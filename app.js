@@ -361,7 +361,8 @@ function copyHTML(p, i) {
     </div>`;
 }
 function factsHTML(p) {
-  return p.facts.map(([b, s]) => `<li><b>${b}</b><span>${s}</span></li>`).join('');
+  // Dosierung steht schon im Kopf des Etiketts
+  return p.facts.filter(([, s]) => !/^(pro Tag|pro Portion|bei Bedarf)$/.test(s)).map(([b, s]) => `<li><span>${s}</span><b>${b}</b></li>`).join('');
 }
 function wordHTML(p) {
   return [...p.word].map((ch, i) => `<span style="--i:${i}">${ch}</span>`).join('');
@@ -426,6 +427,7 @@ function goTo(i, dir) {
   setTheme(p);
   swap(copy, copyHTML(p, i));
   swap(facts, factsHTML(p));
+  $('#heroServing').textContent = p.serving;
   swapWord(p);
 
   const done = () => { busy = false; showBubble(p); };
@@ -465,6 +467,7 @@ function initHero() {
   makeHeroBear(p);
   copy.innerHTML = copyHTML(p, 0);
   facts.innerHTML = factsHTML(p);
+  $('#heroServing').textContent = p.serving;
   word.innerHTML = wordHTML(p);
   renderThumbs();
   setTimeout(() => showBubble(p), 600);
@@ -912,6 +915,16 @@ const nav = $('.nav');
 addEventListener('scroll', () => {
   nav.classList.toggle('is-scrolled', scrollY > hero.offsetTop + hero.offsetHeight - 90);
 }, { passive: true });
+
+/* Ankündigungsleiste: auf dem Handy eine Nachricht nach der anderen */
+const annItems = $$('#announce li');
+let ann = 0;
+setInterval(() => {
+  if (document.hidden) return;
+  annItems[ann].classList.remove('is-active');
+  ann = (ann + 1) % annItems.length;
+  annItems[ann].classList.add('is-active');
+}, 3800);
 
 /* Start */
 initHero();

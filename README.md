@@ -1,6 +1,6 @@
 # bärly – Gummy-Shop (Prototyp)
 
-Klickbarer Prototyp für eine Supplement-Gummibärchen-Marke. Der Markenname **bärly** ist ein Platzhalter.
+Klickbarer Prototyp für eine Supplement-Gummibärchen-Marke. Marke: **bärly** (Domain: bärly.de).
 
 ## Ansehen
 

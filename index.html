@@ -7,7 +7,7 @@
 <meta name="description" content="bärly: Supplement-Gummibärchen für Beauty, Fokus, Sport und die Pausenbrotdose. Vegan, mit Pektin, weniger Zucker.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,10 +33,11 @@
 <a class="skip" href="#shop">Zum Shop springen</a>
 
 <div class="announce" aria-label="Hinweise">
-  <div class="announce-track">
-    <span>Versandkostenfrei ab 35 €</span><span>Abo jederzeit pausierbar</span><span>Pektin statt Gelatine</span><span>Founders Club: 25 % auf die erste Bestellung</span>
-    <span aria-hidden="true">Versandkostenfrei ab 35 €</span><span aria-hidden="true">Abo jederzeit pausierbar</span><span aria-hidden="true">Pektin statt Gelatine</span><span aria-hidden="true">Founders Club: 25 % auf die erste Bestellung</span>
-  </div>
+  <ul class="announce-list" id="announce">
+    <li class="is-active"><i aria-hidden="true"></i>Versandkostenfrei ab 35 €</li>
+    <li><i aria-hidden="true"></i>Abo ohne Mindestlaufzeit</li>
+    <li><i aria-hidden="true"></i><a href="#founders">Founders Club: 25 % auf die erste Bestellung</a></li>
+  </ul>
 </div>
 
 <header class="nav" id="top">
@@ -67,7 +68,10 @@
       <div class="hero-bubble" id="heroBubble"></div>
     </div>
 
-    <ul class="hero-facts" id="heroFacts"></ul>
+    <div class="hero-label">
+      <p class="hero-label-head"><span>Was drin ist</span><small id="heroServing"></small></p>
+      <ul class="hero-facts" id="heroFacts"></ul>
+    </div>
   </div>
 
   <div class="hero-controls">

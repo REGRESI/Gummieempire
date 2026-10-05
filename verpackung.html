@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bärly Verpackung</title>
+<meta name="description" content="Verpackungssystem von bärly: Formate, Größen, Material und Gestaltung der Packungsvorderseite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="verpackung.css">
+</head>
+<body class="pk">
+
+<header class="pk-nav">
+  <a class="logo" href="index.html" aria-label="Zurück zum Shop">b<span class="logo-a">ä</span>rly</a>
+  <nav class="pk-links" aria-label="Abschnitte">
+    <a href="#system">System</a>
+    <a href="#formate">Formate</a>
+    <a href="#front">Vorderseite</a>
+    <a href="#sorten">Alle Sorten</a>
+    <a href="#regeln">Pflichtangaben</a>
+    <a href="#launch">Launch</a>
+  </nav>
+  <a class="btn btn-ink pk-shop" href="index.html">Zum Shop</a>
+</header>
+
+<main>
+  <section class="pk-hero" id="system">
+    <div class="wrap pk-hero-grid">
+      <div>
+        <p class="eyebrow">Verpackung · Arbeitsstand</p>
+        <h1 class="pk-title" id="pkTitle">Eine Dose. Danach nur noch Nachfüller.</h1>
+        <div class="pk-reco" id="pkReco"></div>
+      </div>
+      <div class="pk-hero-visual" id="pkHeroVisual" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="section pk-formats" id="formate">
+    <div class="wrap">
+      <p class="eyebrow">Formate</p>
+      <h2 class="h2">Was wir verkaufen und worin.</h2>
+      <div class="format-list" id="formatList"></div>
+    </div>
+  </section>
+
+  <section class="section pk-front" id="front">
+    <div class="wrap">
+      <p class="eyebrow">Vorderseite</p>
+      <h2 class="h2">In dieser Reihenfolge liest man die Dose.</h2>
+      <p class="lead">Von oben nach unten, vom Regal bis zur Hand. Kids-Packungen folgen demselben Raster, mit zwei Unterschieden: dem gelben kids-Zeichen und dem Hinweis auf den kindersicheren Deckel.</p>
+      <div class="zone-grid">
+        <div class="zone-visual" id="zoneVisual"></div>
+        <ol class="zone-list" id="zoneList"></ol>
+      </div>
+      <div class="devices" id="devices"></div>
+    </div>
+  </section>
+
+  <section class="section pk-lineup" id="sorten">
+    <div class="wrap">
+      <div class="lineup-head">
+        <div>
+          <p class="eyebrow">Alle Sorten</p>
+          <h2 class="h2">Zwölf Bären, ein Regal.</h2>
+        </div>
+        <div class="filters" id="lineupTabs" role="tablist" aria-label="Format wählen">
+          <button class="filter" type="button" role="tab" data-view="can" aria-selected="true">Dose</button>
+          <button class="filter" type="button" role="tab" data-view="refill" aria-selected="false">Nachfüller</button>
+          <button class="filter" type="button" role="tab" data-view="sachet" aria-selected="false">Tütchen</button>
+        </div>
+      </div>
+      <div class="lineup" id="lineup"></div>
+      <div class="table-scroll">
+        <table class="spec-table" id="sizeTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pk-rules" id="regeln">
+    <div class="wrap">
+      <p class="eyebrow">Pflichtangaben &amp; Aussagen</p>
+      <h2 class="h2">Was drauf muss und was wir sagen dürfen.</h2>
+      <div class="rules-grid" id="rules"></div>
+    </div>
+  </section>
+
+  <section class="section pk-launch" id="launch">
+    <div class="wrap">
+      <p class="eyebrow">Launch</p>
+      <h2 class="h2">Reihenfolge und offene Fragen.</h2>
+      <div class="launch-grid" id="launchGrid"></div>
+      <div class="sources" id="sources"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="pk-foot">
+  <div class="wrap">
+    <p>Arbeitsstand für Lieferanten- und Designgespräche. Maße, Füllmengen und Rezepturen sind Richtwerte, bis der Hersteller sie bestätigt. Rechtliche Angaben vor dem Druck prüfen lassen.</p>
+  </div>
+</footer>
+
+<script src="brand.js"></script>
+<script src="packs.js"></script>
+<script src="packaging-spec.js"></script>
+<script src="verpackung.js"></script>
+</body>
+</html>

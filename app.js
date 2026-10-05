@@ -926,7 +926,29 @@ setInterval(() => {
   annItems[ann].classList.add('is-active');
 }, 3800);
 
+/* Nährstoff-Ticker: Gruppe so oft füllen, dass sie breiter als der Bildschirm ist,
+   dann einmal klonen. So entsteht nie eine Lücke, egal wie breit das Fenster ist. */
+function initTicker() {
+  const track = $('#tickerTrack');
+  const group = $('.ticker-group', track);
+  const items = group.innerHTML;
+  const build = () => {
+    $$('.ticker-group', track).slice(1).forEach(g => g.remove());
+    group.innerHTML = items;
+    while (group.scrollWidth < innerWidth + 200) group.insertAdjacentHTML('beforeend', items);
+    const clone = group.cloneNode(true);
+    track.append(clone);
+    // konstantes Tempo: ca. 90 px pro Sekunde
+    track.style.setProperty('--ticker-dur', (group.scrollWidth / 90).toFixed(1) + 's');
+  };
+  build();
+  let w = innerWidth;
+  addEventListener('resize', () => { if (Math.abs(innerWidth - w) > 80) { w = innerWidth; build(); } });
+  document.fonts?.ready.then(build);
+}
+
 /* Start */
+initTicker();
 initHero();
 renderShop();
 initFinder();

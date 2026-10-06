@@ -24,8 +24,9 @@
   <nav class="nav-links" id="navLinks" aria-label="Hauptnavigation">
     <a href="#produkte">Produkte</a>
     <a href="#finder">Bären-Finder</a>
-    <a href="#abo">Abo</a>
+    <a href="#alltag">Alltag</a>
     <a href="#crew">Crew</a>
+    <a href="#abo">Abo</a>
     <a href="#faq">FAQ</a>
   </nav>
   <div class="nav-actions">
@@ -41,20 +42,24 @@
 
 <main id="top">
 
-<!-- 1 · HERO -->
-<section class="hero" aria-labelledby="heroTitle">
-  <div class="wrap hero-head">
-    <p class="eyebrow" data-reveal>Supplement-Gummies für Erwachsene</p>
-    <h1 class="hero-mark" id="heroTitle" data-reveal><span aria-hidden="true">bärly</span><span class="sr-only">bärly Supplement-Gummies</span></h1>
-    <p class="hero-claim" data-reveal>Same Bears. <em>Better Days.</em></p>
-    <p class="hero-sub" data-reveal>Vier Sorten, vier klare Rezepturen: GLOW, FLEX, SNOOZY und DAILY. Zwei Gummies am Tag, im Abo versandkostenfrei.</p>
-    <div class="hero-ctas" data-reveal>
-      <a class="btn btn-ink" href="#produkte">Produkte entdecken</a>
-      <a class="btn btn-ghost" href="#finder">Welcher Bär passt zu dir?</a>
+<!-- 1 · HERO: eine Bühne pro Bär, der nächste kommt von rechts unten -->
+<section class="hero" id="hero" aria-roledescription="Karussell" aria-label="Die vier bärly-Bären">
+  <div class="hero-bg" aria-hidden="true"><span class="hero-stars"></span></div>
+  <div class="hero-word" id="heroWord" aria-hidden="true"></div>
+  <div class="hero-float" id="heroFloat" aria-hidden="true"></div>
+  <div class="wrap hero-grid" id="heroPanel" role="tabpanel">
+    <div class="hero-text">
+      <h1 class="hero-brand"><span class="sr-only">bärly Supplement-Gummies: </span>Same Bears. <em>Better Days.</em></h1>
+      <div class="hero-copy" id="heroCopy" aria-live="off"></div>
     </div>
+    <div class="hero-stage" id="heroStage"></div>
   </div>
-  <div class="wrap">
-    <figure class="hero-visual slot" id="heroVisual" data-src="assets/hero/crew.webp" data-alt="Die vier bärly-Dosen GLOW, FLEX, SNOOZY und DAILY mit ihren Charakteren" data-reveal></figure>
+  <div class="wrap hero-bar">
+    <div class="hero-tabs" id="heroTabs" role="tablist" aria-label="Bär wählen"></div>
+    <button class="hero-toggle" id="heroToggle" type="button" aria-pressed="false" aria-label="Automatischen Wechsel anhalten">
+      <svg class="i-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6v12M15 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+    </button>
   </div>
 </section>
 
@@ -106,14 +111,24 @@
   </div>
 </section>
 
-<!-- 5 · LIFESTYLE -->
-<section class="section moments" aria-labelledby="momentsTitle">
+<!-- 5 · EIN TAG MIT DER CREW -->
+<section class="section day-section" id="alltag" aria-labelledby="dayTitle">
   <div class="wrap">
     <header class="section-head" data-reveal>
-      <p class="eyebrow">Im Alltag</p>
-      <h2 class="h2" id="momentsTitle">Zwei Gummies. <em>Vier Momente.</em></h2>
+      <p class="eyebrow">Ein Tag mit der Crew</p>
+      <h2 class="h2" id="dayTitle">Zwei Gummies. <em>Vier Momente.</em></h2>
+      <p class="lead">Jeder Bär hat seine Uhrzeit. Zieh den Regler durch den Tag.</p>
     </header>
-    <div class="moment-grid" id="momentGrid"></div>
+    <div class="day" id="day" data-reveal>
+      <div class="day-sky" aria-hidden="true"><span class="day-arc"><span class="day-sun"></span></span><span class="day-moon"></span><span class="day-stars"></span></div>
+      <div class="day-scene" id="dayScene"></div>
+      <div class="day-copy" id="dayCopy" aria-live="polite"></div>
+      <div class="day-control">
+        <label class="sr-only" for="dayRange">Tageszeit wählen</label>
+        <input type="range" id="dayRange" min="0" max="3" step="1" value="0">
+        <div class="day-ticks" id="dayTicks"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -140,7 +155,7 @@
     <header class="section-head section-head-center" data-reveal>
       <p class="eyebrow">Die Charaktere</p>
       <h2 class="h2" id="crewTitle">Meet the <em>bärly Crew.</em></h2>
-      <p class="lead">Hinter jeder Dose steht ein Bär. Auf der Dose sitzt er an der Seite, hier darf er nach vorne.</p>
+      <p class="lead">Hinter jeder Dose steht ein Bär. Auf der Dose sitzt er an der Seite, hier darf er nach vorne. Tipp: Im Hero oben kannst du sie antippen.</p>
     </header>
     <div class="crew-grid" id="crewGrid"></div>
   </div>
@@ -247,7 +262,7 @@
       <div class="footer-cols">
         <div>
           <p class="footer-h">Shop</p>
-          <a href="#produkte">Produkte</a><a href="#finder">Bären-Finder</a><a href="#abo">Abo</a>
+          <a href="glow.html">GLOW</a><a href="flex.html">FLEX</a><a href="snoozy.html">SNOOZY</a><a href="daily.html">DAILY</a><a href="#abo">Abo</a>
         </div>
         <div>
           <p class="footer-h">Hilfe</p>
@@ -283,14 +298,10 @@
   </div>
 </div>
 
-<!-- Produktdetail -->
-<dialog class="modal" id="modal" aria-labelledby="modalTitle">
-  <div class="modal-inner" id="modalInner"></div>
-</dialog>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="brand.js"></script>
-<script src="app.js"></script>
+<script src="shop.js"></script>
+<script src="home.js"></script>
 </body>
 </html>

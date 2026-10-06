@@ -32,7 +32,11 @@ const PRODUCTS = [
     word: 'GLOW', mood: 'wink', acc: 'sparkles',
     story: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag. Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.',
     facts: [['450 µg', 'Biotin'], ['5 mg', 'Zink'], ['80 mg', 'Vitamin C'], ['2 Gummies', 'pro Tag']],
-    nutrients: [['Biotin', '450 µg', '900 %'], ['Zink', '5 mg', '50 %'], ['Vitamin C', '80 mg', '100 %']],
+    nutrients: [
+      ['Biotin', '450 µg', '900 %', 'Biotin trägt zur Erhaltung normaler Haut und Haare bei.'],
+      ['Zink', '5 mg', '50 %', 'Zink trägt zur Erhaltung normaler Haut, Haare und Nägel bei.'],
+      ['Vitamin C', '80 mg', '100 %', 'Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.']
+    ],
     claim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 26.90, vegan: true, doses: { zinc: 5 }
   },
@@ -49,7 +53,11 @@ const PRODUCTS = [
     word: 'FLEX', mood: 'cool', acc: 'shades',
     story: '3 g Kreatin in zwei Blaubeer-Gummies, ohne Shaker und Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein. Für Erwachsene, die intensiv trainieren.',
     facts: [['3 g', 'Kreatin'], ['0,7 mg', 'Vitamin B6'], ['2,5 µg', 'Vitamin B12'], ['2 Gummies', 'pro Tag']],
-    nutrients: [['Kreatin (aus 3.410 mg Kreatin-Monohydrat)', '3.000 mg', '–'], ['Vitamin B6', '0,7 mg', '50 %'], ['Vitamin B12', '2,5 µg', '100 %']],
+    nutrients: [
+      ['Kreatin (aus 3.410 mg Kreatin-Monohydrat)', '3.000 mg', '–', 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.'],
+      ['Vitamin B6', '0,7 mg', '50 %', 'Vitamin B6 trägt zur Verringerung von Müdigkeit und Ermüdung bei.'],
+      ['Vitamin B12', '2,5 µg', '100 %', 'Vitamin B12 trägt zu einem normalen energieliefernden Stoffwechsel bei.']
+    ],
     claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 29.90, vegan: true, doses: { b6: .7 }, adultOnly: true
   },
@@ -65,8 +73,13 @@ const PRODUCTS = [
     pack: { primary: '#b9a7e6', accent: '#8e6bdb', light: '#dccef4', fur: '#8b5cf6', icon: 'moon', jar: '#bfa9e6', deep: '#43207f', metal: ['#ece6f8', '#998cbd'] },
     word: 'SNOOZY', mood: 'sleepy', acc: 'zz',
     story: 'Melatonin, Magnesium und Vitamin B6 in zwei Waldbeer-Gummies, eine halbe Stunde vor dem Schlafengehen. Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
-    facts: [['1 mg', 'Melatonin'], ['56 mg', 'Magnesium'], ['1,4 mg', 'Vitamin B6'], ['2 Gummies', 'vor dem Schlafen']],
-    nutrients: [['Melatonin', '1 mg', '–'], ['Magnesium', '56 mg', '15 %'], ['Vitamin B6', '1,4 mg', '100 %']],
+    facts: [['1 mg', 'Melatonin'], ['57 mg', 'Magnesium'], ['1,4 mg', 'Vitamin B6'], ['2 Gummies', 'vor dem Schlafen']],
+    // Magnesium 57 mg = 15,2 % NRV: ab 15 % gilt die Menge als signifikant, erst dann ist eine Angabe erlaubt
+    nutrients: [
+      ['Melatonin', '1 mg', '–', 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.'],
+      ['Magnesium', '57 mg', '15 %', 'Magnesium trägt zu einer normalen Funktion des Nervensystems bei.'],
+      ['Vitamin B6', '1,4 mg', '100 %', 'Vitamin B6 trägt zu einer normalen psychischen Funktion bei.']
+    ],
     claim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
     warn: 'Nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende. Nicht vor dem Autofahren einnehmen.',
     serving: '2 Fruchtgummis 30 Minuten vor dem Schlafengehen', count: 60, price: 24.90, vegan: true, doses: { b6: 1.4 }, adultOnly: true
@@ -85,10 +98,21 @@ const PRODUCTS = [
     story: '12 Vitamine und 3 Mineralstoffe in zwei Zitrone-Mango-Gummies zum Frühstück. Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.',
     facts: [['12', 'Vitamine'], ['3', 'Mineralstoffe'], ['10 µg', 'Vitamin D3'], ['2 Gummies', 'pro Tag']],
     nutrients: [
-      ['Vitamin A', '200 µg', '25 %'], ['Vitamin D3', '10 µg', '200 %'], ['Vitamin E', '6 mg', '50 %'], ['Vitamin C', '80 mg', '100 %'],
-      ['Thiamin (B1)', '0,55 mg', '50 %'], ['Riboflavin (B2)', '0,7 mg', '50 %'], ['Niacin (als Nicotinamid)', '8 mg', '50 %'], ['Pantothensäure', '3 mg', '50 %'],
-      ['Vitamin B6', '1,4 mg', '100 %'], ['Biotin', '25 µg', '50 %'], ['Folsäure', '200 µg', '100 %'], ['Vitamin B12', '2,5 µg', '100 %'],
-      ['Zink', '1,5 mg', '15 %'], ['Selen', '27,5 µg', '50 %'], ['Jod', '75 µg', '50 %']
+      ['Vitamin A', '200 µg', '25 %', 'Vitamin A trägt zur Erhaltung normaler Haut bei.'],
+      ['Vitamin D3', '10 µg', '200 %', 'Vitamin D trägt zu einer normalen Funktion des Immunsystems bei.'],
+      ['Vitamin E', '6 mg', '50 %', 'Vitamin E trägt dazu bei, die Zellen vor oxidativem Stress zu schützen.'],
+      ['Vitamin C', '80 mg', '100 %', 'Vitamin C trägt zu einer normalen Funktion des Immunsystems bei.'],
+      ['Thiamin (B1)', '0,55 mg', '50 %', 'Thiamin trägt zu einem normalen Energiestoffwechsel bei.'],
+      ['Riboflavin (B2)', '0,7 mg', '50 %', 'Riboflavin trägt zur Verringerung von Müdigkeit und Ermüdung bei.'],
+      ['Niacin (als Nicotinamid)', '8 mg', '50 %', 'Niacin trägt zur Verringerung von Müdigkeit und Ermüdung bei.'],
+      ['Pantothensäure', '3 mg', '50 %', 'Pantothensäure trägt zu einer normalen geistigen Leistung bei.'],
+      ['Vitamin B6', '1,4 mg', '100 %', 'Vitamin B6 trägt zu einem normalen energieliefernden Stoffwechsel bei.'],
+      ['Biotin', '25 µg', '50 %', 'Biotin trägt zu einem normalen Energiestoffwechsel bei.'],
+      ['Folsäure', '200 µg', '100 %', 'Folat trägt zur Verringerung von Müdigkeit und Ermüdung bei.'],
+      ['Vitamin B12', '2,5 µg', '100 %', 'Vitamin B12 trägt zu einem normalen energieliefernden Stoffwechsel bei.'],
+      ['Zink', '1,5 mg', '15 %', 'Zink trägt zu einer normalen Funktion des Immunsystems bei.'],
+      ['Selen', '27,5 µg', '50 %', 'Selen trägt zu einer normalen Funktion des Immunsystems bei.'],
+      ['Jod', '75 µg', '50 %', 'Jod trägt zu einer normalen kognitiven Funktion bei.']
     ],
     claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 24.90, vegan: true, doses: { zinc: 1.5, vitD: 10, b6: 1.4 }
@@ -231,6 +255,83 @@ const PRODUCTS = [
 ];
 const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
 
+/* ------------------------------------------------------------------ */
+/* Texte für Hero und Produktseiten der Launch-Crew                    */
+/* hero    Schlagzeile (HTML, <em> = kursiv) und Unterzeile             */
+/* lines   Sprechblasen des Maskottchens (Charakter, keine Wirkaussage) */
+/* traits  Steckbrief                                                   */
+/* ritual  Uhrzeit, Moment und drei Schritte zur Einnahme               */
+/* faq     produktbezogene Fragen                                       */
+/* ------------------------------------------------------------------ */
+const PDP = {
+  glow: {
+    hero: { title: 'Beauty, <em>zum Kauen.</em>', sub: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag.' },
+    lines: ['Krone sitzt. Du auch?', 'Heute ist Main-Character-Tag.', 'Erst zwei Gummies, dann der Spiegel.', 'Herzbrille bleibt auf. Immer.'],
+    traits: [['Rolle', 'The Main Character'], ['Erkennungszeichen', 'Krone und Herzbrille'], ['Lieblingsort', 'Vor dem Spiegel, mit gutem Licht'], ['Sagt nie', '„Ich bin nicht fotogen.“']],
+    ritual: { time: '07:30', moment: 'Morgens im Bad', steps: [
+      ['Zwei Gummies', 'Morgens, zwischen Zähneputzen und Serum.'],
+      ['Mehr ist nicht mehr', 'Die Tagesportion sind zwei Gummies. Nicht mehr.'],
+      ['Dose zu, fertig', 'Im Abo kommt der Nachfüller, bevor die Dose leer ist.']
+    ] },
+    faq: [
+      ['Wie viel ist pro Tagesportion drin?', '450 µg Biotin (900 % des Nährstoffbezugswerts), 5 mg Zink (50 %) und 80 mg Vitamin C (100 %) in zwei Fruchtgummis.'],
+      ['Ab wann merke ich etwas?', 'Dazu machen wir kein Versprechen. Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei, Vitamin C zu einer normalen Kollagenbildung für eine normale Funktion der Haut. Mehr sagen wir nicht, weil mehr nicht belegt ist.'],
+      ['Kann ich GLOW mit DAILY kombinieren?', 'Ja. Zusammen kommst du auf 6,5 mg Zink pro Tag. Das ist genau die Höchstmenge, die das BfR für Zink in Nahrungsergänzungsmitteln empfiehlt. Nimm dann kein weiteres Zink-Präparat dazu.'],
+      ['Ist GLOW vegan?', 'Die Rezeptur ist mit Pektin statt Gelatine geplant. Die finale Zutatenliste steht hier, sobald der Hersteller sie bestätigt.']
+    ]
+  },
+  flex: {
+    hero: { title: '3 g Kreatin. <em>Ohne Shaker.</em>', sub: 'Zwei Blaubeer-Gummies am Tag, dazu Vitamin B6 und B12.' },
+    lines: ['Noch ein Satz. Dann noch einer.', 'Shaker? Kenn ich nicht.', 'Brille bleibt auf. Auch drinnen.', 'Ruhetag heißt: trotzdem zwei Gummies.'],
+    traits: [['Rolle', 'The Gym Bro'], ['Erkennungszeichen', 'Schwarze Sportbrille'], ['Lieblingsort', 'Hantelbank, vorletzter Satz'], ['Sagt nie', '„Heute lass ich’s mal.“']],
+    ritual: { time: '17:30', moment: 'Jeden Tag, auch an Ruhetagen', steps: [
+      ['Zwei Gummies', 'Jeden Tag. Die Uhrzeit ist egal, Hauptsache täglich.'],
+      ['3 g pro Tag', 'Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.'],
+      ['Ab in die Tasche', 'Kein Abmessen, kein Pulver im Rucksack.']
+    ] },
+    faq: [
+      ['Warum Gummies statt Pulver?', 'Weil 3 g Kreatin in zwei Gummies in jede Tasche passen. Kein Abmessen, kein Shaker, kein Pulver im Rucksack.'],
+      ['Warum ist die FLEX-Dose größer?', 'Für 3 g Kreatin pro Tag sind die Gummies größer, etwa 4,5 g pro Stück. Deshalb kommt FLEX in der großen Dose mit 150 mm Höhe.'],
+      ['Muss ich FLEX auch an trainingsfreien Tagen nehmen?', 'Ja. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein, also jeden Tag zwei Gummies.'],
+      ['Ist FLEX für Jugendliche?', 'Nein. FLEX ist für Erwachsene, die intensiv trainieren.']
+    ]
+  },
+  snoozy: {
+    hero: { title: '1 mg Melatonin. <em>Licht aus.</em>', sub: 'Zwei Waldbeer-Gummies, eine halbe Stunde vor dem Schlafengehen.' },
+    lines: ['Psst. Ich bin schon im Bett.', 'Handy weg. Ich mein’s ernst.', 'Nur noch fünf Minuten. Oder acht Stunden.', 'Kissen ist dabei. Immer.'],
+    traits: [['Rolle', 'The Chill Guy'], ['Erkennungszeichen', 'Schlafmütze und Kissen'], ['Lieblingsort', 'Unter der Decke'], ['Sagt nie', '„Nur noch eine Folge.“']],
+    ritual: { time: '22:30', moment: 'Abends, vor dem Schlafen', steps: [
+      ['Zwei Gummies', 'Etwa 30 Minuten vor dem Schlafengehen.'],
+      ['Danach nicht mehr fahren', 'Nach der Einnahme nicht mehr Auto fahren.'],
+      ['Licht aus', 'Handy weg, Licht aus, Kissen zurechtlegen.']
+    ] },
+    faq: [
+      ['Wie viel Melatonin ist drin?', '1 mg pro Tagesportion. Genau die Menge, für die die zugelassene Angabe gilt: Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen, wenn kurz vor dem Schlafengehen 1 mg aufgenommen wird.'],
+      ['Für wen ist SNOOZY nicht geeignet?', 'SNOOZY ist nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende, und nicht vor dem Autofahren.'],
+      ['Ich nehme Medikamente. Darf ich SNOOZY nehmen?', 'Sprich bitte vorher mit deiner Ärztin oder deinem Arzt.'],
+      ['Warum Magnesium und Vitamin B6?', 'Magnesium trägt zu einer normalen Funktion des Nervensystems bei, Vitamin B6 zu einer normalen psychischen Funktion. Beides ist in einer Menge drin, für die diese Angaben zugelassen sind.']
+    ]
+  },
+  daily: {
+    hero: { title: '15 Nährstoffe. <em>Zwei Gummies.</em>', sub: '12 Vitamine und 3 Mineralstoffe, Zitrone-Mango, zum Frühstück.' },
+    lines: ['Plan steht. Snacks auch.', 'Hab an alles gedacht. Auch an dich.', 'Zwei Gummies, dann los.', 'Liste abgehakt. Nächste Liste.'],
+    traits: [['Rolle', 'The Organizer'], ['Erkennungszeichen', 'Hoodie und Crossbody-Bag'], ['Lieblingsort', 'Am Frühstückstisch, mit Liste'], ['Sagt nie', '„Mal schauen.“']],
+    ritual: { time: '07:00', moment: 'Zum Frühstück', steps: [
+      ['Zwei Gummies', 'Morgens zum Frühstück.'],
+      ['Mit einer Mahlzeit', 'Die Vitamine A, D und E sind fettlöslich. Darum am besten zum Essen.'],
+      ['Dose bleibt stehen', 'Der Nachfüller kommt per Brief, die Dose bleibt auf dem Tisch.']
+    ] },
+    faq: [
+      ['Warum nicht 100 % von allem?', 'Weil du auch isst. DAILY ist als Ergänzung gedacht und bleibt bei Zink, Vitamin D und Vitamin B6 unter den Höchstmengen-Empfehlungen des BfR, auch zusammen mit den anderen bärly-Sorten.'],
+      ['Kann ich DAILY mit GLOW kombinieren?', 'Ja. Zusammen kommst du auf 6,5 mg Zink pro Tag, genau die Höchstmenge, die das BfR für Zink in Nahrungsergänzungsmitteln empfiehlt. Nimm dann kein weiteres Zink-Präparat dazu.'],
+      ['Ich habe eine Schilddrüsenerkrankung. Ist Jod drin?', 'Ja, 75 µg Jod pro Tagesportion. Bei Schilddrüsenerkrankungen sprich bitte vorher mit deiner Ärztin oder deinem Arzt.'],
+      ['Ist DAILY vegan?', 'Die Rezeptur ist mit Pektin statt Gelatine geplant. Die finale Zutatenliste steht hier, sobald der Hersteller sie bestätigt.']
+    ]
+  }
+};
+/* Produktseiten liegen im Hauptordner: glow.html, flex.html, snoozy.html, daily.html */
+const pdpUrl = (id) => `${id}.html`;
+
 /* Packungsdaten je Sorte (siehe verpackung.html)
    nutrient  kurzer Nährstoffname für die Vorderseite
    dose      Leitdosis pro Tagesportion
@@ -365,10 +466,11 @@ const BUNDLES = {
    (siehe assets/ASSETS.md); fehlt eine Datei, zeigt die Seite einen sauberen Platzhalter. */
 const ASSETS = (id) => ({
   front: `assets/products/${id}-front.webp`,
+  wrap: `assets/products/${id}-wrap.webp`,
   character: `assets/characters/${id}.webp`,
+  bust: `assets/characters/${id}-bust.webp`,
   lifestyle: `assets/lifestyle/${id}.webp`
 });
-const HERO_ASSET = 'assets/hero/crew.webp';
 
 
 /* SVG-Definitionen (Zuckerkristalle, Weichzeichner) einmal pro Seite einhängen */
@@ -497,5 +599,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, HERO_ASSET, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, plansFor, planFor, netGrams, unitPrice, bear };
 })();

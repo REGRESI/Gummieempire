@@ -4,32 +4,29 @@ Alle Bilder auf der Website werden eigens dafür produziert. Ausschnitte aus Moo
 
 Fehlt eine Datei, zeigt die Website an dieser Stelle einen sauberen Platzhalter mit dem Dateinamen. Sobald die Datei unter genau diesem Pfad liegt, erscheint sie automatisch.
 
-## Produkte (vorhanden)
+## Vorhanden (eigene Renderings)
 
-| Datei | Inhalt |
-| --- | --- |
-| `products/glow-front.webp` | GLOW-Dose frontal, transparenter Hintergrund |
-| `products/flex-front.webp` | FLEX-Dose (Dose Groß) frontal |
-| `products/snoozy-front.webp` | SNOOZY-Dose frontal |
-| `products/daily-front.webp` | DAILY-Dose frontal |
+| Datei | Inhalt | Quelle |
+| --- | --- | --- |
+| `products/{glow,flex,snoozy,daily}-front.webp` | Dose frontal, transparenter Hintergrund, Leinwand 720 × 1473 px, alle im selben Maßstab und unten bündig | `packs.js` `jar()` · `node tools/render-products.js` |
+| `products/{id}-wrap.webp` | Abwicklung des Dosenkörpers (2000 px breit = Umfang) für die 360°-Ansicht: Front, Maskottchen-Seite, Rückseite mit Nährwerten, linke Seite | `packs.js` `jarWrap()` · `node tools/render.js tools/render-wraps.html assets/products` |
+| `characters/{id}.webp` | Maskottchen ganz, 940 × 1040 px, transparent | `mascots.js` · `node tools/render.js tools/render-characters.html assets/characters` |
+| `characters/{id}-bust.webp` | Maskottchen als Büste, 600 × 510 px, transparent (Auswahl im Hero, Karten, Leiste) | wie oben |
 
-Die Produktbilder sind gerenderte Illustrationen aus `packs.js` (`node tools/render-products.js`). Gemeinsame Leinwand 720 × 1473 px, alle Dosen im selben Maßstab und unten bündig. Für den Launch durch echte Packshots ersetzen: gleiche Ausrichtung, gleiche Leinwand, Hintergrund transparent, weiches Bodenlicht.
+Die Renderer erzeugen PNG; danach in WebP umwandeln (Qualität 86–90, bei Figuren mit Alphakanal). Für den Launch können echte Packshots und 3D-Renderings der Maskottchen die Dateien 1:1 ersetzen: gleicher Name, gleiche Leinwand, transparenter Hintergrund. Die 360°-Ansicht braucht dafür eine flache Etiketten-Abwicklung in derselben Aufteilung (Front bei 57,5° vom linken Rand, siehe `WRAP_SEAM` in `packs.js`).
 
 ## Noch zu produzieren
 
-Alle Formate als WebP, sRGB, Qualität 85–90.
+Alle Formate als WebP, sRGB, Qualität 85–90. Bis dahin zeigt die Seite die Maskottchen mit Dose auf der Sortenfarbe und einen kleinen Hinweis mit dem Dateinamen.
 
-| Datei | Format | Motiv |
-| --- | --- | --- |
-| `hero/crew.webp` | 2400 × 1350 (16:9) | Die vier Dosen nebeneinander auf einem hellen, matten Podest, dahinter oder daneben die vier Charaktere. Viel Luft, cremeweißer bis zartrosa Hintergrund, weiches Studiolicht von links oben. Kein Text im Bild. |
-| `characters/glow.webp` | 1200 × 1500 (4:5) | GLOW: pinker Bär, Krone und Herzbrille, selbstbewusste Pose. Freigestellt oder auf zartrosa Fläche. |
-| `characters/flex.webp` | 1200 × 1500 (4:5) | FLEX: blauer, athletischer Bär mit schwarzer Sportbrille. Freigestellt oder auf zartblauer Fläche. |
-| `characters/snoozy.webp` | 1200 × 1500 (4:5) | SNOOZY: lila Bär mit Schlafmütze, Kissen im Arm, entspannt. Freigestellt oder auf zartlila Fläche. |
-| `characters/daily.webp` | 1200 × 1500 (4:5) | DAILY: gelber Bär mit Hoodie und Crossbody-Bag, freundlich, aufrecht. Freigestellt oder auf zartgelber Fläche. |
-| `lifestyle/glow.webp` | 1600 × 2000 (4:5) | GLOW-Dose auf einem hellen Vanity-Setup: Marmor, Spiegel, Serum, frische Himbeeren, Morgenlicht. Ruhig, viel Fläche. |
-| `lifestyle/flex.webp` | 1600 × 2000 (4:5) | FLEX-Dose im Gym: Bank, Hanteln, Sporttasche, kühles Tageslicht. Keine Personen mit Körperversprechen. |
-| `lifestyle/snoozy.webp` | 1600 × 2000 (4:5) | SNOOZY-Dose im Schlafzimmer am Abend: Nachttisch, warme Lampe, Leinen, Buch. Nur Erwachsenen-Setting. |
-| `lifestyle/daily.webp` | 1600 × 2000 (4:5) | DAILY-Dose beim Frühstück: Küche, Kaffee, Zitrone, Mango, helles Morgenlicht. |
+| Datei | Format | Motiv | Wo |
+| --- | --- | --- | --- |
+| `lifestyle/glow.webp` | 1600 × 2000 (4:5) | GLOW-Dose auf einem hellen Vanity-Setup: Marmor, Spiegel, Serum, frische Himbeeren, Morgenlicht. Ruhig, viel Fläche. | „Ein Tag mit der Crew“, Produktseite „Im Alltag“ |
+| `lifestyle/flex.webp` | 1600 × 2000 (4:5) | FLEX-Dose im Gym: Bank, Hanteln, Sporttasche, kühles Tageslicht. Keine Personen mit Körperversprechen. | wie oben |
+| `lifestyle/snoozy.webp` | 1600 × 2000 (4:5) | SNOOZY-Dose im Schlafzimmer am Abend: Nachttisch, warme Lampe, Leinen, Buch. Nur Erwachsenen-Setting. | wie oben |
+| `lifestyle/daily.webp` | 1600 × 2000 (4:5) | DAILY-Dose beim Frühstück: Küche, Kaffee, Zitrone, Mango, helles Morgenlicht. | wie oben |
+
+Der Hero braucht kein eigenes Bild mehr: Er setzt sich pro Sorte aus Maskottchen und Dose zusammen.
 
 ## Regeln für alle Bilder
 

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FLEX Kreatin Gummies · bärly</title>
+<meta name="description" content="bärly FLEX Kreatin Gummies: 3 g Kreatin pro Tagesportion, dazu Vitamin B6 und B12. Blaubeere, 60 Fruchtgummis für 30 Tage. Einmalig 29,90 €, im Abo 22,32 € je Lieferung.">
+<meta name="theme-color" content="#fbf8f4">
+<!-- Erzeugt mit node tools/build-pdps.js. Inhalt kommt aus brand.js über pdp.js. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800&family=Fredoka:wght@600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="pdp.css">
+</head>
+<body>
+
+<a class="skip" href="#buy">Zur Kaufbox springen</a>
+
+<aside class="announce" aria-label="Hinweis">
+  <p><a href="index.html#founders">Founders Club: Early Access und 25 % auf deine erste Bestellung</a></p>
+</aside>
+
+<header class="nav" id="nav">
+  <a class="logo" href="index.html" aria-label="bärly, zur Startseite">bärly</a>
+  <nav class="nav-links" id="navLinks" aria-label="Hauptnavigation">
+    <a href="index.html#produkte">Produkte</a>
+    <a href="index.html#finder">Bären-Finder</a>
+    <a href="index.html#alltag">Alltag</a>
+    <a href="index.html#crew">Crew</a>
+    <a href="index.html#abo">Abo</a>
+    <a href="index.html#faq">FAQ</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <button class="icon-btn cart-btn" id="cartOpen" type="button" aria-label="Warenkorb öffnen, 0 Artikel">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11l-1-11Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span class="cart-count" id="cartCount" aria-hidden="true">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top" class="pdp" data-product="flex">
+  <noscript>
+    <div class="wrap noscript">
+      <h1>FLEX Kreatin Gummies</h1>
+      <p>3 g Kreatin pro Tagesportion, dazu Vitamin B6 und B12. Blaubeere, 2 Fruchtgummis täglich.</p>
+      <p>Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.</p>
+      <p>Für Preise, Warenkorb und die 360°-Ansicht bitte JavaScript aktivieren.</p>
+    </div>
+  </noscript>
+</main>
+
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-mark" href="index.html" aria-label="bärly, zur Startseite">bärly</a>
+      <div class="footer-cols">
+        <div>
+          <p class="footer-h">Shop</p>
+          <a href="glow.html">GLOW</a><a href="flex.html">FLEX</a><a href="snoozy.html">SNOOZY</a><a href="daily.html">DAILY</a><a href="index.html#abo">Abo</a>
+        </div>
+        <div>
+          <p class="footer-h">Hilfe</p>
+          <a href="index.html#faq">FAQ</a><a href="index.html#founders">Founders Club</a><a href="index.html">Kontakt</a>
+        </div>
+        <div>
+          <p class="footer-h">Rechtliches</p>
+          <a href="index.html">Impressum</a><a href="index.html">Datenschutz</a><a href="index.html">AGB</a><a href="index.html">Widerruf</a>
+        </div>
+      </div>
+    </div>
+    <p class="legal">Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene und abwechslungsreiche Ernährung und eine gesunde Lebensweise. Die angegebene empfohlene tägliche Verzehrsmenge darf nicht überschritten werden. Außerhalb der Reichweite von kleinen Kindern aufbewahren. Prototyp: Produkte, Preise und Rezepturen sind Platzhalter und noch nicht final.</p>
+    <p class="copy">© 2026 bärly · Same Bears. Better Days.</p>
+  </div>
+</footer>
+
+<!-- Warenkorb -->
+<div class="overlay" id="overlay" hidden></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-head">
+    <p class="drawer-title" id="drawerTitle">Warenkorb</p>
+    <button class="icon-btn" id="cartClose" type="button" aria-label="Warenkorb schließen">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="ship" id="ship"></div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="drawer-sum"><span>Zwischensumme</span><strong id="cartTotal">0,00 €</strong></div>
+    <button class="btn btn-ink btn-block" type="button" id="checkout">Zur Kasse</button>
+    <p class="drawer-note" id="checkoutNote" role="status">Prototyp: Die Kasse wird später mit Shopify verbunden.</p>
+    <p class="sr-only" id="cartStatus" role="status"></p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="brand.js"></script>
+<script src="packs.js"></script>
+<script src="shop.js"></script>
+<script src="pdp.js"></script>
+</body>
+</html>

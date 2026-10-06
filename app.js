@@ -592,6 +592,7 @@ function viewsFor(p) {
     { id: 'jar', label: 'Dose', html: () => `<img src="${im.jar}" alt="${esc(productName(p))}-Dose mit ${esc(p.name)}">` },
     { id: 'views', label: 'Rundum', html: photo(im.views, `${productName(p)}-Dose von vorne, seitlich und hinten`) },
     { id: 'life', label: 'Im Alltag', html: photo(im.life, `${productName(p)}-Dose im Alltag`) },
+    { id: 'mood', label: 'Stimmung', html: () => `<div class="g-mood">${im.mood.map((src, i) => `<img src="${src}" alt="${esc(productName(p))}-Stimmungsbild ${i + 1}">`).join('')}</div>` },
     { id: 'gummies', label: 'Gummies', html: photo(im.gummies, `${productName(p)} Fruchtgummis, ${p.flavor}`) },
     { id: 'refill', label: 'Nachfüller', html: () => packs.refill(p) },
     { id: 'letter', label: 'Per Brief', html: () => packs.letter(packs.nest(packs.refill(p), 0, 0, 92)), wide: true },

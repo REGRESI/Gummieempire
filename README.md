@@ -1,33 +1,46 @@
-# bärly – Gummy-Shop (Prototyp)
+# bärly – Gummy-Shop und Markenwelt (Prototyp)
 
-Klickbarer Prototyp für eine Supplement-Gummibärchen-Marke. Marke: **bärly** (Domain: bärly.de).
+Klickbarer Prototyp für eine Supplement-Gummibärchen-Marke. Marke: **bärly** (Domain: bärly.de). Claim: *Same Bears. Better Days.*
 
 ## Ansehen
 
 - **Lokal:** `index.html` im Browser öffnen.
-- **GitHub Pages:** Repo → Settings → Pages → Branch auswählen → Ordner `/ (root)`. Danach ist die Seite unter `https://<user>.github.io/Gummieempire/` erreichbar.
+- **GitHub Pages (empfohlen, lädt alle Bilder):** Repo → Settings → Pages → Branch auswählen → Ordner `/ (root)`. Danach ist die Seite unter `https://<user>.github.io/Gummieempire/` erreichbar.
 - **Ohne Setup:** `https://htmlpreview.github.io/?https://github.com/REGRESI/Gummieempire/blob/<branch>/index.html`
 
 ## Was drin ist
 
-- Hero-Karussell: Ein Bär steht in der Mitte, der nächste fliegt von unten rechts herein. Wischen, Pfeiltasten, Antippen (Squish) und Maus-Parallax funktionieren.
-- 12 Sorten (9 für Erwachsene, 3 in der Kids-Linie) mit eigener Figur, Farbe, Nährwerttabelle und zugelassener Gesundheitsangabe.
-- Formatwahl je Sorte: Abo (Dose gratis, Nachfüller per Brief, Rhythmus 30/45/60 Tage), Einmalkauf, Nur Nachfüller, 3er-Vorrat; Kids und Zap als Tütchen-Box. Grundpreis pro kg.
-- Bären-Finder mit Zielen, Abo-Preis und Warnung, wenn ein Stack die BfR-Höchstmengen für Zink oder Vitamin D überschreitet.
-- Warenkorb mit Abo/Einmalkauf, Bundles und Gratisversand-Leiste (wird im Browser gespeichert).
-- Beauty-von-innen-Sektion, Kids-Linie „Pausenbrot-Bande“, Vergleichstabelle, Abo-Erklärung, Founders-Club-Anmeldung, FAQ.
+Der Launch konzentriert sich auf vier Bären aus der Character Bible. Die anderen Sorten stehen als „später“ in den Daten.
 
-## Verpackung
+| Bär | Produkt | Rolle | Running Gag |
+| --- | --- | --- | --- |
+| Glow | Beauty Gummies (Biotin, Zink, Vitamin C) | The Main Character | „Bin in 5 Minuten fertig.“ |
+| Flex | Kreatin Gummies (Kreatin, B6, B12) | The Gym Bro | „Nur noch ein Satz.“ |
+| Snooze | Snoozy Sleep Gummies (Melatonin, Magnesium, B6) | The Chill Guy | „Morgen?“ |
+| Daily | Multivitamin Gummies (12 Vitamine, 3 Mineralstoffe) | The Organizer | „Ich hab da einen Plan.“ |
 
-`verpackung.html` ist die Arbeitsgrundlage für Lieferanten und Design: Formate (Bärendose, Nachfüller per Brief, Tütchen-Box, Tagestütchen, Probierwoche), Maße, Material, Raster der Vorderseite, Pflichtangaben, erlaubte und verbotene Umweltaussagen, Launch-Wellen und Quellen mit Prüfstatus. Die Packungen werden als SVG aus `packs.js` gezeichnet, die Inhalte stehen in `packaging-spec.js`.
+- **Hero:** Die Dose mit dem Bär obendrauf steht in der Mitte, die nächste fliegt von unten rechts herein. Wischen, Pfeiltasten, Antippen und Maus-Parallax funktionieren.
+- **Quiz** „Welcher bärly-Bär bist du?“ mit drei Fragen, teilbarem Ergebnis und Bundle-Tipp.
+- **Shop:** vier Dosen, Bundles „Die ganze Crew“ und „Beauty Sleep“, Teaser „Bald im Haus“. Formatwahl je Sorte: Abo (Dose gratis, Nachfüller per Brief, 30/45/60 Tage), Einmalkauf, Nur Nachfüller, 3er-Vorrat, mit Grundpreis pro kg.
+- **Die Crew:** Charakterkarten mit Eigenschaften, Zitat, Running Gag und Zimmer, dazu die sechs Crew-Dynamiken.
+- **Das Haus:** Villa mit anklickbaren Zimmern.
+- **Episoden:** Episode 001 als Storyboard, Running Gags, Links zu Instagram, TikTok und YouTube.
+- **bärly kids:** bleibt sichtbar, ist aber noch nicht bestellbar. Statt Warenkorb gibt es eine Warteliste.
+- Warenkorb (im Browser gespeichert), Founders Club mit Abstimmung, FAQ.
+
+## Interne Seiten
+
+- `verpackung.html`: Verpackungssystem für Lieferanten und Design: Dose im Look der Frames, Nachfüller per Brief, Maße, Material, Lesereihenfolge der Vorderseite, Pflichtangaben, Launch, offene Fragen und Quellen mit Prüfstatus. Inhalte in `packaging-spec.js`, Zeichnungen in `packs.js`.
+- `content.html`: Content-Plan für Instagram, TikTok und YouTube: Avatare und Bären, Content-Säulen, Staffel 1 mit acht Folgen, Hooks und CTAs je Plattform, Posting-Takt, Leitplanken mit zugelassenen Claims, Kennzahlen.
 
 ## Anpassen
 
-Produkte, Packungsdaten, Formate und Preise stehen in `brand.js` (`PRODUCTS`, `PACK_INFO`, `plansFor`, `BUNDLES`), Shop-Logik in `app.js`. Farben und Schriften stehen in `styles.css` unter `:root`.
+Produkte, Welt (Zimmer, Beziehungen, Gags, Episoden), Bildpfade, Formate und Preise stehen in `brand.js` (`PRODUCTS`, `WORLD`, `IMG`, `PACK_INFO`, `plansFor`, `BUNDLES`), Shop-Logik in `app.js`. Farben und Schriften stehen in `styles.css` unter `:root`. Bilder liegen in `assets/` und sind Ausschnitte aus dem PDF mit den Frames.
 
 ## Vor dem Launch prüfen
 
-- Rezepturen, Dosierungen und Preise mit dem Hersteller abgleichen.
-- Gesundheitsbezogene Aussagen (VO 1924/2006, VO 432/2012) und Pflichthinweise rechtlich prüfen lassen.
-- Zuckerwert „unter 1 g“ ist ein Zielwert.
-- Kasse und Newsletter sind noch nicht angebunden (geplant: Shopify).
+- Bilder in voller Auflösung aus den Original-Frames exportieren (die PDF-Ausschnitte sind klein).
+- Rezepturen, Dosierungen und Preise mit dem Hersteller abgleichen. Die Crew ist so abgestimmt, dass alle vier zusammen nicht über den BfR-Höchstmengen für Zink, Vitamin D und B6 liegen.
+- Melatonin (Snoozy): Einstufung in Deutschland rechtlich klären.
+- Gesundheitsbezogene Aussagen (VO 1924/2006, VO 432/2012), Produktnamen und Captions rechtlich prüfen lassen.
+- Kasse, Newsletter und Warteliste sind noch nicht angebunden (geplant: Shopify).

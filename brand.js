@@ -93,7 +93,7 @@ const PRODUCTS = [
     story: '12 Vitamine und 3 Mineralstoffe in zwei Zitrone-Mango-Gummies, einmal morgens. Vitamin C und D tragen zu einer normalen Funktion des Immunsystems bei. Den Rest des Tages plant Daily.',
     facts: [['12', 'Vitamine'], ['3', 'Mineralstoffe'], ['10 µg', 'Vitamin D3'], ['2 Gummies', 'pro Tag']],
     nutrients: [['Vitamin C', '80 mg', '100 %'], ['Vitamin D3', '10 µg', '200 %'], ['Vitamin B6', '1,4 mg', '100 %'], ['Vitamin B12', '2,5 µg', '100 %'], ['Zink', '1,5 mg', '15 %'], ['Selen', '27,5 µg', '50 %'], ['Jod', '75 µg', '50 %']],
-    claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen Energiestoffwechsel bei.',
+    claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 24.90, vegan: true, doses: { zinc: 1.5, vitD: 10, b6: 1.4 }
   },
   /* ---------------- Später: Sorten für die nächsten Wellen ---------------- */

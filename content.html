@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bärly Content-Plan</title>
+<meta name="description" content="Interner Content-Plan von bärly: Avatare und Bären, Staffel 1 für Instagram, TikTok und YouTube, Hooks, Posting-Takt und Leitplanken.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .cp { background: var(--paper); }
+  .cp-nav {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 12px var(--gutter);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .cp-links { display: flex; flex-wrap: wrap; gap: 4px; }
+  .cp-links a { text-decoration: none; font-weight: 600; font-size: 14px; padding: 7px 12px; border-radius: 99px; }
+  .cp-links a:hover { background: var(--paper-2); }
+  .cp-hero { background: var(--snoozy-t); padding-block: clamp(48px, 7vw, 96px); overflow: hidden; }
+  .cp-hero h1 { margin: 0 0 18px; font-family: var(--f-display); font-weight: 700; font-size: clamp(38px, 5.6vw, 76px); line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+  .cp-hero h1 span { font-family: var(--f-hand); color: var(--snoozy); font-size: 1.1em; }
+  .cp-faces { display: flex; margin-top: 28px; }
+  .cp-faces img { width: clamp(70px, 9vw, 110px); margin-right: -2%; }
+  .cp-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 32px; }
+  .cp-summary div { padding: 16px; border-radius: 18px; background: rgba(255, 255, 255, .7); }
+  .cp-summary b { display: block; font-family: var(--f-display); font-size: 30px; line-height: 1; }
+  .cp-summary span { font-size: 14px; color: var(--ink-soft); }
+
+  .avatars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+  .avatar { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 18px; padding: 20px; border-radius: 24px; background: var(--t); }
+  .avatar img { grid-row: span 2; width: 120px; align-self: start; }
+  .avatar h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 26px; line-height: 1.05; }
+  .avatar h3 small { display: block; font-family: var(--f-body); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c); margin-bottom: 4px; }
+  .avatar dl { grid-column: 1 / -1; margin: 10px 0 0; display: grid; gap: 8px; }
+  .avatar dt { font-weight: 800; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .avatar dd { margin: 2px 0 0; font-size: 15px; line-height: 1.45; }
+  .avatar .quote { margin: 0; font-family: var(--f-hand); font-weight: 700; font-size: 22px; line-height: 1.05; }
+  .note { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
+
+  .pillars { display: grid; gap: 10px; margin-top: 28px; }
+  .pillar { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr) 56px; gap: 16px; align-items: center; padding: 14px 18px; border-radius: 18px; background: var(--paper-2); }
+  .pillar b { font-family: var(--f-display); font-size: 19px; }
+  .pillar p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+  .pillar span { font-family: var(--f-display); font-weight: 700; font-size: 22px; text-align: right; }
+
+  .season { display: grid; gap: 14px; margin-top: 28px; }
+  .ep { display: grid; grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1fr); gap: 18px; padding: 20px; border-radius: 22px; background: #fff; border: 2px solid var(--line); }
+  .ep-n { font-family: var(--f-display); font-weight: 700; font-size: 34px; line-height: 1; }
+  .ep-n small { display: block; margin-top: 6px; font-family: var(--f-body); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+  .ep h3 { margin: 0 0 6px; font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 1.1; }
+  .ep p { margin: 0 0 8px; font-size: 15px; line-height: 1.45; }
+  .ep .hook { font-family: var(--f-hand); font-weight: 700; font-size: 22px; line-height: 1.1; color: var(--snoozy); margin-bottom: 8px; }
+  .ep dl { margin: 0; display: grid; gap: 6px; font-size: 14.5px; }
+  .ep dt { font-weight: 800; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .ep dd { margin: 0; line-height: 1.4; }
+  .ep-faces { display: flex; margin-top: 8px; }
+  .ep-faces img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: 50% 8%; background: var(--paper-2); }
+  .ep-faces img + img { margin-left: -10px; }
+  .ep-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+  .ep-strip img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 8px; }
+
+  .platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+  .platform { padding: 22px; border-radius: 24px; background: var(--paper-2); display: grid; align-content: start; gap: 10px; }
+  .platform h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 26px; }
+  .platform h4 { margin: 8px 0 0; font-weight: 800; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .platform ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+
+  .ladder { list-style: none; counter-reset: l; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .ladder li { counter-increment: l; position: relative; padding: 18px 18px 18px 18px; border-radius: 20px; background: var(--ink); color: var(--paper); }
+  .ladder li::before { content: counter(l); display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 10px; border-radius: 50%; background: var(--sun); color: var(--ink); font-family: var(--f-display); font-weight: 700; }
+  .ladder b { display: block; font-family: var(--f-display); font-size: 20px; }
+  .ladder span { font-size: 14px; opacity: .8; }
+
+  .cadence { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+  .phase { padding: 22px; border-radius: 24px; border: 2.5px solid var(--ink); background: #fff; }
+  .phase h3 { margin: 0 0 4px; font-family: var(--f-display); font-weight: 700; font-size: 24px; }
+  .phase p.when { margin: 0 0 12px; font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .phase ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+  .week { margin-top: 18px; overflow-x: auto; }
+  .week table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 14px; }
+  .week th, .week td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .week thead th { font-weight: 800; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .rules2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+  .rule { padding: 22px; border-radius: 24px; }
+  .rule h3 { margin: 0 0 10px; font-family: var(--f-display); font-weight: 700; font-size: 24px; }
+  .rule ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 15px; }
+  .rule-do { background: #dcf6e1; }
+  .rule-dont { background: #ffdde1; }
+  .claims { margin-top: 16px; overflow-x: auto; }
+  .claims table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14.5px; }
+  .claims th, .claims td { padding: 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .claims thead th { font-weight: 800; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+  .kpi { padding: 18px; border-radius: 20px; background: var(--paper-2); }
+  .kpi b { display: block; font-family: var(--f-display); font-size: 28px; line-height: 1; margin-bottom: 6px; }
+  .kpi span { font-size: 14px; color: var(--ink-soft); line-height: 1.4; display: block; }
+  .prod { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+  .prod div { padding: 20px; border-radius: 22px; background: var(--paper-2); }
+  .prod h3 { margin: 0 0 8px; font-family: var(--f-display); font-weight: 700; font-size: 21px; }
+  .prod p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+  .cp-foot { padding-block: 40px; background: var(--ink); color: rgba(255, 250, 243, .75); font-size: 14px; }
+  .cp-foot p { margin: 0; max-width: 70ch; }
+
+  @media (max-width: 960px) {
+    .cp-links { display: none; }
+    .avatars, .platforms, .cadence, .rules2, .prod { grid-template-columns: minmax(0, 1fr); }
+    .ladder, .kpis, .cp-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ep { grid-template-columns: 70px minmax(0, 1fr); }
+    .ep > div:last-child { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .avatar { grid-template-columns: 80px minmax(0, 1fr); }
+    .avatar img { width: 80px; }
+    .pillar { grid-template-columns: minmax(0, 1fr) 48px; }
+    .pillar p { grid-column: 1 / -1; grid-row: 2; }
+    .ep { grid-template-columns: minmax(0, 1fr); }
+    .ep > div:last-child { grid-column: auto; }
+    .ep-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body class="cp">
+
+<header class="cp-nav">
+  <a class="logo" href="index.html" aria-label="Zurück zum Shop">bärly<sup>™</sup></a>
+  <nav class="cp-links" aria-label="Abschnitte">
+    <a href="#avatare">Avatare</a>
+    <a href="#saeulen">Säulen</a>
+    <a href="#staffel">Staffel 1</a>
+    <a href="#plattformen">Plattformen</a>
+    <a href="#takt">Takt</a>
+    <a href="#leitplanken">Leitplanken</a>
+    <a href="#messen">Messen</a>
+  </nav>
+  <a class="btn btn-ink btn-sm" href="index.html">Zum Shop</a>
+</header>
+
+<main>
+  <section class="cp-hero">
+    <div class="wrap">
+      <p class="eyebrow">Content-Plan · intern · Arbeitsstand</p>
+      <h1>Vier Bären, ein Haus, jede Woche eine Folge. <span>Same Bears. Better Days.</span></h1>
+      <p class="lead">Die Crew ist das Marketing. Wir erzählen kurze Cartoon-Episoden aus dem bärly-Haus, jede mit einem Running Gag, und jeder Bär spricht genau eine Zielgruppe an. Das Produkt taucht auf wie im echten Leben: zwei Gummies zum Frühstück, Snoozy am Abend, der Nachfüller im Briefkasten. Verkauft wird im Shop, nicht in der Pointe.</p>
+      <div class="cp-faces" aria-hidden="true">
+        <img src="assets/plush-glow.webp" alt=""><img src="assets/plush-flex.webp" alt=""><img src="assets/plush-snooze.webp" alt=""><img src="assets/plush-daily.webp" alt="">
+      </div>
+      <div class="cp-summary">
+        <div><b>8</b><span>Episoden in Staffel 1, davon 6 vor dem Launch</span></div>
+        <div><b>3 × / Woche</b><span>Serien-Posts vor dem Launch (Folge, Teil 2 oder Gag-Clip), danach 2 × pro Woche</span></div>
+        <div><b>3</b><span>Plattformen: TikTok, Instagram, YouTube</span></div>
+        <div><b>1</b><span>Ziel vor dem Launch: Founders-Club-Liste aufbauen</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="avatare">
+    <div class="wrap">
+      <p class="eyebrow">Avatare ↔ Bären</p>
+      <h2 class="h2">Jeder Bär spricht eine Person an.</h2>
+      <p class="lead">Die Avatare sind Arbeitshypothesen aus der Character Bible und den Referenzmarken. Nach den ersten vier Wochen mit echten Kommentaren, Quiz-Ergebnissen und Founders-Club-Daten überprüfen.</p>
+      <div class="avatars">
+        <article class="avatar" style="--t:var(--glow-t);--c:#b8235c">
+          <img src="assets/plush-glow.webp" alt="Glow">
+          <h3><small>Glow · Beauty Gummies</small>Lea, 26</h3>
+          <p class="quote">„Ich tu so viel für meine Haut von außen.“</p>
+          <dl>
+            <div><dt>Alltag</dt><dd>Arbeitet im Marketing, Skincare-Routine morgens und abends, folgt Beauty-Creators, kauft lieber Serum als Make-up.</dd></div>
+            <div><dt>Was sie bremst</dt><dd>Hat schon Beauty-Gummies probiert, keinen Unterschied gemerkt, misstraut großen Versprechen.</dd></div>
+            <div><dt>Was sie hören will</dt><dd>Ehrliches Tempo (Haut erneuert sich in rund 28 Tagen), was drin ist, hübsche Dose fürs Bad-Regal.</dd></div>
+            <div><dt>Hooks</dt><dd>Get Ready With Me mit Glow, „Bin in 5 Minuten fertig“, Shelfie, Glow erklärt Biotin in 15 Sekunden.</dd></div>
+            <div><dt>Plattform</dt><dd>TikTok, Instagram Reels und Stories</dd></div>
+          </dl>
+        </article>
+        <article class="avatar" style="--t:var(--flex-t);--c:#1a3a94">
+          <img src="assets/plush-flex.webp" alt="Flex">
+          <h3><small>Flex · Kreatin Gummies</small>Tim, 24</h3>
+          <p class="quote">„Pulver klumpt, Shaker stinkt, ich vergess es.“</p>
+          <dl>
+            <div><dt>Alltag</dt><dd>Gym vier Mal pro Woche, kennt Kreatin, trackt Training in einer App, schaut Gym-Content auf TikTok und YouTube.</dd></div>
+            <div><dt>Was ihn bremst</dt><dd>Kreatin-Gummies haben einen schlechten Ruf, weil viele zu wenig Kreatin enthalten.</dd></div>
+            <div><dt>Was er hören will</dt><dd>3 g pro Tagesportion, geprüft vom Labor, kein Shaker. Gerne mit Selbstironie.</dd></div>
+            <div><dt>Hooks</dt><dd>05:00-Wecker, „Nur noch ein Satz“, Flex versucht Snooze ins Gym zu bekommen, Laborbericht als Stitch.</dd></div>
+            <div><dt>Plattform</dt><dd>TikTok, YouTube Shorts</dd></div>
+          </dl>
+        </article>
+        <article class="avatar" style="--t:var(--snoozy-t);--c:#45198c">
+          <img src="assets/plush-snooze.webp" alt="Snooze">
+          <h3><small>Snooze · Snoozy Sleep Gummies</small>Sarah, 33</h3>
+          <p class="quote">„Um elf ins Bett, um eins noch am Handy.“</p>
+          <dl>
+            <div><dt>Alltag</dt><dd>Job mit Verantwortung, abends Serien und Handy, kommt schwer runter, liebt Rituale (Kerze, Tee, Decke).</dd></div>
+            <div><dt>Was sie bremst</dt><dd>Angst, morgens müde zu sein. Unsicher, ob Melatonin „okay“ ist.</dd></div>
+            <div><dt>Was sie hören will</dt><dd>1 mg, 30 Minuten vor dem Schlafen, nur für Erwachsene. Ein Abendritual mit Humor statt Schlaf-Druck.</dd></div>
+            <div><dt>Hooks</dt><dd>„Morgen?“, Snooze gegen den Wecker, Pyjama-Abend mit Glow (Beauty Sleep), Snooze’s Room als ASMR-Tour.</dd></div>
+            <div><dt>Plattform</dt><dd>Instagram Reels, TikTok</dd></div>
+          </dl>
+        </article>
+        <article class="avatar" style="--t:var(--daily-t);--c:#6e4700">
+          <img src="assets/plush-daily.webp" alt="Daily">
+          <h3><small>Daily · Multivitamin Gummies</small>Mara und Jonas, 30–38</h3>
+          <p class="quote">„Fünf Dosen im Schrank, keine Ahnung wofür.“</p>
+          <dl>
+            <div><dt>Alltag</dt><dd>Voller Kalender, Meal-Prep am Sonntag, Notion oder Papierplaner, wollen die Basics abdecken, ohne nachzudenken.</dd></div>
+            <div><dt>Was sie bremst</dt><dd>Zu viele Produkte, Angst vor Überdosierung, Abo-Fallen.</dd></div>
+            <div><dt>Was sie hören will</dt><dd>Ein Gummy-Paar am Morgen, abgestimmt mit der Crew, Abo jederzeit pausierbar, Nachfüller per Brief.</dd></div>
+            <div><dt>Hooks</dt><dd>„Ich hab da einen Plan“, Wochenplanung der Crew, Plan A geht schief, Plan B klappt. Der Brief im Briefkasten.</dd></div>
+            <div><dt>Plattform</dt><dd>Instagram (Reels und Karussells), YouTube</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="note">Später: Eltern von 4- bis 12-Jährigen für bärly kids. Content dafür richtet sich nur an Eltern, nie an Kinder, und startet erst, wenn die Linie bestellbar ist.</p>
+    </div>
+  </section>
+
+  <section class="section" id="saeulen" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="eyebrow">Content-Säulen</p>
+      <h2 class="h2">Was wir posten, und wie viel davon.</h2>
+      <div class="pillars">
+        <div class="pillar"><b>Episoden</b><p>Die Serie aus dem bärly-Haus. 20–45 Sekunden, eine Situation, ein Running Gag, eine Pointe. Baut Follower und Wiedererkennung auf.</p><span>40 %</span></div>
+        <div class="pillar"><b>Running Gags und Memes</b><p>Kurze Wiederholungen: „Nur noch ein Satz“, „Bin in 5 Minuten fertig“, „Morgen?“, „Ich hab da einen Plan“. Gut für Stitches, Duette und Kommentar-Antworten.</p><span>25 %</span></div>
+        <div class="pillar"><b>Bär erklärt</b><p>Ein Nährstoff in 15 Sekunden, erklärt vom passenden Bären. Nur mit zugelassener Angabe, wortgleich.</p><span>15 %</span></div>
+        <div class="pillar"><b>Community</b><p>Quiz „Welcher Bär bist du?“, Abstimmung „Wer zieht als Nächstes ein?“, Shelfies, Reposts von Kundinnen und Kunden.</p><span>15 %</span></div>
+        <div class="pillar"><b>Produkt und Abo</b><p>Die Dose, der Brief, die Tatzen-Dosis. Immer als Teil einer Szene, nie als Werbespot.</p><span>5 %</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="staffel">
+    <div class="wrap">
+      <p class="eyebrow">Staffel 1 · Launch</p>
+      <h2 class="h2">Acht Folgen bis zum ersten Brief.</h2>
+      <p class="lead">Jede Folge hat einen Hook in den ersten zwei Sekunden, einen Running Gag und genau einen Produktmoment. Der Cliffhanger zeigt auf die nächste Folge. Episode 001 ist schon als Storyboard in den Frames.</p>
+      <div class="season">
+        <article class="ep">
+          <div class="ep-n">001<small>Woche −4</small></div>
+          <div>
+            <p class="hook">„Wenn dein Gym-Buddy um 05:00 vor deinem Bett steht.“</p>
+            <h3>Flex versucht Snooze ins Gym zu bekommen</h3>
+            <p>05:00, Flex ist wach. Snooze hat Ausreden. Glow kommt dazu, Daily hat einen Plan. Am Ende schaffen sie es zusammen.</p>
+            <div class="ep-strip"><img src="assets/ep1-1.webp" alt=""><img src="assets/ep1-2.webp" alt=""><img src="assets/ep1-3.webp" alt=""><img src="assets/ep1-4.webp" alt=""><img src="assets/ep1-5.webp" alt=""><img src="assets/ep1-6.webp" alt=""></div>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>„Nur noch ein Satz.“ gegen „Morgen?“</dd></div>
+            <div><dt>Produktmoment</dt><dd>Glow: „Nimm gleich deine Glow Gummies mit!“ Zwei Stück, Tatzen-Dosis im Bild.</dd></div>
+            <div><dt>CTA</dt><dd>„Teil 2 am Mittwoch. Welcher Bär bist du?“ (Quiz)</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-flex.webp" alt=""><img src="assets/plush-snooze.webp" alt=""><img src="assets/plush-glow.webp" alt=""><img src="assets/plush-daily.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">002<small>Woche −4</small></div>
+          <div>
+            <p class="hook">„Sie hat ‚5 Minuten‘ gesagt. Das war vor 45 Minuten.“</p>
+            <h3>Bin in 5 Minuten fertig</h3>
+            <p>Die Crew wartet vor Glows Tür. Daily stoppt die Zeit, Flex macht Liegestütze, Snooze schläft im Flur ein. Glow kommt raus, mit Krone, perfekt.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>„Bin in 5 Minuten fertig.“</dd></div>
+            <div><dt>Produktmoment</dt><dd>Glow-Dose auf dem Schminktisch, zwei Gummies zum Frühstück.</dd></div>
+            <div><dt>CTA</dt><dd>„Markier die Person, auf die du immer wartest.“</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-glow.webp" alt=""><img src="assets/plush-daily.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">003<small>Woche −3</small></div>
+          <div>
+            <p class="hook">„Daily hat einen Plan. Daily hat immer einen Plan.“</p>
+            <h3>Der Wochenplan</h3>
+            <p>Daily plant die Woche für alle. Glow interpretiert kreativ, Flex baut überall ein Workout ein, Snooze streicht alles vor zehn Uhr. Plan B klappt.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>„Ich hab da einen Plan.“</dd></div>
+            <div><dt>Produktmoment</dt><dd>Auf dem Plan steht „08:00 Daily, 2 Stück“. Mehr nicht.</dd></div>
+            <div><dt>CTA</dt><dd>Karussell: „Speicher dir Dailys Plan.“</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-daily.webp" alt=""><img src="assets/plush-flex.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">004<small>Woche −3</small></div>
+          <div>
+            <p class="hook">„Glow redet. Snooze hört zu. Halb.“</p>
+            <h3>Beauty Sleep</h3>
+            <p>Pyjama-Abend in Snooze’s Room. Glow erzählt vom Tag, Snooze gibt einen einzigen, perfekten Ratschlag und schläft ein.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>„Morgen?“</dd></div>
+            <div><dt>Produktmoment</dt><dd>Snoozy 30 Minuten vor dem Schlafen. Caption: „Nur für Erwachsene.“</dd></div>
+            <div><dt>CTA</dt><dd>„Wer ist dein Snooze?“ Kommentare</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-glow.webp" alt=""><img src="assets/plush-snooze.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">005<small>Woche −2</small></div>
+          <div>
+            <p class="hook">„Snooze musste nicht mal aufstehen.“</p>
+            <h3>Der Brief</h3>
+            <p>Der Nachfüller kommt als Brief durch den Briefkasten. Flex wartet an der Tür auf den Paketboten, der nie kommt. Snooze hat ihn schon aufgefüllt.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>Flex: „Nur noch ein Satz.“ (an der Tür)</dd></div>
+            <div><dt>Produktmoment</dt><dd>Brief, Nachfüller, Dose. Erklärt das Abo in einer Szene.</dd></div>
+            <div><dt>CTA</dt><dd>„Founders Club: Link in Bio.“</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-snooze.webp" alt=""><img src="assets/plush-flex.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">006<small>Woche −1</small></div>
+          <div>
+            <p class="hook">„Es klingelt. Vor der Tür stehen drei Schatten.“</p>
+            <h3>Wer zieht als Nächstes ein?</h3>
+            <p>Drei Silhouetten vor der Villa: ein Bär mit Omega-3, einer mit Kollagen, einer mit D3 und K2. Die Crew ist sich uneinig.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>„Wir machen das zusammen.“</dd></div>
+            <div><dt>Produktmoment</dt><dd>Keiner. Nur die Abstimmung.</dd></div>
+            <div><dt>CTA</dt><dd>Abstimmen im Founders Club, Story-Umfrage</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-daily.webp" alt=""><img src="assets/plush-glow.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">007<small>Launch</small></div>
+          <div>
+            <p class="hook">„Die Dosen sind da.“</p>
+            <h3>Launch-Tag</h3>
+            <p>Vier Dosen kommen an, jeder Bär findet seine. Party im Wohnzimmer, Daily hat natürlich einen Ablaufplan.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>Alle vier in einer Szene</dd></div>
+            <div><dt>Produktmoment</dt><dd>Die Launch-Crew im Regal, Tatzen-Dosis auf jeder Dose.</dd></div>
+            <div><dt>CTA</dt><dd>„Shop ist offen. Founders-Code gilt 72 Stunden.“</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-glow.webp" alt=""><img src="assets/plush-flex.webp" alt=""><img src="assets/plush-snooze.webp" alt=""><img src="assets/plush-daily.webp" alt=""></div></div>
+        </article>
+        <article class="ep">
+          <div class="ep-n">008<small>Launch +1</small></div>
+          <div>
+            <p class="hook">„Ich bin zu 100 % Snooze. Du?“</p>
+            <h3>Welcher Bär bist du?</h3>
+            <p>Die Bären reagieren auf Quiz-Ergebnisse aus der Community. Format zum Duettieren und Stitchen.</p>
+          </div>
+          <div><dl>
+            <div><dt>Running Gag</dt><dd>Jeder Bär verteidigt sich</dd></div>
+            <div><dt>Produktmoment</dt><dd>Ergebnis-Karte mit Dose.</dd></div>
+            <div><dt>CTA</dt><dd>„Mach das Quiz und teil dein Ergebnis.“</dd></div>
+          </dl><div class="ep-faces"><img src="assets/plush-flex.webp" alt=""><img src="assets/plush-snooze.webp" alt=""></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plattformen" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="eyebrow">Plattformen</p>
+      <h2 class="h2">Eine Folge, drei Schnitte.</h2>
+      <div class="platforms">
+        <div class="platform">
+          <h3>TikTok</h3>
+          <h4>Format</h4>
+          <ul><li>9:16, 20–35 Sekunden, Pointe vor Sekunde 25</li><li>Serie mit „Teil 2“-Cliffhanger</li><li>Antwort-Videos auf Kommentare, in der Stimme des Bären</li></ul>
+          <h4>Hook</h4>
+          <ul><li>Situation als Text in der ersten Sekunde: „Wenn dein Gym-Buddy um 05:00 …“</li><li>Bewegung im ersten Frame, kein Logo-Intro</li></ul>
+          <h4>CTA</h4>
+          <ul><li>Folgen für Teil 2, Quiz über Link in Bio</li></ul>
+        </div>
+        <div class="platform">
+          <h3>Instagram</h3>
+          <h4>Format</h4>
+          <ul><li>Reels aus demselben Material, ruhigeres Cover mit Bärenkopf</li><li>Karussells: „Welcher Bär bist du?“, Dailys Plan, Zimmer-Touren</li><li>Stories mit Umfragen, Highlights mit Krone, Hantel, Mond, Sonne</li></ul>
+          <h4>Hook</h4>
+          <ul><li>Running Gag als Cover-Text, Shelfie-Ästhetik</li></ul>
+          <h4>CTA</h4>
+          <ul><li>Speichern, Markieren, Founders Club per Link-Sticker</li></ul>
+        </div>
+        <div class="platform">
+          <h3>YouTube</h3>
+          <h4>Format</h4>
+          <ul><li>Shorts als Cut-Downs der Folgen</li><li>Einmal im Monat „Ein Monat im bärly-Haus“, 3–6 Minuten</li><li>Lore: Zimmer-Touren, Behind the Scenes</li></ul>
+          <h4>Hook</h4>
+          <ul><li>Thumbnail mit Bär und einer Zeile, Kapitel pro Folge</li></ul>
+          <h4>CTA</h4>
+          <ul><li>Abonnieren, Community-Umfragen, Link zur Website</li></ul>
+        </div>
+      </div>
+      <ol class="ladder" aria-label="CTA-Leiter">
+        <li><b>Folgen</b><span>Teil 2 kommt am Mittwoch.</span></li>
+        <li><b>Quiz</b><span>Welcher Bär bist du? Ergebnis teilen.</span></li>
+        <li><b>Founders Club</b><span>E-Mail, 25 % auf die erste Bestellung, Stimme fürs nächste Zimmer.</span></li>
+        <li><b>Shop</b><span>Erst ab dem Launch. Abo mit Dose gratis.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="takt">
+    <div class="wrap">
+      <p class="eyebrow">Posting-Takt</p>
+      <h2 class="h2">Vier Wochen vorher anfangen.</h2>
+      <div class="cadence">
+        <div class="phase">
+          <h3>Vor dem Launch</h3>
+          <p class="when">Woche −4 bis −1</p>
+          <ul><li>3 Serien-Posts pro Woche (Mo, Mi, Fr, 18 Uhr): neue Folge, Teil 2 oder Running-Gag-Clip</li><li>Täglich Stories: Umfrage, Gag, Zimmer-Detail</li><li>2 Karussells pro Woche</li><li>Ziel: Founders-Club-Liste</li></ul>
+        </div>
+        <div class="phase">
+          <h3>Launch-Woche</h3>
+          <p class="when">7 Tage</p>
+          <ul><li>Jeden Tag ein Clip oder eine Folge</li><li>Folge 007 am Launch-Tag um 18 Uhr</li><li>Founders-Code 72 Stunden</li><li>Erste Kundenreaktionen sammeln (mit Erlaubnis)</li></ul>
+        </div>
+        <div class="phase">
+          <h3>Danach</h3>
+          <p class="when">laufend</p>
+          <ul><li>2 Folgen pro Woche, ein fester Serien-Tag</li><li>1 YouTube-Compilation pro Monat</li><li>1 Abstimmung pro Monat: Wer zieht ein?</li><li>Running Gag in jeder Folge</li></ul>
+        </div>
+      </div>
+      <div class="week">
+        <table>
+          <thead><tr><th scope="col">Beispielwoche</th><th scope="col">TikTok</th><th scope="col">Instagram</th><th scope="col">YouTube</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Montag</th><td>Neue Folge (Teil 1)</td><td>Reel der Folge, Story-Umfrage</td><td>Short</td></tr>
+            <tr><th scope="row">Mittwoch</th><td>Teil 2 oder zweite Folge der Woche</td><td>Reel, Karussell „Bär erklärt“</td><td>Short</td></tr>
+            <tr><th scope="row">Freitag</th><td>Running-Gag-Clip, Kommentar-Antwort</td><td>Reel, Story „Wer ist dein …?“</td><td>Short</td></tr>
+            <tr><th scope="row">Sonntag</th><td>–</td><td>Karussell Wochenplan (Daily)</td><td>Einmal im Monat: Compilation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="leitplanken" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="eyebrow">Leitplanken</p>
+      <h2 class="h2">Lustig ja. Gesundheitsversprechen nein.</h2>
+      <p class="lead">Captions, Voice-over und Text im Bild zählen wie die Packung. Produktnamen wie GLOW oder FLEX gelten als Gesundheitsbezug und brauchen die zugelassene Angabe. Vor dem Launch einmal von einer Lebensmittelrechts-Kanzlei abnehmen lassen.</p>
+      <div class="rules2">
+        <div class="rule rule-do">
+          <h3>Machen</h3>
+          <ul>
+            <li>Dosis zeigen, wenn jemand Gummies nimmt: zwei Stück, Tatzen-Dosis im Bild.</li>
+            <li>Nutzen nur mit dem zugelassenen Satz, wortgleich (siehe Tabelle), in Caption oder Bild.</li>
+            <li>Snoozy: „Nur für Erwachsene“ in jeder Caption. Nie Kinder in derselben Szene, nie vor dem Autofahren.</li>
+            <li>Bären als Erwachsene in einer WG zeigen, Humor über Alltag statt über Wirkung.</li>
+            <li>Bezahlte Creator-Posts als „Werbung“ kennzeichnen.</li>
+            <li>KI-generierte Clips nach Plattformregeln kennzeichnen; die Transparenzpflichten aus Art. 50 des EU AI Act gelten seit 2. August 2026.</li>
+            <li>Musik nur mit Lizenz für kommerzielle Accounts.</li>
+          </ul>
+        </div>
+        <div class="rule rule-dont">
+          <h3>Lassen</h3>
+          <ul>
+            <li>Keine Überdosis-Gags: kein Bär, der die ganze Dose isst, kein „eins geht noch“.</li>
+            <li>Gummies nie als Snack, Süßigkeit oder Belohnung zeigen.</li>
+            <li>Keine Wirkversprechen: „macht schön“, „nie wieder müde“, „Muskeln in 2 Wochen“, Vorher-Nachher mit Versprechen.</li>
+            <li>Keine Krankheiten: Schlafstörung, Haarausfall, Akne, Erkältung.</li>
+            <li>Keine Ansprache von Kindern und kein „Frag deine Eltern“ (UWG Anhang Nr. 28). Kids-Content erst mit bärly kids, nur an Eltern.</li>
+            <li>Keine Abnehm- oder Gewichtsaussagen bei Flex.</li>
+            <li>Keine pauschalen Umweltaussagen (nachhaltig, umweltfreundlich, klimaneutral).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="claims">
+        <table>
+          <thead><tr><th scope="col">Bär</th><th scope="col">Zugelassener Satz (VO 432/2012)</th><th scope="col">Bedingung</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Glow</th><td>Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.</td><td>2 Gummies pro Tag</td></tr>
+            <tr><th scope="row">Flex</th><td>Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung.</td><td>3 g Kreatin pro Tag, nur für Erwachsene, die Schnellkrafttraining machen</td></tr>
+            <tr><th scope="row">Snoozy</th><td>Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen.</td><td>1 mg kurz vor dem Schlafengehen; Melatonin-Einstufung vorab rechtlich klären</td></tr>
+            <tr><th scope="row">Daily</th><td>Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.</td><td>2 Gummies pro Tag</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="messen">
+    <div class="wrap">
+      <p class="eyebrow">Messen</p>
+      <h2 class="h2">Woran wir nach vier Wochen entscheiden.</h2>
+      <p class="lead">Startwerte zum Vergleichen, keine Zusagen. Nach Folge 004 entscheiden: Welcher Bär trägt, welcher Gag wiederholt sich, welche Plattform bekommt mehr Budget.</p>
+      <div class="kpis">
+        <div class="kpi"><b>Hook-Rate</b><span>3-Sekunden-Views geteilt durch Impressionen. Zeigt, ob die erste Sekunde trägt.</span></div>
+        <div class="kpi"><b>Watch-Through</b><span>Anteil, der bis zur Pointe schaut. Pro Bär vergleichen.</span></div>
+        <div class="kpi"><b>Shares + Saves</b><span>Pro 1.000 Views. Der beste Hinweis auf Serien-Potenzial.</span></div>
+        <div class="kpi"><b>Follows pro Folge</b><span>Wächst die Serie oder nur einzelne Clips?</span></div>
+        <div class="kpi"><b>Quiz-Abschlüsse</b><span>Und welcher Bär am häufigsten rauskommt.</span></div>
+        <div class="kpi"><b>Founders-Sign-ups</b><span>Pro Plattform, über UTM-Links in der Bio.</span></div>
+        <div class="kpi"><b>Kommentare mit Bärnamen</b><span>Wie oft schreiben Leute „ich bin Snooze“? Maß für Identifikation.</span></div>
+        <div class="kpi"><b>Abo-Quote</b><span>Ab dem Launch: Anteil Abo an den ersten Bestellungen.</span></div>
+      </div>
+      <div class="prod">
+        <div><h3>Charaktere konsistent halten</h3><p>Character Bible als Vorlage für jede Folge: Turnaround, Mimik, Farbpalette, Signature-Items (Krone, Sonnenbrille, Schlafmütze, Cap). Für KI-Videos feste Referenzbilder pro Bär und ein Prompt-Baustein je Charakter.</p></div>
+        <div><h3>Stimme und Ton</h3><p>Entweder feste Sprecherinnen und Sprecher je Bär oder ohne Stimme mit Untertiteln und Sounddesign. Nicht mischen. Untertitel immer, viele schauen ohne Ton.</p></div>
+        <div><h3>Wiedererkennung</h3><p>Jede Folge endet mit derselben Endkarte: Crew auf dem Sofa, „Same Bears. Better Days.“ in Handschrift, Teil-2-Hinweis.</p></div>
+        <div><h3>Bilder in voller Auflösung</h3><p>Die Frames liegen hier nur als Ausschnitte aus dem PDF vor (ca. 1.240 px pro Seite). Für Shop und Ads die Originaldateien in voller Auflösung exportieren.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="cp-foot">
+  <div class="wrap">
+    <p>Interner Arbeitsstand. Avatare und Kennzahlen sind Hypothesen, Claims und Captions vor der Veröffentlichung rechtlich prüfen lassen. <a href="verpackung.html" style="color:inherit">Zum Verpackungssystem</a></p>
+  </div>
+</footer>
+</body>
+</html>

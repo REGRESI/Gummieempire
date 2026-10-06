@@ -17,15 +17,18 @@ $('#pkReco').innerHTML = SPEC.reco.map(t => `<p>${esc(t)}</p>`).join('');
 $('#pkHeroVisual').innerHTML = `
   <div class="hv hv-can">${packs.can(byId.glow)}</div>
   <div class="hv hv-refill">${packs.refill(byId.glow)}</div>
-  <div class="hv hv-sachet">${packs.sachet(KIDS, { day: 'MO', name: 'Emma' })}</div>`;
+  <div class="hv hv-sachet">${packs.packet(['kiko'], { day: 'MO', name: 'Emma' })}</div>`;
 
 /* Formate */
 const formatArt = {
-  can: () => packs.can(byId.mags),
+  can: () => `<div class="can-trio">${packs.can(byId.sunny)}${packs.can(byId.mags)}${packs.can(byId.brainy)}</div>`,
   refill: () => packs.refill(byId.mags),
-  sachet: () => packs.sachet(KIDS, { day: 'DI', name: 'Paul' }),
-  box: () => packs.box(KIDS),
-  stack: () => packs.sachet(['glow', 'dew', 'mags'], { day: 'MI' })
+  letter: () => packs.letter(`<g transform="scale(.42)">${packs.refill(byId.mags).replace('<svg ', '<svg width="224" height="332" ')}</g>`),
+  strip: () => packs.strip(['juno'], { name: 'Emma', count: 3 }),
+  kids: () => packs.packet(['kiko'], { day: 'DI', name: 'Paul' }),
+  zap: () => packs.strip(['zap'], { count: 3 }),
+  trial: () => packs.packet(['glow'], { day: 'MO' }),
+  stack: () => packs.packet(['glow', 'dew'], { day: 'MI' })
 };
 $('#formatList').innerHTML = SPEC.formats.map(f => `
   <article class="format">
@@ -56,19 +59,18 @@ const lineup = $('#lineup');
 function renderLineup(view) {
   if (view === 'sachet') {
     lineup.innerHTML = [
-      packs.sachet(KIDS, { day: 'MO', name: 'Emma' }),
-      packs.sachet(['kiko'], { day: 'DI', name: 'Ben' }),
-      packs.sachet(['glow', 'dew'], { day: 'MI' }),
-      packs.sachet(['flex', 'buff'], { day: 'DO' }),
-      packs.sachet(['mags', 'sunny'], { day: 'FR' }),
-      packs.sachet(['brainy', 'shield', 'sunny'], { day: 'SA' }),
-      packs.box(KIDS),
-      packs.box(['glow', 'dew', 'mags'], { title: 'Tagestütchen', sub: 'Dein Stack · 4 Wochen' })
-    ].map(s => `<div class="lineup-item">${s}</div>`).join('');
+      [packs.packet(['kiko'], { day: 'MO', name: 'Emma' }), 'Kiko'],
+      [packs.packet(['splash'], { day: 'DI', name: 'Ben' }), 'Splash'],
+      [packs.packet(['juno'], { day: 'MI', name: 'Mia' }), 'Juno'],
+      [packs.packet(KIDS, { day: 'DO', name: 'Leo' }), 'Schulstart-Trio'],
+      [packs.packet(['zap'], { day: '1' }), 'Zap'],
+      [packs.packet(['glow', 'dew'], { day: 'FR' }), 'Beauty-Stack (Phase 2)']
+    ].map(([s, n]) => `<div class="lineup-item">${s}<span>${esc(n)}</span></div>`).join('');
     return;
   }
-  lineup.innerHTML = PRODUCTS.map(p =>
-    `<div class="lineup-item">${view === 'refill' ? packs.refill(p) : packs.can(p)}<span>${esc(p.name)}</span></div>`).join('');
+  const list = PRODUCTS.filter(p => window.Baerly.PACK_INFO[p.id].can);
+  lineup.innerHTML = list.map(p =>
+    `<div class="lineup-item lineup-${view}">${view === 'refill' ? packs.refill(p) : packs.can(p)}<span>${esc(p.name)}</span></div>`).join('');
 }
 renderLineup('can');
 $('#lineupTabs').addEventListener('click', e => {

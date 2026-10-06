@@ -165,7 +165,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: absolute; inset: auto 0 9% 0; z-index: -1;
   text-align: center; white-space: nowrap;
   font-family: var(--f-display); font-weight: 800;
-  font-size: clamp(110px, 25vw, 380px); line-height: .8;
+  font-size: clamp(90px, calc(150vw / var(--len, 5)), 380px); line-height: .8;
   letter-spacing: -.05em;
   font-variation-settings: "wdth" 75, "opsz" 96;
   color: var(--hero-color);

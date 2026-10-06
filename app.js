@@ -115,6 +115,7 @@ function swap(el, html) {
 }
 
 function swapWord(p) {
+  word.style.setProperty('--len', p.word.length);
   word.innerHTML = wordHTML(p);
   if (reduced) return;
   $$('span', word).forEach((s, i) => s.animate(
@@ -189,6 +190,7 @@ function initHero() {
   copy.innerHTML = copyHTML(p, 0);
   facts.innerHTML = factsHTML(p);
   $('#heroServing').textContent = p.serving;
+  word.style.setProperty('--len', p.word.length);
   word.innerHTML = wordHTML(p);
   renderThumbs();
   setTimeout(() => showBubble(p), 600);

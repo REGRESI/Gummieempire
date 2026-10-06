@@ -75,7 +75,10 @@
 .lineup-head .h2 { margin: 0; }
 .lineup { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px 12px; }
 .lineup-item { display: grid; justify-items: center; gap: 6px; }
+.lineup { align-items: end; }
 .lineup-item svg { display: block; width: 100%; height: auto; }
+.can-trio { display: flex; align-items: flex-end; gap: 4px; }
+.can-trio svg { width: 33%; height: auto; }
 .lineup-item span { font-weight: 700; font-size: 14px; }
 .spec-table { width: 100%; min-width: 640px; border-collapse: collapse; margin-top: 40px; font-size: 15px; font-variant-numeric: tabular-nums; }
 .spec-table th, .spec-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }

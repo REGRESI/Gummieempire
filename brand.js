@@ -23,7 +23,8 @@ const PRODUCTS = [
     id: 'glow', launch: true, name: 'Glow', title: 'Beauty Gummies', cat: 'beauty', line: 'adult',
     role: 'The Main Character',
     goal: 'Beauty', persona: 'Charmant, selbstbewusst und immer ein bisschen extra.', look: 'Pink, mit Krone und Herzbrille',
-    short: 'Für Haut und Haare. Mit Biotin, Zink und Vitamin C.',
+    short: 'Mit Biotin, Zink und Vitamin C.',
+    cardClaim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei.',
     scene: { title: 'Vor dem Spiegel', text: 'Zwei Gummies in der Morgenroutine, zwischen Serum und Parfum.' },
     flavor: 'Himbeere', ingredients: 'Biotin · Zink · Vitamin C',
     color: '#e86b8e', light: '#ffd1e1', dark: '#c2416a', tint: '#fad4dd',
@@ -39,7 +40,8 @@ const PRODUCTS = [
     id: 'flex', launch: true, name: 'Flex', title: 'Kreatin Gummies', cat: 'sport', line: 'adult',
     role: 'The Gym Bro',
     goal: 'Performance', persona: 'Diszipliniert, loyal und ein kleines bisschen zu motiviert.', look: 'Blau, athletisch, mit schwarzer Sportbrille',
-    short: 'Für dein Training. 3 g Kreatin pro Tagesportion.',
+    short: '3 g Kreatin pro Tagesportion, dazu Vitamin B6 und B12.',
+    cardClaim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
     scene: { title: 'Vor dem ersten Satz', text: 'Zwei Gummies aus der Sporttasche. Kein Shaker, kein Pulver.' },
     flavor: 'Blaubeere', ingredients: 'Kreatin · Vitamin B6 · B12',
     color: '#2a6fff', light: '#a7c6ff', dark: '#1e4ed8', tint: '#d3e8ff',
@@ -55,7 +57,8 @@ const PRODUCTS = [
     id: 'snoozy', launch: true, name: 'Snoozy', title: 'Sleep Gummies', cat: 'sleep', line: 'adult',
     role: 'The Chill Guy',
     goal: 'Sleep', persona: 'Ruhig, humorvoll und Profi im Abschalten.', look: 'Lila, mit Schlafmütze und Kissen',
-    short: 'Für den Abend. 1 mg Melatonin, dazu Magnesium und Vitamin B6.',
+    short: '1 mg Melatonin, dazu Magnesium und Vitamin B6.',
+    cardClaim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen, wenn kurz vor dem Schlafengehen 1 mg aufgenommen wird.',
     scene: { title: 'Nach dem letzten Licht', text: 'Eine halbe Stunde vor dem Schlafen. Handy weg, Licht aus.' },
     flavor: 'Waldbeere', ingredients: 'Melatonin · Magnesium · Vitamin B6',
     color: '#8e6bdb', light: '#dcc3ff', dark: '#5b21b6', tint: '#dccef4',
@@ -72,7 +75,8 @@ const PRODUCTS = [
     id: 'daily', launch: true, name: 'Daily', title: 'Multivitamin Gummies', cat: 'balance', line: 'adult',
     role: 'The Organizer',
     goal: 'Daily Wellness', persona: 'Strukturiert, positiv und der Grund, warum die Crew funktioniert.', look: 'Gelb, mit Hoodie und Crossbody-Bag',
-    short: 'Für jeden Tag. 12 Vitamine und 3 Mineralstoffe.',
+    short: '12 Vitamine und 3 Mineralstoffe in zwei Gummies.',
+    cardClaim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei.',
     scene: { title: 'Mit dem ersten Kaffee', text: 'Zwei Gummies zum Frühstück, bevor der Tag losgeht.' },
     flavor: 'Zitrone-Mango', ingredients: '12 Vitamine · 3 Mineralstoffe',
     color: '#e0a11f', light: '#fbe7b5', dark: '#8a5c00', tint: '#fbe7b5',
@@ -304,7 +308,8 @@ function plansFor(p) {
     const refill = round2(p.price - REFILL_OFF);
     const stock = to90(refill * 3 * .9);   // Rabatt nie kleiner als angezeigt: auf x,90 abrunden
     return [
-      { id: 'abo', label: 'Abo', sub: 'Dose ohne Aufpreis, danach Nachfüller per Brief', price: aboPrice(p.price), save: '−20 %', view: 'can', every: true },
+      // Abo-Preis bezieht sich auf den Nachfüller, weil das Abo ab der zweiten Lieferung nur Nachfüller schickt
+      { id: 'abo', label: 'Abo', sub: 'Dose ohne Aufpreis, danach Nachfüller per Brief, je 20 % unter dem Nachfüller-Preis', price: aboPrice(refill), save: '−20 %', view: 'can', every: true },
       { id: 'once', label: 'Einmalkauf', sub: 'Dose mit 60 Fruchtgummis für 30 Tage', price: p.price, view: 'can' },
       { id: 'refill', label: 'Nur Nachfüller', sub: `Für deine Dose · ${refillSub}`, price: refill, view: 'refill' },
       { id: 'stock', label: '3er-Vorrat', sub: '3 Nachfüller, einzeln versiegelt, 90 Tage', price: stock, save: `−${Math.floor((1 - stock / (refill * 3)) * 100)} %`, view: 'refill' }
@@ -351,8 +356,8 @@ function unitPrice(p, planId) {
 }
 
 const BUNDLES = {
-  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'Glow, Flex, Snoozy und Daily, je 30 Tage', aboSub: 'alle vier alle 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
-  beautysleep: { id: 'beautysleep', name: 'Beauty Sleep', title: 'Glow + Snoozy, die besten Freunde', aboSub: 'Glow + Snoozy alle 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
+  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage', aboSub: 'alle vier, je 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
+  beautysleep: { id: 'beautysleep', name: 'Morgen & Abend', title: 'GLOW zum Frühstück, SNOOZY vor dem Schlafen', aboSub: 'GLOW und SNOOZY, je 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
   kids:   { id: 'kids', name: 'Schul-Duo', title: '30 Tütchen mit je 1 Kiko + 1 Juno', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
 

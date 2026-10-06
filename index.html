@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>bärly · Supplement-Gummies · Same Bears. Better Days.</title>
-<meta name="description" content="bärly: vier Supplement-Gummies mit klarem Zweck. GLOW für Haut und Haare, FLEX mit Kreatin, SNOOZY für den Abend, DAILY mit 12 Vitaminen. Im Abo versandkostenfrei.">
+<meta name="description" content="bärly: vier Supplement-Gummies. GLOW mit Biotin, Zink und Vitamin C, FLEX mit 3 g Kreatin, SNOOZY mit Melatonin, DAILY mit 12 Vitaminen und 3 Mineralstoffen. Im Abo versandkostenfrei.">
 <meta name="theme-color" content="#fbf8f4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
     <p class="eyebrow" data-reveal>Supplement-Gummies für Erwachsene</p>
     <h1 class="hero-mark" id="heroTitle" data-reveal><span aria-hidden="true">bärly</span><span class="sr-only">bärly Supplement-Gummies</span></h1>
     <p class="hero-claim" data-reveal>Same Bears. <em>Better Days.</em></p>
-    <p class="hero-sub" data-reveal>Vier Gummies mit klarem Zweck: Beauty, Performance, Sleep und Daily Wellness. Zwei am Tag, im Abo versandkostenfrei.</p>
+    <p class="hero-sub" data-reveal>Vier Sorten, vier klare Rezepturen: GLOW, FLEX, SNOOZY und DAILY. Zwei Gummies am Tag, im Abo versandkostenfrei.</p>
     <div class="hero-ctas" data-reveal>
       <a class="btn btn-ink" href="#produkte">Produkte entdecken</a>
       <a class="btn btn-ghost" href="#finder">Welcher Bär passt zu dir?</a>
@@ -159,13 +159,13 @@
       </ol>
     </div>
     <div class="abo-card" data-reveal>
-      <p class="abo-card-label">Beispiel GLOW</p>
+      <p class="abo-card-label">Beispiel GLOW, pro 30 Tage</p>
       <div class="abo-compare">
-        <div><span>Einmalkauf</span><strong id="aboOnce"></strong></div>
+        <div><span>Nachfüller einzeln</span><strong id="aboOnce"></strong></div>
         <div class="abo-best"><span>Im Abo</span><strong id="aboSub"></strong></div>
       </div>
       <ul class="abo-perks">
-        <li>20 % günstiger auf jede Sorte</li>
+        <li>Jede Lieferung 20 % unter dem Nachfüller-Preis</li>
         <li>Dose ohne Aufpreis</li>
         <li>Versandkostenfrei</li>
       </ul>
@@ -266,7 +266,7 @@
 
 <!-- Warenkorb -->
 <div class="overlay" id="overlay" hidden></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
   <div class="drawer-head">
     <p class="drawer-title" id="drawerTitle">Warenkorb</p>
     <button class="icon-btn" id="cartClose" type="button" aria-label="Warenkorb schließen">
@@ -279,8 +279,9 @@
     <div class="drawer-sum"><span>Zwischensumme</span><strong id="cartTotal">0,00 €</strong></div>
     <button class="btn btn-ink btn-block" type="button" id="checkout">Zur Kasse</button>
     <p class="drawer-note" id="checkoutNote" role="status">Prototyp: Die Kasse wird später mit Shopify verbunden.</p>
+    <p class="sr-only" id="cartStatus" role="status"></p>
   </div>
-</aside>
+</div>
 
 <!-- Produktdetail -->
 <dialog class="modal" id="modal" aria-labelledby="modalTitle">

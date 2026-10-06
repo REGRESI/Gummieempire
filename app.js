@@ -9,6 +9,7 @@ const { BRAND, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, HERO_A
 
 const CREW = PRODUCTS.filter(p => p.launch);
 const SHIPPING_FREE = 35;
+const SHIPPING_COST = 3.90;   // Prototyp-Wert für Einmalkäufe unter 35 €
 const THEME = {
   glow:   { tint: '#f6e1e6', deep: '#9c2f55', dot: '#e58aa3' },
   flex:   { tint: '#e1e8f6', deep: '#1f3a8a', dot: '#7f9ee6' },
@@ -17,8 +18,9 @@ const THEME = {
 };
 const SET_TEXT = {
   crew: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage.',
-  beautysleep: 'GLOW am Morgen, SNOOZY am Abend.'
+  beautysleep: 'GLOW zum Frühstück, SNOOZY vor dem Schlafen.'
 };
+const PRICE_NOTE = `Alle Preise inkl. MwSt. Versand ${eur(SHIPPING_COST)}, ab ${eur(SHIPPING_FREE)} und im Abo versandkostenfrei.`;
 
 /* ------------------------------------------------------------------ */
 /* Helfer                                                              */
@@ -34,6 +36,12 @@ const perKg = (p, plan) => `${eur(unitPrice(p, plan))}/kg`;
 const count = (p) => { const f = PACK_INFO[p.id]; return f.refill[0] * (30 / f.refill[1]); };
 const memberSum = (b) => b.members.reduce((s, id) => s + byId[id].price, 0);
 const sellable = (id) => (byId[id] && byId[id].launch) || (BUNDLES[id] && !BUNDLES[id].soon);
+const members = (id) => BUNDLES[id] ? BUNDLES[id].members : [id];
+/* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin, nur für Erwachsene) */
+const warnFor = (id) => members(id).map(m => byId[m].warn).filter(Boolean)[0] || '';
+const adultFor = (id) => members(id).some(m => byId[m].adultOnly);
+/* Pfade dürfen nur an Schrägstrichen umbrechen */
+const pathHTML = (src) => esc(src).replace(/\//g, '/<wbr>');
 
 document.documentElement.classList.add('js');
 
@@ -50,7 +58,7 @@ function store(key, val) {
 function slotHTML(src, alt, fallback) {
   return `<div class="slot" data-src="${src}" data-alt="${esc(alt)}">
     <div class="slot-fallback">${fallback}</div>
-    <span class="slot-tag" title="Platzhalter: Bild unter ${src} ablegen">${src}</span>
+    <span class="slot-tag" title="Platzhalter: Bild unter ${src} ablegen">${pathHTML(src)}</span>
   </div>`;
 }
 function hydrateSlots(root = document) {
@@ -107,7 +115,7 @@ function initHero() {
   fig.innerHTML = `<div class="slot-fallback stage">
       <div class="stage-row">${CREW.map(p => `<img src="${ASSETS(p.id).front}" alt="" decoding="async">`).join('')}</div>
     </div>
-    <span class="slot-tag" title="Platzhalter: Gruppenbild unter ${HERO_ASSET} ablegen">${HERO_ASSET}</span>`;
+    <span class="slot-tag" title="Platzhalter: Gruppenbild unter ${HERO_ASSET} ablegen">${pathHTML(HERO_ASSET)}</span>`;
   fig.setAttribute('role', 'img');
   fig.setAttribute('aria-label', fig.dataset.alt);
 }
@@ -126,6 +134,7 @@ function productCard(p) {
       <p class="product-name">${NAME(p)}</p>
       <h3 class="product-title">${p.title}</h3>
       <p class="product-short">${p.short}</p>
+      <p class="product-claim">${p.cardClaim}${p.warn ? ` <b>${p.warn}</b>` : ''}</p>
       <p class="product-price"><strong>${eur(p.price)}</strong><span>oder ${eur(abo.price)} im Abo</span></p>
       <p class="product-unit">${count(p)} Fruchtgummis · 30 Tage · ${perKg(p, 'once')}, im Abo ${perKg(p, 'abo')}</p>
     </div>
@@ -136,11 +145,13 @@ function productCard(p) {
   </article>`;
 }
 function setCard(b) {
+  const warn = warnFor(b.id);
   return `<article class="set" data-reveal>
-    <div class="set-visual">${b.members.map(id => `<img src="${ASSETS(id).front}" alt="" loading="lazy" decoding="async">`).join('')}</div>
+    <div class="set-visual">${adultFor(b.id) ? '<span class="product-badge" aria-hidden="true">18+</span>' : ''}${b.members.map(id => `<img src="${ASSETS(id).front}" alt="" loading="lazy" decoding="async">`).join('')}</div>
     <div>
       <h3>${b.name}</h3>
       <p>${SET_TEXT[b.id] || b.title}</p>
+      ${warn ? `<p class="set-warn">SNOOZY: ${warn}</p>` : ''}
       <p class="set-price"><s>${eur(memberSum(b))}</s><strong>${eur(b.price)}</strong><span>im Abo ${eur(aboPrice(b.price))}</span></p>
       <button class="btn btn-ink btn-sm" type="button" data-bundle="${b.id}">Set in den Warenkorb</button>
     </div>
@@ -149,14 +160,15 @@ function setCard(b) {
 function renderProducts() {
   $('#productGrid').innerHTML = CREW.map(productCard).join('');
   $('#sets').innerHTML = ['crew', 'beautysleep'].map(id => setCard(BUNDLES[id])).join('');
+  $('#sets').insertAdjacentHTML('afterend', `<p class="price-note">${PRICE_NOTE}</p>`);
 }
 
 /* ------------------------------------------------------------------ */
 /* Bären-Finder                                                        */
 /* ------------------------------------------------------------------ */
 const SET_HINT = {
-  glow: ['beautysleep', 'Passt zu SNOOZY: Als Beauty Sleep'],
-  snoozy: ['beautysleep', 'Passt zu GLOW: Als Beauty Sleep'],
+  glow: ['beautysleep', 'Passt zu SNOOZY: Als Set Morgen & Abend'],
+  snoozy: ['beautysleep', 'Passt zu GLOW: Als Set Morgen & Abend'],
   flex: ['crew', 'Mehr als ein Ziel? Alle vier als Set'],
   daily: ['crew', 'Mehr als ein Ziel? Alle vier als Set']
 };
@@ -169,17 +181,17 @@ function renderFinder(id) {
   $('#finderResult').innerHTML = `<div class="finder-card" style="${vars(id)}">
     <div class="finder-visual"><img src="${ASSETS(id).front}" alt="${NAME(p)} ${p.title}, Dose" decoding="async"></div>
     <div class="finder-copy">
-      <p class="product-name">Dein Bär: ${NAME(p)}</p>
+      <p class="product-name">DEIN BÄR: ${NAME(p)}</p>
       <h3>${p.title}</h3>
-      <p>${p.short} ${p.flavor}, ${p.serving.toLowerCase().replace('fruchtgummis', 'Fruchtgummis')}.</p>
+      <p class="finder-desc">${p.short} ${p.flavor}, ${p.serving}.</p>
       <ul class="facts">${facts.map(([v, l]) => `<li><b>${v}</b><span>${l}</span></li>`).join('')}</ul>
       <p class="claim-note">${p.claim}${p.warn ? ` ${p.warn}` : ''}</p>
       <div class="finder-buy">
-        <div class="price"><strong>${eur(abo.price)}</strong><span>im Abo statt ${eur(p.price)} · ${perKg(p, 'abo')}</span></div>
+        <div class="price"><strong>${eur(abo.price)}</strong><span>im Abo, statt ${eur(p.price)} einmalig · ${perKg(p, 'abo')} · inkl. MwSt.</span></div>
         <button class="btn btn-ink" type="button" data-add="${id}" data-plan="abo">Im Abo in den Warenkorb</button>
         <button class="btn btn-ghost" type="button" data-detail="${id}">Details</button>
       </div>
-      <p class="finder-set">${setText} für ${eur(b.price)} statt ${eur(memberSum(b))}. <button class="text-btn" type="button" data-bundle="${setId}">Set hinzufügen</button></p>
+      <p class="finder-set">${setText} für ${eur(b.price)} statt ${eur(memberSum(b))}.${warnFor(setId) && !p.warn ? ` Enthält SNOOZY: ${warnFor(setId)}` : ''} <button class="text-btn" type="button" data-bundle="${setId}">Set hinzufügen</button></p>
     </div>
   </div>`;
 }
@@ -206,7 +218,7 @@ function renderMoments() {
       <figcaption>
         <p class="moment-name">${NAME(p)}</p>
         <h3 class="moment-title">${p.scene.title}</h3>
-        <p class="moment-text">${p.scene.text}</p>
+        <p class="moment-text">${p.scene.text}${p.warn ? ` <span class="adult-note">Nur für Erwachsene.</span>` : ''}</p>
       </figcaption>
     </figure>
   </article>`).join('');
@@ -216,14 +228,14 @@ function renderCrew() {
     ${slotHTML(ASSETS(p.id).character, `${NAME(p)}, ${p.look}`, `<div class="member-fallback" style="position:absolute;inset:0">${charIcon(p.id)}</div>`)}
     <h3>${NAME(p)}</h3>
     <p>${p.persona}</p>
-    <button class="member-product" type="button" data-detail="${p.id}">${p.title}</button>
+    <button class="member-product" type="button" data-detail="${p.id}">${p.title}</button>${p.warn ? '<span class="adult-note">Nur für Erwachsene</span>' : ''}
   </article>`).join('');
 }
 function initAbo() {
   const p = byId.glow;
-  $('#aboOnce').textContent = eur(p.price);
+  $('#aboOnce').textContent = eur(planFor(p, 'refill').price);
   $('#aboSub').textContent = eur(planFor(p, 'abo').price);
-  $('.abo-compare').insertAdjacentHTML('afterend', `<p class="abo-unit">Grundpreis ${perKg(p, 'once')} einmalig, ${perKg(p, 'abo')} im Abo</p>`);
+  $('.abo-compare').insertAdjacentHTML('afterend', `<p class="abo-unit">Grundpreis ${perKg(p, 'refill')} einzeln, ${perKg(p, 'abo')} im Abo. Die erste Lieferung kommt mit Dose; ohne Abo kostet die Dose mit Füllung ${eur(p.price)}. Alle Preise inkl. MwSt.</p>`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -257,7 +269,7 @@ function openDetail(id, planId) {
       </button>
       <div class="gallery" id="gallery"></div>
       <div class="gallery-thumbs" role="group" aria-label="Ansicht wählen">
-        ${views.map((v, i) => `<button class="gthumb" type="button" data-view="${v.id}" aria-pressed="${i === 0}" aria-selected="${i === 0}">${v.label}</button>`).join('')}
+        ${views.map((v, i) => `<button class="gthumb" type="button" data-view="${v.id}" aria-pressed="${i === 0}">${v.label}</button>`).join('')}
       </div>
     </div>
     <div class="modal-body">
@@ -282,6 +294,7 @@ function openDetail(id, planId) {
         <select id="every"><option value="30">30 Tage</option><option value="45">45 Tage</option><option value="60">60 Tage</option></select>
         <span>Pausieren, tauschen oder kündigen jederzeit</span></label>
       <button class="btn btn-ink btn-block" type="button" data-modal-add="${p.id}">In den Warenkorb</button>
+      <p class="price-note">${PRICE_NOTE}</p>
       <details class="mandatory">
         <summary>Pflichtangaben</summary>
         <dl>
@@ -300,11 +313,7 @@ function openDetail(id, planId) {
     const v = views.find(x => x.id === vid) || views[0];
     gallery.innerHTML = v.html();
     hydrateSlots(gallery);
-    $$('.gthumb', modalInner).forEach(t => {
-      const on = t.dataset.view === v.id;
-      t.setAttribute('aria-pressed', String(on));
-      t.setAttribute('aria-selected', String(on));
-    });
+    $$('.gthumb', modalInner).forEach(t => t.setAttribute('aria-pressed', String(t.dataset.view === v.id)));
   };
   const net = (plan) => {
     $('#netLine', modalInner).textContent = `${plan === 'stock' ? '3 × ' : ''}${count(p)} Fruchtgummis = ${netGrams(p, plan)} g · Grundpreis ${perKg(p, plan)}`;
@@ -373,10 +382,12 @@ function renderCart() {
   $('#cartTotal').textContent = eur(total);
   const hasAbo = cart.some(l => l.plan === 'abo');
   const missing = Math.max(0, SHIPPING_FREE - total);
-  $('#ship').innerHTML = (hasAbo || (cart.length && missing === 0)
-    ? 'Versandkostenfrei.'
-    : `Noch ${eur(missing)} bis zum kostenlosen Versand. Im Abo immer versandkostenfrei.`) +
-    `<div class="ship-bar"><span style="width:${hasAbo ? 100 : Math.min(100, total / SHIPPING_FREE * 100)}%"></span></div>`;
+  const free = hasAbo || missing === 0;
+  $('#ship').innerHTML = (!cart.length
+    ? `Versand ${eur(SHIPPING_COST)}, ab ${eur(SHIPPING_FREE)} und im Abo versandkostenfrei.`
+    : free ? 'Versand: kostenlos.'
+    : `Versand: ${eur(SHIPPING_COST)}. Noch ${eur(missing)} bis zum kostenlosen Versand, im Abo immer kostenlos.`) +
+    `<div class="ship-bar"><span style="width:${free && cart.length ? 100 : Math.min(100, total / SHIPPING_FREE * 100)}%"></span></div>`;
 
   const items = $('#drawerItems');
   if (!cart.length) {
@@ -388,13 +399,16 @@ function renderCart() {
     const pl = planFor(it, l.plan);
     const first = it.members ? it.members[0] : it.id;
     const canToggle = (l.plan === 'abo' || l.plan === 'once');
+    const aboSave = Math.floor((1 - planFor(it, 'abo').price / planFor(it, 'once').price) * 100);
+    const warn = warnFor(l.id);
     return `<div class="line" style="${vars(first)}">
       <div class="line-img">${lineImage(l.id)}</div>
       <div>
         <p class="line-name">${lineName(it)}</p>
-        <p class="line-meta">${pl.label}${pl.sub ? ' · ' + pl.sub : ''}${l.plan === 'abo' ? ` · alle ${l.every || 30} Tage` : ''}</p>
+        <p class="line-meta">${pl.label}${pl.sub ? ' · ' + pl.sub : ''}${l.plan === 'abo' && !it.members ? ` · alle ${l.every || 30} Tage` : ''}</p>
+        ${warn ? `<p class="line-warn">${it.members ? 'SNOOZY: ' : ''}${warn}</p>` : ''}
         ${canToggle ? `<div class="line-plan" role="group" aria-label="Kaufart für ${esc(lineName(it))}">
-          <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo −20 %</button>
+          <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo −${aboSave} %</button>
           <button type="button" data-plan="${i}" data-val="once" aria-pressed="${l.plan === 'once'}">Einmal</button>
         </div>` : ''}
       </div>
@@ -402,7 +416,7 @@ function renderCart() {
         <span class="line-price">${eur(linePrice(l))}</span>
         <div class="qty">
           <button type="button" data-qty="${i}" data-d="-1" aria-label="${esc(lineName(it))}: eins weniger">−</button>
-          <span aria-label="Menge">${l.qty}</span>
+          <span><span class="sr-only">Menge </span>${l.qty}</span>
           <button type="button" data-qty="${i}" data-d="1" aria-label="${esc(lineName(it))}: eins mehr">+</button>
         </div>
       </div>
@@ -429,6 +443,8 @@ $('#drawerItems').addEventListener('click', e => {
   if (q || pl) {
     saveCart();
     renderCart();
+    const total = cart.reduce((s, l) => s + linePrice(l), 0);
+    $('#cartStatus').textContent = `Warenkorb aktualisiert. Zwischensumme ${eur(total)}.`;
     // Die Knöpfe wurden neu gezeichnet: Fokus zurück auf denselben Knopf, sonst auf „Schließen“
     ((refocus && $(refocus, $('#drawerItems'))) || $('#cartClose')).focus();
   }
@@ -439,11 +455,13 @@ let lastFocus = null;
 const behindDrawer = ['.skip', '.announce', '.nav', 'main', '.footer'].map(s => $(s)).filter(Boolean);
 function openCart() {
   lastFocus = document.activeElement;
+  $('#toast').classList.remove('show');
   overlay.hidden = false;
   drawer.classList.add('open');
   drawer.setAttribute('aria-hidden', 'false');
   behindDrawer.forEach(el => { el.inert = true; });
-  $('#cartClose').focus();
+  // Erst fokussieren, wenn der Drawer sichtbar ist
+  requestAnimationFrame(() => $('#cartClose').focus());
 }
 function closeCart() {
   overlay.hidden = true;
@@ -505,13 +523,18 @@ const nav = $('#nav');
 addEventListener('scroll', () => nav.classList.toggle('is-scrolled', scrollY > 8), { passive: true });
 const menuBtn = $('#menuBtn');
 const navLinks = $('#navLinks');
-const setMenu = (open) => {
+const setMenu = (open, focusFirst = false) => {
   navLinks.classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
   menuBtn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+  if (open && focusFirst) $('a', navLinks).focus();
 };
-menuBtn.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+menuBtn.addEventListener('click', e => setMenu(!navLinks.classList.contains('open'), e.detail === 0));
 navLinks.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+nav.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
+});
+nav.addEventListener('focusout', e => { if (!nav.contains(e.relatedTarget)) setMenu(false); });
 
 /* Einblenden beim Scrollen */
 function initReveal() {

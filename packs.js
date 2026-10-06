@@ -315,7 +315,7 @@ function jar(p, opts = {}) {
       <stop offset=".72" stop-color="#000" stop-opacity=".02"/><stop offset=".9" stop-color="#000" stop-opacity=".12"/>
       <stop offset="1" stop-color="#000" stop-opacity=".28"/>
     </linearGradient>
-    <linearGradient id="${id}metal" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="${id}metal" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="${m1}"/><stop offset=".45" stop-color="#fff"/><stop offset=".55" stop-color="${m1}"/><stop offset="1" stop-color="${m2}"/>
     </linearGradient>
     <linearGradient id="${id}sheen" x1="0" y1="0" x2="1" y2="0">
@@ -339,7 +339,7 @@ function jar(p, opts = {}) {
     ${txt(120, t + 97, 'bärly', 60, `text-anchor="middle" ${D(700)} letter-spacing="-1.5" fill="#fff"`)}
     ${txt(186, t + 60, '™', 9, `${D(600)} fill="#fff"`)}
     <text x="120" y="${t + 137}" text-anchor="middle" ${D(600)} font-size="27" letter-spacing="3.5" fill="${c.deep}">${esc(name)}</text>
-    <path d="M102 ${t + 150} H138" stroke="url(#${id}metal)" stroke-width="1.6" stroke-linecap="round"/>
+    <rect x="98" y="${t + 149}" width="44" height="2" rx="1" fill="url(#${id}metal)"/>
     ${txt(120, t + 166, p.title.toUpperCase(), 9.4, `text-anchor="middle" ${B(700)} letter-spacing="2.6" fill="${c.deep}"`)}
     ${txt(120, t + 181, p.ingredients || f.nutrient, 8.6, `text-anchor="middle" ${B(500)} fill="${c.deep}" fill-opacity=".85"`)}
     ${warn.length ? lines(120, warnY, warn, 5.3, 6.4, `text-anchor="middle" ${B(700)} fill="${c.deep}"`) : ''}

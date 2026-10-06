@@ -30,7 +30,7 @@ window.Baerly.SPEC = {
       material: 'Mono-PE-Barrierelaminat (MDO-PE/PE, EVOH ≤ 5 % oder AlOx), 100–120 µm, weiß-opak als Lichtschutz, bedruckt im Look der Dose. Ziel: WVTR ≤ 1 g/m²·d (38 °C/90 % r. F.), OTR ≤ 2 cm³/m²·d·bar, auch nach Knickbelastung. Digitaldruck ab 250 Stück je Motiv.',
       closure: 'Reißkerben, PE-Druckzipper, Ausgießecke, Briefkasten-Stempel. Abziehbarer MHD- und Los-Sticker für den Dosenboden. 15 × 15 mm frei für das EU-Sortierlabel.',
       who: 'Alle Erwachsenen-Abos ab Monat 2, Kunden mit Dose und Kunden ohne Dose (der Beutel funktioniert auch allein).',
-      price: 'Abo: Sortenpreis −20 %, Versand gratis. „Nur Nachfüller“: Sortenpreis −2 €. 3er-Vorrat nur einmalig, mindestens −10 % (auf x,90 € abgerundet), nie als Abo-Standard. Beauty Sleep (Glow + Snoozy) als Doppelbrief 44,90 €, die ganze Crew 89,90 €.'
+      price: 'Abo: 20 % unter dem Nachfüller-Preis, Dose in der ersten Lieferung ohne Aufpreis, Versand gratis. „Nur Nachfüller“: Sortenpreis −2 €. 3er-Vorrat nur einmalig, mindestens −10 % (auf x,90 € abgerundet), nie als Abo-Standard. Beauty Sleep (Glow + Snoozy) als Doppelbrief 44,90 €, die ganze Crew 89,90 €.'
     },
     {
       key: 'tuetchen', role: 'Versiegelte Tagesportion',

@@ -2,10 +2,10 @@
   'use strict';
 
   const DATA = [
-    {id:'glow', name:'GLOW', type:'Beauty Gummies', meta:'Biotin · Zink · Vitamin C', flavor:'Himbeere', price:'26,90 €', tone:'#edc0cf', jar:'assets/jar-glow.webp', char:'assets/plush-glow.webp', role:'The Main Character', find:'Für Beauty, Self-Care und deine tägliche Glow-Routine.'},
-    {id:'flex', name:'FLEX', type:'Kreatin Gummies', meta:'Kreatin · Vitamin B6 · B12', flavor:'Blaubeere', price:'29,90 €', tone:'#bfd0ec', jar:'assets/jar-flex.webp', char:'assets/plush-flex.webp', role:'The Gym Bro', find:'Für Performance, Training und eine einfache Kreatin-Routine.'},
-    {id:'snoozy', name:'SNOOZY', type:'Sleep Gummies', meta:'Melatonin · Magnesium · Vitamin B6', flavor:'Waldbeere', price:'24,90 €', tone:'#c7b8e2', jar:'assets/jar-snoozy.webp', char:'assets/plush-snooze.webp', role:'The Chill Guy', find:'Für deine Abendroutine und einen klaren Cut zwischen Tag und Nacht.'},
-    {id:'daily', name:'DAILY', type:'Multivitamin Gummies', meta:'12 Vitamine · 3 Mineralstoffe', flavor:'Zitrone-Mango', price:'24,90 €', tone:'#e5c46d', jar:'assets/jar-daily.webp', char:'assets/plush-daily.webp', role:'The Organizer', find:'Für Everyday Wellness und eine unkomplizierte tägliche Basis.'}
+    {id:'glow', name:'GLOW', type:'Beauty Gummies', meta:'Biotin · Zink · Vitamin C', flavor:'Himbeere', price:'26,90 €', tone:'#edc0cf', jar:'assets/products/glow-front.webp', char:'assets/plush-glow.webp', role:'The Main Character', find:'Für Beauty, Self-Care und deine tägliche Glow-Routine.'},
+    {id:'flex', name:'FLEX', type:'Kreatin Gummies', meta:'Kreatin · Vitamin B6 · B12', flavor:'Blaubeere', price:'29,90 €', tone:'#bfd0ec', jar:'assets/products/flex-front.webp', char:'assets/plush-flex.webp', role:'The Gym Bro', find:'Für Performance, Training und eine einfache Kreatin-Routine.'},
+    {id:'snoozy', name:'SNOOZY', type:'Sleep Gummies', meta:'Melatonin · Magnesium · Vitamin B6', flavor:'Waldbeere', price:'24,90 €', tone:'#c7b8e2', jar:'assets/products/snoozy-front.webp', char:'assets/plush-snooze.webp', role:'The Chill Guy', find:'Für deine Abendroutine und einen klaren Cut zwischen Tag und Nacht.'},
+    {id:'daily', name:'DAILY', type:'Multivitamin Gummies', meta:'12 Vitamine · 3 Mineralstoffe', flavor:'Zitrone-Mango', price:'24,90 €', tone:'#e5c46d', jar:'assets/products/daily-front.webp', char:'assets/plush-daily.webp', role:'The Organizer', find:'Für Everyday Wellness und eine unkomplizierte tägliche Basis.'}
   ];
 
   const productGrid = document.querySelector('#productGrid');

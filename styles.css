@@ -217,6 +217,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes lineIn { from { opacity: 0; transform: translateY(18px); } }
 
 /* Bühne: Maskottchen hinten, Dose vorne rechts */
+.hero-stage img { -webkit-user-drag: none; user-select: none; }
 .hero-stage {
   position: relative; justify-self: center;
   width: min(100%, calc((100svh - 300px) * 1.08)); min-width: min(100%, 420px); aspect-ratio: 1.08 / 1;
@@ -350,7 +351,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .set .set-warn { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.45; }
 .set-visual .product-badge { top: 0; left: 8px; }
 .set-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-top: 12px; font-variant-numeric: tabular-nums; }
-.set-price s { color: var(--ink-3); font-size: 14px; }
+.set-price em { color: var(--ink-2); font-size: 14px; font-style: normal; }
 .set-price strong { font-size: 18px; color: var(--ink); }
 .set-price span { width: 100%; font-size: 12px; color: var(--ink-3); }
 .set .btn { margin-top: 14px; }

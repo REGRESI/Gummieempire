@@ -47,8 +47,8 @@ const VIEWS = [
   { id: 'jar', label: '360° Dose', thumb: `<img src="${a.front}" alt="">` },
   { id: 'bear', label: `${NAME(p)} als Bär`, thumb: `<img src="${a.bust}" alt="">` },
   { id: 'gummy', label: 'Die Gummies', thumb: `<span class="vt-gummy">${bear(p, { face: false, shadow: false, label: false })}</span>` },
-  { id: 'refill', label: 'Nachfüller', thumb: `<span class="vt-refill">${packs.refill(p)}</span>` },
-  { id: 'life', label: 'Im Alltag', thumb: `<span class="vt-time">${d.ritual.time}</span>` }
+  { id: 'refill', label: 'Nachfüller', thumb: `<span class="vt-refill" aria-hidden="true">${packs.refill(p)}</span>` },
+  { id: 'life', label: 'Im Alltag', thumb: `<span class="vt-time" aria-hidden="true">${d.ritual.time}</span>` }
 ];
 function viewHTML(id) {
   switch (id) {
@@ -185,7 +185,7 @@ function crossCard(q) {
     <span class="cross-name">${NAME(q)}</span>
     <span class="cross-title">${q.title}</span>
     <span class="cross-short">${q.short}</span>
-    <span class="cross-price">${eur(q.price)} · im Abo ${eur(pa.price)}</span>
+    <span class="cross-price">${eur(q.price)} (${perKg(q, 'once')}) · im Abo ${eur(pa.price)} (${perKg(q, 'abo')})</span>
     ${q.warn ? '<span class="cross-adult">Nur für Erwachsene</span>' : ''}
   </a>`;
 }
@@ -281,7 +281,7 @@ function render() {
         <div class="calc-row calc-abo"><span>Im Abo</span><strong id="calcAbo"></strong><small id="calcAboNote"></small></div>
         <div class="calc-save"><span>Du sparst</span><strong id="calcSave"></strong></div>
         <button class="btn btn-ink btn-block" type="button" data-add="${p.id}" data-plan="abo">Abo starten · ${eur(abo.price)} je Lieferung</button>
-        <p class="calc-fine">Inkl. MwSt. Einzelkauf: erste Dose ${eur(p.price)}, danach Nachfüller je ${eur(refill.price)}, je Bestellung ${eur(SHIPPING_COST)} Versand. Ohne Vorrats-Pakete gerechnet.</p>
+        <p class="calc-fine">Inkl. MwSt. Abo: ${eur(abo.price)} je Lieferung (${perKg(p, 'abo')}). Einzelkauf: erste Dose ${eur(p.price)} (${perKg(p, 'once')}), danach Nachfüller je ${eur(refill.price)} (${perKg(p, 'refill')}), je Bestellung ${eur(SHIPPING_COST)} Versand. Ohne Vorrats-Pakete gerechnet.</p>
       </div>
     </div>
   </section>
@@ -355,7 +355,7 @@ function render() {
           <h3 class="cross-title">${set.name}</h3>
           <p class="cross-short">${set.title}.</p>
           ${setWarn ? `<p class="cross-adult">SNOOZY: ${setWarn}</p>` : ''}
-          <p class="cross-price"><s>${eur(memberSum(set))}</s> ${eur(set.price)}</p>
+          <p class="cross-price">${eur(set.price)} <span class="cross-was">statt einzeln ${eur(memberSum(set))}</span></p>
           <button class="btn btn-ink btn-sm" type="button" data-bundle="${set.id}">Set in den Warenkorb</button>
         </div>
       </div>
@@ -399,7 +399,7 @@ function initJar() {
   const N = 60;                                          // Streifen pro Ring: genug für eine glatte Rundung
   const strips = [];
   let alpha = 0, vel = 0, raf = 0, dragging = false, idle = !reduced, idleStart = 0, intro = !reduced;
-  let lastX = 0, lastT = 0, built = false;
+  let lastX = 0, lastT = 0, built = false, visible = false, sway = 0, lastFrame = 0;
 
   function build() {
     const w = view.clientWidth, h = view.clientHeight;
@@ -458,17 +458,21 @@ function initJar() {
 
   function loop(now) {
     raf = 0;
+    const dt = lastFrame ? Math.min(50, now - lastFrame) : 16;
+    lastFrame = now;
     if (dragging) return;                                   // beim Ziehen malt pointermove
+    if (!visible && Math.abs(vel) <= .02) { lastFrame = 0; return; }   // außer Sicht: Pause, weiter beim nächsten Blick
     if (intro) {
       // Einmal schwungvoll drehen, damit klar ist: die Dose ist rund
       if (!idleStart) idleStart = now;
       const k = Math.min(1, (now - idleStart) / 1800);
       alpha = 220 - 220 * (1 - (1 - k) ** 3);
-      if (k >= 1) { intro = false; idleStart = now; alpha = 0; }
+      if (k >= 1) { intro = false; sway = 0; alpha = 0; }
     } else if (Math.abs(vel) > .02) {
       alpha += vel; vel *= .94;                             // Schwung nach dem Loslassen
     } else if (idle) {
-      alpha = Math.sin((now - idleStart) / 1600) * 14;      // leichtes Pendeln, bis jemand anfasst
+      sway += dt;
+      alpha = Math.sin(sway / 1600) * 14;                   // leichtes Pendeln, bis jemand anfasst
     } else {
       return;
     }
@@ -532,13 +536,15 @@ function initJar() {
     view.style.setProperty('--wrap', `url("${a.wrap}")`);
     view.classList.add('is-3d');
     build();
-    whenVisible(view, () => { idleStart = 0; kick(); }, '0px');
+    kick();
   };
+  const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); });
+  io.observe(view);
   img.src = a.wrap;
   let lastW = 0;
   const ro = new ResizeObserver(() => { if (built && view.clientWidth !== lastW) { lastW = view.clientWidth; build(); } });
   ro.observe(view);
-  jar = { turnTo, stop: () => { cancelAnimationFrame(raf); cancelAnimationFrame(tween); raf = 0; ro.disconnect(); } };
+  jar = { turnTo, stop: () => { cancelAnimationFrame(raf); cancelAnimationFrame(tween); raf = 0; ro.disconnect(); io.disconnect(); img.onload = null; } };
 }
 
 /* ------------------------------------------------------------------ */
@@ -548,7 +554,8 @@ function initGallery() {
   const stage = $('#gStage');
   const tabs = $$('.vt');
   const show = (id, focus) => {
-    if (jar && id !== 'jar') { jar.stop(); jar = null; }
+    if (stage.dataset.view === id) { if (focus) $(`#vt-${id}`).focus(); return; }
+    if (jar) { jar.stop(); jar = null; }
     stage.innerHTML = viewHTML(id);
     stage.setAttribute('aria-labelledby', `vt-${id}`);
     stage.dataset.view = id;
@@ -584,7 +591,7 @@ function initBuy() {
     $('#buyLabel').textContent = state.plan === 'abo' ? 'Abo starten' : 'In den Warenkorb';
     $('#buyPrice').textContent = eur(total);
     $('#stickyPrice').textContent = eur(total);
-    $('#stickyPlan').textContent = `${pl.label}${state.plan === 'abo' ? `, alle ${state.every} Tage` : ''}${state.qty > 1 ? ` · ${state.qty} ×` : ''}`;
+    $('#stickyPlan').textContent = `${pl.label}${state.plan === 'abo' ? `, alle ${state.every} Tage` : ''}${state.qty > 1 ? ` · ${state.qty} ×` : ''} · ${perKg(p, state.plan)}`;
     const ship = state.plan === 'abo' || total >= SHIPPING_FREE ? 'versandkostenfrei' : `zzgl. ${eur(SHIPPING_COST)} Versand (ab ${eur(SHIPPING_FREE)} frei)`;
     $('#buyMeta').textContent = `${state.qty > 1 ? `${state.qty} × ${eur(pl.price)} · ` : ''}Grundpreis ${perKg(p, state.plan)} · ${state.plan === 'stock' ? '3 × ' : ''}${count(p)} Fruchtgummis = ${netGrams(p, state.plan)} g · inkl. MwSt., ${ship}`;
     rhythm.hidden = !pl.every;
@@ -613,7 +620,8 @@ function initBuy() {
       sticky.setAttribute('aria-hidden', String(!on));
       $('#stickyBtn').tabIndex = on ? 0 : -1;
     };
-    new IntersectionObserver(([en]) => { pastBuy = !en.isIntersecting && en.boundingClientRect.top < 0; sync(); }).observe($('.buy-row'));
+    // Unterhalb des Bildschirms zählt als „sichtbar“, so ändert auch ein Sprung über die Kaufbox hinweg den Zustand
+    new IntersectionObserver(([en]) => { pastBuy = !en.isIntersecting; sync(); }, { rootMargin: '0px 0px 100000px 0px' }).observe($('.buy-row'));
     new IntersectionObserver(([en]) => { atFooter = en.isIntersecting; sync(); }).observe($('.footer'));
   }
 }

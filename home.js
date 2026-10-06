@@ -33,7 +33,7 @@ function heroCopy(p, i) {
       <a class="btn btn-hero" href="${pdpUrl(p.id)}">${NAME(p)} entdecken</a>
       <button class="btn btn-hero-ghost" type="button" data-add="${p.id}" data-plan="abo">Im Abo · ${eur(abo.price)}</button>
     </div>
-    <p class="hero-price hl">Im Abo ${eur(abo.price)} je 30 Tage (${perKg(p, 'abo')}), einmalig ${eur(p.price)}. Inkl. MwSt.</p>`;
+    <p class="hero-price hl">Im Abo ${eur(abo.price)} je 30 Tage (${perKg(p, 'abo')}), einmalig ${eur(p.price)} (${perKg(p, 'once')}). Inkl. MwSt.</p>`;
 }
 
 function heroSlide(p) {
@@ -41,9 +41,9 @@ function heroSlide(p) {
   return `<div class="hero-slide" data-id="${p.id}">
     <div class="hero-halo"></div>
     <button class="hero-buddy" type="button" aria-label="${NAME(p)} etwas sagen lassen">
-      <img class="hero-mascot" src="${a.character}" alt="" width="940" height="1040" decoding="async">
+      <img class="hero-mascot" src="${a.character}" alt="" width="940" height="1040" decoding="async" draggable="false">
     </button>
-    <img class="hero-jar" src="${a.front}" alt="" width="720" height="1473" decoding="async">
+    <img class="hero-jar" src="${a.front}" alt="" width="720" height="1473" decoding="async" draggable="false">
     <p class="hero-bubble" aria-live="polite">${PDP[p.id].lines[0]}</p>
   </div>`;
 }
@@ -66,7 +66,6 @@ function initHero() {
   const toggle = $('#heroToggle');
   const panel = $('#heroPanel');
   let index = 0;
-  let busy = false;
   let userPaused = reduced;            // bei reduzierter Bewegung kein automatischer Wechsel
   const holds = new Set();             // Gründe für eine Pause: hover, focus, offscreen, hidden, overlay
   const lineIdx = {};
@@ -116,11 +115,18 @@ function initHero() {
     hero.classList.remove('swap'); void hero.offsetWidth; hero.classList.add('swap');
   }
 
+  /* Läuft noch ein Wechsel, wird er sofort beendet: jeder Klick und jede Taste zählt */
+  let running = [];
+  function settle() {
+    running.forEach(a => a.cancel());
+    running = [];
+    $$('.hero-slide', stage).slice(0, -1).forEach(s => s.remove());
+  }
+
   function go(to, dir = 1, manual = false) {
     to = (to + CREW.length) % CREW.length;
-    if (busy || to === index) return;
-    busy = true;
-    const safety = setTimeout(() => { busy = false; }, 1700);
+    if (to === index) return;
+    settle();
     const p = CREW[to];
     index = to;
     copy.setAttribute('aria-live', manual ? 'polite' : 'off');
@@ -129,24 +135,22 @@ function initHero() {
     const inc = stage.lastElementChild;
     render(p, to, false);
     restartBar();
-    const done = () => { clearTimeout(safety); busy = false; };
-    if (reduced) {
-      out?.remove();
-      done();
-      return;
-    }
+    if (reduced) { out?.remove(); return; }
     // Der alte Bär fliegt nach links oben raus, der neue kommt von rechts unten (rückwärts umgekehrt)
     const exitTo = dir > 0 ? 'translate(-70%, -52%) rotate(-36deg) scale(.45)' : 'translate(78%, 68%) rotate(36deg) scale(.45)';
-    out?.animate([{ transform: 'none', opacity: 1 }, { transform: exitTo, opacity: 0 }],
-      { duration: 620, easing: 'cubic-bezier(.55,0,.8,.3)', fill: 'forwards' }).finished.then(() => out.remove());
+    const leave = out?.animate([{ transform: 'none', opacity: 1 }, { transform: exitTo, opacity: 0 }],
+      { duration: 620, easing: 'cubic-bezier(.55,0,.8,.3)', fill: 'forwards' });
+    leave?.finished.then(() => out.remove(), () => {});
     const enterFrom = dir > 0 ? 'translate(112%, 104%) rotate(52deg) scale(.4)' : 'translate(-108%, -92%) rotate(-52deg) scale(.4)';
-    inc.animate([
+    const enter = inc.animate([
       { transform: enterFrom, opacity: 0 },
       { opacity: 1, offset: .2 },
       { transform: 'translate(0,0) rotate(-7deg) scale(1.06)', offset: .66 },
       { transform: 'translate(0,0) rotate(3deg) scale(.98)', offset: .84 },
       { transform: 'none', opacity: 1 }
-    ], { duration: 1150, delay: 160, easing: 'cubic-bezier(.22,.9,.3,1)', fill: 'backwards' }).finished.then(done, done);
+    ], { duration: 1150, delay: 160, easing: 'cubic-bezier(.22,.9,.3,1)', fill: 'backwards' });
+    enter.finished.catch(() => {});
+    running = [leave, enter].filter(Boolean);
   }
 
   render(CREW[0], 0, true);
@@ -175,6 +179,7 @@ function initHero() {
   /* Wischen auf der Bühne */
   let sx = null, sy = 0;
   stage.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; });
+  stage.addEventListener('pointercancel', () => { sx = null; });
   stage.addEventListener('pointerup', e => {
     if (sx === null) return;
     const dx = e.clientX - sx, dy = e.clientY - sy;
@@ -259,7 +264,7 @@ function setCard(b) {
       <h3>${b.name}</h3>
       <p>${SET_TEXT[b.id] || b.title}</p>
       ${warn ? `<p class="set-warn">SNOOZY: ${warn}</p>` : ''}
-      <p class="set-price"><s>${eur(memberSum(b))}</s><strong>${eur(b.price)}</strong><span>im Abo ${eur(planFor(b, 'abo').price)}</span></p>
+      <p class="set-price"><strong>${eur(b.price)}</strong><em>statt einzeln ${eur(memberSum(b))}</em><span>im Abo ${eur(planFor(b, 'abo').price)}</span></p>
       <button class="btn btn-ink btn-sm" type="button" data-bundle="${b.id}">Set in den Warenkorb</button>
     </div>
   </article>`;
@@ -297,7 +302,7 @@ function renderFinder(id) {
       <ul class="facts">${facts.map(([v, l]) => `<li><b>${v}</b><span>${l}</span></li>`).join('')}</ul>
       <p class="claim-note">${p.claim}${p.warn ? ` ${p.warn}` : ''}</p>
       <div class="finder-buy">
-        <div class="price"><strong>${eur(abo.price)}</strong><span>im Abo, statt ${eur(p.price)} einmalig · ${perKg(p, 'abo')} · inkl. MwSt.</span></div>
+        <div class="price"><strong>${eur(abo.price)}</strong><span>im Abo (${perKg(p, 'abo')}), einmalig ${eur(p.price)} (${perKg(p, 'once')}) · inkl. MwSt.</span></div>
         <button class="btn btn-ink" type="button" data-add="${id}" data-plan="abo">Im Abo in den Warenkorb</button>
         <a class="btn btn-ghost" href="${pdpUrl(id)}">Zur Produktseite</a>
       </div>

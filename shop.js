@@ -126,7 +126,6 @@ function renderCart() {
     const pl = planFor(it, l.plan);
     const first = it.members ? it.members[0] : it.id;
     const canToggle = (l.plan === 'abo' || l.plan === 'once');
-    const aboSave = Math.floor((1 - planFor(it, 'abo').price / planFor(it, 'once').price) * 100);
     const warn = warnFor(l.id);
     const name = it.members ? esc(lineName(it)) : `<a href="${pdpUrl(it.id)}">${esc(lineName(it))}</a>`;
     return `<div class="line" style="${vars(first)}">
@@ -136,7 +135,7 @@ function renderCart() {
         <p class="line-meta">${pl.label}${pl.sub ? ' · ' + pl.sub : ''}${l.plan === 'abo' && !it.members ? ` · alle ${l.every || 30} Tage` : ''}</p>
         ${warn ? `<p class="line-warn">${it.members ? 'SNOOZY: ' : ''}${warn}</p>` : ''}
         ${canToggle ? `<div class="line-plan" role="group" aria-label="Kaufart für ${esc(lineName(it))}">
-          <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo −${aboSave} %</button>
+          <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo</button>
           <button type="button" data-plan="${i}" data-val="once" aria-pressed="${l.plan === 'once'}">Einmal</button>
         </div>` : ''}
       </div>

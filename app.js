@@ -12,8 +12,9 @@
   const crewGrid = document.querySelector('#crewGrid');
   const finderResult = document.querySelector('#finderResult');
 
-  productGrid.innerHTML = DATA.map(p => `
+  productGrid.innerHTML = DATA.map((p, i) => `
     <article class="product-card" style="--tone:${p.tone}">
+      <span class="card-index">${String(i + 1).padStart(2,'0')} / 04</span>
       <div class="product-media"><img class="jar" src="${p.jar}" alt="bärly ${p.name} ${p.type}"></div>
       <span class="type">${p.type}</span>
       <h3>${p.name}</h3>
@@ -38,6 +39,21 @@
       finderResult.querySelector('p').style.color = 'rgba(25,23,27,.66)';
     });
   });
+
+  const menuBtn = document.querySelector('#menuBtn');
+  const mobileMenu = document.querySelector('#mobileMenu');
+  if (menuBtn && mobileMenu) {
+    const closeMenu = () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    };
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth > 650) closeMenu(); });
+  }
 
   const form = document.querySelector('#foundersForm');
   form.addEventListener('submit', e => {

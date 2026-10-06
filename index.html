@@ -26,20 +26,28 @@
       <a href="#faq">FAQ</a>
     </nav>
     <a class="nav-cta" href="#shop">Produkte entdecken</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
   </header>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+    <a href="#shop">Shop</a>
+    <a href="#finder">Bären-Finder</a>
+    <a href="#crew">Die Crew</a>
+    <a href="#abo">Abo</a>
+    <a href="#faq">FAQ</a>
+  </nav>
 
   <main id="top">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Premium Gummies. Eigene Character-Welt.</p>
+        <p class="eyebrow">Meet the Original Four</p>
         <h1>Small Gummies.<br><span>Big Changes.</span></h1>
-        <p class="hero-lead">Vier Produkte. Vier Persönlichkeiten. Eine neue Wellness-Routine, die man gerne jeden Tag sieht.</p>
+        <p class="hero-lead">Wellness, die nicht nach Pflichtprogramm aussieht. Vier Produkte, vier Persönlichkeiten — und eine Routine mit echter Wiedererkennung.</p>
         <div class="hero-actions">
           <a class="btn btn-dark" href="#shop">Produkte entdecken</a>
           <a class="btn btn-light" href="#finder">Welcher Bär passt zu dir?</a>
         </div>
         <div class="hero-proof">
-          <span>60 Gummies</span><i></i><span>30 Tage</span><i></i><span>DACH Launch</span>
+          <span>GLOW</span><i></i><span>FLEX</span><i></i><span>SNOOZY</span><i></i><span>DAILY</span>
         </div>
       </div>
 
@@ -49,7 +57,7 @@
     </section>
 
     <section class="trust">
-      <p>Cleanes Design. Klare Routine. Vier Produkte zum Start.</p>
+      <p>Vier Routinen. Eine unverwechselbare Welt.</p>
       <div class="trust-items">
         <span>GLOW · Beauty</span>
         <span>FLEX · Performance</span>
@@ -64,9 +72,24 @@
           <p class="eyebrow">The Original Four</p>
           <h2>Lern die erste<br>bärly Crew kennen.</h2>
         </div>
-        <p>Keine zwölf Produkte auf einmal. Wir starten mit vier klaren Routinen — und lassen die Familie danach mit der Community wachsen.</p>
+        <p>Jeder Bär steht für eine klare Routine. Du wählst nicht aus zwanzig Dosen — sondern den, der wirklich zu deinem Alltag passt.</p>
       </div>
       <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="section why" id="why">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Why bärly</p>
+          <h2>Nicht einfach<br>noch eine Dose.</h2>
+        </div>
+        <p>Wir verbinden ein cleanes Supplement-Erlebnis mit einer Character-Welt, die du wiedererkennst — im Bad, im Gym, am Schreibtisch und auf Social.</p>
+      </div>
+      <div class="why-grid">
+        <article><span>01</span><h3>Klare Routinen</h3><p>Vier Produkte zum Start. Kein überladener Supplement-Schrank.</p></article>
+        <article><span>02</span><h3>Premium Packaging</h3><p>Matte Farben, subtile Metallic-Details und ein Design, das du stehen lässt.</p></article>
+        <article><span>03</span><h3>Eine echte Crew</h3><p>GLOW, FLEX, SNOOZY und DAILY sind mehr als Farbcodes — sie geben bärly Persönlichkeit.</p></article>
+      </div>
     </section>
 
     <section class="section finder" id="finder">
@@ -92,24 +115,32 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Meet the bärly Crew</p>
-          <h2>Die Characters sind die Marke.</h2>
+          <h2>Vier Bären.<br>Vier Persönlichkeiten.</h2>
         </div>
-        <p>Die Produkte bleiben premium und erwachsen. Die Personality lebt daneben — auf Social, im Unboxing und in der gesamten bärly Welt.</p>
+        <p>Von Main Character bis Gym Bro: Jede Routine bekommt ihren eigenen Charakter — ohne dass das Packaging seinen Premium-Look verliert.</p>
       </div>
       <div class="crew-grid" id="crewGrid"></div>
     </section>
 
-    <section class="section simple" id="abo">
-      <p class="eyebrow">Abo</p>
-      <h2>Deine Routine,<br>ohne jedes Mal neu zu denken.</h2>
-      <p>Flexibel, kündbar und auf deine Routine abgestimmt. Die finalen Abo-Details werden vor Launch ergänzt.</p>
-      <a class="btn btn-dark" href="#founders">Early Access sichern</a>
+    <section class="section abo" id="abo">
+      <div class="abo-copy">
+        <p class="eyebrow">bärly Abo</p>
+        <h2>Deine Routine.<br>Automatisch da.</h2>
+        <p>Für alle, die nicht jeden Monat neu daran denken wollen. Flexibel bleiben, regelmäßig nach Hause bekommen.</p>
+        <a class="btn btn-dark" href="#founders">Early Access sichern</a>
+      </div>
+      <div class="abo-card">
+        <span class="abo-kicker">Geplant zum Launch</span>
+        <strong>20 % Abo-Vorteil</strong>
+        <ul><li>regelmäßige Lieferung</li><li>Intervall flexibel anpassbar</li><li>keine Mindestlaufzeit geplant</li></ul>
+        <small>Finale Konditionen werden vor Verkaufsstart bestätigt.</small>
+      </div>
     </section>
 
     <section class="section founders" id="founders">
       <div>
         <p class="eyebrow">Founders Club</p>
-        <h2>Sei beim ersten Drop dabei.</h2>
+        <h2>Der erste Drop gehört den Founders.</h2>
       </div>
       <form id="foundersForm">
         <input type="email" placeholder="deine@email.de" aria-label="E-Mail-Adresse" required>
@@ -122,15 +153,17 @@
       <p class="eyebrow">FAQ</p>
       <h2>Das Wichtigste zuerst.</h2>
       <details><summary>Wann startet bärly?</summary><p>Die Launch-Crew befindet sich aktuell in Vorbereitung. Founders erfahren den Start zuerst.</p></details>
-      <details><summary>Welche Produkte starten zuerst?</summary><p>GLOW, FLEX, SNOOZY und DAILY.</p></details>
-      <details><summary>Sind die Rezepturen schon final?</summary><p>Nein. Zutaten, Mengen, Pflichtangaben und zulässige Claims werden vor Verkauf final geprüft.</p></details>
+      <details><summary>Welche Produkte starten zuerst?</summary><p>GLOW, FLEX, SNOOZY und DAILY bilden die erste bärly Crew.</p></details>
+      <details><summary>Was ist der Bären-Finder?</summary><p>Ein kurzer Produktfinder, der dich anhand deiner gewünschten Routine zum passenden bärly Produkt führt.</p></details>
+      <details><summary>Wird es weitere Bären geben?</summary><p>Ja. Die Crew soll nach dem Launch weiter wachsen — neue Produkte und Characters werden Schritt für Schritt ergänzt.</p></details>
+      <details><summary>Sind die Rezepturen schon final?</summary><p>Noch nicht vollständig. Zutaten, Mengen, Pflichtangaben und zulässige Claims werden vor Verkauf final geprüft.</p></details>
     </section>
   </main>
 
   <footer>
     <a class="brand" href="#top">bärly<sup>™</sup></a>
     <p>Same Bears. Better Days.</p>
-    <span>Launch prototype · Inhalte und Rezepturen noch nicht final.</span>
+    <span>© 2026 bärly · Same Bears. Better Days.</span>
   </footer>
 
   <script src="app.js"></script>

@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "branch": "baerly/asset-library",
+  "rules": {
+    "productionRoot": "assets/",
+    "referencesRoot": "references/",
+    "neverUseReferencesInProduction": true,
+    "noPlaceholdersWhenApprovedAssetExists": true,
+    "doNotCropMoodboards": true
+  },
+  "homepage": {
+    "hero": {
+      "status": "planned"
+    },
+    "lifestyle": {
+      "glow": {
+        "status": "approved-existing-needs-library-import",
+        "target": "assets/homepage/lifestyle/glow-vanity.webp"
+      },
+      "flex": {
+        "status": "approved-existing-needs-library-import",
+        "target": "assets/homepage/lifestyle/flex-gym.webp"
+      },
+      "snoozy": {
+        "status": "approved-existing-needs-library-import",
+        "target": "assets/homepage/lifestyle/snoozy-bedroom.webp"
+      },
+      "daily": {
+        "status": "approved-existing-needs-library-import",
+        "target": "assets/homepage/lifestyle/daily-workspace.webp"
+      }
+    },
+    "crew": {
+      "status": "planned"
+    },
+    "subscription": {
+      "status": "planned"
+    },
+    "founders": {
+      "status": "planned"
+    }
+  },
+  "products": {
+    "glow": {
+      "front": {
+        "status": "approved-existing",
+        "source": "assets/products/glow-front.webp",
+        "target": "assets/products/glow/glow-pack-front.webp"
+      }
+    },
+    "flex": {
+      "front": {
+        "status": "approved-existing",
+        "source": "assets/products/flex-front.webp",
+        "target": "assets/products/flex/flex-pack-front.webp"
+      }
+    },
+    "snoozy": {
+      "front": {
+        "status": "approved-existing",
+        "source": "assets/products/snoozy-front.webp",
+        "target": "assets/products/snoozy/snoozy-pack-front.webp"
+      }
+    },
+    "daily": {
+      "front": {
+        "status": "approved-existing",
+        "source": "assets/products/daily-front.webp",
+        "target": "assets/products/daily/daily-pack-front.webp"
+      }
+    }
+  },
+  "pdp": {
+    "glow": {
+      "status": "approved-pending-binary-commit",
+      "hero": "assets/pdp/glow/glow-pdp-hero.webp",
+      "lifestyle": "assets/pdp/glow/glow-pdp-lifestyle.webp",
+      "character": "assets/pdp/glow/glow-pdp-character.webp",
+      "detail": "assets/pdp/glow/glow-pdp-detail.webp",
+      "routine": "assets/pdp/glow/glow-pdp-routine.webp"
+    },
+    "flex": {
+      "status": "planned"
+    },
+    "snoozy": {
+      "status": "planned"
+    },
+    "daily": {
+      "status": "planned"
+    }
+  }
+}

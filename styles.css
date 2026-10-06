@@ -49,14 +49,14 @@ button,input{font:inherit}
 .section-head>p,.simple>p{color:var(--muted);font-size:17px;line-height:1.65;max-width:560px}
 .products{background:#fff}
 .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.product-card{border-radius:28px;overflow:hidden;min-height:560px;position:relative;padding:24px;display:flex;flex-direction:column;background:var(--tone)}
-.product-media{position:relative;height:340px;display:flex;align-items:end;justify-content:center}
-.product-media:before{content:"";position:absolute;width:84%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.55)}
-.product-media .jar{position:relative;max-height:315px;width:auto;z-index:2;filter:drop-shadow(0 18px 20px rgba(30,20,34,.13))}
-.product-card h3{font-family:"Manrope";font-size:42px;letter-spacing:-.05em;margin:18px 0 4px}
-.product-card .type{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-.product-card .meta{margin:12px 0 18px;color:rgba(25,23,27,.65);font-size:14px}
-.product-card .card-foot{display:flex;justify-content:space-between;align-items:end;margin-top:auto}
+.product-card{border-radius:28px;overflow:hidden;min-height:580px;position:relative;padding:18px;display:flex;flex-direction:column;background:var(--tone)}
+.product-media{position:relative;height:360px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:20px;background:#f3ede7}
+.product-media:before{display:none}
+.product-media .jar{width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
+.product-card h3{font-family:"Manrope";font-size:42px;letter-spacing:-.05em;margin:20px 6px 4px}
+.product-card .type{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:18px 6px 0}
+.product-card .meta{margin:12px 6px 18px;color:rgba(25,23,27,.65);font-size:14px}
+.product-card .card-foot{display:flex;justify-content:space-between;align-items:end;margin:auto 6px 4px}
 .product-card .price{font-weight:700}
 .product-card a{text-decoration:none;font-weight:700;border-bottom:1px solid currentColor}
 .finder{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw;align-items:center}

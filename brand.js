@@ -18,8 +18,87 @@ const aboPrice = n => Math.round(n * ABO_FACTOR * 100) / 100;
 /* Hersteller und Lebensmittelrecht prüfen lassen.                     */
 /* ------------------------------------------------------------------ */
 const PRODUCTS = [
+  /* ---------------- Launch-Crew: die vier Bären aus der Character Bible ---------------- */
   {
-    id: 'mags', name: 'Mags', title: 'Magnesium Gummies', cat: 'balance', line: 'adult',
+    id: 'glow', launch: true, name: 'Glow', title: 'Beauty Gummies', cat: 'beauty', line: 'adult',
+    role: 'The Main Character', she: true,
+    flavor: 'Himbeere', ingredients: 'Biotin · Zink · Vitamin C',
+    color: '#e86b8e', light: '#ffd1e1', dark: '#c2416a', tint: '#fad4dd',
+    pack: { primary: '#fad4dd', accent: '#e86b8e', light: '#f7e9ed', fur: '#ff8fb1', icon: 'crown', jar: '#f4a6bd', deep: '#b8235c' },
+    word: 'GLOW', mood: 'wink', acc: 'sparkles',
+    quote: 'Schönheit kommt von innen – und ein bisschen von bärly.',
+    traits: ['Beauty', 'Self-Care', 'Confidence', 'Charmant', 'Optimistisch', 'Etwas chaotisch'],
+    gag: 'Bin in 5 Minuten fertig.',
+    room: { id: 'glow', name: "Glow's Room", floor: 'OG links', text: "Glow's Reich: Beauty, Mode, Self-Care und natürlich ihr bärly-GLOW-Setup." },
+    headline: 'Schönheit kommt von innen.',
+    hello: 'Hi, ich bin Glow. The Main Character.',
+    story: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag. Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Der Rest ist Haltung.',
+    facts: [['450 µg', 'Biotin'], ['5 mg', 'Zink'], ['80 mg', 'Vitamin C'], ['2 Gummies', 'pro Tag']],
+    nutrients: [['Biotin', '450 µg', '900 %'], ['Zink', '5 mg', '50 %'], ['Vitamin C', '80 mg', '100 %']],
+    claim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.',
+    serving: '2 Fruchtgummis täglich', count: 60, price: 26.90, vegan: true, doses: { zinc: 5 }
+  },
+  {
+    id: 'flex', launch: true, name: 'Flex', title: 'Kreatin Gummies', cat: 'sport', line: 'adult',
+    role: 'The Gym Bro',
+    flavor: 'Blaubeere', ingredients: 'Kreatin · Vitamin B6 · B12',
+    color: '#2a6fff', light: '#a7c6ff', dark: '#1e4ed8', tint: '#d3e8ff',
+    pack: { primary: '#d3e8ff', accent: '#2a6fff', light: '#e9f3ff', fur: '#6da3ff', icon: 'dumbbell', jar: '#8eaaf0', deep: '#1a3a94' },
+    word: 'FLEX', mood: 'cool', acc: 'shades',
+    quote: 'Heute noch stärker als gestern.',
+    traits: ['Performance', 'Energie', 'Disziplin', 'Motiviert', 'Selbstironisch', 'Loyal'],
+    gag: 'Nur noch ein Satz.',
+    room: { id: 'flex', name: "Flex's Room", floor: 'EG rechts', text: "Flex's Gym-Zone: Trainingsplan, Supplements und immer ein gutes Workout." },
+    headline: 'Heute noch stärker als gestern.',
+    hello: 'Flex hier. Nur noch ein Satz.',
+    story: 'Um 05:00 Uhr schon im Gym, und die Crew kommt mit. 3 g Kreatin pro Tagesportion, Blaubeere, kein Shaker, kein Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining.',
+    facts: [['3 g', 'Kreatin'], ['0,7 mg', 'Vitamin B6'], ['2,5 µg', 'Vitamin B12'], ['2 Gummies', 'pro Tag']],
+    nutrients: [['Kreatin-Monohydrat', '3.000 mg', '–'], ['Vitamin B6', '0,7 mg', '50 %'], ['Vitamin B12', '2,5 µg', '100 %']],
+    claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
+    serving: '2 Fruchtgummis täglich', count: 60, price: 29.90, vegan: true, doses: { b6: .7 }, adultOnly: true
+  },
+  {
+    id: 'snoozy', launch: true, name: 'Snooze', title: 'Sleep Gummies', product: 'Snoozy', cat: 'sleep', line: 'adult',
+    role: 'The Chill Guy',
+    flavor: 'Waldbeere', ingredients: 'Melatonin · Magnesium · Vitamin B6',
+    color: '#8e6bdb', light: '#dcc3ff', dark: '#5b21b6', tint: '#dccef4',
+    pack: { primary: '#b9a7e6', accent: '#8e6bdb', light: '#dccef4', fur: '#8b5cf6', icon: 'moon', jar: '#b897e8', deep: '#45198c' },
+    word: 'SNOOZY', mood: 'sleepy', acc: 'zz',
+    quote: 'Gute Dinge passieren im Schlaf.',
+    traits: ['Recovery', 'Schlaf', 'Balance', 'Ruhig', 'Humorvoll', 'Immer müde'],
+    gag: 'Morgen?',
+    room: { id: 'snooze', name: "Snooze's Room", floor: 'OG Mitte', text: "Snooze's Safe Space: maximale Entspannung, minimaler Aufwand." },
+    headline: 'Gute Dinge passieren im Schlaf.',
+    hello: 'Snooze. Fünf Minuten noch.',
+    story: 'Melatonin, Magnesium und Vitamin B6, Waldbeere, eine halbe Stunde vor dem Schlafengehen. Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Morgen? Morgen.',
+    facts: [['1 mg', 'Melatonin'], ['56 mg', 'Magnesium'], ['1,4 mg', 'Vitamin B6'], ['2 Gummies', 'vor dem Schlafen']],
+    nutrients: [['Melatonin', '1 mg', '–'], ['Magnesium', '56 mg', '15 %'], ['Vitamin B6', '1,4 mg', '100 %']],
+    claim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
+    warn: 'Nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende. Nicht vor dem Autofahren einnehmen.',
+    serving: '2 Fruchtgummis 30 Minuten vor dem Schlafengehen', count: 60, price: 24.90, vegan: true, doses: { b6: 1.4 }, adultOnly: true
+  },
+  {
+    id: 'daily', launch: true, name: 'Daily', title: 'Multivitamin Gummies', cat: 'balance', line: 'adult',
+    role: 'The Organizer',
+    flavor: 'Zitrone-Mango', ingredients: '12 Vitamine · 3 Mineralstoffe',
+    color: '#e0a11f', light: '#fbe7b5', dark: '#a8730c', tint: '#fbe7b5',
+    pack: { primary: '#f6c843', accent: '#e0a11f', light: '#fbe7b5', fur: '#ffd166', icon: 'sun', jar: '#f3c34b', deep: '#6e4700' },
+    word: 'DAILY', mood: 'grin', acc: 'cap',
+    quote: 'Kleine Gewohnheiten. Große Tage.',
+    traits: ['Everyday Wellness', 'Strukturiert', 'Positiv', 'Zuverlässig', 'Hilfsbereit', 'Hält die Crew zusammen'],
+    gag: 'Ich hab da einen Plan.',
+    room: { id: 'daily', name: "Daily's Workspace", floor: 'OG rechts', text: "Daily's Bereich: Planung, To-dos, Reisen, Content und die nächste große Idee." },
+    headline: 'Kleine Gewohnheiten. Große Tage.',
+    hello: 'Daily hier. Ich hab da einen Plan.',
+    story: '12 Vitamine und 3 Mineralstoffe in zwei Zitrone-Mango-Gummies, einmal morgens. Vitamin C und D tragen zu einer normalen Funktion des Immunsystems bei. Den Rest des Tages plant Daily.',
+    facts: [['12', 'Vitamine'], ['3', 'Mineralstoffe'], ['10 µg', 'Vitamin D3'], ['2 Gummies', 'pro Tag']],
+    nutrients: [['Vitamin C', '80 mg', '100 %'], ['Vitamin D3', '10 µg', '200 %'], ['Vitamin B6', '1,4 mg', '100 %'], ['Vitamin B12', '2,5 µg', '100 %'], ['Zink', '1,5 mg', '15 %'], ['Selen', '27,5 µg', '50 %'], ['Jod', '75 µg', '50 %']],
+    claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen Energiestoffwechsel bei.',
+    serving: '2 Fruchtgummis täglich', count: 60, price: 24.90, vegan: true, doses: { zinc: 1.5, vitD: 10, b6: 1.4 }
+  },
+  /* ---------------- Später: Sorten für die nächsten Wellen ---------------- */
+  {
+    id: 'mags', later: true, name: 'Mags', title: 'Magnesium Gummies', cat: 'balance', line: 'adult',
     flavor: 'Blaue Himbeere · sauer', sour: true,
     color: '#2f6bff', light: '#9cbcff', dark: '#1636a8', tint: '#d9e6ff',
     word: 'CHILL', mood: 'sleepy', acc: 'zz',
@@ -32,7 +111,7 @@ const PRODUCTS = [
     serving: '2 Fruchtgummis täglich', count: 60, price: 24.90, vegan: true, doses: {}
   },
   {
-    id: 'sunny', name: 'Sunny', title: 'Vitamin D3 + K2 Gummies', cat: 'balance', line: 'adult',
+    id: 'sunny', later: true, name: 'Sunny', title: 'Vitamin D3 + K2 Gummies', cat: 'balance', line: 'adult',
     flavor: 'Orange-Mango',
     color: '#ff8a1f', light: '#ffc27a', dark: '#c4500a', tint: '#ffe6cc',
     word: 'SONNE', mood: 'cool', acc: 'shades',
@@ -45,20 +124,7 @@ const PRODUCTS = [
     serving: '1 Fruchtgummi täglich', count: 30, price: 19.90, vegan: true, doses: { vitD: 20 }
   },
   {
-    id: 'glow', name: 'Glow', title: 'Hair, Skin & Nails Gummies', cat: 'beauty', line: 'adult',
-    flavor: 'Erdbeere',
-    color: '#ff4fa3', light: '#ffa8d2', dark: '#c21470', tint: '#ffdcee',
-    word: 'GLOW', mood: 'lashes', acc: 'sparkles',
-    headline: 'Haare, Haut und Nägel fangen innen an.',
-    hello: 'Ich bin Glow. Geduld steht dir.',
-    story: 'Biotin, Zink und Selen, die drei Klassiker für Haare und Nägel, in einem Erdbeer-Gummy. Über Nacht passiert nichts, ein Haar wächst etwa einen Zentimeter im Monat. Aber ich bleibe dran.',
-    facts: [['450 µg', 'Biotin'], ['5 mg', 'Zink'], ['55 µg', 'Selen'], ['2 Gummies', 'pro Tag']],
-    nutrients: [['Biotin', '450 µg', '900 %'], ['Zink', '5 mg', '50 %'], ['Selen', '55 µg', '100 %']],
-    claim: 'Biotin, Zink und Selen tragen zur Erhaltung normaler Haare und Nägel bei. Biotin und Zink tragen zur Erhaltung normaler Haut bei.',
-    serving: '2 Fruchtgummis täglich', count: 60, price: 26.90, vegan: true, doses: { zinc: 5 }
-  },
-  {
-    id: 'dew', name: 'Dew', title: 'Kollagen + Vitamin C Gummies', cat: 'beauty', line: 'adult',
+    id: 'dew', later: true, name: 'Dew', title: 'Kollagen + Vitamin C Gummies', cat: 'beauty', line: 'adult',
     flavor: 'Litschi-Holunderblüte',
     color: '#8b5cf6', light: '#c7adff', dark: '#5527c9', tint: '#ece3ff',
     word: 'DEW', mood: 'wink', acc: 'drop',
@@ -71,7 +137,7 @@ const PRODUCTS = [
     serving: '2 Fruchtgummis täglich', count: 60, price: 27.90, vegan: false, doses: {}
   },
   {
-    id: 'brainy', name: 'Brainy', title: 'Omega-3 Gummies aus Algenöl', cat: 'focus', line: 'adult',
+    id: 'brainy', later: true, name: 'Brainy', title: 'Omega-3 Gummies aus Algenöl', cat: 'focus', line: 'adult',
     flavor: 'Zitrone-Limette',
     color: '#10b39a', light: '#80e3d4', dark: '#087766', tint: '#d3f5ef',
     word: 'FOKUS', mood: 'smart', acc: 'glasses',
@@ -84,20 +150,7 @@ const PRODUCTS = [
     serving: '3 Fruchtgummis täglich', count: 90, price: 29.90, vegan: true, doses: {}
   },
   {
-    id: 'flex', name: 'Flex', title: 'Kreatin Gummies', cat: 'sport', line: 'adult',
-    flavor: 'Kirsche-Cola',
-    color: '#e8263b', light: '#ff8b97', dark: '#a10d1f', tint: '#ffdde1',
-    word: 'WUMMS', mood: 'determined', acc: 'headband',
-    headline: 'Kreatin, das du nicht anrühren musst.',
-    hello: 'Flex. Noch ein Satz?',
-    story: '3 Gramm Kreatin-Monohydrat pro Portion, genau die Menge aus den Studien. Kein Shaker, kein Pulver im Rucksack, keine Klümpchen. Vier Gummies, fertig.',
-    facts: [['3 g', 'Kreatin-Monohydrat'], ['4 Gummies', 'pro Tag'], ['120', 'Gummies im Glas'], ['Vegan', 'Pektin statt Gelatine']],
-    nutrients: [['Kreatin-Monohydrat', '3.000 mg', '–']],
-    claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
-    serving: '4 Fruchtgummis täglich', count: 120, price: 29.90, vegan: true, doses: {}, adultOnly: true
-  },
-  {
-    id: 'zap', name: 'Zap', title: 'Koffein + L-Theanin Gummies', cat: 'focus', line: 'adult',
+    id: 'zap', later: true, name: 'Zap', title: 'Koffein + L-Theanin Gummies', cat: 'focus', line: 'adult',
     flavor: 'Zitrone · sauer', sour: true,
     color: '#ffc21a', light: '#ffe48a', dark: '#b88200', tint: '#fff2c2',
     word: 'ESPRESSO', mood: 'wide', acc: 'bolt',
@@ -111,7 +164,7 @@ const PRODUCTS = [
     serving: '1 Tütchen täglich', count: 30, price: 19.90, vegan: true, doses: {}, adultOnly: true
   },
   {
-    id: 'shield', name: 'Shield', title: 'Immun Gummies: Vitamin C, Zink, D3', cat: 'balance', line: 'adult',
+    id: 'shield', later: true, name: 'Shield', title: 'Immun Gummies: Vitamin C, Zink, D3', cat: 'balance', line: 'adult',
     flavor: 'Grüner Apfel · sauer', sour: true,
     color: '#3fbf5a', light: '#9fe6ab', dark: '#1e7f35', tint: '#dcf6e1',
     word: 'ABWEHR', mood: 'grin', acc: 'none',
@@ -124,7 +177,7 @@ const PRODUCTS = [
     serving: '2 Fruchtgummis täglich', count: 60, price: 21.90, vegan: true, doses: { zinc: 5, vitD: 10 }
   },
   {
-    id: 'buff', name: 'Buff', title: 'Protein Gummies', cat: 'sport', line: 'adult',
+    id: 'buff', later: true, name: 'Buff', title: 'Protein Gummies', cat: 'sport', line: 'adult',
     flavor: 'Salted Caramel',
     color: '#c8732e', light: '#efb47c', dark: '#7c3e12', tint: '#f6e3cf',
     word: 'PROTEIN', mood: 'determined', acc: 'none',
@@ -137,7 +190,7 @@ const PRODUCTS = [
     serving: '1 Tütchen (5 Fruchtgummis) pro Portion', count: 50, price: 12.90, vegan: false, doses: {}
   },
   {
-    id: 'kiko', name: 'Kiko', title: 'Kids Gummies mit Eisen, Jod und DHA', cat: 'kids', line: 'kids',
+    id: 'kiko', soon: true, name: 'Kiko', title: 'Kids Gummies mit Eisen, Jod und DHA', cat: 'kids', line: 'kids',
     flavor: 'Kiwi-Limette',
     color: '#8bd12e', light: '#c9f07f', dark: '#4e8a0c', tint: '#eaf8d2',
     word: 'SCHULE', mood: 'grin', acc: 'cap',
@@ -151,7 +204,7 @@ const PRODUCTS = [
     serving: '1 Tütchen täglich', count: 30, price: 19.90, vegan: true, doses: {}
   },
   {
-    id: 'splash', name: 'Splash', title: 'Kids Elektrolyt Gummies', cat: 'kids', line: 'kids',
+    id: 'splash', soon: true, name: 'Splash', title: 'Kids Elektrolyt Gummies', cat: 'kids', line: 'kids',
     flavor: 'Kokos-Ananas',
     color: '#1eb8f0', light: '#8edcf8', dark: '#0a78a6', tint: '#d5f1fc',
     word: 'SPORTTAG', mood: 'wide', acc: 'goggles',
@@ -165,7 +218,7 @@ const PRODUCTS = [
     serving: '1 Tütchen pro Sporttag', count: 10, price: 7.90, vegan: true, doses: {}
   },
   {
-    id: 'juno', name: 'Juno', title: 'Kids Vitamin D Gummies', cat: 'kids', line: 'kids',
+    id: 'juno', soon: true, name: 'Juno', title: 'Kids Vitamin D Gummies', cat: 'kids', line: 'kids',
     flavor: 'Erdbeere-Banane',
     color: '#ff5a5f', light: '#ffa3a5', dark: '#c0262c', tint: '#ffe0df',
     word: 'WACHSEN', mood: 'lashes', acc: 'bow',
@@ -196,24 +249,30 @@ const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
    refill    [Fruchtgummis pro Beutel, Tage pro Beutel, Beutelgröße]
    wave      Launch-Welle 1, 2 oder 3 */
 const PACK_INFO = {
+  glow:   { nutrient: 'Biotin · Zink · Vitamin C', dose: '450 µg Biotin', perDay: 2, unit: 3, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 1,
+            legal: 'Nahrungsergänzungsmittel mit Biotin, Zink und Vitamin C',
+            claim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei.' },
+  flex:   { nutrient: 'Kreatin · B6 · B12', dose: '3 g Kreatin', perDay: 2, unit: 4.5, format: 'can', can: 'gross', refill: [60, 30, 'L'], wave: 1,
+            legal: 'Nahrungsergänzungsmittel mit Kreatin, Vitamin B6 und B12',
+            claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung.' },
+  snoozy: { nutrient: 'Melatonin · Magnesium · B6', dose: '1 mg Melatonin', perDay: 2, unit: 3, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 1,
+            legal: 'Nahrungsergänzungsmittel mit Melatonin, Magnesium und Vitamin B6',
+            claim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen.' },
+  daily:  { nutrient: '12 Vitamine · 3 Mineralstoffe', dose: '80 mg Vit. C', perDay: 2, unit: 3, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 1,
+            legal: 'Nahrungsergänzungsmittel mit Vitaminen und Mineralstoffen',
+            claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei.' },
   mags:   { nutrient: 'Magnesium', dose: '150 mg', perDay: 2, unit: 3, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 1,
             legal: 'Nahrungsergänzungsmittel mit Magnesium',
             claim: 'Magnesium trägt zu einer normalen psychischen Funktion bei.' },
   sunny:  { nutrient: 'Vitamin D3 + K2', dose: '20 µg D3', perDay: 1, unit: 3, format: 'can', can: 'std', refill: [30, 30, 'S'], wave: 1,
             legal: 'Nahrungsergänzungsmittel mit Vitamin D3 und Vitamin K2',
             claim: 'Vitamin D trägt zu einer normalen Funktion des Immunsystems bei.' },
-  glow:   { nutrient: 'Biotin · Zink · Selen', dose: '450 µg Biotin', perDay: 2, unit: 3, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 1,
-            legal: 'Nahrungsergänzungsmittel mit Biotin, Zink und Selen',
-            claim: 'Biotin, Zink und Selen tragen zur Erhaltung normaler Haare und Nägel bei.' },
   dew:    { nutrient: 'Vitamin C + Kollagen', dose: '80 mg Vit. C', perDay: 2, unit: 3.5, format: 'can', can: 'std', refill: [60, 30, 'M'], wave: 2,
             legal: 'Nahrungsergänzungsmittel mit Vitamin C und Kollagenpeptiden',
             claim: 'Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.' },
   brainy: { nutrient: 'Omega-3 DHA aus Algen', dose: '250 mg DHA', perDay: 3, unit: 3, format: 'can', can: 'gross', refill: [90, 30, 'L'], wave: 2,
             legal: 'Nahrungsergänzungsmittel mit Omega-3-Fettsäure DHA aus Algenöl',
             claim: 'DHA trägt zur Erhaltung einer normalen Gehirnfunktion bei.' },
-  flex:   { nutrient: 'Kreatin', dose: '3 g', perDay: 4, unit: 4, format: 'can', can: 'gross', refill: [60, 15, 'M'], wave: 2,
-            legal: 'Nahrungsergänzungsmittel mit Kreatin',
-            claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung.' },
   zap:    { nutrient: 'Koffein + L-Theanin', dose: '80 mg Koffein', perDay: 1, unit: 3, format: 'box', wave: 2,
             legal: 'Nahrungsergänzungsmittel mit Koffein und L-Theanin',
             caffeine: 'Enthält Koffein. Für Kinder und schwangere Frauen nicht empfohlen. (80 mg Koffein pro Tagesportion)' },
@@ -298,9 +357,61 @@ function unitPrice(p, planId) {
 }
 
 const BUNDLES = {
-  beauty: { id: 'beauty', name: 'Beauty-Stack', title: 'Glow + Dew, zwei Nachfüller in einem Brief', aboSub: 'Glow + Dew alle 30 Tage', members: ['glow', 'dew'], price: 44.90, tint: '#ffdcee' },
-  kids:   { id: 'kids', name: 'Schul-Duo', title: 'Kiko + Juno, je 30 Tütchen', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2' }
+  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'Glow, Flex, Snoozy und Daily, je 30 Tage', aboSub: 'alle vier alle 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
+  beautysleep: { id: 'beautysleep', name: 'Beauty Sleep', title: 'Glow + Snoozy, die besten Freunde', aboSub: 'Glow + Snoozy alle 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
+  kids:   { id: 'kids', name: 'Schul-Duo', title: 'Kiko + Juno, je 30 Tütchen', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
+
+/* Bilder aus Character Bible, World Bible und Packaging-Frames (assets/) */
+const IMG = (id) => ({
+  jar: `assets/jar-${id}.webp`,
+  plush: `assets/plush-${id === 'snoozy' ? 'snooze' : id}.webp`,
+  life: `assets/life-${id}.webp`,
+  views: `assets/views-${id}.webp`,
+  gummies: `assets/gummies-${id}.webp`,
+  mood: [1, 2, 3, 4].map(n => `assets/mood-${id}-${n}.webp`)
+});
+
+/* Die Welt: Haus, Zimmer, Beziehungen, Running Gags, Episoden */
+const WORLD = {
+  rooms: [
+    { id: 'glow', name: "Glow's Room", floor: 'OG links', img: 'assets/room-glow.webp', x: 20, y: 33, who: 'glow', text: "Beauty, Mode, Self-Care und natürlich ihr bärly-GLOW-Setup." },
+    { id: 'snooze', name: "Snooze's Room", floor: 'OG Mitte', img: 'assets/room-snooze.webp', x: 45.1, y: 30, who: 'snoozy', text: 'Snooze’s Safe Space: maximale Entspannung, minimaler Aufwand.' },
+    { id: 'daily', name: "Daily's Workspace", floor: 'OG rechts', img: 'assets/room-daily.webp', x: 72.6, y: 30, who: 'daily', text: 'Planung, To-dos, Reisen, Content und die nächste große Idee.' },
+    { id: 'flex', name: "Flex's Room", floor: 'EG rechts', img: 'assets/room-flex.webp', x: 77.1, y: 66, who: 'flex', text: 'Flex’s Gym-Zone: Trainingsplan, Supplements und immer ein gutes Workout.' },
+    { id: 'wohnzimmer', name: 'Wohnzimmer', floor: 'EG', img: 'assets/room-wohnzimmer.webp', x: 31.4, y: 64, who: null, text: 'Hier verbringt die Crew Zeit, schaut Serien, plant Abenteuer oder chillt einfach zusammen.' },
+    { id: 'kueche', name: 'Küche', floor: 'EG', img: 'assets/room-kueche.webp', x: 52, y: 78, who: null, text: 'Gemeinsam kochen, Gummies snacken und über den nächsten Plan diskutieren.' }
+  ],
+  pairs: [
+    { a: 'glow', b: 'flex', title: 'Glow × Flex', text: 'Geschwisterartige Rivalität. Ziehen sich ständig auf, aber immer füreinander da.' },
+    { a: 'glow', b: 'snoozy', title: 'Glow × Snooze', text: 'Überraschend beste Freunde. Glow redet, Snooze hört (halb) zu und gibt die besten, einfachsten Ratschläge.' },
+    { a: 'glow', b: 'daily', title: 'Glow × Daily', text: 'Daily plant, Glow interpretiert kreativ. Komplettes Chaos, aber ein perfektes Team.' },
+    { a: 'flex', b: 'snoozy', title: 'Flex × Snooze', text: 'Kompletter Gegensatz. Daraus entstehen die besten Gags.' },
+    { a: 'flex', b: 'daily', title: 'Flex × Daily', text: 'Daily bringt Struktur, Flex fügt überall ein Workout ein.' },
+    { a: 'snoozy', b: 'daily', title: 'Snooze × Daily', text: 'Daily hat bereits aufgegeben. Und liebt ihn trotzdem.' }
+  ],
+  gags: [
+    { who: 'flex', text: 'Nur noch ein Satz.' },
+    { who: 'glow', text: 'Bin in 5 Minuten fertig.' },
+    { who: 'snoozy', text: 'Morgen?' },
+    { who: 'daily', text: 'Ich hab da einen Plan.' },
+    { who: null, text: 'Wir machen das zusammen.' }
+  ],
+  episodes: [
+    {
+      n: '001', title: 'Flex versucht Snooze ins Gym zu bekommen', status: 'Storyboard',
+      panels: [
+        { img: 'assets/ep1-1.webp', cap: '05:00 Uhr', text: 'Flex ist schon wach und motiviert.' },
+        { img: 'assets/ep1-2.webp', cap: 'Aufwachen!', text: 'Flex versucht, Snooze zu wecken.' },
+        { img: 'assets/ep1-3.webp', cap: 'Klassische Ausreden', text: 'Snooze hat immer einen Grund.' },
+        { img: 'assets/ep1-4.webp', cap: 'Glow betritt die Szene', text: '„Wenn du schon aufstehst, nimm gleich deine GLOW Gummies mit!“' },
+        { img: 'assets/ep1-5.webp', cap: 'Daily mit dem Plan', text: 'Versucht, alle zu koordinieren.' },
+        { img: 'assets/ep1-6.webp', cap: 'Am Ende schaffen sie es doch', text: 'Gemeinsam ist alles besser.' }
+      ]
+    }
+  ]
+};
+
 
 /* SVG-Definitionen (Zuckerkristalle, Weichzeichner) einmal pro Seite einhängen */
 function ensureDefs() {
@@ -428,5 +539,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, IMG, WORLD, plansFor, planFor, netGrams, unitPrice, bear };
 })();

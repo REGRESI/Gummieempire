@@ -13,21 +13,20 @@
 .pk-links a:hover { background: var(--paper-2); }
 .pk-shop { padding: 11px 18px; font-size: 14px; }
 
-.pk-hero { background: #ffdcee; padding-block: clamp(48px, 7vw, 96px); overflow: hidden; }
+.pk-hero { background: var(--glow-t); padding-block: clamp(48px, 7vw, 96px); overflow: hidden; }
 .pk-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
 .pk-title {
-  margin: 0 0 22px; font-family: var(--f-display); font-weight: 800;
-  font-size: clamp(40px, 6vw, 80px); line-height: .95; letter-spacing: -.03em;
-  font-variation-settings: "wdth" 80, "opsz" 96; text-wrap: balance;
+  margin: 0 0 22px; font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(38px, 5.4vw, 72px); line-height: 1; letter-spacing: -.02em; text-wrap: balance;
 }
 .pk-reco { display: grid; gap: 14px; max-width: 60ch; }
 .pk-reco p { margin: 0; font-size: 18px; }
 .pk-hero-visual { position: relative; aspect-ratio: 1 / .92; max-width: 100%; }
 .hv { position: absolute; }
 .hv svg { display: block; width: 100%; height: auto; }
-.hv-can { width: 44%; left: 4%; bottom: 0; z-index: 2; }
-.hv-refill { width: 38%; left: 40%; top: 0; transform: rotate(7deg); }
-.hv-sachet { width: 28%; right: 0; bottom: 4%; transform: rotate(-9deg); z-index: 3; }
+.hv-can { width: 42%; left: 4%; bottom: 0; z-index: 2; }
+.hv-refill { width: 38%; left: 36%; top: 0; transform: rotate(7deg); }
+.hv-sachet { width: 34%; right: 0; bottom: 2%; transform: rotate(-6deg); z-index: 3; }
 
 .format-list { display: grid; gap: 18px; margin-top: 32px; }
 .format {
@@ -36,7 +35,7 @@
 }
 .format-art svg { display: block; width: 100%; height: auto; max-height: 300px; }
 .format-role { margin: 0 0 4px; font-family: var(--f-label); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
-.format h3 { margin: 0 0 14px; font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 3vw, 36px); letter-spacing: -.02em; line-height: 1; }
+.format h3 { margin: 0 0 14px; font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 3vw, 36px); line-height: 1.05; }
 .format-specs { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; }
 .format-specs div { min-width: 0; }
 .format-specs dt { font-family: var(--f-label); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
@@ -87,6 +86,8 @@
 .mode b { font-family: var(--f-display); font-size: 20px; }
 .mode p { margin: 0; font-size: 15px; color: var(--ink-soft); }
 .lineup-wide { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.lineup-crew { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.lineup-crew .lineup-item span { text-align: center; }
 .decision { margin: 24px 0 8px; padding: 22px 24px; border-radius: var(--radius); background: #fff1c2; border: 2px solid var(--ink); }
 .decision h3 { margin: 0 0 8px; font-family: var(--f-display); font-size: 22px; }
 .decision p { margin: 0; max-width: 75ch; }
@@ -116,7 +117,7 @@
 .pk-foot { padding-block: 40px; background: var(--ink); color: rgba(253, 252, 255, .75); font-size: 14px; }
 .pk-foot p { margin: 0; max-width: 70ch; }
 
-@media (max-width: 1080px) { .lineup { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 1080px) { .lineup:not(.lineup-crew) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 860px) {
   .pk-links { display: none; }
   .pk-hero-grid, .zone-grid, .rules-grid, .launch-grid { grid-template-columns: minmax(0, 1fr); }
@@ -124,9 +125,10 @@
   .format-art { max-width: 220px; }
   .zone-visual { max-width: 320px; }
   .lineup, .lineup-wide { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lineup-crew { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mode-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 520px) {
   .format-specs { grid-template-columns: minmax(0, 1fr); }
-  .lineup, .lineup-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lineup, .lineup-wide, .lineup-crew { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

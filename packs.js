@@ -14,7 +14,7 @@
 'use strict';
 
 const { INK, byId, bear, PACK_INFO } = window.Baerly;
-const DISPLAY = "'Bricolage Grotesque', 'Arial Rounded MT Bold', Arial, sans-serif";
+const DISPLAY = "Fredoka, 'Arial Rounded MT Bold', Arial, sans-serif";
 const BODY = "Figtree, 'Segoe UI', Arial, sans-serif";
 const HAND = "Caveat, 'Comic Sans MS', cursive";
 const YELLOW = '#ffd84d';
@@ -192,6 +192,7 @@ function badgeRow(x, y, list) {
 }
 
 function refill(p, opts = {}) {
+  if (p.pack) return refillBrand(p, opts);
   const f = info(p);
   const id = nid('rf');
   const variant = opts.variant || 'refill';
@@ -249,6 +250,147 @@ function refill(p, opts = {}) {
     ${crimp(0, y(228), W, H - y(228), p.dark)}
     <rect width="${W}" height="${H}" fill="url(#${id}pil)"/>
     <path d="M${y(18)} ${y(80)} Q${y(36)} ${y(110)} ${y(24)} ${y(140)}" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="5" stroke-linecap="round"/>
+  </g></g>
+</svg>`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Marken-Dose der Launch-Crew (nach den Packaging-Frames):            */
+/* matte Pastell-Dose, geriffelter Deckel in derselben Farbe, weißes   */
+/* „bärly™“, Produktname in Tieffarbe, Kategorie, Nährstoffzeile,      */
+/* Tatzen-Dosis, Füllmenge und Sorte unten links, Icon unten rechts.   */
+/* Maßstab wie die Bärendose: Ø 70 mm, Körper 100 mm.                  */
+/* ------------------------------------------------------------------ */
+function icon(kind, cx, cy, s, color) {
+  const g = (d) => `<g transform="translate(${cx} ${cy}) scale(${s})" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</g>`;
+  switch (kind) {
+    case 'crown': return g('<path d="M-10 5 L-10 -5 L-5 0 L0 -8 L5 0 L10 -5 L10 5 Z"/><path d="M-10 9 H10"/>');
+    case 'dumbbell': return g('<path d="M-12 -4 V4 M-8 -7 V7 M8 -7 V7 M12 -4 V4 M-8 0 H8"/>');
+    case 'moon': return g('<path d="M3 -9 A9 9 0 1 0 9 5 A7 7 0 1 1 3 -9 Z"/><path d="M9 -8 l1 2 l2 1 l-2 1 l-1 2 l-1 -2 l-2 -1 l2 -1 Z" stroke-width="1.2"/>');
+    case 'sun': return g('<circle r="4.5"/>' + Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<path d="M${(Math.cos(a) * 7.5).toFixed(1)} ${(Math.sin(a) * 7.5).toFixed(1)} L${(Math.cos(a) * 10.5).toFixed(1)} ${(Math.sin(a) * 10.5).toFixed(1)}"/>`; }).join(''));
+    default: return '';
+  }
+}
+const pal = (p) => {
+  const k = p.pack || {};
+  return { body: k.jar || p.color, deep: k.deep || p.dark, light: k.light || p.light, accent: k.accent || p.color, icon: k.icon };
+};
+const perDayLabel = (p, f) => `${f.perDay || 1} ${p.id === 'snoozy' ? 'am Abend' : 'am Tag'}`;
+
+function jar(p, opts = {}) {
+  const f = info(p);
+  const c = pal(p);
+  const id = nid('jr');
+  const name = (p.product || p.name).toUpperCase();
+  const [n, days] = f.refill || [p.count, 30];
+  const count = n * (30 / days);
+  const grams = Math.round(count * (f.unit || 3));
+  // Dose Groß (Flex): gleiche Front, Körper 50 % höher; der untere Block rutscht mit
+  const extra = (opts.size || f.can) === 'gross' ? 92 : 0;
+  const bx = 26, bw = 188, top = 66, bottom = 296 + extra;
+  const lo = (v) => v + extra;
+  const body = `M${bx} ${top} H${bx + bw} V${bottom - 14} Q${bx + bw} ${bottom} ${bx + bw - 14} ${bottom} H${bx + 14} Q${bx} ${bottom} ${bx} ${bottom - 14} Z`;
+  return `<svg class="pack pack-jar" viewBox="0 0 240 ${318 + extra}" role="img" aria-label="bärly ${esc(p.product || p.name)}, ${esc(p.title)}: ${esc(f.legal || '')}, ${count} Fruchtgummis">
+  <defs>
+    <linearGradient id="${id}cyl" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity=".2"/><stop offset=".1" stop-color="#000" stop-opacity=".04"/>
+      <stop offset=".24" stop-color="#fff" stop-opacity=".26"/><stop offset=".36" stop-color="#fff" stop-opacity=".05"/>
+      <stop offset=".75" stop-color="#000" stop-opacity="0"/><stop offset=".92" stop-color="#000" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".24"/>
+    </linearGradient>
+    <linearGradient id="${id}sw" x1="0" y1="0" x2="1" y2=".4">
+      <stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset=".45" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="${c.deep}" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+    </linearGradient>
+    <clipPath id="${id}b"><path d="${body}"/></clipPath>
+  </defs>
+  <ellipse cx="120" cy="${bottom + 9}" rx="98" ry="8" fill="${INK}" opacity=".16"/>
+  <g clip-path="url(#${id}b)">
+    <rect x="${bx}" y="${top}" width="${bw}" height="${bottom - top}" fill="${c.body}"/>
+    <!-- metallische Schwünge wie in den Frames -->
+    <path d="M${bx} 212 C 92 168, 150 262, ${bx + bw} 186 L${bx + bw} 222 C 150 292, 88 204, ${bx} 248 Z" fill="url(#${id}sw)"/>
+    <path d="M${bx} 112 C 74 96, 130 140, ${bx + bw} 92 L${bx + bw} 102 C 128 156, 74 112, ${bx} 126 Z" fill="#fff" opacity=".18"/>
+    ${txt(120, 140, 'bärly', 52, `text-anchor="middle" ${D(700)} letter-spacing="-1" fill="#fff"`)}
+    ${txt(178, 107, '™', 9, `${D(600)} fill="#fff"`)}
+    <text x="120" y="178" text-anchor="middle" ${D(700)} font-size="30" letter-spacing=".5" fill="${c.deep}" ${name.length > 6 ? `textLength="${Math.min(170, name.length * 20)}" lengthAdjust="spacingAndGlyphs"` : ''}>${esc(name)}</text>
+    ${txt(120, 196, p.title.toUpperCase(), 10, `text-anchor="middle" ${B(800)} letter-spacing="1.6" fill="${c.deep}"`)}
+    <path d="M100 206 H140" stroke="${c.deep}" stroke-opacity=".35" stroke-width="1.2"/>
+    ${txt(120, 221, p.ingredients || f.nutrient, 9.4, `text-anchor="middle" ${B(600)} fill="${c.deep}"`)}
+    ${opts.dose === false ? '' : `<rect x="84" y="229" width="72" height="17" rx="8.5" fill="#fff" fill-opacity=".6"/>
+    ${paw(96, 238, 13, f.perDay || 1, c.deep, { empty: '#fff' })}
+    ${txt(106, 241, perDayLabel(p, f), 8.4, `${B(800)} fill="${c.deep}"`)}`}
+    ${txt(bx + 14, lo(268), `${count} Gummies`, 9.2, `${B(800)} fill="${c.deep}"`)}
+    ${txt(bx + 14, lo(280), p.flavor, 8.6, `${B(500)} fill="${c.deep}"`)}
+    ${icon(c.icon, bx + bw - 24, lo(270), .95, c.deep)}
+    ${txt(120, lo(291), `Nahrungsergänzungsmittel · ${grams} g`, 5.8, `text-anchor="middle" ${B(600)} fill="${c.deep}" fill-opacity=".75"`)}
+    <rect x="${bx}" y="${top}" width="${bw}" height="${bottom - top}" fill="url(#${id}cyl)"/>
+  </g>
+  <!-- Schulter und geriffelter Deckel in Produktfarbe -->
+  <rect x="${bx + 6}" y="${top - 8}" width="${bw - 12}" height="10" fill="${c.body}"/>
+  <rect x="${bx + 6}" y="${top - 8}" width="${bw - 12}" height="10" fill="#000" opacity=".12"/>
+  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="${c.body}"/>
+  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="#fff" opacity=".12"/>
+  <g stroke="#000" stroke-opacity=".1" stroke-width="1.6">${Array.from({ length: 38 }, (_, i) => `<line x1="${bx + i * 5}" y1="23" x2="${bx + i * 5}" y2="${top - 10}"/>`).join('')}</g>
+  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="url(#${id}cyl)"/>
+  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="5" rx="2.5" fill="#fff" opacity=".35"/>
+</svg>`;
+}
+
+/* Nachfüller der Launch-Crew: flacher Mono-PE-Beutel im Look der Dose */
+function refillBrand(p, opts = {}) {
+  const f = info(p);
+  const c = pal(p);
+  const id = nid('rb');
+  const variant = opts.variant || 'refill';
+  const W = 220, H = 313;
+  const [n0, days0] = f.refill || [p.count, 30];
+  const n = variant === 'trial' ? (f.perDay || 1) * 7 : n0;
+  const grams = Math.round(n * (f.unit || 3));
+  const name = (p.product || p.name).toUpperCase();
+  const pill = {
+    refill: days0 === 30 ? 'NACHFÜLLER · 30 TAGE' : 'NACHFÜLLER',
+    trial: 'PROBIERWOCHE · 7 TAGE',
+    duo1: 'BEUTEL 1 VON 2 · TAG 1–15',
+    duo2: 'BEUTEL 2 VON 2 · TAG 16–30'
+  }[variant];
+  const pw = pill.length * 5.2 + 18;
+  const legal = wrap(`${f.legal} · ${n} Fruchtgummis = ${grams} g`, 60);
+  return `<svg class="pack pack-refill" viewBox="0 0 ${W} ${H + 12}" role="img" aria-label="${variant === 'trial' ? 'Probierwoche' : 'Nachfüller'} ${esc(p.product || p.name)}: ${esc(f.legal)}, ${n} Fruchtgummis = ${grams} g">
+  <defs>
+    <clipPath id="${id}c"><rect x="0" y="0" width="${W}" height="${H}" rx="7"/></clipPath>
+    <mask id="${id}m"><rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/><path d="M${W} 15 l-7 5 l7 5Z M0 15 l7 5 l-7 5Z" fill="#000"/></mask>
+    <radialGradient id="${id}pil" cx="45%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".2"/>
+    </radialGradient>
+    <linearGradient id="${id}sw" x1="0" y1="0" x2="1" y2=".4">
+      <stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset=".45" stop-color="#fff" stop-opacity=".5"/><stop offset=".6" stop-color="${c.deep}" stop-opacity=".15"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="${W / 2}" cy="${H + 6}" rx="${W * .42}" ry="6" fill="${INK}" opacity=".14"/>
+  <g mask="url(#${id}m)"><g clip-path="url(#${id}c)">
+    <rect width="${W}" height="${H}" fill="${c.body}"/>
+    <path d="M0 232 C 70 190, 130 280, ${W} 206 L${W} 238 C 130 306, 66 222, 0 262 Z" fill="url(#${id}sw)"/>
+    ${crimp(0, 0, W, 13, c.body)}
+    <rect width="${W}" height="13" fill="#000" opacity=".08"/>
+    <line x1="0" y1="20" x2="${W}" y2="20" stroke="#fff" stroke-opacity=".6" stroke-width="1.2" stroke-dasharray="4 3"/>
+    ${txt(W / 2, 74, 'bärly', 44, `text-anchor="middle" ${D(700)} letter-spacing="-1" fill="#fff"`)}
+    ${txt(W / 2 + 54, 48, '™', 8, `${D(600)} fill="#fff"`)}
+    <text x="${W / 2}" y="106" text-anchor="middle" ${D(700)} font-size="27" letter-spacing=".5" fill="${c.deep}" ${name.length > 6 ? `textLength="${Math.min(160, name.length * 18)}" lengthAdjust="spacingAndGlyphs"` : ''}>${esc(name)}</text>
+    ${txt(W / 2, 122, p.title.toUpperCase(), 9.2, `text-anchor="middle" ${B(800)} letter-spacing="1.5" fill="${c.deep}"`)}
+    ${txt(W / 2, 140, p.ingredients || f.nutrient, 8.6, `text-anchor="middle" ${B(600)} fill="${c.deep}"`)}
+    <rect x="${W / 2 - pw / 2}" y="151" width="${pw}" height="16" rx="8" fill="${INK}"/>
+    ${txt(W / 2, 162, pill, 7.4, `text-anchor="middle" ${B(800)} letter-spacing=".6" fill="#fff"`)}
+    <rect x="16" y="182" width="96" height="34" rx="10" fill="#fff" fill-opacity=".62"/>
+    ${paw(34, 199, 24, f.perDay || 1, c.deep, { empty: '#fff' })}
+    ${txt(52, 197, perDayLabel(p, f), 9.4, `${B(800)} fill="${c.deep}"`)}
+    ${txt(52, 208, variant === 'trial' ? '7 Tage' : (days0 === 30 ? '30 Tage' : '15 Tage'), 8.4, `${B(600)} fill="${c.deep}"`)}
+    ${variant === 'trial' ? '' : stamp(W - 44, 199, 21, '#fff')}
+    ${txt(16, 238, `${n} Gummies · ${p.flavor}`, 8.6, `${B(700)} fill="${c.deep}"`)}
+    ${icon(c.icon, W - 26, 236, .8, c.deep)}
+    <rect x="0" y="252" width="${W}" height="${legal.length * 7 + 8}" fill="#fff"/>
+    ${lines(W / 2, 261, legal, 5.6, 7, `text-anchor="middle" ${B(600)} fill="${INK}"`)}
+    ${crimp(0, 288, W, H - 288, c.body)}
+    <rect y="288" width="${W}" height="${H - 288}" fill="#000" opacity=".08"/>
+    <rect width="${W}" height="${H}" fill="url(#${id}pil)"/>
   </g></g>
 </svg>`;
 }
@@ -464,5 +606,5 @@ function nest(svg, x, y, w) {
   return svg.replace('<svg ', `<svg x="${x}" y="${y}" width="${w}" height="${h}" style="width:${w}px;height:${h}px" `);
 }
 
-window.Baerly.packs = { can, refill, tuetchen, tuetchenM, box, letter, paw, nest, CAN };
+window.Baerly.packs = { can, jar, refill, tuetchen, tuetchenM, box, letter, paw, nest, icon, CAN };
 })();

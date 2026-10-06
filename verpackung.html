@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>bärly Verpackung</title>
-<meta name="description" content="Verpackungssystem von bärly: Formate, Größen, Material und Gestaltung der Packungsvorderseite.">
+<meta name="description" content="Verpackungssystem von bärly: Dose im Look der Frames, Nachfüller per Brief, Größen, Pflichtangaben und Launch der vier Bären.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="verpackung.css">
 </head>
 <body class="pk">
 
 <header class="pk-nav">
-  <a class="logo" href="index.html" aria-label="Zurück zum Shop">b<span class="logo-a">ä</span>rly</a>
+  <a class="logo" href="index.html" aria-label="Zurück zum Shop">bärly<sup>™</sup></a>
   <nav class="pk-links" aria-label="Abschnitte">
     <a href="#system">System</a>
     <a href="#formate">Formate</a>
     <a href="#front">Vorderseite</a>
-    <a href="#sorten">Alle Sorten</a>
+    <a href="#sorten">Die Crew</a>
     <a href="#regeln">Pflichtangaben</a>
     <a href="#launch">Launch</a>
   </nav>
@@ -50,7 +50,7 @@
     <div class="wrap">
       <p class="eyebrow">Vorderseite</p>
       <h2 class="h2">In dieser Reihenfolge liest man die Dose.</h2>
-      <p class="lead">Von oben nach unten, vom Regal bis zur Hand. Nachfüller, Tütchen und Boxen folgen derselben Lesereihenfolge. Kids und Zap haben eigene Tonlagen, siehe unten.</p>
+      <p class="lead">Die Dose aus euren Frames, ergänzt um das, was rechtlich fehlt: Tatzen-Dosis und Pflichtzeile. Der Nachfüller folgt derselben Lesereihenfolge. Kids und Zap kommen später und haben eigene Tonlagen, siehe unten.</p>
       <div class="zone-grid">
         <div class="zone-visual" id="zoneVisual"></div>
         <ol class="zone-list" id="zoneList"></ol>
@@ -64,13 +64,13 @@
     <div class="wrap">
       <div class="lineup-head">
         <div>
-          <p class="eyebrow">Alle Sorten</p>
-          <h2 class="h2">Alle Sorten, alle Formate.</h2>
+          <p class="eyebrow">Die Launch-Crew</p>
+          <h2 class="h2">Vier Bären, zwei Formate.</h2>
         </div>
         <div class="filters" id="lineupTabs" role="tablist" aria-label="Format wählen">
-          <button class="filter" type="button" role="tab" data-view="can" aria-selected="true">Bärendosen</button>
+          <button class="filter" type="button" role="tab" data-view="can" aria-selected="true">Dosen</button>
           <button class="filter" type="button" role="tab" data-view="refill" aria-selected="false">Nachfüller</button>
-          <button class="filter" type="button" role="tab" data-view="sachet" aria-selected="false">Tütchen &amp; Boxen</button>
+          <button class="filter" type="button" role="tab" data-view="sachet" aria-selected="false">Später: Tütchen &amp; Boxen</button>
         </div>
       </div>
       <div class="lineup" id="lineup"></div>

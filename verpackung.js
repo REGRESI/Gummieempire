@@ -14,20 +14,19 @@ const list = (items) => `<ul>${items.map(t => `<li>${esc(t)}</li>`).join('')}</u
 $('#pkTitle').textContent = SPEC.title;
 $('#pkReco').innerHTML = SPEC.reco.map(t => `<p>${esc(t)}</p>`).join('');
 $('#pkHeroVisual').innerHTML = `
-  <div class="hv hv-can">${packs.can(byId.glow)}</div>
-  <div class="hv hv-refill">${packs.refill(byId.glow)}</div>
-  <div class="hv hv-sachet">${packs.tuetchen('kiko', { name: 'Emma' })}</div>`;
+  <div class="hv hv-can">${packs.jar(byId.glow)}</div>
+  <div class="hv hv-refill">${packs.refill(byId.snoozy)}</div>
+  <div class="hv hv-sachet">${packs.jar(byId.daily)}</div>`;
 
 /* Formate */
 const formatArt = {
-  can: () => `<div class="can-duo">${packs.can(byId.mags)}${packs.can(byId.brainy)}</div>`,
-  refill: () => packs.refill(byId.mags),
-  duo: () => `<div class="can-duo">${packs.refill(byId.flex, { variant: 'duo1' })}${packs.refill(byId.flex, { variant: 'duo2' })}</div>`,
+  can: () => `<div class="can-duo">${packs.jar(byId.glow)}${packs.jar(byId.flex)}</div>`,
+  refill: () => `<div class="can-duo">${packs.refill(byId.daily)}${packs.refill(byId.flex)}</div>`,
   tuetchen: () => `<div class="can-duo">${packs.tuetchen('kiko', { name: 'Paul' })}${packs.tuetchen('zap')}</div>`,
   box: () => packs.box(['kiko', 'juno']),
   letter: () => packs.letter(packs.nest(packs.tuetchen('juno', { name: 'Emma' }), 20, 0, 70), { label: '30 Tütchen für die Box' }),
   trial: () => packs.refill(byId.glow, { variant: 'trial' }),
-  stack: () => `<div class="can-duo">${packs.tuetchenM(['glow', 'dew'], { title: 'BEAUTY' })}${packs.tuetchenM('buff')}</div>`
+  stack: () => `<div class="can-duo">${packs.tuetchenM(['daily', 'glow'], { title: 'MORGEN' })}${packs.tuetchenM(['daily', 'flex'], { title: 'GYM' })}</div>`
 };
 $('#formatList').innerHTML = SPEC.formats.map(f => `
   <article class="format">
@@ -47,12 +46,12 @@ $('#formatList').innerHTML = SPEC.formats.map(f => `
   </article>`).join('');
 
 /* Vorderseiten-Raster: nummerierte Punkte auf der Dose, in Lesereihenfolge */
-$('#zoneVisual').innerHTML = `<div class="zone-can">${packs.can(byId.mags)}${SPEC.zones.map((z, i) =>
+$('#zoneVisual').innerHTML = `<div class="zone-can">${packs.jar(byId.glow)}${SPEC.zones.map((z, i) =>
   `<span class="zone-dot" style="top:${z.y}%;left:${z.x}%">${i + 1}</span>`).join('')}</div>`;
 $('#zoneList').innerHTML = SPEC.zones.map(z => `<li><b>${esc(z.label)}</b><span>${esc(z.detail)}</span></li>`).join('');
 
 /* Drei Tonlagen: Erwachsene, Kids, Zap */
-const modeArt = { mags: () => packs.refill(byId.mags), kiko: () => packs.box('kiko'), zap: () => packs.box('zap') };
+const modeArt = { glow: () => packs.jar(byId.glow), kiko: () => packs.box('kiko'), zap: () => packs.box('zap') };
 $('#modes').innerHTML = `<h3 class="devices-title">Drei Tonlagen</h3><div class="mode-list">${SPEC.modes.map(m =>
   `<div class="mode"><div class="mode-art">${modeArt[m.id]()}</div><b>${esc(m.label)}</b><p>${esc(m.text)}</p></div>`).join('')}</div>`;
 $('#devices').innerHTML = `<h3 class="devices-title">Was nur wir haben</h3><div class="device-list">${SPEC.devices.map(d =>
@@ -78,9 +77,10 @@ function renderLineup(view) {
     return;
   }
   lineup.className = 'lineup';
-  const items = PRODUCTS.filter(p => PACK_INFO[p.id].format === 'can');
+  lineup.className = 'lineup lineup-crew';
+  const items = PRODUCTS.filter(p => p.launch);
   lineup.innerHTML = items.map(p =>
-    `<div class="lineup-item lineup-${view}">${view === 'refill' ? packs.refill(p, { variant: PACK_INFO[p.id].refill[1] === 30 ? 'refill' : 'duo1' }) : packs.can(p)}<span>${esc(p.name)}</span></div>`).join('');
+    `<div class="lineup-item lineup-${view}">${view === 'refill' ? packs.refill(p) : packs.jar(p)}<span>${esc(p.product || p.name)} · ${esc(p.title)}</span></div>`).join('');
 }
 renderLineup('can');
 $('#lineupTabs').addEventListener('click', e => {

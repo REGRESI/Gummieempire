@@ -1,30 +1,149 @@
-# bärly Asset Library
+# bärly Asset Library — Canonical Rules
 
-This branch is the single source of truth for approved visual assets used by the bärly website and future brand work.
+This branch is the single source of truth for approved bärly visual assets.
 
-## Hard rules
+## 1. Production vs. Reference
 
-1. **Production assets live only under `assets/`.**
-2. **Reference material lives only under `references/` and must never be used directly on the public website.**
-3. Before adding any image to a page, read `assets/asset-manifest.json` and use the exact approved path.
-4. If an approved asset exists, **do not generate, crop, synthesize, or substitute another image**.
-5. Do not crop frames out of moodboards, character bibles, storyboards, or packaging boards.
-6. If the required production asset is missing, leave a clearly designed asset slot or ask for the asset. Do not invent a visual.
-7. Product names and characters are canonical:
-   - GLOW — pink — crown + heart sunglasses
-   - FLEX — blue — black sport sunglasses
-   - SNOOZY — purple — sleep cap + pillow
-   - DAILY — yellow/gold — hoodie / organizer
-8. Website visuals must feel premium, adult, clean, and editorial. Character use should add life without making the brand childish.
-9. Approved images are immutable unless a new version is explicitly approved. New versions should use a descriptive suffix or replace the manifest path deliberately.
-10. Do not alter product packaging text inside approved renders.
+- `assets/` = production-ready assets that may be used on the public website.
+- `references/` = design bibles, packaging boards, moodboards and storyboards.
+- Files inside `references/` must NEVER be used directly as public website imagery.
 
-## Directory model
+## 2. Canonical packaging rule — DO NOT REDESIGN
+
+The four adult launch jars have locked packaging systems:
+
+- GLOW — pink / blush / metallic rose accents / crown icon
+- FLEX — light blue / metallic royal-blue accents / biceps icon
+- SNOOZY — lavender / metallic purple accents / moon icon
+- DAILY — warm yellow-gold / metallic gold accents / sun icon
+
+The approved packaging boards define:
+- exact front-label hierarchy
+- side character panel
+- back-label structure
+- jar body and lid colors
+- metallic/matte material language
+- iconography
+- product naming
+- overall proportions
+
+Claude Code or any future tool MAY:
+- scale
+- translate
+- rotate
+- mask
+- parallax
+- animate
+- add realistic shadow/reflection
+- animate lid opening/closing
+- use the approved front/side/back/3-quarter assets in 2D/3D-like compositions
+
+Claude Code or any future tool MUST NOT:
+- redraw labels
+- change typography hierarchy
+- change product name spelling
+- change colors
+- invent packaging
+- replace icons
+- modify metallic patterns
+- change jar proportions
+- crop a packaging board and pretend it is a production product image
+
+If a required jar view is missing, the implementation must wait for that approved asset.
+
+## 3. Canonical character rule — DO NOT REDESIGN
+
+Character appearance is locked to the approved Character Bibles.
+
+GLOW:
+- pink plush bear
+- gold crown with pink jewel
+- heart sunglasses
+- feminine, confident
+- canonical proportions from Character Bible
+
+FLEX:
+- blue plush bear
+- athletic/muscular canonical body
+- black sport sunglasses
+- canonical proportions from Character Bible
+
+SNOOZY:
+- purple soft/round bear
+- moon-and-stars sleep cap
+- cream pillow
+- canonical proportions from Character Bible
+
+DAILY:
+- yellow/gold bear
+- cream hoodie
+- black crossbody bag
+- organizer aesthetic
+- canonical proportions from Character Bible
+
+Allowed:
+- pose/expression variations that remain fully on-model
+- subtle interaction animations
+- parallax
+- hover reactions
+- light movement
+
+Not allowed:
+- new anatomy
+- changed fur colors
+- changed signature items
+- random clothing
+- redesigning facial features
+- making adult characters look more childlike
+
+## 4. Master asset hierarchy
+
+Every product will eventually have these approved master views:
+
+```
+assets/products/{product}/
+  {product}-pack-front-master.webp
+  {product}-pack-3q-front-master.webp
+  {product}-pack-side-master.webp
+  {product}-pack-back-master.webp
+  {product}-pack-detail-metallic.webp
+```
+
+The four camera views must use the SAME:
+- jar scale
+- focal length / perspective language
+- camera height
+- neutral studio lighting
+- crop ratio
+- background family
+
+This is critical so product transitions on the homepage and PDP feel physically consistent.
+
+## 5. Homepage hero system
+
+The adult homepage hero is modular, not one flattened campaign JPEG.
+
+Layers:
+1. abstract premium background
+2. canonical jar master asset
+3. canonical character cutout
+4. subtle accent objects
+5. HTML copy and CTA
+
+Jar position/size must remain consistent between GLOW, FLEX, SNOOZY and DAILY slides.
+
+Characters add life but stay secondary to premium packaging.
+
+## 6. Folder structure
 
 ```
 assets/
+  asset-manifest.json
   homepage/
     hero/
+      backgrounds/
+      characters/
+      accents/
     lifestyle/
     crew/
     subscription/
@@ -47,21 +166,39 @@ assets/
 
 references/
   packaging/
-  moodboards/
+    glow/
+    flex/
+    snoozy/
+    daily/
   character-bible/
+    glow/
+    flex/
+    snoozy/
+    daily/
+  moodboards/
   storyboards/
 ```
 
-## Naming
+## 7. Naming
 
-Use lowercase kebab-case and describe the role, not the generation history.
+Use lowercase kebab-case. Never use generation-history filenames.
 
 Good:
-- `glow-pdp-hero.webp`
-- `flex-pack-front.webp`
-- `snoozy-character-card.webp`
+- `glow-pack-front-master.webp`
+- `glow-pack-side-master.webp`
+- `flex-character-hero.webp`
 
 Bad:
-- `final-new-v7.png`
-- `imagegen.png`
-- `cropped-moodboard-2.webp`
+- `final-v8-new.png`
+- `imagegen-3.png`
+- `crop-from-board.webp`
+
+## 8. Claude Code implementation rule
+
+Before implementing or changing any visual:
+1. Read `ASSET_RULES.md`.
+2. Read `assets/asset-manifest.json`.
+3. Use only paths marked `approved`.
+4. Do not invent fallback product art.
+5. Do not use references as production visuals.
+6. If an asset is missing, keep the layout ready for it and report the missing asset instead of hallucinating one.

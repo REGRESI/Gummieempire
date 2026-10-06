@@ -38,16 +38,8 @@ button,input{font:inherit}
 .hero-proof{display:flex;align-items:center;gap:13px;margin-top:34px;color:var(--muted);font-size:13px}
 .hero-proof i{width:3px;height:3px;background:currentColor;border-radius:50%}
 .hero-visual{position:relative;min-height:640px;display:flex;align-items:center;justify-content:center}
-.hero-glow{position:absolute;width:82%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(255,255,255,.55) 38%,transparent 70%);filter:blur(3px)}
-.hero-lineup{position:relative;width:100%;height:610px;display:flex;align-items:end;justify-content:center}
-.hero-product{position:relative;width:24%;margin:0 -2.2%;filter:drop-shadow(0 24px 24px rgba(30,20,34,.12));transition:transform .35s ease;z-index:2}
-.hero-product:hover{transform:translateY(-16px)}
-.hero-product .jar{width:100%}
-.hero-product .character{position:absolute;width:54%;left:50%;transform:translateX(-50%);top:-18%;z-index:3}
-.p-glow{transform:rotate(-4deg) translateY(16px)}
-.p-flex{transform:rotate(-1deg);z-index:3}
-.p-daily{transform:rotate(2deg);z-index:3}
-.p-snoozy{transform:rotate(5deg) translateY(18px)}
+.hero-campaign{width:min(100%,920px);border-radius:34px;box-shadow:0 36px 90px rgba(32,24,36,.16);object-fit:cover;aspect-ratio:3/2}
+.hero-visual:before{content:"";position:absolute;inset:12% 8% -4%;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.95),rgba(255,255,255,0));filter:blur(36px);z-index:-1}
 .trust{padding:28px 4vw;border-block:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:24px;background:#fff}
 .trust p{margin:0;font-weight:700}
 .trust-items{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
@@ -105,7 +97,6 @@ footer p{text-align:center}
   .site-header{grid-template-columns:1fr auto}
   .hero{grid-template-columns:1fr;padding-top:70px}
   .hero-visual{min-height:520px}
-  .hero-lineup{height:500px}
   .product-grid,.crew-grid{grid-template-columns:1fr 1fr}
   .section-head,.finder{grid-template-columns:1fr}
 }
@@ -116,8 +107,6 @@ footer p{text-align:center}
   .hero{padding:56px 18px 40px}
   .hero h1{font-size:54px}
   .hero-visual{min-height:360px}
-  .hero-lineup{height:340px}
-  .hero-product{width:29%;margin:0 -4%}
   .trust{align-items:flex-start;flex-direction:column}
   .trust-items{gap:10px}
   .section{padding:78px 18px}

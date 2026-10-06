@@ -1,92 +1,120 @@
 {
-  "version": "1.0",
-  "branch": "baerly/asset-library",
-  "rules": {
-    "productionRoot": "assets/",
-    "referencesRoot": "references/",
-    "neverUseReferencesInProduction": true,
-    "noPlaceholdersWhenApprovedAssetExists": true,
-    "doNotCropMoodboards": true
-  },
-  "homepage": {
-    "hero": {
-      "status": "planned"
-    },
-    "lifestyle": {
-      "glow": {
-        "status": "approved-existing-needs-library-import",
-        "target": "assets/homepage/lifestyle/glow-vanity.webp"
-      },
-      "flex": {
-        "status": "approved-existing-needs-library-import",
-        "target": "assets/homepage/lifestyle/flex-gym.webp"
-      },
-      "snoozy": {
-        "status": "approved-existing-needs-library-import",
-        "target": "assets/homepage/lifestyle/snoozy-bedroom.webp"
-      },
-      "daily": {
-        "status": "approved-existing-needs-library-import",
-        "target": "assets/homepage/lifestyle/daily-workspace.webp"
-      }
-    },
-    "crew": {
-      "status": "planned"
-    },
-    "subscription": {
-      "status": "planned"
-    },
-    "founders": {
-      "status": "planned"
-    }
+  "version": "2.0",
+  "purpose": "Canonical bärly adult launch asset map",
+  "sourceOfTruthBranch": "baerly/asset-library",
+  "invariants": {
+    "packagingLocked": true,
+    "characterDesignLocked": true,
+    "noGeneratedFallbacks": true,
+    "noReferenceBoardCrops": true,
+    "sameJarScaleAcrossHero": true,
+    "sameJarCameraSystemAcrossProductMasters": true
   },
   "products": {
     "glow": {
-      "front": {
-        "status": "approved-existing",
-        "source": "assets/products/glow-front.webp",
-        "target": "assets/products/glow/glow-pack-front.webp"
+      "status": "master-views-to-generate",
+      "canonical": {
+        "color": "pink/blush",
+        "icon": "crown",
+        "product": "GLOW",
+        "type": "BEAUTY GUMMIES",
+        "flavor": "Himbeere"
+      },
+      "masters": {
+        "front": "assets/products/glow/glow-pack-front-master.webp",
+        "threeQuarterFront": "assets/products/glow/glow-pack-3q-front-master.webp",
+        "side": "assets/products/glow/glow-pack-side-master.webp",
+        "back": "assets/products/glow/glow-pack-back-master.webp",
+        "metallicDetail": "assets/products/glow/glow-pack-detail-metallic.webp"
       }
     },
     "flex": {
-      "front": {
-        "status": "approved-existing",
-        "source": "assets/products/flex-front.webp",
-        "target": "assets/products/flex/flex-pack-front.webp"
+      "status": "master-views-to-generate",
+      "canonical": {
+        "color": "light blue/royal blue",
+        "icon": "biceps",
+        "product": "FLEX",
+        "type": "KREATIN GUMMIES",
+        "flavor": "Blaubeere"
+      },
+      "masters": {
+        "front": "assets/products/flex/flex-pack-front-master.webp",
+        "threeQuarterFront": "assets/products/flex/flex-pack-3q-front-master.webp",
+        "side": "assets/products/flex/flex-pack-side-master.webp",
+        "back": "assets/products/flex/flex-pack-back-master.webp",
+        "metallicDetail": "assets/products/flex/flex-pack-detail-metallic.webp"
       }
     },
     "snoozy": {
-      "front": {
-        "status": "approved-existing",
-        "source": "assets/products/snoozy-front.webp",
-        "target": "assets/products/snoozy/snoozy-pack-front.webp"
+      "status": "master-views-to-generate",
+      "canonical": {
+        "color": "lavender/purple",
+        "icon": "moon",
+        "product": "SNOOZY",
+        "type": "SLEEP GUMMIES",
+        "flavor": "Waldbeere"
+      },
+      "masters": {
+        "front": "assets/products/snoozy/snoozy-pack-front-master.webp",
+        "threeQuarterFront": "assets/products/snoozy/snoozy-pack-3q-front-master.webp",
+        "side": "assets/products/snoozy/snoozy-pack-side-master.webp",
+        "back": "assets/products/snoozy/snoozy-pack-back-master.webp",
+        "metallicDetail": "assets/products/snoozy/snoozy-pack-detail-metallic.webp"
       }
     },
     "daily": {
-      "front": {
-        "status": "approved-existing",
-        "source": "assets/products/daily-front.webp",
-        "target": "assets/products/daily/daily-pack-front.webp"
+      "status": "master-views-to-generate",
+      "canonical": {
+        "color": "warm yellow/gold",
+        "icon": "sun",
+        "product": "DAILY",
+        "type": "MULTIVITAMIN GUMMIES",
+        "flavor": "Zitrone-Mango"
+      },
+      "masters": {
+        "front": "assets/products/daily/daily-pack-front-master.webp",
+        "threeQuarterFront": "assets/products/daily/daily-pack-3q-front-master.webp",
+        "side": "assets/products/daily/daily-pack-side-master.webp",
+        "back": "assets/products/daily/daily-pack-back-master.webp",
+        "metallicDetail": "assets/products/daily/daily-pack-detail-metallic.webp"
       }
     }
   },
-  "pdp": {
+  "characters": {
     "glow": {
-      "status": "approved-pending-binary-commit",
-      "hero": "assets/pdp/glow/glow-pdp-hero.webp",
-      "lifestyle": "assets/pdp/glow/glow-pdp-lifestyle.webp",
-      "character": "assets/pdp/glow/glow-pdp-character.webp",
-      "detail": "assets/pdp/glow/glow-pdp-detail.webp",
-      "routine": "assets/pdp/glow/glow-pdp-routine.webp"
+      "status": "character-bible-canonical",
+      "hero": "assets/homepage/hero/characters/glow-character-hero.webp"
     },
     "flex": {
-      "status": "planned"
+      "status": "character-bible-canonical",
+      "hero": "assets/homepage/hero/characters/flex-character-hero.webp"
     },
     "snoozy": {
-      "status": "planned"
+      "status": "character-bible-canonical",
+      "hero": "assets/homepage/hero/characters/snoozy-character-hero.webp"
     },
     "daily": {
-      "status": "planned"
+      "status": "character-bible-canonical",
+      "hero": "assets/homepage/hero/characters/daily-character-hero.webp"
     }
+  },
+  "homepageHero": {
+    "implementation": "layered-interactive",
+    "jarMasterRule": "Use front or 3q-front approved master only; identical rendered dimensions and anchor point on every slide.",
+    "backgrounds": {
+      "glow": "assets/homepage/hero/backgrounds/glow-bg.webp",
+      "flex": "assets/homepage/hero/backgrounds/flex-bg.webp",
+      "snoozy": "assets/homepage/hero/backgrounds/snoozy-bg.webp",
+      "daily": "assets/homepage/hero/backgrounds/daily-bg.webp"
+    }
+  },
+  "pdp": {
+    "rule": "PDP imagery may build scenes around approved jar and character masters but must not redraw packaging.",
+    "products": [
+      "glow",
+      "flex",
+      "snoozy",
+      "daily"
+    ]
   }
 }

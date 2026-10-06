@@ -273,11 +273,15 @@ function icon(kind, cx, cy, s, color) {
 }
 const pal = (p) => {
   const k = p.pack || {};
-  return { body: k.jar || p.color, deep: k.deep || p.dark, light: k.light || p.light, accent: k.accent || p.color, icon: k.icon };
+  return { body: k.jar || p.color, deep: k.deep || p.dark, light: k.light || p.light, accent: k.accent || p.color, icon: k.icon, metal: k.metal || ['#e9e4dc', '#a59c8e'] };
 };
 const perDayLabel = (p, f) => `${f.perDay || 1} ${p.id === 'snoozy' ? 'am Abend' : 'am Tag'}`;
 
 function jar(p, opts = {}) {
+  /* Launch-Dose nach dem Packaging-Briefing: matte, undurchsichtige Dose in der Sortenfarbe,
+     glatter Schraubdeckel ohne Symbol, großes weißes bärly-Logo, Produktname darunter,
+     feine Metallic-Akzente. Kein Charakter auf der Front (der sitzt auf der Seite).
+     Maßstab: Ø 70 mm = 188 px, Körper 100 mm (Standard) bzw. 150 mm (Groß). */
   const f = info(p);
   const c = pal(p);
   const id = nid('jr');
@@ -285,53 +289,81 @@ function jar(p, opts = {}) {
   const [n, days] = f.refill || [p.count, 30];
   const count = n * (30 / days);
   const grams = Math.round(count * (f.unit || 3));
-  // Dose Groß (Flex): gleiche Front, Körper 50 % höher; der untere Block rutscht mit
-  const extra = (opts.size || f.can) === 'gross' ? 92 : 0;
-  const bx = 26, bw = 188, top = 66, bottom = 296 + extra;
-  const lo = (v) => v + extra;
-  const body = `M${bx} ${top} H${bx + bw} V${bottom - 14} Q${bx + bw} ${bottom} ${bx + bw - 14} ${bottom} H${bx + 14} Q${bx} ${bottom} ${bx} ${bottom - 14} Z`;
-  return `<svg class="pack pack-jar" viewBox="0 0 240 ${318 + extra}" role="img" aria-label="bärly ${esc(p.product || p.name)}, ${esc(p.title)}: ${esc(f.legal || '')}, ${count} Fruchtgummis">
+  const MM = 188 / 70;
+  const bx = 26, bw = 188, capTop = 14, capH = 46, top = 66;
+  const bodyH = ((opts.size || f.can) === 'gross' ? 150 : 100) * MM;
+  const bottom = top + bodyH;
+  const t = top + (bodyH - 100 * MM) * .42;              // Logo-Block sitzt bei der Dose Groß tiefer, gleiche Proportion
+  const H = opts.canvasH || Math.ceil(bottom + 22);
+  const yOff = H - Math.ceil(bottom + 22);                 // auf gemeinsamer Leinwand unten ausrichten
+  const [m1, m2] = c.metal;
+  const dose = `${f.perDay || 1} Gummies ${p.id === 'snoozy' ? 'am Abend' : 'täglich'}`;
+  const legal = wrap(`${f.legal || 'Nahrungsergänzungsmittel'} · ${count} Fruchtgummis = ${grams} g`, 66);
+  const warn = p.warn ? wrap(p.warn, 62) : [];
+  let y = bottom - 12;                                     // unterer Block von unten nach oben
+  const legalY = y - (legal.length - 1) * 6.2; y = legalY - 12;
+  const doseY = y; y -= 11;
+  const countY = y; y -= 13;
+  const warnY = y - (warn.length - 1) * 6.4;
+  const body = `M${bx} ${top} H${bx + bw} V${bottom - 16} Q${bx + bw} ${bottom} ${bx + bw - 16} ${bottom} H${bx + 16} Q${bx} ${bottom} ${bx} ${bottom - 16} Z`;
+  const cap = `M${bx + 2} ${capTop + capH} V${capTop + 9} Q${bx + 2} ${capTop} ${bx + 11} ${capTop} H${bx + bw - 11} Q${bx + bw - 2} ${capTop} ${bx + bw - 2} ${capTop + 9} V${capTop + capH} Z`;
+  return `<svg class="pack pack-jar" viewBox="0 0 240 ${H}" role="img" aria-label="bärly ${esc(p.product || p.name)}, ${esc(p.title)}: ${esc(f.legal || '')}, ${count} Fruchtgummis">
   <defs>
     <linearGradient id="${id}cyl" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity=".2"/><stop offset=".1" stop-color="#000" stop-opacity=".04"/>
-      <stop offset=".24" stop-color="#fff" stop-opacity=".26"/><stop offset=".36" stop-color="#fff" stop-opacity=".05"/>
-      <stop offset=".75" stop-color="#000" stop-opacity="0"/><stop offset=".92" stop-color="#000" stop-opacity=".1"/>
-      <stop offset="1" stop-color="#000" stop-opacity=".24"/>
+      <stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".08" stop-color="#000" stop-opacity=".07"/>
+      <stop offset=".22" stop-color="#fff" stop-opacity=".2"/><stop offset=".4" stop-color="#fff" stop-opacity=".04"/>
+      <stop offset=".72" stop-color="#000" stop-opacity=".02"/><stop offset=".9" stop-color="#000" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
     </linearGradient>
-    <linearGradient id="${id}sw" x1="0" y1="0" x2="1" y2=".4">
-      <stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset=".45" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="${c.deep}" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/>
+    <linearGradient id="${id}metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${m1}"/><stop offset=".45" stop-color="#fff"/><stop offset=".55" stop-color="${m1}"/><stop offset="1" stop-color="${m2}"/>
     </linearGradient>
+    <linearGradient id="${id}sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="${m1}" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="${m2}" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="${id}grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch" result="t"/>
+      <feColorMatrix in="t" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 .07"/></feComponentTransfer>
+    </filter>
+    <filter id="${id}blur" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="5"/></filter>
     <clipPath id="${id}b"><path d="${body}"/></clipPath>
+    <clipPath id="${id}c"><path d="${cap}"/></clipPath>
   </defs>
-  <ellipse cx="120" cy="${bottom + 9}" rx="98" ry="8" fill="${INK}" opacity=".16"/>
+  <g transform="translate(0 ${yOff})">
+  <ellipse cx="120" cy="${bottom + 4}" rx="96" ry="6" fill="${INK}" opacity=".28" filter="url(#${id}blur)"/>
+  <!-- Körper -->
   <g clip-path="url(#${id}b)">
-    <rect x="${bx}" y="${top}" width="${bw}" height="${bottom - top}" fill="${c.body}"/>
-    <!-- metallische Schwünge wie in den Frames -->
-    <path d="M${bx} 212 C 92 168, 150 262, ${bx + bw} 186 L${bx + bw} 222 C 150 292, 88 204, ${bx} 248 Z" fill="url(#${id}sw)"/>
-    <path d="M${bx} 112 C 74 96, 130 140, ${bx + bw} 92 L${bx + bw} 102 C 128 156, 74 112, ${bx} 126 Z" fill="#fff" opacity=".18"/>
-    ${txt(120, 140, 'bärly', 52, `text-anchor="middle" ${D(700)} letter-spacing="-1" fill="#fff"`)}
-    ${txt(178, 107, '™', 9, `${D(600)} fill="#fff"`)}
-    <text x="120" y="178" text-anchor="middle" ${D(700)} font-size="30" letter-spacing=".5" fill="${c.deep}" ${name.length > 6 ? `textLength="${Math.min(170, name.length * 20)}" lengthAdjust="spacingAndGlyphs"` : ''}>${esc(name)}</text>
-    ${txt(120, 196, p.title.toUpperCase(), 10, `text-anchor="middle" ${B(800)} letter-spacing="1.6" fill="${c.deep}"`)}
-    <path d="M100 206 H140" stroke="${c.deep}" stroke-opacity=".35" stroke-width="1.2"/>
-    ${txt(120, 221, p.ingredients || f.nutrient, 9.4, `text-anchor="middle" ${B(600)} fill="${c.deep}"`)}
-    ${opts.dose === false ? '' : `<rect x="84" y="229" width="72" height="17" rx="8.5" fill="#fff" fill-opacity=".6"/>
-    ${paw(96, 238, 13, f.perDay || 1, c.deep, { empty: '#fff' })}
-    ${txt(106, 241, perDayLabel(p, f), 8.4, `${B(800)} fill="${c.deep}"`)}`}
-    ${txt(bx + 14, lo(268), `${count} Gummies`, 9.2, `${B(800)} fill="${c.deep}"`)}
-    ${txt(bx + 14, lo(280), p.flavor, 8.6, `${B(500)} fill="${c.deep}"`)}
-    ${icon(c.icon, bx + bw - 24, lo(270), .95, c.deep)}
-    ${txt(120, lo(291), `Nahrungsergänzungsmittel · ${grams} g`, 5.8, `text-anchor="middle" ${B(600)} fill="${c.deep}" fill-opacity=".75"`)}
-    <rect x="${bx}" y="${top}" width="${bw}" height="${bottom - top}" fill="url(#${id}cyl)"/>
+    <rect x="${bx}" y="${top}" width="${bw}" height="${bodyH}" fill="${c.body}"/>
+    <path d="M${bx} ${top + bodyH * .52} C ${bx + 70} ${top + bodyH * .4}, ${bx + 120} ${top + bodyH * .68}, ${bx + bw} ${top + bodyH * .5} L${bx + bw} ${top + bodyH * .55} C ${bx + 120} ${top + bodyH * .74}, ${bx + 70} ${top + bodyH * .46}, ${bx} ${top + bodyH * .58} Z" fill="url(#${id}sheen)" opacity=".55"/>
+    ${txt(120, t + 97, 'bärly', 60, `text-anchor="middle" ${D(700)} letter-spacing="-1.5" fill="#fff"`)}
+    ${txt(186, t + 60, '™', 9, `${D(600)} fill="#fff"`)}
+    <text x="120" y="${t + 137}" text-anchor="middle" ${D(600)} font-size="27" letter-spacing="3.5" fill="${c.deep}">${esc(name)}</text>
+    <path d="M102 ${t + 150} H138" stroke="url(#${id}metal)" stroke-width="1.6" stroke-linecap="round"/>
+    ${txt(120, t + 166, p.title.toUpperCase(), 9.4, `text-anchor="middle" ${B(700)} letter-spacing="2.6" fill="${c.deep}"`)}
+    ${txt(120, t + 181, p.ingredients || f.nutrient, 8.6, `text-anchor="middle" ${B(500)} fill="${c.deep}" fill-opacity=".85"`)}
+    ${warn.length ? lines(120, warnY, warn, 5.3, 6.4, `text-anchor="middle" ${B(700)} fill="${c.deep}"`) : ''}
+    ${txt(120, countY, `${count} GUMMIES · ${p.flavor.toUpperCase()}`, 7.2, `text-anchor="middle" ${B(700)} letter-spacing="1.4" fill="${c.deep}"`)}
+    ${txt(120, doseY, dose, 7.2, `text-anchor="middle" ${B(500)} fill="${c.deep}"`)}
+    ${lines(120, legalY, legal, 5, 6.2, `text-anchor="middle" ${B(500)} fill="${c.deep}" fill-opacity=".8"`)}
+    <rect x="${bx}" y="${top}" width="${bw}" height="${bodyH}" fill="url(#${id}cyl)"/>
+    <rect x="${bx}" y="${top}" width="${bw}" height="${bodyH}" filter="url(#${id}grain)"/>
+    <rect x="${bx}" y="${top}" width="${bw}" height="2.5" fill="#000" opacity=".1"/>
   </g>
-  <!-- Schulter und geriffelter Deckel in Produktfarbe -->
-  <rect x="${bx + 6}" y="${top - 8}" width="${bw - 12}" height="10" fill="${c.body}"/>
-  <rect x="${bx + 6}" y="${top - 8}" width="${bw - 12}" height="10" fill="#000" opacity=".12"/>
-  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="${c.body}"/>
-  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="#fff" opacity=".12"/>
-  <g stroke="#000" stroke-opacity=".1" stroke-width="1.6">${Array.from({ length: 38 }, (_, i) => `<line x1="${bx + i * 5}" y1="23" x2="${bx + i * 5}" y2="${top - 10}"/>`).join('')}</g>
-  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="${top - 22}" rx="7" fill="url(#${id}cyl)"/>
-  <rect x="${bx - 4}" y="16" width="${bw + 8}" height="5" rx="2.5" fill="#fff" opacity=".35"/>
+  <!-- Hals -->
+  <rect x="${bx + 8}" y="${capTop + capH - 1}" width="${bw - 16}" height="${top - capTop - capH + 2}" fill="${c.body}"/>
+  <rect x="${bx + 8}" y="${capTop + capH - 1}" width="${bw - 16}" height="${top - capTop - capH + 2}" fill="#000" opacity=".2"/>
+  <!-- glatter Schraubdeckel ohne Symbol -->
+  <g clip-path="url(#${id}c)">
+    <rect x="${bx}" y="${capTop}" width="${bw}" height="${capH}" fill="${c.body}"/>
+    <rect x="${bx}" y="${capTop}" width="${bw}" height="${capH}" fill="#fff" opacity=".1"/>
+    <g stroke="#000" stroke-opacity=".045" stroke-width="1.2">${Array.from({ length: 46 }, (_, i) => `<line x1="${bx + 3 + i * 4}" y1="${capTop + 6}" x2="${bx + 3 + i * 4}" y2="${capTop + capH - 4}"/>`).join('')}</g>
+    <rect x="${bx}" y="${capTop}" width="${bw}" height="${capH}" fill="url(#${id}cyl)"/>
+    <rect x="${bx}" y="${capTop}" width="${bw}" height="${capH}" filter="url(#${id}grain)"/>
+    <rect x="${bx}" y="${capTop}" width="${bw}" height="3" fill="#fff" opacity=".35"/>
+    <rect x="${bx}" y="${capTop + capH - 3}" width="${bw}" height="3" fill="#000" opacity=".1"/>
+  </g>
+  </g>
 </svg>`;
 }
 
@@ -353,7 +385,8 @@ function refillBrand(p, opts = {}) {
     duo2: 'BEUTEL 2 VON 2 · TAG 16–30'
   }[variant];
   const pw = pill.length * 5.2 + 18;
-  const legal = wrap(`${f.legal} · ${n} Fruchtgummis = ${grams} g`, 60);
+  const legal = [...(p.warn ? wrap(p.warn, 60) : []), ...wrap(`${f.legal} · ${n} Fruchtgummis = ${grams} g`, 60)];
+  const legalTop = 288 - (legal.length * 7 + 6);
   return `<svg class="pack pack-refill" viewBox="0 0 ${W} ${H + 12}" role="img" aria-label="${variant === 'trial' ? 'Probierwoche' : 'Nachfüller'} ${esc(p.product || p.name)}: ${esc(f.legal)}, ${n} Fruchtgummis = ${grams} g">
   <defs>
     <clipPath id="${id}c"><rect x="0" y="0" width="${W}" height="${H}" rx="7"/></clipPath>
@@ -385,9 +418,8 @@ function refillBrand(p, opts = {}) {
     ${txt(52, 208, variant === 'trial' ? '7 Tage' : (days0 === 30 ? '30 Tage' : '15 Tage'), 8.4, `${B(600)} fill="${c.deep}"`)}
     ${variant === 'trial' ? '' : stamp(W - 44, 199, 21, '#fff')}
     ${txt(16, 238, `${n} Gummies · ${p.flavor}`, 8.6, `${B(700)} fill="${c.deep}"`)}
-    ${icon(c.icon, W - 26, 236, .8, c.deep)}
-    <rect x="0" y="252" width="${W}" height="${legal.length * 7 + 8}" fill="#fff"/>
-    ${lines(W / 2, 261, legal, 5.6, 7, `text-anchor="middle" ${B(600)} fill="${INK}"`)}
+    <rect x="0" y="${legalTop}" width="${W}" height="${288 - legalTop}" fill="#fff"/>
+    ${lines(W / 2, legalTop + 8, legal, 5.6, 7, `text-anchor="middle" ${B(600)} fill="${INK}"`)}
     ${crimp(0, 288, W, H - 288, c.body)}
     <rect y="288" width="${W}" height="${H - 288}" fill="#000" opacity=".08"/>
     <rect width="${W}" height="${H}" fill="url(#${id}pil)"/>
@@ -525,9 +557,12 @@ function box(m, opts = {}) {
   const bg = zap ? INK : CREAM;
   const band = zap ? INK : p.color;
   const n = sport ? 10 : 30;
-  const grams = Math.round(n * (f.unit || 2.5));
+  const perSachet = list.length;                      // Schul-Duo: 1 Kiko + 1 Juno pro Tütchen
+  const grams = Math.round(n * list.reduce((s, x) => s + (info(x).unit || 2.5), 0));
+  const nutrients = list.flatMap(x => (info(x).nutrient || '').split(' · '));
+  const nutrientText = nutrients.length > 1 ? `${nutrients.slice(0, -1).join(', ')} und ${nutrients[nutrients.length - 1]}` : nutrients[0];
   const word = p.word;
-  const legal = list.length > 1 ? 'Nahrungsergänzungsmittel für Kinder' : f.legal;
+  const legal = list.length > 1 ? `Nahrungsergänzungsmittel mit ${nutrientText} für Kinder` : f.legal;
   const W = ox + FW + dx + 10, H = oy + FH + 18;
   const ears = [ox + FW * .3, ox + FW * .7];
   return `<svg class="pack pack-box" viewBox="0 0 ${W} ${H}" role="img" aria-label="${zap ? 'Zap-Box' : 'Tütchen-Box'} ${list.map(x => esc(x.name)).join(' + ')}: ${n} Tagestütchen">
@@ -577,7 +612,7 @@ function box(m, opts = {}) {
       ${txt(ox + y(6), oy + y(80.5), 'Vorrat zu den Eltern – nur das Tütchen geht mit.', y(2.6), `${B(800)} fill="${INK}"`)}
     `}
     <rect x="${ox}" y="${oy + y(82)}" width="${FW}" height="${y(8)}" fill="#fff"/>
-    ${lines(ox + FW / 2, oy + y(85.2), wrap(`${legal} · ${n} Tagestütchen à 1 Fruchtgummi = ${grams} g`, 78), y(2.4), y(3), `text-anchor="middle" ${B(600)} fill="${INK}"`)}
+    ${lines(ox + FW / 2, oy + y(85.2), wrap(`${legal} · ${n} Tagestütchen à ${perSachet} Fruchtgummi${perSachet > 1 ? 's' : ''} = ${grams} g`, 78), y(2.4), y(3), `text-anchor="middle" ${B(600)} fill="${INK}"`)}
   </g>
 </svg>`;
 }

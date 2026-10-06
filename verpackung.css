@@ -117,7 +117,7 @@
 .pk-foot { padding-block: 40px; background: var(--ink); color: rgba(253, 252, 255, .75); font-size: 14px; }
 .pk-foot p { margin: 0; max-width: 70ch; }
 
-@media (max-width: 1080px) { .lineup:not(.lineup-crew) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 1080px) { .lineup { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 860px) {
   .pk-links { display: none; }
   .pk-hero-grid, .zone-grid, .rules-grid, .launch-grid { grid-template-columns: minmax(0, 1fr); }

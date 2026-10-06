@@ -21,18 +21,15 @@ const PRODUCTS = [
   /* ---------------- Launch-Crew: die vier Bären aus der Character Bible ---------------- */
   {
     id: 'glow', launch: true, name: 'Glow', title: 'Beauty Gummies', cat: 'beauty', line: 'adult',
-    role: 'The Main Character', she: true,
+    role: 'The Main Character',
+    goal: 'Beauty', persona: 'Charmant, selbstbewusst und immer ein bisschen extra.', look: 'Pink, mit Krone und Herzbrille',
+    short: 'Für Haut und Haare. Mit Biotin, Zink und Vitamin C.',
+    scene: { title: 'Vor dem Spiegel', text: 'Zwei Gummies in der Morgenroutine, zwischen Serum und Parfum.' },
     flavor: 'Himbeere', ingredients: 'Biotin · Zink · Vitamin C',
     color: '#e86b8e', light: '#ffd1e1', dark: '#c2416a', tint: '#fad4dd',
-    pack: { primary: '#fad4dd', accent: '#e86b8e', light: '#f7e9ed', fur: '#ff8fb1', icon: 'crown', jar: '#f4a6bd', deep: '#b8235c' },
+    pack: { primary: '#fad4dd', accent: '#e86b8e', light: '#f7e9ed', fur: '#ff8fb1', icon: 'crown', jar: '#efb3c3', deep: '#9c2f55', metal: ['#f3d2cb', '#b97f76'] },
     word: 'GLOW', mood: 'wink', acc: 'sparkles',
-    quote: 'Schönheit kommt von innen – und ein bisschen von bärly.',
-    traits: ['Beauty', 'Self-Care', 'Confidence', 'Charmant', 'Optimistisch', 'Etwas chaotisch'],
-    gag: 'Bin in 5 Minuten fertig.',
-    room: { id: 'glow', name: "Glow's Room", floor: 'OG links', text: "Glow's Reich: Beauty, Mode, Self-Care und natürlich ihr bärly-GLOW-Setup." },
-    headline: 'Schönheit kommt von innen.',
-    hello: 'Hi, ich bin Glow. The Main Character.',
-    story: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag. Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Der Rest ist Haltung.',
+    story: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag. Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.',
     facts: [['450 µg', 'Biotin'], ['5 mg', 'Zink'], ['80 mg', 'Vitamin C'], ['2 Gummies', 'pro Tag']],
     nutrients: [['Biotin', '450 µg', '900 %'], ['Zink', '5 mg', '50 %'], ['Vitamin C', '80 mg', '100 %']],
     claim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei. Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.',
@@ -41,36 +38,30 @@ const PRODUCTS = [
   {
     id: 'flex', launch: true, name: 'Flex', title: 'Kreatin Gummies', cat: 'sport', line: 'adult',
     role: 'The Gym Bro',
+    goal: 'Performance', persona: 'Diszipliniert, loyal und ein kleines bisschen zu motiviert.', look: 'Blau, athletisch, mit schwarzer Sportbrille',
+    short: 'Für dein Training. 3 g Kreatin pro Tagesportion.',
+    scene: { title: 'Vor dem ersten Satz', text: 'Zwei Gummies aus der Sporttasche. Kein Shaker, kein Pulver.' },
     flavor: 'Blaubeere', ingredients: 'Kreatin · Vitamin B6 · B12',
     color: '#2a6fff', light: '#a7c6ff', dark: '#1e4ed8', tint: '#d3e8ff',
-    pack: { primary: '#d3e8ff', accent: '#2a6fff', light: '#e9f3ff', fur: '#6da3ff', icon: 'dumbbell', jar: '#8eaaf0', deep: '#1a3a94' },
+    pack: { primary: '#d3e8ff', accent: '#2a6fff', light: '#e9f3ff', fur: '#6da3ff', icon: 'dumbbell', jar: '#a6bdee', deep: '#1f3a8a', metal: ['#e8edf6', '#8f9bb5'] },
     word: 'FLEX', mood: 'cool', acc: 'shades',
-    quote: 'Heute noch stärker als gestern.',
-    traits: ['Performance', 'Energie', 'Disziplin', 'Motiviert', 'Selbstironisch', 'Loyal'],
-    gag: 'Nur noch ein Satz.',
-    room: { id: 'flex', name: "Flex's Room", floor: 'EG rechts', text: "Flex's Gym-Zone: Trainingsplan, Supplements und immer ein gutes Workout." },
-    headline: 'Heute noch stärker als gestern.',
-    hello: 'Flex hier. Nur noch ein Satz.',
-    story: 'Um 05:00 Uhr schon im Gym, und die Crew kommt mit. 3 g Kreatin pro Tagesportion, Blaubeere, kein Shaker, kein Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining.',
+    story: '3 g Kreatin in zwei Blaubeer-Gummies, ohne Shaker und Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein. Für Erwachsene, die intensiv trainieren.',
     facts: [['3 g', 'Kreatin'], ['0,7 mg', 'Vitamin B6'], ['2,5 µg', 'Vitamin B12'], ['2 Gummies', 'pro Tag']],
-    nutrients: [['Kreatin-Monohydrat', '3.000 mg', '–'], ['Vitamin B6', '0,7 mg', '50 %'], ['Vitamin B12', '2,5 µg', '100 %']],
+    nutrients: [['Kreatin (aus 3.410 mg Kreatin-Monohydrat)', '3.000 mg', '–'], ['Vitamin B6', '0,7 mg', '50 %'], ['Vitamin B12', '2,5 µg', '100 %']],
     claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 29.90, vegan: true, doses: { b6: .7 }, adultOnly: true
   },
   {
-    id: 'snoozy', launch: true, name: 'Snooze', title: 'Sleep Gummies', product: 'Snoozy', cat: 'sleep', line: 'adult',
+    id: 'snoozy', launch: true, name: 'Snoozy', title: 'Sleep Gummies', cat: 'sleep', line: 'adult',
     role: 'The Chill Guy',
+    goal: 'Sleep', persona: 'Ruhig, humorvoll und Profi im Abschalten.', look: 'Lila, mit Schlafmütze und Kissen',
+    short: 'Für den Abend. 1 mg Melatonin, dazu Magnesium und Vitamin B6.',
+    scene: { title: 'Nach dem letzten Licht', text: 'Eine halbe Stunde vor dem Schlafen. Handy weg, Licht aus.' },
     flavor: 'Waldbeere', ingredients: 'Melatonin · Magnesium · Vitamin B6',
     color: '#8e6bdb', light: '#dcc3ff', dark: '#5b21b6', tint: '#dccef4',
-    pack: { primary: '#b9a7e6', accent: '#8e6bdb', light: '#dccef4', fur: '#8b5cf6', icon: 'moon', jar: '#b897e8', deep: '#45198c' },
+    pack: { primary: '#b9a7e6', accent: '#8e6bdb', light: '#dccef4', fur: '#8b5cf6', icon: 'moon', jar: '#bfa9e6', deep: '#43207f', metal: ['#ece6f8', '#998cbd'] },
     word: 'SNOOZY', mood: 'sleepy', acc: 'zz',
-    quote: 'Gute Dinge passieren im Schlaf.',
-    traits: ['Recovery', 'Schlaf', 'Balance', 'Ruhig', 'Humorvoll', 'Immer müde'],
-    gag: 'Morgen?',
-    room: { id: 'snooze', name: "Snooze's Room", floor: 'OG Mitte', text: "Snooze's Safe Space: maximale Entspannung, minimaler Aufwand." },
-    headline: 'Gute Dinge passieren im Schlaf.',
-    hello: 'Snooze. Fünf Minuten noch.',
-    story: 'Melatonin, Magnesium und Vitamin B6, Waldbeere, eine halbe Stunde vor dem Schlafengehen. Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Morgen? Morgen.',
+    story: 'Melatonin, Magnesium und Vitamin B6 in zwei Waldbeer-Gummies, eine halbe Stunde vor dem Schlafengehen. Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
     facts: [['1 mg', 'Melatonin'], ['56 mg', 'Magnesium'], ['1,4 mg', 'Vitamin B6'], ['2 Gummies', 'vor dem Schlafen']],
     nutrients: [['Melatonin', '1 mg', '–'], ['Magnesium', '56 mg', '15 %'], ['Vitamin B6', '1,4 mg', '100 %']],
     claim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
@@ -80,19 +71,21 @@ const PRODUCTS = [
   {
     id: 'daily', launch: true, name: 'Daily', title: 'Multivitamin Gummies', cat: 'balance', line: 'adult',
     role: 'The Organizer',
+    goal: 'Daily Wellness', persona: 'Strukturiert, positiv und der Grund, warum die Crew funktioniert.', look: 'Gelb, mit Hoodie und Crossbody-Bag',
+    short: 'Für jeden Tag. 12 Vitamine und 3 Mineralstoffe.',
+    scene: { title: 'Mit dem ersten Kaffee', text: 'Zwei Gummies zum Frühstück, bevor der Tag losgeht.' },
     flavor: 'Zitrone-Mango', ingredients: '12 Vitamine · 3 Mineralstoffe',
-    color: '#e0a11f', light: '#fbe7b5', dark: '#a8730c', tint: '#fbe7b5',
-    pack: { primary: '#f6c843', accent: '#e0a11f', light: '#fbe7b5', fur: '#ffd166', icon: 'sun', jar: '#f3c34b', deep: '#6e4700' },
+    color: '#e0a11f', light: '#fbe7b5', dark: '#8a5c00', tint: '#fbe7b5',
+    pack: { primary: '#f6c843', accent: '#e0a11f', light: '#fbe7b5', fur: '#ffd166', icon: 'sun', jar: '#eecb6c', deep: '#5f4100', metal: ['#f7e3a8', '#b48a2a'] },
     word: 'DAILY', mood: 'grin', acc: 'cap',
-    quote: 'Kleine Gewohnheiten. Große Tage.',
-    traits: ['Everyday Wellness', 'Strukturiert', 'Positiv', 'Zuverlässig', 'Hilfsbereit', 'Hält die Crew zusammen'],
-    gag: 'Ich hab da einen Plan.',
-    room: { id: 'daily', name: "Daily's Workspace", floor: 'OG rechts', text: "Daily's Bereich: Planung, To-dos, Reisen, Content und die nächste große Idee." },
-    headline: 'Kleine Gewohnheiten. Große Tage.',
-    hello: 'Daily hier. Ich hab da einen Plan.',
-    story: '12 Vitamine und 3 Mineralstoffe in zwei Zitrone-Mango-Gummies, einmal morgens. Vitamin C und D tragen zu einer normalen Funktion des Immunsystems bei. Den Rest des Tages plant Daily.',
+    story: '12 Vitamine und 3 Mineralstoffe in zwei Zitrone-Mango-Gummies zum Frühstück. Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.',
     facts: [['12', 'Vitamine'], ['3', 'Mineralstoffe'], ['10 µg', 'Vitamin D3'], ['2 Gummies', 'pro Tag']],
-    nutrients: [['Vitamin C', '80 mg', '100 %'], ['Vitamin D3', '10 µg', '200 %'], ['Vitamin B6', '1,4 mg', '100 %'], ['Vitamin B12', '2,5 µg', '100 %'], ['Zink', '1,5 mg', '15 %'], ['Selen', '27,5 µg', '50 %'], ['Jod', '75 µg', '50 %']],
+    nutrients: [
+      ['Vitamin A', '200 µg', '25 %'], ['Vitamin D3', '10 µg', '200 %'], ['Vitamin E', '6 mg', '50 %'], ['Vitamin C', '80 mg', '100 %'],
+      ['Thiamin (B1)', '0,55 mg', '50 %'], ['Riboflavin (B2)', '0,7 mg', '50 %'], ['Niacin (als Nicotinamid)', '8 mg', '50 %'], ['Pantothensäure', '3 mg', '50 %'],
+      ['Vitamin B6', '1,4 mg', '100 %'], ['Biotin', '25 µg', '50 %'], ['Folsäure', '200 µg', '100 %'], ['Vitamin B12', '2,5 µg', '100 %'],
+      ['Zink', '1,5 mg', '15 %'], ['Selen', '27,5 µg', '50 %'], ['Jod', '75 µg', '50 %']
+    ],
     claim: 'Vitamin C und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei. Vitamin B6 und B12 tragen zu einem normalen energieliefernden Stoffwechsel bei.',
     serving: '2 Fruchtgummis täglich', count: 60, price: 24.90, vegan: true, doses: { zinc: 1.5, vitD: 10, b6: 1.4 }
   },
@@ -301,7 +294,7 @@ const PACK_INFO = {
 const REFILL_OFF = 2;      // Nachfüller ohne Dose: 2 € günstiger
 const EXTRA_CAN = 4.90;    // zusätzliche Bärendose
 const round2 = n => Math.round(n * 100) / 100;
-const to90 = n => Math.floor(n) + .9;   // 61,83 → 61,90
+const to90 = n => { const v = Math.floor(n) + .9; return round2(v > n ? v - 1 : v); };   // 61,83 → 60,90, nie über dem Rabattpreis
 function plansFor(p) {
   const f = PACK_INFO[p.id] || {};
   if (f.format === 'can') {
@@ -309,11 +302,12 @@ function plansFor(p) {
     const per = 30 / days;
     const refillSub = per === 1 ? `${n} Fruchtgummis, 30 Tage` : `${per} Beutel à ${n} Fruchtgummis, zusammen 30 Tage`;
     const refill = round2(p.price - REFILL_OFF);
+    const stock = to90(refill * 3 * .9);   // Rabatt nie kleiner als angezeigt: auf x,90 abrunden
     return [
-      { id: 'abo', label: 'Abo', sub: 'Bärendose gratis, danach Nachfüller per Brief', price: aboPrice(p.price), save: '−20 %', view: 'can', every: true },
-      { id: 'once', label: 'Einmalkauf', sub: 'Bärendose mit 30 Tagen', price: p.price, view: 'can' },
+      { id: 'abo', label: 'Abo', sub: 'Dose ohne Aufpreis, danach Nachfüller per Brief', price: aboPrice(p.price), save: '−20 %', view: 'can', every: true },
+      { id: 'once', label: 'Einmalkauf', sub: 'Dose mit 60 Fruchtgummis für 30 Tage', price: p.price, view: 'can' },
       { id: 'refill', label: 'Nur Nachfüller', sub: `Für deine Dose · ${refillSub}`, price: refill, view: 'refill' },
-      { id: 'stock', label: '3er-Vorrat', sub: '3 Nachfüller, einzeln versiegelt, 90 Tage', price: to90(refill * 3 * .9), save: '−10 %', view: 'refill' }
+      { id: 'stock', label: '3er-Vorrat', sub: '3 Nachfüller, einzeln versiegelt, 90 Tage', price: stock, save: `−${Math.floor((1 - stock / (refill * 3)) * 100)} %`, view: 'refill' }
     ];
   }
   if (f.format === 'box') {
@@ -359,58 +353,17 @@ function unitPrice(p, planId) {
 const BUNDLES = {
   crew:   { id: 'crew', name: 'Die ganze Crew', title: 'Glow, Flex, Snoozy und Daily, je 30 Tage', aboSub: 'alle vier alle 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
   beautysleep: { id: 'beautysleep', name: 'Beauty Sleep', title: 'Glow + Snoozy, die besten Freunde', aboSub: 'Glow + Snoozy alle 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
-  kids:   { id: 'kids', name: 'Schul-Duo', title: 'Kiko + Juno, je 30 Tütchen', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
+  kids:   { id: 'kids', name: 'Schul-Duo', title: '30 Tütchen mit je 1 Kiko + 1 Juno', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
 
-/* Bilder aus Character Bible, World Bible und Packaging-Frames (assets/) */
-const IMG = (id) => ({
-  jar: `assets/jar-${id}.webp`,
-  plush: `assets/plush-${id === 'snoozy' ? 'snooze' : id}.webp`,
-  life: `assets/life-${id}.webp`,
-  views: `assets/views-${id}.webp`,
-  gummies: `assets/gummies-${id}.webp`,
-  mood: [1, 2, 3, 4].map(n => `assets/mood-${id}-${n}.webp`)
+/* Bild-Slots der Website. Alle Bilder werden eigens für die Website produziert
+   (siehe assets/ASSETS.md); fehlt eine Datei, zeigt die Seite einen sauberen Platzhalter. */
+const ASSETS = (id) => ({
+  front: `assets/products/${id}-front.webp`,
+  character: `assets/characters/${id}.webp`,
+  lifestyle: `assets/lifestyle/${id}.webp`
 });
-
-/* Die Welt: Haus, Zimmer, Beziehungen, Running Gags, Episoden */
-const WORLD = {
-  rooms: [
-    { id: 'glow', name: "Glow's Room", floor: 'OG links', img: 'assets/room-glow.webp', x: 20, y: 33, who: 'glow', text: "Beauty, Mode, Self-Care und natürlich ihr bärly-GLOW-Setup." },
-    { id: 'snooze', name: "Snooze's Room", floor: 'OG Mitte', img: 'assets/room-snooze.webp', x: 45.1, y: 30, who: 'snoozy', text: 'Snooze’s Safe Space: maximale Entspannung, minimaler Aufwand.' },
-    { id: 'daily', name: "Daily's Workspace", floor: 'OG rechts', img: 'assets/room-daily.webp', x: 72.6, y: 30, who: 'daily', text: 'Planung, To-dos, Reisen, Content und die nächste große Idee.' },
-    { id: 'flex', name: "Flex's Room", floor: 'EG rechts', img: 'assets/room-flex.webp', x: 77.1, y: 66, who: 'flex', text: 'Flex’s Gym-Zone: Trainingsplan, Supplements und immer ein gutes Workout.' },
-    { id: 'wohnzimmer', name: 'Wohnzimmer', floor: 'EG', img: 'assets/room-wohnzimmer.webp', x: 31.4, y: 64, who: null, text: 'Hier verbringt die Crew Zeit, schaut Serien, plant Abenteuer oder chillt einfach zusammen.' },
-    { id: 'kueche', name: 'Küche', floor: 'EG', img: 'assets/room-kueche.webp', x: 52, y: 78, who: null, text: 'Gemeinsam kochen, Gummies snacken und über den nächsten Plan diskutieren.' }
-  ],
-  pairs: [
-    { a: 'glow', b: 'flex', title: 'Glow × Flex', text: 'Geschwisterartige Rivalität. Ziehen sich ständig auf, aber immer füreinander da.' },
-    { a: 'glow', b: 'snoozy', title: 'Glow × Snooze', text: 'Überraschend beste Freunde. Glow redet, Snooze hört (halb) zu und gibt die besten, einfachsten Ratschläge.' },
-    { a: 'glow', b: 'daily', title: 'Glow × Daily', text: 'Daily plant, Glow interpretiert kreativ. Komplettes Chaos, aber ein perfektes Team.' },
-    { a: 'flex', b: 'snoozy', title: 'Flex × Snooze', text: 'Kompletter Gegensatz. Daraus entstehen die besten Gags.' },
-    { a: 'flex', b: 'daily', title: 'Flex × Daily', text: 'Daily bringt Struktur, Flex fügt überall ein Workout ein.' },
-    { a: 'snoozy', b: 'daily', title: 'Snooze × Daily', text: 'Daily hat bereits aufgegeben. Und liebt ihn trotzdem.' }
-  ],
-  gags: [
-    { who: 'flex', text: 'Nur noch ein Satz.' },
-    { who: 'glow', text: 'Bin in 5 Minuten fertig.' },
-    { who: 'snoozy', text: 'Morgen?' },
-    { who: 'daily', text: 'Ich hab da einen Plan.' },
-    { who: null, text: 'Wir machen das zusammen.' }
-  ],
-  episodes: [
-    {
-      n: '001', title: 'Flex versucht Snooze ins Gym zu bekommen', status: 'Storyboard',
-      panels: [
-        { img: 'assets/ep1-1.webp', cap: '05:00 Uhr', text: 'Flex ist schon wach und motiviert.' },
-        { img: 'assets/ep1-2.webp', cap: 'Aufwachen!', text: 'Flex versucht, Snooze zu wecken.' },
-        { img: 'assets/ep1-3.webp', cap: 'Klassische Ausreden', text: 'Snooze hat immer einen Grund.' },
-        { img: 'assets/ep1-4.webp', cap: 'Glow betritt die Szene', text: '„Wenn du schon aufstehst, nimm gleich deine GLOW Gummies mit!“' },
-        { img: 'assets/ep1-5.webp', cap: 'Daily mit dem Plan', text: 'Versucht, alle zu koordinieren.' },
-        { img: 'assets/ep1-6.webp', cap: 'Am Ende schaffen sie es doch', text: 'Gemeinsam ist alles besser.' }
-      ]
-    }
-  ]
-};
+const HERO_ASSET = 'assets/hero/crew.webp';
 
 
 /* SVG-Definitionen (Zuckerkristalle, Weichzeichner) einmal pro Seite einhängen */
@@ -539,5 +492,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, IMG, WORLD, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, HERO_ASSET, plansFor, planFor, netGrams, unitPrice, bear };
 })();

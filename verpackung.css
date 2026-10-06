@@ -77,8 +77,19 @@
 .lineup-item { display: grid; justify-items: center; gap: 6px; }
 .lineup { align-items: end; }
 .lineup-item svg { display: block; width: 100%; height: auto; }
-.can-trio { display: flex; align-items: flex-end; gap: 4px; }
-.can-trio svg { width: 33%; height: auto; }
+.can-duo { display: flex; align-items: flex-end; gap: 6%; }
+.can-duo svg { width: 47%; height: auto; }
+.modes { margin-top: 48px; }
+.mode-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.mode { display: grid; align-content: start; gap: 6px; padding: 18px; border-radius: 18px; background: var(--paper-2); }
+.mode-art { height: 220px; display: grid; place-items: center; }
+.mode-art svg { max-height: 100%; width: auto; max-width: 100%; }
+.mode b { font-family: var(--f-display); font-size: 20px; }
+.mode p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+.lineup-wide { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.decision { margin: 24px 0 8px; padding: 22px 24px; border-radius: var(--radius); background: #fff1c2; border: 2px solid var(--ink); }
+.decision h3 { margin: 0 0 8px; font-family: var(--f-display); font-size: 22px; }
+.decision p { margin: 0; max-width: 75ch; }
 .lineup-item span { font-weight: 700; font-size: 14px; }
 .spec-table { width: 100%; min-width: 640px; border-collapse: collapse; margin-top: 40px; font-size: 15px; font-variant-numeric: tabular-nums; }
 .spec-table th, .spec-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -100,6 +111,7 @@
 .src-tag { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 11px; font-weight: 700; margin-right: 6px; background: var(--paper-2); color: var(--ink); }
 .src-ok { background: #dcf6e1; }
 .src-fix { background: #fff1c2; }
+.src-est { background: #e9e4f5; }
 
 .pk-foot { padding-block: 40px; background: var(--ink); color: rgba(253, 252, 255, .75); font-size: 14px; }
 .pk-foot p { margin: 0; max-width: 70ch; }
@@ -111,9 +123,10 @@
   .format { grid-template-columns: minmax(0, 1fr); }
   .format-art { max-width: 220px; }
   .zone-visual { max-width: 320px; }
-  .lineup { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lineup, .lineup-wide { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mode-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 520px) {
   .format-specs { grid-template-columns: minmax(0, 1fr); }
-  .lineup { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lineup, .lineup-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

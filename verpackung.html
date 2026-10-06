@@ -50,11 +50,12 @@
     <div class="wrap">
       <p class="eyebrow">Vorderseite</p>
       <h2 class="h2">In dieser Reihenfolge liest man die Dose.</h2>
-      <p class="lead">Von oben nach unten, vom Regal bis zur Hand. Kids-Packungen folgen demselben Raster, mit zwei Unterschieden: dem gelben kids-Zeichen und dem Hinweis auf den kindersicheren Deckel.</p>
+      <p class="lead">Von oben nach unten, vom Regal bis zur Hand. Nachfüller, Tütchen und Boxen folgen derselben Lesereihenfolge. Kids und Zap haben eigene Tonlagen, siehe unten.</p>
       <div class="zone-grid">
         <div class="zone-visual" id="zoneVisual"></div>
         <ol class="zone-list" id="zoneList"></ol>
       </div>
+      <div class="modes" id="modes"></div>
       <div class="devices" id="devices"></div>
     </div>
   </section>
@@ -64,12 +65,12 @@
       <div class="lineup-head">
         <div>
           <p class="eyebrow">Alle Sorten</p>
-          <h2 class="h2">Zwölf Bären, ein Regal.</h2>
+          <h2 class="h2">Alle Sorten, alle Formate.</h2>
         </div>
         <div class="filters" id="lineupTabs" role="tablist" aria-label="Format wählen">
-          <button class="filter" type="button" role="tab" data-view="can" aria-selected="true">Dose</button>
+          <button class="filter" type="button" role="tab" data-view="can" aria-selected="true">Bärendosen</button>
           <button class="filter" type="button" role="tab" data-view="refill" aria-selected="false">Nachfüller</button>
-          <button class="filter" type="button" role="tab" data-view="sachet" aria-selected="false">Tütchen</button>
+          <button class="filter" type="button" role="tab" data-view="sachet" aria-selected="false">Tütchen &amp; Boxen</button>
         </div>
       </div>
       <div class="lineup" id="lineup"></div>
@@ -91,6 +92,7 @@
     <div class="wrap">
       <p class="eyebrow">Launch</p>
       <h2 class="h2">Reihenfolge und offene Fragen.</h2>
+      <div class="decision" id="decision"></div>
       <div class="launch-grid" id="launchGrid"></div>
       <div class="sources" id="sources"></div>
     </div>

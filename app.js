@@ -5,7 +5,8 @@
 (() => {
 'use strict';
 
-const { BRAND, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, plansFor, planFor, bear, packs } = window.Baerly;
+const { BRAND, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, plansFor, planFor, netGrams, unitPrice, bear, packs } = window.Baerly;
+const perKg = (p, plan) => `${eur(unitPrice(p, plan))}/kg`;
 const SHIPPING_FREE = 35;
 
 const HERO = ['mags', 'sunny', 'glow', 'flex', 'brainy', 'zap', 'kiko'].map(id => byId[id]);
@@ -17,7 +18,7 @@ const GOALS = [
   { id: 'energy', label: 'Energie ohne Kaffee', c: '#ffc21a', ids: ['zap'] },
   { id: 'sport',  label: 'Training',            c: '#e8263b', ids: ['flex', 'buff'] },
   { id: 'immune', label: 'Immunsystem',         c: '#3fbf5a', ids: ['shield', 'sunny'] },
-  { id: 'kids',   label: 'Für mein Kind',       c: '#8bd12e', ids: ['kiko', 'splash', 'juno'] }
+  { id: 'kids',   label: 'Für mein Kind',       c: '#8bd12e', ids: ['kiko', 'juno'] }
 ];
 
 /* Höchstmengen-Empfehlungen des BfR für Nahrungsergänzungsmittel (pro Tag) */
@@ -261,23 +262,36 @@ const grid = $('#productGrid');
 const filtersEl = $('#filters');
 let activeFilter = store('baerly-filter') || 'all';
 
-/* Produktfoto je Format: Dose für Erwachsene, Päckchen für Kids und Zap */
+/* Produktfoto je Format: Dose (Erwachsene), Tütchen-Box (Kids, Zap), Tütchen (Buff, Splash) */
 function shotHTML(p) {
   const f = PACK_INFO[p.id] || {};
-  if (f.can) {
-    // Dosen im echten Größenverhältnis: S, M und L teilen sich eine Skala
-    const vh = (size) => 130 + packs.CAN[size].H;
-    const pct = Math.round(vh(f.can) / vh('L') * 100);
+  if (f.format === 'can') {
+    // Dosen im echten Größenverhältnis: Standard und Groß teilen sich eine Skala
+    const pct = f.can === 'gross' ? 100 : 74;
     return `<span class="shot shot-can">
       <span class="shot-pack" style="height:${pct}%">${packs.can(p)}</span>
       <span class="shot-bear">${bear(p, { label: false })}</span>
     </span>`;
   }
-  const zap = p.id === 'zap';
+  if (f.format === 'box') {
+    return `<span class="shot shot-box">
+      <span class="shot-pack">${packs.box(p)}</span>
+      ${p.id === 'zap' ? '' : `<span class="shot-bear">${bear(p, { label: false })}</span>`}
+    </span>`;
+  }
+  const pack = f.format === 'portion' ? packs.tuetchenM(p) : packs.tuetchen(p, { name: 'Leo' });
   return `<span class="shot shot-packet">
-    <span class="shot-pack">${packs.packet([p], { day: zap ? '1' : 'MO', name: p.line === 'kids' ? 'Emma' : '' })}</span>
-    ${zap ? '' : `<span class="shot-bear">${bear(p, { label: false })}</span>`}
+    <span class="shot-pack">${pack}</span>
+    <span class="shot-bear">${bear(p, { label: false })}</span>
   </span>`;
+}
+
+function formatLine(p) {
+  const f = PACK_INFO[p.id] || {};
+  if (f.format === 'can') return `${f.can === 'gross' ? 'Bärendose Groß' : 'Bärendose'} · ${f.refill[0] * (30 / f.refill[1])} Fruchtgummis · 30 Tage`;
+  if (f.format === 'box') return 'Tütchen-Box · 30 Tütchen · 30 Tage';
+  if (f.format === 'portion') return '10 Portionen à 5 Fruchtgummis';
+  return '10 Sporttag-Tütchen';
 }
 
 function cardHTML(p) {
@@ -288,7 +302,8 @@ function cardHTML(p) {
     p.adultOnly ? '<span class="badge">18+</span>' : '',
     !p.vegan ? '<span class="badge">nicht vegan</span>' : ''
   ].join('');
-  const fmt = f.can ? `Bärendose · ${f.refill[0]} Stück · 30 Tage` : `Wochenstreifen · 28 Päckchen`;
+  const abo = plansFor(p).find(x => x.id === 'abo');
+  const gift = f.format === 'can' ? ', Dose gratis' : f.format === 'box' ? ', Box gratis' : '';
   return `<article class="card" data-cat="${p.cat}" style="--tint:${p.tint};--c:${p.color}">
     <button class="card-visual" type="button" data-detail="${p.id}" aria-label="Details zu ${p.name}">
       ${shotHTML(p)}
@@ -297,10 +312,11 @@ function cardHTML(p) {
     <div class="card-body">
       <div class="card-top"><h3 class="card-name">${p.name}</h3><span class="card-price">${eur(p.price)}</span></div>
       <p class="card-sub">${p.title}</p>
-      <p class="card-flavor">${fmt}</p>
-      <p class="card-abo">im Abo ${eur(aboPrice(p.price))}${f.can ? ', Dose gratis' : ''}</p>
+      <p class="card-flavor">${formatLine(p)} · ${perKg(p, 'once')}</p>
+      <p class="card-abo">${abo ? `im Abo ${eur(abo.price)}${gift}` : 'Für Sport-, Schwimm- und Hitzetage'}</p>
     </div>
     <div class="card-actions">
+      <button class="btn btn-ghost card-more" type="button" data-detail="${p.id}">Formate</button>
       <button class="btn btn-ink add-btn" type="button" data-add="${p.id}">In den Warenkorb</button>
     </div>
   </article>`;
@@ -420,12 +436,13 @@ function initKids() {
       <span class="kid-power">${p.power}</span>
     </button>`).join('');
 
-  // Wochenstreifen mit Namensfeld, das sich live mitschreibt
+  // Tütchen-Box und Tütchen mit Namensfeld, das sich live mitschreibt
   const input = $('#kidName');
   const art = $('#kidsStrip');
   const draw = () => {
     const name = input.value.trim() || 'Emma';
-    art.innerHTML = packs.strip(['kiko', 'juno', 'splash'], { name, count: 3 });
+    art.innerHTML = `<div class="kids-box">${packs.box(['kiko', 'juno'])}</div>
+      <div class="kids-tuetchen">${packs.tuetchen('kiko', { name })}${packs.tuetchen('juno', { name })}</div>`;
   };
   input.value = store('baerly-kidname') || '';
   draw();
@@ -435,7 +452,7 @@ function initKids() {
 /* So kommen die Bären zu dir: Dose und Brief mit Nachfüller */
 function initAbo() {
   $('#artCan').innerHTML = packs.can(byId.glow);
-  $('#artLetter').innerHTML = packs.letter(`<g transform="scale(.42)">${packs.refill(byId.mags).replace('<svg ', '<svg width="224" height="332" ')}</g>`, { label: 'Dein Nachschub ist da.' });
+  $('#artLetter').innerHTML = packs.letter(packs.nest(packs.refill(byId.mags), 0, 0, 92), { label: 'Dein Nachschub ist da.' });
 }
 
 /* ------------------------------------------------------------------ */
@@ -448,28 +465,37 @@ const modalInner = $('#modalInner');
 function viewsFor(p) {
   const f = PACK_INFO[p.id] || {};
   const zap = p.id === 'zap';
+  const kidName = p.line === 'kids' ? 'Emma' : '';
   const v = [];
-  if (f.can) {
-    v.push({ id: 'can', label: 'Bärendose', html: () => packs.can(p) });
-    v.push({ id: 'refill', label: 'Nachfüller', html: () => packs.refill(p) });
+  if (f.format === 'can') {
+    v.push({ id: 'can', label: f.can === 'gross' ? 'Bärendose Groß' : 'Bärendose', html: () => packs.can(p) });
+    v.push({ id: 'refill', label: 'Nachfüller', html: () => packs.refill(p, { variant: f.refill[1] === 30 ? 'refill' : 'duo1' }) });
+    v.push({ id: 'letter', label: 'Per Brief', html: () => packs.letter(packs.nest(packs.refill(p), 0, 0, 92)), wide: true });
+  } else if (f.format === 'box') {
+    v.push({ id: 'box', label: zap ? 'Zap-Box' : 'Tütchen-Box', html: () => packs.box(p), wide: true });
+    v.push({ id: 'tuetchen', label: 'Tütchen', html: () => packs.tuetchen(p, { name: kidName }) });
+    v.push({ id: 'letter', label: 'Nachschub per Brief', html: () => packs.letter(packs.nest(packs.tuetchen(p, { name: kidName }), 20, 0, 70), { label: '30 Tütchen für die Box' }), wide: true });
+  } else if (f.format === 'portion') {
+    v.push({ id: 'portion', label: 'Portion', html: () => packs.tuetchenM(p) });
+    v.push({ id: 'letter', label: 'Per Brief', html: () => packs.letter(packs.nest(packs.tuetchenM(p), 0, 0, 80), { label: '10 Portionen' }), wide: true });
   } else {
-    v.push({ id: 'packet', label: 'Päckchen', html: () => packs.packet([p], { day: zap ? '1' : 'MO', name: p.line === 'kids' ? 'Emma' : '' }) });
-    v.push({ id: 'strip', label: 'Wochenstreifen', html: () => packs.strip([p], { name: p.line === 'kids' ? 'Emma' : '', count: 3 }), wide: true });
+    v.push({ id: 'sport', label: 'Sporttag-Tütchen', html: () => packs.tuetchen(p, { name: 'Leo' }) });
   }
   v.push({ id: 'dose', label: 'Dosis', html: () => doseCard(p) });
   if (!zap) v.push({ id: 'bear', label: p.name, html: () => bear(p) });
   return v;
 }
+const VIEW_FOR_PLAN = { can: 'can', refill: 'refill', box: 'box', portion: 'portion', sport: 'sport' };
 
-/* Dosis-Bild: Pfoten-Dosis und Reichweite, wie auf der Packung */
+/* Dosis-Bild: Tatzen-Dosis und Reichweite, wie auf der Packung */
 function doseCard(p) {
   const f = PACK_INFO[p.id] || {};
-  const days = f.can ? 30 : 28;
-  return `<svg class="dose-card" viewBox="0 0 240 240" role="img" aria-label="${f.perDay} pro Tag, ${days} Tage">
+  const unit = f.format === 'can' ? `${f.perDay} Fruchtgummi${f.perDay > 1 ? 's' : ''} am Tag` : f.format === 'sport' ? '1 Tütchen pro Sporttag' : f.format === 'portion' ? '1 Tütchen pro Portion' : '1 Tütchen am Tag';
+  return `<svg class="dose-card" viewBox="0 0 240 240" role="img" aria-label="${unit}">
     <rect x="10" y="10" width="220" height="220" rx="28" fill="#fff"/>
-    ${packs.paw(120, 104, 2.6, f.perDay || 1)}
-    <text x="120" y="182" text-anchor="middle" font-family="'Bricolage Grotesque', Arial, sans-serif" font-weight="800" font-size="22" fill="#1d1236">${f.can ? `${f.perDay} Gummi${f.perDay > 1 ? 's' : ''} am Tag` : '1 Päckchen am Tag'}</text>
-    <text x="120" y="204" text-anchor="middle" font-family="Figtree, Arial, sans-serif" font-weight="600" font-size="12" fill="#1d1236" fill-opacity=".7">${days} Tage · ${f.dose} pro Tag</text>
+    ${packs.paw(120, 100, 120, f.perDay || 1, p.color)}
+    <text x="120" y="184" text-anchor="middle" font-family="'Bricolage Grotesque', Arial, sans-serif" font-weight="800" font-size="20" fill="#1d1236">${unit}</text>
+    <text x="120" y="206" text-anchor="middle" font-family="Figtree, Arial, sans-serif" font-weight="600" font-size="12" fill="#1d1236" fill-opacity=".7">${f.format === 'sport' ? '10 Tütchen' : f.format === 'portion' ? '10 Portionen' : '30 Tage'} · ${f.dose} pro ${f.format === 'portion' ? 'Portion' : 'Tag'}</text>
   </svg>`;
 }
 
@@ -479,7 +505,8 @@ function openDetail(id, planId) {
   const f = PACK_INFO[p.id] || {};
   const plans = plansFor(p);
   const views = viewsFor(p);
-  const start = planId || 'abo';
+  const start = plans.find(x => x.id === (planId || 'abo')) ? (planId || 'abo') : plans[0].id;
+  const kids = p.line === 'kids';
   modalInner.style.setProperty('--tint', p.tint);
   modalInner.innerHTML = `
     <div class="modal-visual">
@@ -493,51 +520,70 @@ function openDetail(id, planId) {
     </div>
     <div class="modal-body">
       <div>
-        <p class="eyebrow">${p.line === 'kids' ? 'bärly kids · 4–12 Jahre · für Eltern' : p.title}</p>
+        <p class="eyebrow">${kids ? 'bärly kids · für Eltern · 4–12 Jahre' : p.title}</p>
         <h2>${p.name}</h2>
       </div>
       <p class="modal-sub">${p.flavor} · ${p.serving}${p.vegan ? ' · vegan' : ' · nicht vegan'}</p>
       <p class="modal-story">${p.story}</p>
       <table class="nutri">
-        <caption>Pro Tagesportion</caption>
+        <caption>Pro ${f.format === 'portion' ? 'Portion' : 'Tagesportion'}</caption>
         <thead><tr><th scope="col">Nährstoff</th><th scope="col">Menge</th><th scope="col">% NRV*</th></tr></thead>
         <tbody>${p.nutrients.map(([n, a, r]) => `<tr><th scope="row">${n}</th><td>${a}</td><td>${r}</td></tr>`).join('')}</tbody>
       </table>
-      <p class="claim"><b>Was wir sagen dürfen</b>${f.claim || p.claim}</p>
+      <p class="claim"><b>Was wir sagen dürfen</b>${f.claim ? f.claim + '*' : 'Für Koffein und L-Theanin gibt es keine zugelassene gesundheitsbezogene Angabe. Deshalb sagen wir nur, was drin ist.'}</p>
       ${p.warn ? `<p class="modal-warn">${p.warn}</p>` : ''}
       <div class="plan-pick" role="radiogroup" aria-label="Format und Kaufart">
-        ${plans.map(pl => `<label class="plan-opt"><span class="plan-main"><input type="radio" name="plan" id="plan-${pl.id}" value="${pl.id}" data-view="${pl.view}" ${pl.id === start ? 'checked' : ''}><span><b>${pl.label}</b>${pl.save ? `<em class="save">${pl.save}</em>` : ''}<small>${pl.sub}</small></span></span><strong>${eur(pl.price)}</strong></label>`).join('')}
+        ${plans.map(pl => `<label class="plan-opt"><span class="plan-main"><input type="radio" name="plan" id="plan-${pl.id}" value="${pl.id}" data-view="${VIEW_FOR_PLAN[pl.view] || ''}" ${pl.id === start ? 'checked' : ''}><span><b>${pl.label}</b>${pl.save ? `<em class="save">${pl.save}</em>` : ''}<small>${pl.sub}</small></span></span><span class="plan-price"><strong>${eur(pl.price)}</strong><small>${perKg(p, pl.id)}</small></span></label>`).join('')}
       </div>
+      ${plans.some(x => x.every) ? `<label class="every" for="every">Liefern alle
+        <select id="every"><option value="30">30 Tage</option><option value="45">45 Tage</option><option value="60">60 Tage</option></select>
+        <span>${kids ? 'Ferien-Pause jederzeit im Kundenkonto' : 'Pausieren, tauschen, überspringen jederzeit'}</span></label>` : ''}
       <button class="btn btn-ink btn-block" type="button" data-modal-add="${p.id}">In den Warenkorb</button>
+      <p class="letterbox-note">${f.format === 'can' ? 'Nachfüller kommen als Brief durch den Briefkasten. Du musst nicht zu Hause sein.' : f.format === 'box' ? 'Die Box bleibt bei dir. Der Nachschub mit 30 Tütchen kommt als Brief.' : 'Kommt als Brief durch den Briefkasten.'}</p>
       <details class="mandatory">
         <summary>Pflichtangaben</summary>
         <dl>
           <div><dt>Bezeichnung</dt><dd>${f.legal}</dd></div>
-          <div><dt>Verzehrempfehlung</dt><dd>${p.serving}. ${f.can ? `${f.perDay} Fruchtgummi${f.perDay > 1 ? 's' : ''} entsprechen einer Tagesportion.` : 'Ein Päckchen entspricht einer Tagesportion.'}</dd></div>
-          <div><dt>Füllmenge</dt><dd>${f.can ? `${f.refill[0]} Fruchtgummis = ${Math.round(f.refill[0] * f.unit)} g` : `28 Päckchen à 1 Fruchtgummi = ${Math.round(28 * f.unit)} g`} (Richtwert)</dd></div>
-          ${f.caffeine ? `<div><dt>Koffein</dt><dd>${f.caffeine}</dd></div>` : ''}
-          <div><dt>Hinweise</dt><dd>Die angegebene empfohlene tägliche Verzehrmenge darf nicht überschritten werden. Nahrungsergänzungsmittel sind kein Ersatz für eine abwechslungsreiche und ausgewogene Ernährung und eine gesunde Lebensweise. Außerhalb der Reichweite von kleinen Kindern aufbewahren.</dd></div>
-          <div><dt>Zutaten</dt><dd>Folgen mit der finalen Rezeptur des Herstellers.</dd></div>
+          <div><dt>Verzehrempfehlung</dt><dd>${p.serving}. ${f.format === 'can' ? `${f.perDay} Fruchtgummi${f.perDay > 1 ? 's' : ''} entsprechen einer Tagesportion.` : f.format === 'portion' ? '5 Fruchtgummis entsprechen einer Portion.' : 'Ein Tütchen entspricht einer Tagesportion.'}</dd></div>
+          <div><dt>Füllmenge</dt><dd id="netLine"></dd></div>
+          ${f.caffeine ? `<div><dt>Koffein</dt><dd>${f.caffeine} Nur für Erwachsene.</dd></div>` : ''}
+          ${kids ? '<div><dt>Für wen</dt><dd>Für Kinder von 4–12 Jahren. Bitte vorher mit der Kinderarztpraxis sprechen. Vorrat zu den Eltern, nur das Tütchen geht mit.</dd></div>' : ''}
+          <div><dt>Hinweise</dt><dd>Die angegebene empfohlene tägliche Verzehrsmenge darf nicht überschritten werden. Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene und abwechslungsreiche Ernährung. Eine abwechslungsreiche, ausgewogene Ernährung und eine gesunde Lebensweise sind wichtig. Außerhalb der Reichweite von kleinen Kindern aufbewahren.</dd></div>
+          <div><dt>Zutaten</dt><dd>Folgen mit der finalen Rezeptur des Herstellers. Gefärbt mit Frucht- und Pflanzenkonzentraten.</dd></div>
         </dl>
       </details>
-      <p class="footnote">* NRV = Nährstoffbezugswert laut EU-Verordnung 1169/2011.</p>
+      <p class="footnote">* NRV = Nährstoffbezugswert laut EU-Verordnung 1169/2011. Mengen und Gewichte sind Richtwerte, bis der Hersteller sie bestätigt.</p>
     </div>`;
 
-  const stage = $('#galleryStage', modalInner);
+  const stageEl = $('#galleryStage', modalInner);
   const show = (vid) => {
     const v = views.find(x => x.id === vid) || views[0];
-    stage.classList.toggle('is-wide', !!v.wide);
-    stage.innerHTML = v.html();
+    stageEl.classList.toggle('is-wide', !!v.wide);
+    stageEl.innerHTML = v.html();
     $$('.gthumb', modalInner).forEach(t => t.setAttribute('aria-selected', String(t.dataset.view === v.id)));
   };
-  show((plans.find(x => x.id === start) || plans[0]).view);
+  const net = (plan) => {
+    const g = netGrams(p, plan);
+    const nl = $('#netLine', modalInner);
+    if (f.format === 'can') nl.textContent = `${plan === 'stock' ? '3 × ' : ''}${f.refill[0] * (30 / f.refill[1])} Fruchtgummis = ${g} g · Grundpreis ${perKg(p, plan)}`;
+    else if (f.format === 'portion') nl.textContent = `10 Tütchen à 5 Fruchtgummis = ${g} g · Grundpreis ${perKg(p, plan)}`;
+    else nl.textContent = `${p.count} Tagestütchen à 1 Fruchtgummi = ${g} g · Grundpreis ${perKg(p, plan)}`;
+  };
+  const sel = plans.find(x => x.id === start);
+  show(VIEW_FOR_PLAN[sel.view] || views[0].id);
+  net(start);
   $('.gallery-thumbs', modalInner).addEventListener('click', e => {
     const t = e.target.closest('.gthumb');
     if (t) show(t.dataset.view);
   });
   $('.plan-pick', modalInner).addEventListener('change', e => {
     if (e.target.dataset.view) show(e.target.dataset.view);
+    net(e.target.value);
+    const ev = $('.every', modalInner);
+    if (ev) ev.hidden = !plans.find(x => x.id === e.target.value)?.every;
   });
+  const ev = $('.every', modalInner);
+  if (ev) ev.hidden = !sel.every;
   if (!modal.open) modal.showModal();
 }
 modal.addEventListener('click', e => {
@@ -545,7 +591,8 @@ modal.addEventListener('click', e => {
   const add = e.target.closest('[data-modal-add]');
   if (add) {
     const plan = $('input[name="plan"]:checked', modal)?.value || 'once';
-    addToCart(add.dataset.modalAdd, plan, add);
+    const every = planFor(byId[add.dataset.modalAdd], plan).every ? +($('#every', modal)?.value || 30) : 0;
+    addToCart(add.dataset.modalAdd, plan, add, every ? { every } : {});
     modal.close();
   }
 });
@@ -571,6 +618,7 @@ function addToCart(id, plan = 'once', fromEl, extra = {}) {
   if (!it) return;
   const found = cart.find(l => l.id === id && l.plan === plan && (l.name || '') === (extra.name || ''));
   found ? found.qty++ : cart.push({ id, plan, qty: 1, ...extra });
+  if (found && extra.every) found.every = extra.every;
   saveCart();
   renderCart();
   flyToCart(id, fromEl);
@@ -628,8 +676,8 @@ function renderCart() {
       <div class="line-img">${bear(mb)}</div>
       <div>
         <p class="line-name">${it.name}</p>
-        <p class="line-meta">${planFor(it, l.plan).label}${planFor(it, l.plan).sub ? ' · ' + planFor(it, l.plan).sub : ''}${l.name ? ` · Namensfeld: ${l.name}` : ''}</p>
-        ${l.plan === 'refill' ? '' : `<div class="line-plan" role="group" aria-label="Kaufart">
+        <p class="line-meta">${planFor(it, l.plan).label}${planFor(it, l.plan).sub ? ' · ' + planFor(it, l.plan).sub : ''}${l.plan === 'abo' ? ` · alle ${l.every || 30} Tage` : ''}${l.name ? ` · Beispielname: ${l.name}` : ''}</p>
+        ${(l.plan !== 'abo' && l.plan !== 'once') || !(it.members || plansFor(it).some(x => x.id === 'abo')) ? '' : `<div class="line-plan" role="group" aria-label="Kaufart">
           <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo −20 %</button>
           <button type="button" data-plan="${i}" data-val="once" aria-pressed="${l.plan === 'once'}">Einmal</button>
         </div>`}

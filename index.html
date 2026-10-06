@@ -1,399 +1,157 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>bärly Gummies</title>
-<meta name="description" content="bärly: Supplement-Gummies mit vier Bären. Glow, Flex, Snoozy und Daily. Same Bears. Better Days.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>bärly — Small Gummies. Big Changes.</title>
+  <meta name="description" content="bärly Supplement Gummies: GLOW, FLEX, SNOOZY und DAILY. Premium Wellness trifft Character-IP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<a class="skip" href="#shop">Zum Shop springen</a>
-
-<div class="announce" aria-label="Hinweise">
-  <ul class="announce-list" id="announce">
-    <li class="is-active"><i aria-hidden="true"></i>Im Abo immer versandkostenfrei</li>
-    <li><i aria-hidden="true"></i>Nachfüller kommen per Brief</li>
-    <li><i aria-hidden="true"></i><a href="#founders">Founders Club: 25 % auf die erste Bestellung</a></li>
-  </ul>
-</div>
-
-<header class="nav" id="top">
-  <a class="logo" href="#top" aria-label="bärly Startseite">bärly<sup>™</sup></a>
-  <nav class="nav-links" aria-label="Hauptnavigation">
-    <a href="#shop">Shop</a>
-    <a href="#crew">Die Crew</a>
-    <a href="#haus">Das Haus</a>
-    <a href="#episoden">Episoden</a>
-    <a href="#kids">Kids <span class="soon-pill">bald</span></a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <button class="cart-btn" id="cartOpen" type="button" aria-label="Warenkorb öffnen">
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-    <span class="cart-count" id="cartCount">0</span>
-  </button>
-</header>
-
-<main>
-
-<!-- HERO: ein Bär auf seiner Dose in der Mitte, der nächste fliegt von unten rechts herein -->
-<section class="hero" id="hero" aria-roledescription="Karussell" aria-label="Die bärly Crew">
-  <div class="hero-word" id="heroWord" aria-hidden="true"></div>
-  <div class="hero-grid">
-    <div class="hero-copy" id="heroCopy" aria-live="polite"></div>
-    <div class="hero-stage" id="heroStage">
-      <div class="hero-bubble" id="heroBubble"></div>
-    </div>
-    <div class="hero-label">
-      <p class="hero-label-head"><span>Was drin ist</span><small id="heroServing"></small></p>
-      <ul class="hero-facts" id="heroFacts"></ul>
-    </div>
+  <div class="announce">
+    <span>Launch Crew · GLOW · FLEX · SNOOZY · DAILY</span>
+    <a href="#founders">Founders Club</a>
   </div>
-  <div class="hero-controls">
-    <button class="round-btn" id="heroPrev" type="button" aria-label="Vorheriger Bär">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <div class="hero-thumbs" id="heroThumbs" role="tablist" aria-label="Bär auswählen"></div>
-    <button class="round-btn" id="heroNext" type="button" aria-label="Nächster Bär">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
-</section>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track" id="tickerTrack">
-    <div class="ticker-group">
-      <span>Same Bears</span><i class="t-glow"></i><span>Better Days</span><i class="t-flex"></i><span>Glow</span><i class="t-snoozy"></i><span>Flex</span><i class="t-daily"></i><span>Snoozy</span><i class="t-glow"></i><span>Daily</span><i class="t-flex"></i>
-    </div>
-  </div>
-</div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="bärly Startseite">bärly<sup>™</sup></a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <a href="#shop">Shop</a>
+      <a href="#finder">Bären-Finder</a>
+      <a href="#crew">Die Crew</a>
+      <a href="#abo">Abo</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="#shop">Produkte entdecken</a>
+  </header>
 
-<!-- QUIZ -->
-<section class="section quiz" id="quiz">
-  <div class="wrap quiz-grid">
-    <div class="quiz-intro">
-      <p class="eyebrow">30-Sekunden-Quiz</p>
-      <h2 class="h2">Welcher bärly-Bär bist du?</h2>
-      <p class="lead">Drei Fragen, ein Bär. Danach weißt du, wer bei dir einzieht, und kannst dein Ergebnis teilen.</p>
-      <div class="quiz-crew" id="quizCrew" aria-hidden="true"></div>
-    </div>
-    <div class="quiz-card" id="quizCard" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- SHOP -->
-<section class="section shop" id="shop">
-  <div class="wrap">
-    <div class="shop-head">
-      <div>
-        <p class="eyebrow">Shop · Launch-Crew</p>
-        <h2 class="h2">Vier Bären. Vier Dosen.<br>Ein Abo, das durch den Briefkasten passt.</h2>
-      </div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-    <div class="bundles" id="bundles"></div>
-    <div class="later" id="later"></div>
-  </div>
-</section>
-
-<!-- CREW -->
-<section class="section crew" id="crew">
-  <div class="wrap">
-    <div class="crew-head">
-      <p class="eyebrow">Die bärly Crew</p>
-      <h2 class="h2 h2-xl">Vier Bären. Vier Persönlichkeiten.<br>Ein Zuhause.</h2>
-      <p class="lead">Mehr als Supplements, eine ganze Welt. Ein gemeinsames Ziel: dich in deiner besten Version im Alltag begleiten.</p>
-    </div>
-    <div class="crew-list" id="crewList"></div>
-    <div class="pairs">
-      <h3 class="h3">Die Crew-Dynamik</h3>
-      <div class="pair-list" id="pairList"></div>
-    </div>
-  </div>
-</section>
-
-<!-- DAS HAUS -->
-<section class="section haus" id="haus">
-  <div class="wrap">
-    <div class="haus-head">
-      <p class="eyebrow">Die Welt</p>
-      <h2 class="h2">Willkommen im bärly-Haus.</h2>
-      <p class="lead">Vier Charaktere, ein Zuhause, unzählige Geschichten. Tipp auf ein Zimmer.</p>
-    </div>
-    <div class="haus-grid">
-      <div class="villa" id="villa">
-        <img src="assets/villa.webp" alt="Die bärly-Villa bei Sonnenuntergang mit Pool, Wohnzimmer und den Zimmern der Crew" width="432" height="322">
-      </div>
-      <article class="room" id="roomPanel" aria-live="polite"></article>
-    </div>
-    <ul class="goals" aria-label="Gemeinsame Ziele der Crew">
-      <li>Gesünder und glücklicher leben</li>
-      <li>Unvergessliche Erlebnisse zusammen</li>
-      <li>Die beste Version von uns selbst werden</li>
-      <li>Die bärly-Community aufbauen</li>
-      <li>Abenteuer in neuen Städten und Ländern</li>
-      <li>Und jede Menge Spaß haben</li>
-    </ul>
-  </div>
-</section>
-
-<!-- EPISODEN -->
-<section class="section episodes" id="episoden">
-  <div class="wrap">
-    <div class="ep-head">
-      <div>
-        <p class="eyebrow">Episoden auf Instagram, TikTok und YouTube</p>
-        <h2 class="h2" id="epTitle">Episode 001</h2>
-        <p class="lead" id="epLead"></p>
-      </div>
-      <div class="socials">
-        <a class="social" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-        <a class="social" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
-        <a class="social" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
-      </div>
-    </div>
-    <ol class="strip" id="epStrip"></ol>
-    <div class="gags">
-      <p class="eyebrow">Running Gags</p>
-      <div class="gag-list" id="gagList"></div>
-    </div>
-  </div>
-</section>
-
-<!-- SO KOMMEN DIE BÄREN ZU DIR -->
-<section class="section abo" id="abo">
-  <div class="wrap">
-    <div class="abo-head">
-      <p class="eyebrow">So kommen die Bären zu dir</p>
-      <h2 class="h2">Eine Dose. Danach nur noch Briefe.</h2>
-      <p class="lead">Die bärly-Dose bekommst du einmal, im Abo gratis. Danach kommt alle 30 Tage ein flacher Nachfüller, der durch den Briefkasten passt. Du musst also nicht zu Hause sein.</p>
-    </div>
-    <ol class="steps">
-      <li class="step">
-        <div class="step-art" id="artCan" aria-hidden="true"></div>
-        <span class="step-num">1</span>
-        <h3>Die Dose kommt einmal</h3>
-        <p>Matt, in der Farbe deines Bären. Sie bleibt in deinem Regal. Im Abo kostet sie nichts.</p>
-      </li>
-      <li class="step">
-        <div class="step-art" id="artLetter" aria-hidden="true"></div>
-        <span class="step-num">2</span>
-        <h3>Nachfüller per Brief</h3>
-        <p>Maximal 2 cm flach. Aufreißen, in die Dose füllen, fertig. Der Beutel lässt sich auch wieder verschließen.</p>
-      </li>
-      <li class="step">
-        <div class="step-art step-portal" aria-hidden="true">
-          <p class="portal-label">Nächster Brief</p>
-          <p class="portal-date">in 27 Tagen</p>
-          <div class="portal-btns"><span>Überspringen</span><span>Pausieren</span><span>Tauschen</span></div>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Premium Gummies. Eigene Character-Welt.</p>
+        <h1>Small Gummies.<br><span>Big Changes.</span></h1>
+        <p class="hero-lead">Vier Produkte. Vier Persönlichkeiten. Eine neue Wellness-Routine, die man gerne jeden Tag sieht.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#shop">Produkte entdecken</a>
+          <a class="btn btn-light" href="#finder">Welcher Bär passt zu dir?</a>
         </div>
-        <span class="step-num">3</span>
-        <h3>Du bestimmst den Takt</h3>
-        <p>Alle 30, 45 oder 60 Tage. Ohne Mindestlaufzeit. Wir erinnern dich drei Tage vor dem Versand.</p>
-      </li>
-    </ol>
-  </div>
-</section>
+        <div class="hero-proof">
+          <span>60 Gummies</span><i></i><span>30 Tage</span><i></i><span>DACH Launch</span>
+        </div>
+      </div>
 
-<!-- BEAUTY: Glow's Ecke -->
-<section class="section beauty" id="beauty">
-  <div class="wrap beauty-grid">
-    <div class="beauty-copy">
-      <p class="eyebrow">Glow's Ecke · Beauty von innen</p>
-      <h2 class="h2 h2-xl">Creme wirkt außen.<br>Glow fängt innen an.</h2>
-      <p class="lead">Haut, Haare und Nägel bauen sich aus dem, was du isst. Über Nacht passiert dabei nichts. Das hier ist das Tempo, in dem dein Körper wirklich arbeitet.</p>
-      <div class="cycles">
-        <div class="cycle"><span class="cycle-num">~28</span><span class="cycle-unit">Tage</span><span class="cycle-label">braucht eine Hautzelle von der Basis bis an die Oberfläche</span></div>
-        <div class="cycle"><span class="cycle-num">~1</span><span class="cycle-unit">cm / Monat</span><span class="cycle-label">wächst ein Kopfhaar</span></div>
-        <div class="cycle"><span class="cycle-num">~3</span><span class="cycle-unit">mm / Monat</span><span class="cycle-label">wächst ein Fingernagel</span></div>
+      <div class="hero-visual" aria-label="Die vier bärly Launch-Produkte">
+        <div class="hero-glow"></div>
+        <div class="hero-lineup">
+          <figure class="hero-product p-glow">
+            <img class="jar" src="assets/jar-glow.webp" alt="bärly GLOW Dose">
+            <img class="character" src="assets/plush-glow.webp" alt="" aria-hidden="true">
+          </figure>
+          <figure class="hero-product p-flex">
+            <img class="jar" src="assets/jar-flex.webp" alt="bärly FLEX Dose">
+            <img class="character" src="assets/plush-flex.webp" alt="" aria-hidden="true">
+          </figure>
+          <figure class="hero-product p-daily">
+            <img class="jar" src="assets/jar-daily.webp" alt="bärly DAILY Dose">
+            <img class="character" src="assets/plush-daily.webp" alt="" aria-hidden="true">
+          </figure>
+          <figure class="hero-product p-snoozy">
+            <img class="jar" src="assets/jar-snoozy.webp" alt="bärly SNOOZY Dose">
+            <img class="character" src="assets/plush-snooze.webp" alt="" aria-hidden="true">
+          </figure>
+        </div>
       </div>
-      <div class="timeline" aria-label="Zeitplan für 12 Wochen">
-        <div class="timeline-bar"><span class="timeline-fill" id="timelineFill"></span></div>
-        <ol class="timeline-steps">
-          <li><b>Woche 1</b>Routine finden. Zwei Gummies zum Frühstück.</li>
-          <li><b>Woche 4</b>Eine Hauterneuerung ist durch.</li>
-          <li><b>Woche 8</b>Die ersten neuen Millimeter Nagel sind da.</li>
-          <li><b>Woche 12</b>Rund 3 cm neues Haar. Zeit für ein Vorher-Nachher.</li>
-        </ol>
+    </section>
+
+    <section class="trust">
+      <p>Cleanes Design. Klare Routine. Vier Produkte zum Start.</p>
+      <div class="trust-items">
+        <span>GLOW · Beauty</span>
+        <span>FLEX · Performance</span>
+        <span>SNOOZY · Sleep</span>
+        <span>DAILY · Everyday Wellness</span>
       </div>
-    </div>
-    <div class="beauty-visual">
-      <div class="beauty-duo">
-        <img class="duo duo-1" src="assets/plush-glow.webp" alt="Glow mit Krone und Herz-Sonnenbrille" width="273" height="337">
-        <img class="duo duo-2" src="assets/plush-snooze.webp" alt="Snooze mit Schlafmütze und Kissen" width="286" height="312">
-      </div>
-      <div class="bundle-card">
+    </section>
+
+    <section class="section products" id="shop">
+      <div class="section-head">
         <div>
-          <p class="bundle-name">Beauty Sleep</p>
-          <p class="bundle-desc">Glow + Snoozy, je 30 Tage. Im Abo 35,92 €.</p>
+          <p class="eyebrow">The Original Four</p>
+          <h2>Lern die erste<br>bärly Crew kennen.</h2>
         </div>
-        <div class="bundle-price"><s>51,80 €</s> <strong>44,90 €</strong></div>
-        <button class="btn btn-ink" type="button" data-bundle="beautysleep">In den Warenkorb</button>
+        <p>Keine zwölf Produkte auf einmal. Wir starten mit vier klaren Routinen — und lassen die Familie danach mit der Community wachsen.</p>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
 
-<!-- KIDS: kommt später -->
-<section class="section kids" id="kids">
-  <div class="wrap">
-    <div class="kids-head">
-      <p class="eyebrow eyebrow-kids">bärly kids · kommt später</p>
-      <h2 class="h2 h2-xl kids-title">Vorrat bei dir.<br>Das Tütchen geht mit.</h2>
-      <p class="lead">Drei Bären mit Aufgabe, dosiert für Kinder von 4 bis 12 Jahren. Jeder Tag steckt einzeln versiegelt in einem Tütchen, die Box mit dem Vorrat bleibt bei dir. Noch nicht bestellbar: Trag dich ein, dann sagen wir dir zuerst Bescheid.</p>
-    </div>
-    <div class="kids-stage" id="kidsStage"></div>
-    <div class="kids-bottom">
-      <div class="kids-strip">
-        <div class="kids-strip-art" id="kidsStrip" aria-hidden="true"></div>
-        <label class="name-field" for="kidName">Name fürs Tütchen
-          <input id="kidName" type="text" maxlength="12" placeholder="z. B. Emma" autocomplete="off">
-        </label>
-        <p class="kids-strip-note">Auf jedem Tütchen gibt es ein beschreibbares Feld „Für: ____“, damit Geschwister nicht doppelt nehmen.</p>
+    <section class="section finder" id="finder">
+      <div class="finder-copy">
+        <p class="eyebrow">Bären-Finder</p>
+        <h2>Was soll dein Glas<br>für dich tun?</h2>
+        <p>Drei Klicks, eine klare Empfehlung. Kein komplizierter Supplement-Dschungel.</p>
       </div>
-      <div class="kids-side">
-        <ul class="parent-notes">
-          <li><b>1 Tütchen = 1 Tag. Nicht mehr.</b> Jede Tagesportion einzeln versiegelt.</li>
-          <li><b>Vorrat zu den Eltern.</b> Die Box mit 30 Tütchen bleibt bei dir, nur das Tütchen geht mit.</li>
-          <li><b>Ohne Azofarbstoffe.</b> Die Farbe kommt aus Frucht- und Gemüsekonzentraten.</li>
-        </ul>
-        <form class="waitlist" id="kidsWaitlist" novalidate>
-          <p class="bundle-name">Warteliste bärly kids</p>
-          <p class="bundle-desc">Schul-Duo Kiko + Juno, geplant 34,90 € für 30 Tage</p>
-          <div class="signup-row">
-            <label class="sr-only" for="kidsEmail">E-Mail-Adresse</label>
-            <input id="kidsEmail" type="email" placeholder="du@beispiel.de" autocomplete="email" required>
-            <button class="btn btn-ink" type="submit">Eintragen</button>
-          </div>
-          <p class="signup-msg" id="kidsMsg" role="status"></p>
-        </form>
+      <div class="finder-card">
+        <div class="finder-options">
+          <button data-find="glow"><span>01</span>Beauty & Self-Care</button>
+          <button data-find="flex"><span>02</span>Performance & Gym</button>
+          <button data-find="snoozy"><span>03</span>Abend & Sleep</button>
+          <button data-find="daily"><span>04</span>Daily Wellness</button>
+        </div>
+        <div class="finder-result" id="finderResult">
+          <p>Wähle dein Ziel.</p>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FOUNDERS CLUB -->
-<section class="section founders" id="founders">
-  <div class="wrap founders-grid">
-    <div>
-      <p class="eyebrow">Founders Club</p>
-      <h2 class="h2 h2-xl">Die ersten 1.000 Dosen gehen an euch.</h2>
-      <p class="lead">Trag dich ein und du erfährst als Erstes, wann der Shop öffnet. Dazu 25 % auf die erste Bestellung und eine Stimme dabei, wer als Nächstes ins Haus einzieht.</p>
-      <img class="founders-crew" src="assets/crew-hug.webp" alt="Die Crew kuschelt auf dem Sofa" width="190" height="212" loading="lazy">
-    </div>
-    <form class="signup" id="signup" novalidate>
-      <label for="signupEmail">E-Mail-Adresse</label>
-      <div class="signup-row">
-        <input id="signupEmail" name="email" type="email" placeholder="du@beispiel.de" autocomplete="email" required>
-        <button class="btn btn-ink" type="submit">Eintragen</button>
+    <section class="section crew" id="crew">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Meet the bärly Crew</p>
+          <h2>Die Characters sind die Marke.</h2>
+        </div>
+        <p>Die Produkte bleiben premium und erwachsen. Die Personality lebt daneben — auf Social, im Unboxing und in der gesamten bärly Welt.</p>
       </div>
-      <fieldset class="vote">
-        <legend>Wer soll als Nächstes einziehen?</legend>
-        <label><input type="radio" name="vote" id="voteOmega" value="omega"> Ein Bär mit Omega-3 aus Algen</label>
-        <label><input type="radio" name="vote" id="voteSkin" value="skin"> Ein Bär mit Kollagen und Vitamin C</label>
-        <label><input type="radio" name="vote" id="voteImmun" value="immun"> Ein Bär mit Vitamin D3 und K2</label>
-      </fieldset>
-      <p class="signup-msg" id="signupMsg" role="status"></p>
-    </form>
-  </div>
-</section>
+      <div class="crew-grid" id="crewGrid"></div>
+    </section>
 
-<!-- FAQ -->
-<section class="section faq" id="faq">
-  <div class="wrap faq-grid">
-    <div>
+    <section class="section simple" id="abo">
+      <p class="eyebrow">Abo</p>
+      <h2>Deine Routine,<br>ohne jedes Mal neu zu denken.</h2>
+      <p>Flexibel, kündbar und auf deine Routine abgestimmt. Die finalen Abo-Details werden vor Launch ergänzt.</p>
+      <a class="btn btn-dark" href="#founders">Early Access sichern</a>
+    </section>
+
+    <section class="section founders" id="founders">
+      <div>
+        <p class="eyebrow">Founders Club</p>
+        <h2>Sei beim ersten Drop dabei.</h2>
+      </div>
+      <form id="foundersForm">
+        <input type="email" placeholder="deine@email.de" aria-label="E-Mail-Adresse" required>
+        <button class="btn btn-dark" type="submit">Eintragen</button>
+        <small id="foundersMsg"></small>
+      </form>
+    </section>
+
+    <section class="section faq" id="faq">
       <p class="eyebrow">FAQ</p>
-      <h2 class="h2">Fragen, die wir oft hören.</h2>
-    </div>
-    <div class="faq-list">
-      <details>
-        <summary>Sind das Süßigkeiten oder Nahrungsergänzungsmittel?</summary>
-        <p>Nahrungsergänzungsmittel. Sie schmecken nach Frucht, enthalten aber genau dosierte Vitamine, Mineralstoffe oder andere Stoffe. Deshalb gilt: die empfohlene Tagesmenge auf der Dose nicht überschreiten.</p>
-      </details>
-      <details>
-        <summary>Kann ich mehrere Bären gleichzeitig nehmen?</summary>
-        <p>Ja. Wir haben die Rezepturen so abgestimmt, dass die ganze Crew zusammen nicht über den Höchstmengen-Empfehlungen des BfR für Zink, Vitamin D und Vitamin B6 liegt. Wenn du zusätzlich andere Nahrungsergänzungsmittel nimmst, rechne diese mit.</p>
-      </details>
-      <details>
-        <summary>Für wen ist Snoozy nicht geeignet?</summary>
-        <p>Snoozy enthält Melatonin und ist nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende, und nicht vor dem Autofahren. Wenn du Medikamente nimmst, sprich vorher mit deiner Ärztin oder deinem Arzt.</p>
-      </details>
-      <details>
-        <summary>Wie lange reicht eine Dose?</summary>
-        <p>30 Tage bei der empfohlenen Portion von zwei Gummies. Danach füllst du sie mit dem Nachfüller auf, der per Brief kommt.</p>
-      </details>
-      <details>
-        <summary>Warum kommt der Nachfüller als Brief?</summary>
-        <p>Weil er flach genug ist. Ein Brief landet im Briefkasten, du musst nicht zu Hause sein und nicht zur Packstation. Und wir sparen das Paketporto, deshalb ist der Versand im Abo immer gratis.</p>
-      </details>
-      <details>
-        <summary>Woraus ist die Verpackung?</summary>
-        <p>Die Dose bleibt bei dir. Nachfüller bestehen aus einer einzigen Kunststoffart (Mono-PE), Umschläge aus Papier. Ob wir „recycelbar“ draufschreiben dürfen, entscheidet ein Gutachten vor dem Start. Bis dahin versprechen wir nichts.</p>
-      </details>
-      <details>
-        <summary>Wann kommt bärly kids?</summary>
-        <p>Nach dem Launch der Crew. Trag dich in die Warteliste ein, dann erfährst du es zuerst.</p>
-      </details>
-    </div>
-  </div>
-</section>
+      <h2>Das Wichtigste zuerst.</h2>
+      <details><summary>Wann startet bärly?</summary><p>Die Launch-Crew befindet sich aktuell in Vorbereitung. Founders erfahren den Start zuerst.</p></details>
+      <details><summary>Welche Produkte starten zuerst?</summary><p>GLOW, FLEX, SNOOZY und DAILY.</p></details>
+      <details><summary>Sind die Rezepturen schon final?</summary><p>Nein. Zutaten, Mengen, Pflichtangaben und zulässige Claims werden vor Verkauf final geprüft.</p></details>
+    </section>
+  </main>
 
-</main>
+  <footer>
+    <a class="brand" href="#top">bärly<sup>™</sup></a>
+    <p>Same Bears. Better Days.</p>
+    <span>Launch prototype · Inhalte und Rezepturen noch nicht final.</span>
+  </footer>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-cols">
-        <div>
-          <p class="footer-h">Shop</p>
-          <a href="#shop">Die Crew</a><a href="#beauty">Beauty Sleep</a><a href="#abo">So funktioniert das Abo</a><a href="#kids">bärly kids (bald)</a>
-        </div>
-        <div>
-          <p class="footer-h">Welt</p>
-          <a href="#haus">Das Haus</a><a href="#episoden">Episoden</a><a href="#quiz">Welcher Bär bist du?</a>
-        </div>
-        <div>
-          <p class="footer-h">Intern</p>
-          <a href="verpackung.html">Verpackungssystem</a><a href="content.html">Content-Plan</a><a href="#top">Impressum</a><a href="#top">Datenschutz</a>
-        </div>
-      </div>
-      <p class="legal">Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene und abwechslungsreiche Ernährung und eine gesunde Lebensweise. Die angegebene empfohlene tägliche Verzehrsmenge darf nicht überschritten werden. Außerhalb der Reichweite von kleinen Kindern aufbewahren. Prototyp: Produkte, Preise und Rezepturen sind Platzhalter und noch nicht final.</p>
-    </div>
-    <p class="footer-mark" aria-hidden="true">Same Bears. <span>Better Days.</span></p>
-  </div>
-</footer>
-
-<!-- Warenkorb -->
-<div class="overlay" id="overlay" hidden></div>
-<aside class="drawer" id="drawer" aria-label="Warenkorb" aria-hidden="true">
-  <div class="drawer-head">
-    <p class="drawer-title">Dein Bärenregal</p>
-    <button class="round-btn" id="cartClose" type="button" aria-label="Warenkorb schließen">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-  <div class="ship" id="ship"></div>
-  <div class="drawer-items" id="drawerItems"></div>
-  <div class="drawer-foot">
-    <div class="drawer-sum"><span>Zwischensumme</span><strong id="cartTotal">0,00 €</strong></div>
-    <button class="btn btn-ink btn-block" type="button" id="checkout">Zur Kasse</button>
-    <p class="drawer-note" id="checkoutNote">Prototyp: Die Kasse wird später mit Shopify verbunden.</p>
-  </div>
-</aside>
-
-<!-- Produktdetail -->
-<dialog class="modal" id="modal" aria-label="Produktdetails">
-  <div class="modal-inner" id="modalInner"></div>
-</dialog>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script src="brand.js"></script>
-<script src="packs.js"></script>
-<script src="app.js"></script>
+  <script src="brand.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

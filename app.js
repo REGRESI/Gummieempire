@@ -5,7 +5,7 @@
 (() => {
 'use strict';
 
-const { BRAND, eur, aboPrice, PRODUCTS, byId, BUNDLES, bear, packs } = window.Baerly;
+const { BRAND, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, plansFor, planFor, bear, packs } = window.Baerly;
 const SHIPPING_FREE = 35;
 
 const HERO = ['mags', 'sunny', 'glow', 'flex', 'brainy', 'zap', 'kiko'].map(id => byId[id]);
@@ -259,25 +259,44 @@ const grid = $('#productGrid');
 const filtersEl = $('#filters');
 let activeFilter = store('baerly-filter') || 'all';
 
+/* Produktfoto je Format: Dose für Erwachsene, Päckchen für Kids und Zap */
+function shotHTML(p) {
+  const f = PACK_INFO[p.id] || {};
+  if (f.can) {
+    // Dosen im echten Größenverhältnis: S, M und L teilen sich eine Skala
+    const vh = (size) => 130 + packs.CAN[size].H;
+    const pct = Math.round(vh(f.can) / vh('L') * 100);
+    return `<span class="shot shot-can">
+      <span class="shot-pack" style="height:${pct}%">${packs.can(p)}</span>
+      <span class="shot-bear">${bear(p, { label: false })}</span>
+    </span>`;
+  }
+  const zap = p.id === 'zap';
+  return `<span class="shot shot-packet">
+    <span class="shot-pack">${packs.packet([p], { day: zap ? '1' : 'MO', name: p.line === 'kids' ? 'Emma' : '' })}</span>
+    ${zap ? '' : `<span class="shot-bear">${bear(p, { label: false })}</span>`}
+  </span>`;
+}
+
 function cardHTML(p) {
+  const f = PACK_INFO[p.id] || {};
   const badges = [
     p.line === 'kids' ? '<span class="badge badge-dark">Kids</span>' : '',
     p.sour ? '<span class="badge">Sauer</span>' : '',
     p.adultOnly ? '<span class="badge">18+</span>' : '',
     !p.vegan ? '<span class="badge">nicht vegan</span>' : ''
   ].join('');
+  const fmt = f.can ? `Bärendose · ${f.refill[0]} Stück · 30 Tage` : `Wochenstreifen · 28 Päckchen`;
   return `<article class="card" data-cat="${p.cat}" style="--tint:${p.tint};--c:${p.color}">
     <button class="card-visual" type="button" data-detail="${p.id}" aria-label="Details zu ${p.name}">
-      <span class="shot">
-        <span class="shot-pack">${packs.can(p)}</span>
-        <span class="shot-bear">${bear(p, { label: false })}</span>
-      </span>
+      ${shotHTML(p)}
       <span class="badges">${badges}</span>
     </button>
     <div class="card-body">
       <div class="card-top"><h3 class="card-name">${p.name}</h3><span class="card-price">${eur(p.price)}</span></div>
       <p class="card-sub">${p.title}</p>
-      <p class="card-flavor">${p.flavor} · ${p.count} Stück</p>
+      <p class="card-flavor">${fmt}</p>
+      <p class="card-abo">im Abo ${eur(aboPrice(p.price))}${f.can ? ', Dose gratis' : ''}</p>
     </div>
     <div class="card-actions">
       <button class="btn btn-ink add-btn" type="button" data-add="${p.id}">In den Warenkorb</button>
@@ -398,6 +417,23 @@ function initKids() {
       <span class="kid-name">${p.name}</span>
       <span class="kid-power">${p.power}</span>
     </button>`).join('');
+
+  // Wochenstreifen mit Namensfeld, das sich live mitschreibt
+  const input = $('#kidName');
+  const art = $('#kidsStrip');
+  const draw = () => {
+    const name = input.value.trim() || 'Emma';
+    art.innerHTML = packs.strip(['kiko', 'juno', 'splash'], { name, count: 3 });
+  };
+  input.value = store('baerly-kidname') || '';
+  draw();
+  input.addEventListener('input', () => { store('baerly-kidname', input.value.trim()); draw(); });
+}
+
+/* So kommen die Bären zu dir: Dose und Brief mit Nachfüller */
+function initAbo() {
+  $('#artCan').innerHTML = packs.can(byId.glow);
+  $('#artLetter').innerHTML = packs.letter(`<g transform="scale(.42)">${packs.refill(byId.mags).replace('<svg ', '<svg width="224" height="332" ')}</g>`, { label: 'Dein Nachschub ist da.' });
 }
 
 /* ------------------------------------------------------------------ */
@@ -406,38 +442,100 @@ function initKids() {
 const modal = $('#modal');
 const modalInner = $('#modalInner');
 
-function openDetail(id) {
+/* Galerie-Ansichten je Format */
+function viewsFor(p) {
+  const f = PACK_INFO[p.id] || {};
+  const zap = p.id === 'zap';
+  const v = [];
+  if (f.can) {
+    v.push({ id: 'can', label: 'Bärendose', html: () => packs.can(p) });
+    v.push({ id: 'refill', label: 'Nachfüller', html: () => packs.refill(p) });
+  } else {
+    v.push({ id: 'packet', label: 'Päckchen', html: () => packs.packet([p], { day: zap ? '1' : 'MO', name: p.line === 'kids' ? 'Emma' : '' }) });
+    v.push({ id: 'strip', label: 'Wochenstreifen', html: () => packs.strip([p], { name: p.line === 'kids' ? 'Emma' : '', count: 3 }), wide: true });
+  }
+  v.push({ id: 'dose', label: 'Dosis', html: () => doseCard(p) });
+  if (!zap) v.push({ id: 'bear', label: p.name, html: () => bear(p) });
+  return v;
+}
+
+/* Dosis-Bild: Pfoten-Dosis und Reichweite, wie auf der Packung */
+function doseCard(p) {
+  const f = PACK_INFO[p.id] || {};
+  const days = f.can ? 30 : 28;
+  return `<svg class="dose-card" viewBox="0 0 240 240" role="img" aria-label="${f.perDay} pro Tag, ${days} Tage">
+    <rect x="10" y="10" width="220" height="220" rx="28" fill="#fff"/>
+    ${packs.paw(120, 104, 2.6, f.perDay || 1)}
+    <text x="120" y="182" text-anchor="middle" font-family="'Bricolage Grotesque', Arial, sans-serif" font-weight="800" font-size="22" fill="#1d1236">${f.can ? `${f.perDay} Gummi${f.perDay > 1 ? 's' : ''} am Tag` : '1 Päckchen am Tag'}</text>
+    <text x="120" y="204" text-anchor="middle" font-family="Figtree, Arial, sans-serif" font-weight="600" font-size="12" fill="#1d1236" fill-opacity=".7">${days} Tage · ${f.dose} pro Tag</text>
+  </svg>`;
+}
+
+function openDetail(id, planId) {
   const p = byId[id];
   if (!p) return;
+  const f = PACK_INFO[p.id] || {};
+  const plans = plansFor(p);
+  const views = viewsFor(p);
+  const start = planId || 'abo';
   modalInner.style.setProperty('--tint', p.tint);
   modalInner.innerHTML = `
     <div class="modal-visual">
       <button class="round-btn" type="button" data-close aria-label="Schließen">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
       </button>
-      <span class="bear-wrap">${bear(p)}</span>
+      <div class="gallery-stage" id="galleryStage"></div>
+      <div class="gallery-thumbs" role="tablist" aria-label="Ansicht wählen">
+        ${views.map((v, i) => `<button class="gthumb" type="button" role="tab" data-view="${v.id}" aria-selected="${i === 0}">${v.label}</button>`).join('')}
+      </div>
     </div>
     <div class="modal-body">
       <div>
-        <p class="eyebrow">${p.line === 'kids' ? 'bärly kids · 4–12 Jahre' : p.title}</p>
+        <p class="eyebrow">${p.line === 'kids' ? 'bärly kids · 4–12 Jahre · für Eltern' : p.title}</p>
         <h2>${p.name}</h2>
       </div>
-      <p class="modal-sub">${p.flavor} · ${p.count} Gummies · ${p.serving}${p.vegan ? ' · vegan' : ' · nicht vegan'}</p>
+      <p class="modal-sub">${p.flavor} · ${p.serving}${p.vegan ? ' · vegan' : ' · nicht vegan'}</p>
       <p class="modal-story">${p.story}</p>
       <table class="nutri">
         <caption>Pro Tagesportion</caption>
         <thead><tr><th scope="col">Nährstoff</th><th scope="col">Menge</th><th scope="col">% NRV*</th></tr></thead>
         <tbody>${p.nutrients.map(([n, a, r]) => `<tr><th scope="row">${n}</th><td>${a}</td><td>${r}</td></tr>`).join('')}</tbody>
       </table>
-      <p class="claim"><b>Was wir sagen dürfen</b>${p.claim}</p>
+      <p class="claim"><b>Was wir sagen dürfen</b>${f.claim || p.claim}</p>
       ${p.warn ? `<p class="modal-warn">${p.warn}</p>` : ''}
-      <div class="plan-pick" role="radiogroup" aria-label="Kaufart">
-        <label class="plan-opt"><span><input type="radio" name="plan" id="planAbo" value="abo" checked>Abo<small>alle 30 Tage</small><em class="save">−20 %</em></span><strong>${eur(aboPrice(p.price))}</strong></label>
-        <label class="plan-opt"><span><input type="radio" name="plan" id="planOnce" value="once">Einmalkauf</span><strong>${eur(p.price)}</strong></label>
+      <div class="plan-pick" role="radiogroup" aria-label="Format und Kaufart">
+        ${plans.map(pl => `<label class="plan-opt"><span class="plan-main"><input type="radio" name="plan" id="plan-${pl.id}" value="${pl.id}" data-view="${pl.view}" ${pl.id === start ? 'checked' : ''}><span><b>${pl.label}</b>${pl.save ? `<em class="save">${pl.save}</em>` : ''}<small>${pl.sub}</small></span></span><strong>${eur(pl.price)}</strong></label>`).join('')}
       </div>
       <button class="btn btn-ink btn-block" type="button" data-modal-add="${p.id}">In den Warenkorb</button>
-      <p class="footnote">* NRV = Nährstoffbezugswert für Erwachsene laut EU-Verordnung 1169/2011.</p>
+      <details class="mandatory">
+        <summary>Pflichtangaben</summary>
+        <dl>
+          <div><dt>Bezeichnung</dt><dd>${f.legal}</dd></div>
+          <div><dt>Verzehrempfehlung</dt><dd>${p.serving}. ${f.can ? `${f.perDay} Fruchtgummi${f.perDay > 1 ? 's' : ''} entsprechen einer Tagesportion.` : 'Ein Päckchen entspricht einer Tagesportion.'}</dd></div>
+          <div><dt>Füllmenge</dt><dd>${f.can ? `${f.refill[0]} Fruchtgummis = ${Math.round(f.refill[0] * f.unit)} g` : `28 Päckchen à 1 Fruchtgummi = ${Math.round(28 * f.unit)} g`} (Richtwert)</dd></div>
+          ${f.caffeine ? `<div><dt>Koffein</dt><dd>${f.caffeine}</dd></div>` : ''}
+          <div><dt>Hinweise</dt><dd>Die angegebene empfohlene tägliche Verzehrmenge darf nicht überschritten werden. Nahrungsergänzungsmittel sind kein Ersatz für eine abwechslungsreiche und ausgewogene Ernährung und eine gesunde Lebensweise. Außerhalb der Reichweite von kleinen Kindern aufbewahren.</dd></div>
+          <div><dt>Zutaten</dt><dd>Folgen mit der finalen Rezeptur des Herstellers.</dd></div>
+        </dl>
+      </details>
+      <p class="footnote">* NRV = Nährstoffbezugswert laut EU-Verordnung 1169/2011.</p>
     </div>`;
+
+  const stage = $('#galleryStage', modalInner);
+  const show = (vid) => {
+    const v = views.find(x => x.id === vid) || views[0];
+    stage.classList.toggle('is-wide', !!v.wide);
+    stage.innerHTML = v.html();
+    $$('.gthumb', modalInner).forEach(t => t.setAttribute('aria-selected', String(t.dataset.view === v.id)));
+  };
+  show((plans.find(x => x.id === start) || plans[0]).view);
+  $('.gallery-thumbs', modalInner).addEventListener('click', e => {
+    const t = e.target.closest('.gthumb');
+    if (t) show(t.dataset.view);
+  });
+  $('.plan-pick', modalInner).addEventListener('change', e => {
+    if (e.target.dataset.view) show(e.target.dataset.view);
+  });
   if (!modal.open) modal.showModal();
 }
 modal.addEventListener('click', e => {
@@ -462,16 +560,15 @@ function itemInfo(id) {
   return BUNDLES[id];
 }
 function linePrice(l) {
-  const it = itemInfo(l.id);
-  return (l.plan === 'abo' ? aboPrice(it.price) : it.price) * l.qty;
+  return planFor(itemInfo(l.id), l.plan).price * l.qty;
 }
 function saveCart() { store('baerly-cart', cart); }
 
-function addToCart(id, plan = 'once', fromEl) {
+function addToCart(id, plan = 'once', fromEl, extra = {}) {
   const it = itemInfo(id);
   if (!it) return;
-  const found = cart.find(l => l.id === id && l.plan === plan);
-  found ? found.qty++ : cart.push({ id, plan, qty: 1 });
+  const found = cart.find(l => l.id === id && l.plan === plan && (l.name || '') === (extra.name || ''));
+  found ? found.qty++ : cart.push({ id, plan, qty: 1, ...extra });
   saveCart();
   renderCart();
   flyToCart(id, fromEl);
@@ -529,8 +626,8 @@ function renderCart() {
       <div class="line-img">${bear(mb)}</div>
       <div>
         <p class="line-name">${it.name}</p>
-        <p class="line-meta">${it.title}</p>
-        ${BUNDLES[l.id] ? '' : `<div class="line-plan" role="group" aria-label="Kaufart">
+        <p class="line-meta">${planFor(it, l.plan).label}${planFor(it, l.plan).sub ? ' · ' + planFor(it, l.plan).sub : ''}${l.name ? ` · Namensfeld: ${l.name}` : ''}</p>
+        ${l.plan === 'refill' ? '' : `<div class="line-plan" role="group" aria-label="Kaufart">
           <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo −20 %</button>
           <button type="button" data-plan="${i}" data-val="once" aria-pressed="${l.plan === 'once'}">Einmal</button>
         </div>`}
@@ -617,7 +714,11 @@ document.addEventListener('click', e => {
     return;
   }
   const bundle = e.target.closest('[data-bundle]');
-  if (bundle) { addToCart(bundle.dataset.bundle, 'once', bundle); return; }
+  if (bundle) {
+    const name = bundle.dataset.bundle === 'kids' ? ($('#kidName')?.value.trim() || '') : '';
+    addToCart(bundle.dataset.bundle, 'once', bundle, name ? { name } : {});
+    return;
+  }
   const det = e.target.closest('[data-detail]');
   if (det) openDetail(det.dataset.detail);
 });
@@ -677,6 +778,7 @@ renderShop();
 initFinder();
 initBeauty();
 initKids();
+initAbo();
 renderCart();
 document.title = `${BRAND} Gummies`;
 })();

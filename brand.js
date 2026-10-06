@@ -100,15 +100,15 @@ const PRODUCTS = [
     id: 'zap', name: 'Zap', title: 'Koffein + L-Theanin Gummies', cat: 'focus', line: 'adult',
     flavor: 'Zitrone · sauer', sour: true,
     color: '#ffc21a', light: '#ffe48a', dark: '#b88200', tint: '#fff2c2',
-    word: 'WACH', mood: 'wide', acc: 'bolt',
+    word: 'ESPRESSO', mood: 'wide', acc: 'bolt',
     headline: 'Ein Espresso. Zum Kauen.',
     hello: 'ZAP! Oh, hallo.',
-    story: '80 mg Koffein, so viel wie ein Espresso, plus L-Theanin, damit du nicht zappelig wirst. Zitrone, richtig sauer. Für Erwachsene, nicht nach 16 Uhr und ganz sicher nicht für deine Kids.',
-    facts: [['80 mg', 'Koffein'], ['100 mg', 'L-Theanin'], ['1 Gummy', 'bei Bedarf'], ['18+', 'nur für Erwachsene']],
+    story: '80 mg Koffein, so viel wie ein Espresso, dazu 100 mg L-Theanin. Zitrone, richtig sauer. Jedes Gummy einzeln versiegelt im Päckchen, nur für Erwachsene und nicht nach 16 Uhr.',
+    facts: [['80 mg', 'Koffein'], ['100 mg', 'L-Theanin'], ['1 Päckchen', 'bei Bedarf'], ['18+', 'nur für Erwachsene']],
     nutrients: [['Koffein', '80 mg', '–'], ['L-Theanin', '100 mg', '–']],
     claim: 'Für Koffein gibt es in der EU keine zugelassene gesundheitsbezogene Angabe. Deshalb sagen wir dir nur, was drin ist.',
     warn: 'Erhöhter Koffeingehalt. Für Kinder und schwangere oder stillende Frauen nicht empfohlen.',
-    serving: '1 Gummy, max. 2 täglich', count: 30, price: 19.90, vegan: true, doses: {}, adultOnly: true
+    serving: '1 Päckchen, max. 2 täglich', count: 28, price: 18.90, vegan: true, doses: {}, adultOnly: true
   },
   {
     id: 'shield', name: 'Shield', title: 'Immun Gummies: Vitamin C, Zink, D3', cat: 'balance', line: 'adult',
@@ -148,7 +148,7 @@ const PRODUCTS = [
     facts: [['3,5 mg', 'Eisen'], ['50 µg', 'Jod'], ['100 mg', 'DHA aus Algen'], ['4–12', 'Jahre']],
     nutrients: [['Eisen', '3,5 mg', '25 %'], ['Jod', '50 µg', '33 %'], ['DHA', '100 mg', '–']],
     claim: 'Eisen trägt zur normalen kognitiven Entwicklung von Kindern bei. Jod trägt zu einer normalen kognitiven Funktion bei.',
-    serving: '1 Gummy täglich', count: 30, price: 19.90, vegan: true, doses: {}
+    serving: '1 Päckchen täglich', count: 28, price: 18.90, vegan: true, doses: {}
   },
   {
     id: 'splash', name: 'Splash', title: 'Kids Elektrolyt Gummies', cat: 'kids', line: 'kids',
@@ -162,7 +162,7 @@ const PRODUCTS = [
     facts: [['150 mg', 'Kalium'], ['40 mg', 'Magnesium'], ['50 mg', 'Natrium'], ['4–12', 'Jahre']],
     nutrients: [['Kalium', '150 mg', '8 %'], ['Magnesium', '40 mg', '11 %'], ['Natrium', '50 mg', '–']],
     claim: 'Kalium und Magnesium tragen zu einer normalen Muskelfunktion bei.',
-    serving: '1 Gummy täglich', count: 30, price: 19.90, vegan: true, doses: {}
+    serving: '1 Päckchen täglich', count: 28, price: 18.90, vegan: true, doses: {}
   },
   {
     id: 'juno', name: 'Juno', title: 'Kids Vitamin D Gummies', cat: 'kids', line: 'kids',
@@ -176,32 +176,95 @@ const PRODUCTS = [
     facts: [['10 µg', 'Vitamin D3'], ['1 Gummy', 'pro Tag'], ['4–12', 'Jahre'], ['Vegan', 'D3 aus Flechten']],
     nutrients: [['Vitamin D3', '10 µg', '200 %']],
     claim: 'Vitamin D wird für ein gesundes Wachstum und eine gesunde Entwicklung der Knochen bei Kindern benötigt.',
-    serving: '1 Gummy täglich', count: 30, price: 19.90, vegan: true, doses: {}
+    serving: '1 Päckchen täglich', count: 28, price: 18.90, vegan: true, doses: {}
   }
 ];
 const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
 
-/* Packungstexte: kurzer Nährstoffname, Dosis-Badge, Bezeichnung nach NemV.
-   Nettogewicht = Stückzahl × Stückgewicht (Richtwert, mit Hersteller bestätigen). */
+/* Packungsdaten je Sorte
+   nutrient  kurzer Nährstoffname für die Vorderseite
+   dose      Leitdosis pro Tagesportion (Badge)
+   legal     Bezeichnung nach NemV §4 (Pflicht, im selben Sichtfeld wie die Füllmenge)
+   claim     zugelassene Gesundheitsangabe (VO 432/2012 bzw. Art. 14), trägt Fantasiename und Nutzenwort
+   perDay    Gummis pro Tagesportion (Pfoten-Dosis)
+   unit      Stückgewicht in g (Richtwert, im Füllversuch bestätigen)
+   can       Dosenhöhe S / M / L, null = keine Dose (Kids, Zap: nur Wochenstreifen)
+   refill    Gummis pro Nachfüller und Tage, die er reicht */
 const PACK_INFO = {
-  mags:   { nutrient: 'Magnesium',              dose: '150 mg',  legal: 'Nahrungsergänzungsmittel mit Magnesium' },
-  sunny:  { nutrient: 'Vitamin D3 + K2',        dose: '20 µg D3', legal: 'Nahrungsergänzungsmittel mit Vitamin D3 und K2' },
-  glow:   { nutrient: 'Biotin · Zink · Selen',  dose: '450 µg',  legal: 'Nahrungsergänzungsmittel mit Biotin, Zink und Selen' },
-  dew:    { nutrient: 'Kollagen + Vitamin C',   dose: '1 g',     legal: 'Nahrungsergänzungsmittel mit Kollagen und Vitamin C' },
-  brainy: { nutrient: 'Omega-3 aus Algen',      dose: '250 mg',  legal: 'Nahrungsergänzungsmittel mit DHA aus Algenöl' },
-  flex:   { nutrient: 'Kreatin',                dose: '3 g',     legal: 'Nahrungsergänzungsmittel mit Kreatin' },
-  zap:    { nutrient: 'Koffein + L-Theanin',    dose: '80 mg',   legal: 'Nahrungsergänzungsmittel mit Koffein' },
-  shield: { nutrient: 'Vitamin C · Zink · D3',  dose: '80 mg C', legal: 'Nahrungsergänzungsmittel mit Vitamin C, Zink und Vitamin D' },
-  buff:   { nutrient: 'Protein',                dose: '10 g',    legal: 'Nahrungsergänzungsmittel mit Protein' },
-  kiko:   { nutrient: 'Eisen · Jod · DHA',      dose: '3,5 mg',  legal: 'Nahrungsergänzungsmittel mit Eisen, Jod und DHA' },
-  splash: { nutrient: 'Elektrolyte',            dose: '150 mg',  legal: 'Nahrungsergänzungsmittel mit Kalium und Magnesium' },
-  juno:   { nutrient: 'Vitamin D3',             dose: '10 µg',   legal: 'Nahrungsergänzungsmittel mit Vitamin D3' }
+  mags:   { nutrient: 'Magnesium', dose: '150 mg', perDay: 2, unit: 3, can: 'M', refill: [60, 30],
+            legal: 'Nahrungsergänzungsmittel mit Magnesium',
+            claim: 'Magnesium trägt zu einer normalen psychischen Funktion bei.' },
+  sunny:  { nutrient: 'Vitamin D3 + K2', dose: '20 µg D3', perDay: 1, unit: 3, can: 'S', refill: [30, 30],
+            legal: 'Nahrungsergänzungsmittel mit Vitamin D3 und Vitamin K2',
+            claim: 'Vitamin D trägt zu einer normalen Funktion des Immunsystems bei.' },
+  glow:   { nutrient: 'Biotin · Zink · Selen', dose: '450 µg Biotin', perDay: 2, unit: 3, can: 'M', refill: [60, 30],
+            legal: 'Nahrungsergänzungsmittel mit Biotin, Zink und Selen',
+            claim: 'Biotin, Zink und Selen tragen zur Erhaltung normaler Haare und Nägel bei.' },
+  dew:    { nutrient: 'Vitamin C + Kollagen', dose: '80 mg Vit. C', perDay: 2, unit: 3.5, can: 'M', refill: [60, 30],
+            legal: 'Nahrungsergänzungsmittel mit Vitamin C und Kollagenpeptiden',
+            claim: 'Vitamin C trägt zu einer normalen Kollagenbildung für eine normale Funktion der Haut bei.' },
+  brainy: { nutrient: 'Omega-3 DHA aus Algen', dose: '250 mg DHA', perDay: 3, unit: 3, can: 'L', refill: [90, 30],
+            legal: 'Nahrungsergänzungsmittel mit Omega-3-Fettsäure DHA aus Algenöl',
+            claim: 'DHA trägt zur Erhaltung einer normalen Gehirnfunktion bei.' },
+  flex:   { nutrient: 'Kreatin', dose: '3 g', perDay: 4, unit: 4, can: 'L', refill: [60, 15],
+            legal: 'Nahrungsergänzungsmittel mit Kreatin',
+            claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung.' },
+  zap:    { nutrient: 'Koffein + L-Theanin', dose: '80 mg Koffein', perDay: 1, unit: 3, can: null, refill: null,
+            legal: 'Nahrungsergänzungsmittel mit Koffein und L-Theanin',
+            caffeine: 'Erhöhter Koffeingehalt. Für Kinder und schwangere oder stillende Frauen nicht empfohlen (80 mg Koffein pro Päckchen).' },
+  shield: { nutrient: 'Vitamin C · Zink · D3', dose: '80 mg Vit. C', perDay: 2, unit: 3, can: 'M', refill: [60, 30],
+            legal: 'Nahrungsergänzungsmittel mit Vitamin C, Zink und Vitamin D3',
+            claim: 'Vitamin C, Zink und Vitamin D tragen zu einer normalen Funktion des Immunsystems bei.' },
+  buff:   { nutrient: 'Protein', dose: '10 g', perDay: 5, unit: 5.6, can: 'L', refill: [50, 10],
+            legal: 'Nahrungsergänzungsmittel mit Protein',
+            claim: 'Eiweiß trägt zur Erhaltung von Muskelmasse bei.' },
+  kiko:   { nutrient: 'Eisen · Jod · DHA', dose: '3,5 mg Eisen', perDay: 1, unit: 2.5, can: null, refill: null,
+            legal: 'Nahrungsergänzungsmittel mit Eisen, Jod und DHA für Kinder',
+            claim: 'Eisen trägt zur normalen kognitiven Entwicklung von Kindern bei.' },
+  splash: { nutrient: 'Kalium + Magnesium', dose: '150 mg Kalium', perDay: 1, unit: 2.5, can: null, refill: null,
+            legal: 'Nahrungsergänzungsmittel mit Kalium und Magnesium für Kinder',
+            claim: 'Kalium trägt zu einer normalen Muskelfunktion bei.' },
+  juno:   { nutrient: 'Vitamin D3', dose: '10 µg D3', perDay: 1, unit: 2.5, can: null, refill: null,
+            legal: 'Nahrungsergänzungsmittel mit Vitamin D3 für Kinder',
+            claim: 'Vitamin D wird für ein gesundes Wachstum und eine gesunde Entwicklung der Knochen bei Kindern benötigt.' }
 };
 
 
+/* Formate und Preise je Sorte.
+   Erwachsene: Abo (Dose gratis, danach Nachfüller per Brief), Einmalkauf (Dose + 30 Tage), Nachfüller.
+   Kids und Zap: Wochenstreifen (4 × 7 Päckchen = 28 Tage), im Abo alle 28 Tage. */
+const REFILL_OFF = 2;   // Nachfüller ohne Dose: 2 € günstiger
+const round2 = n => Math.round(n * 100) / 100;
+function plansFor(p) {
+  const f = PACK_INFO[p.id] || {};
+  if (f.can) {
+    const [n, days] = f.refill;
+    const per = 30 / days;
+    const refillSub = per === 1 ? `${n} Fruchtgummis, 30 Tage` : `${per} Beutel à ${n} Fruchtgummis, zusammen 30 Tage`;
+    return [
+      { id: 'abo', label: 'Abo', sub: 'Bärendose gratis, danach Nachfüller alle 30 Tage per Brief', price: aboPrice(p.price), save: '−20 %', view: 'can' },
+      { id: 'once', label: 'Einmalkauf', sub: 'Bärendose mit 30 Tagen', price: p.price, view: 'can' },
+      { id: 'refill', label: 'Nur Nachfüller', sub: `Für deine Dose · ${refillSub}`, price: round2(p.price - REFILL_OFF), view: 'refill' }
+    ];
+  }
+  return [
+    { id: 'abo', label: 'Abo', sub: 'Wochenstreifen alle 28 Tage per Brief', price: aboPrice(p.price), save: '−20 %', view: 'strip' },
+    { id: 'once', label: 'Einmalkauf', sub: '4 Wochenstreifen, 28 Päckchen', price: p.price, view: 'strip' }
+  ];
+}
+function planFor(item, planId) {
+  if (item.members) {
+    return planId === 'abo'
+      ? { id: 'abo', label: 'Abo', sub: 'alle 30 Tage', price: aboPrice(item.price) }
+      : { id: 'once', label: 'Einmalkauf', sub: '', price: item.price };
+  }
+  const all = plansFor(item);
+  return all.find(x => x.id === planId) || all[1];
+}
+
 const BUNDLES = {
-  beauty: { id: 'beauty', name: 'Beauty Stack', title: 'Glow + Dew', members: ['glow', 'dew'], price: 44.90, tint: '#ffdcee' },
-  kids:   { id: 'kids', name: 'Schulstart-Box', title: 'Kiko, Splash und Juno', members: ['kiko', 'splash', 'juno'], price: 49.90, tint: '#fff2c2' }
+  beauty: { id: 'beauty', name: 'Beauty Stack', title: 'Glow + Dew, zwei Nachfüller in einem Brief', members: ['glow', 'dew'], price: 44.90, tint: '#ffdcee' },
+  kids:   { id: 'kids', name: 'Schulstart-Trio', title: 'Kiko, Splash und Juno, je 28 Päckchen', members: ['kiko', 'splash', 'juno'], price: 49.90, tint: '#fff2c2' }
 };
 
 /* SVG-Definitionen (Zuckerkristalle, Weichzeichner) einmal pro Seite einhängen */
@@ -330,5 +393,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { BRAND, INK, ABO_FACTOR, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, bear };
+window.Baerly = { BRAND, INK, ABO_FACTOR, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, plansFor, planFor, bear };
 })();

@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "mode": "strict",
+  "policy": {
+    "useOnlyCanonicalProductionAssets": true,
+    "referencesNeverRenderedOnPublicWebsite": true,
+    "legacyGeneratedAssetsForbidden": true,
+    "missingCanonicalAssetBehavior": "show neutral placeholder or leave slot empty; never synthesize/rebuild",
+    "packagingMayBeTransformedButNotRedesigned": true,
+    "charactersMayBeTransformedButNotRedesigned": true
+  },
+  "forbiddenLegacyGlobs": [
+    "assets/products/*-front.webp",
+    "assets/products/*-wrap.webp",
+    "assets/characters/*.webp",
+    "assets/characters/*-bust.webp"
+  ],
+  "canonical": {
+    "packagingReferences": {
+      "glow": "assets/canonical/references/packaging/glow-packaging-board.png",
+      "flex": "assets/canonical/references/packaging/flex-packaging-board.png",
+      "snoozy": "assets/canonical/references/packaging/snoozy-packaging-board.png",
+      "daily": "assets/canonical/references/packaging/daily-packaging-board.png"
+    },
+    "characterReferences": {
+      "glow": "assets/canonical/references/characters/glow-character-bible.png",
+      "flex": "assets/canonical/references/characters/flex-character-bible.png",
+      "snoozy": "assets/canonical/references/characters/snoozy-character-bible.png",
+      "daily": "assets/canonical/references/characters/daily-character-bible.png"
+    },
+    "production": {
+      "jars": {
+        "glow": {
+          "front": "assets/canonical/products/glow-front.png"
+        },
+        "flex": {
+          "front": "assets/canonical/products/flex-front.png"
+        },
+        "snoozy": {
+          "front": "assets/canonical/products/snoozy-front.png"
+        },
+        "daily": {
+          "front": "assets/canonical/products/daily-front.png"
+        }
+      },
+      "characters": {
+        "glow": "assets/canonical/characters/glow.png",
+        "flex": "assets/canonical/characters/flex.png",
+        "snoozy": "assets/canonical/characters/snoozy.png",
+        "daily": "assets/canonical/characters/daily.png"
+      }
+    }
+  },
+  "futureViews": {
+    "jars": [
+      "3q-front",
+      "side",
+      "back",
+      "open"
+    ],
+    "characterPoses": [
+      "hero-alt",
+      "pdp-alt"
+    ]
+  }
+}

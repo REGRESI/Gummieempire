@@ -6,12 +6,12 @@ This folder is the ONLY allowed visual source for final bärly product and chara
 
 - Production code may use only files listed in `manifest.json > canonical.production`.
 - Reference boards under `references/` are design guides only and must never be displayed, cropped, or sampled into public website imagery.
-- Existing programmatically generated assets elsewhere in `assets/products/` and `assets/characters/` are LEGACY PLACEHOLDERS and are forbidden for the final UI.
+- The approved production files from the asset package are `assets/products/<id>-front.webp` and `assets/characters/<id>.webp` (see `manifest.json`). They replaced the earlier generated images with the same names. `assets/products/*-wrap.webp` and `assets/campaign/crew-hero.webp` must not be used.
 - If a canonical asset is missing, do not recreate it from CSS, SVG, canvas, packs.js, mascots.js, AI, or crops. Keep the component ready and report the missing file.
 - Allowed transformations of canonical production assets: position, scale, crop/mask within layout, opacity, parallax, CSS filters limited to neutral lighting/shadow, transform/rotation, transitions.
 - Forbidden: changing label text, jar colors, logo, metallic pattern, character anatomy, fur color, signature items, facial design or proportions.
 
-## Upload names
+## Upload names (references; production files see manifest.json)
 
 Packaging reference boards:
 - references/packaging/glow-packaging-board.png

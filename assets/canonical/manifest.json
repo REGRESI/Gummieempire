@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "mode": "strict",
   "policy": {
     "useOnlyCanonicalProductionAssets": true,
@@ -10,10 +10,8 @@
     "charactersMayBeTransformedButNotRedesigned": true
   },
   "forbiddenLegacyGlobs": [
-    "assets/products/*-front.webp",
     "assets/products/*-wrap.webp",
-    "assets/characters/*.webp",
-    "assets/characters/*-bust.webp"
+    "assets/campaign/crew-hero.webp"
   ],
   "canonical": {
     "packagingReferences": {
@@ -31,23 +29,29 @@
     "production": {
       "jars": {
         "glow": {
-          "front": "assets/canonical/products/glow-front.png"
+          "front": "assets/products/glow-front.webp"
         },
         "flex": {
-          "front": "assets/canonical/products/flex-front.png"
+          "front": "assets/products/flex-front.webp"
         },
         "snoozy": {
-          "front": "assets/canonical/products/snoozy-front.png"
+          "front": "assets/products/snoozy-front.webp"
         },
         "daily": {
-          "front": "assets/canonical/products/daily-front.png"
+          "front": "assets/products/daily-front.webp"
         }
       },
       "characters": {
-        "glow": "assets/canonical/characters/glow.png",
-        "flex": "assets/canonical/characters/flex.png",
-        "snoozy": "assets/canonical/characters/snoozy.png",
-        "daily": "assets/canonical/characters/daily.png"
+        "glow": "assets/characters/glow.webp",
+        "flex": "assets/characters/flex.webp",
+        "snoozy": "assets/characters/snoozy.webp",
+        "daily": "assets/characters/daily.webp"
+      },
+      "characterDuplicates": {
+        "glow": "assets/characters/glow-bust.webp",
+        "flex": "assets/characters/flex-bust.webp",
+        "snoozy": "assets/characters/snoozy-bust.webp",
+        "daily": "assets/characters/daily-bust.webp"
       }
     }
   },
@@ -62,5 +66,6 @@
       "hero-alt",
       "pdp-alt"
     ]
-  }
+  },
+  "note": "Since the approved asset package (baerly-website-assets.zip) the production files live at assets/products/<id>-front.webp and assets/characters/<id>.webp. They replace the earlier generated images that used the same names. assets/canonical/ keeps the reference boards."
 }

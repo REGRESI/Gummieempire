@@ -14,9 +14,10 @@ const { PRODUCTS, PDP, eur, planFor } = sandbox.window.Baerly;
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const head = index.slice(index.indexOf('<aside class="announce"'), index.indexOf('<main id="top">'));
 const foot = index.slice(index.indexOf('</main>') + '</main>'.length, index.indexOf('<script src="brand.js">'));
+// data-page: shop.js baut daraus in der htmlpreview-Vorschau die richtige Adresse
 const relink = (html) => html
-  .replace(/href="#top"/g, 'href="index.html"')
-  .replace(/href="#([^"]+)"/g, 'href="index.html#$1"')
+  .replace(/href="#top"/g, 'href="index.html" data-page="index.html"')
+  .replace(/href="#([^"]+)"/g, 'href="index.html#$1" data-page="index.html#$1"')
   .replace('aria-label="bärly, zum Seitenanfang"', 'aria-label="bärly, zur Startseite"')
   .replace('aria-label="bärly, zum Seitenanfang"', 'aria-label="bärly, zur Startseite"');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -55,7 +56,6 @@ ${relink(head)}<main id="top" class="pdp" data-product="${p.id}">
   </noscript>
 </main>
 ${relink(foot)}<script src="brand.js"></script>
-<script src="packs.js"></script>
 <script src="shop.js"></script>
 <script src="pdp.js"></script>
 </body>

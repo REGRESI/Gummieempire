@@ -1,12 +1,12 @@
 /* bärly – Startseite
-   Hero mit einer Bühne pro Bär (der nächste fliegt von rechts unten herein), Produktkarten,
-   Bären-Finder, „Ein Tag mit der Crew“, Crew und Abo. Braucht brand.js und shop.js. */
+   Hero mit einer Bühne pro Sorte (Packshot + Charakter aus den freigegebenen Dateien),
+   Produktkarten, Bären-Finder, „Ein Tag mit der Crew“, Crew und Abo. Braucht brand.js und shop.js. */
 
 (() => {
 'use strict';
 
-const { eur, byId, BUNDLES, ASSETS, PDP, pdpUrl, planFor, bear } = window.Baerly;
-const { CREW, PRICE_NOTE, $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, warnFor, adultFor, slotHTML, store, ready } = window.Shop;
+const { eur, byId, BUNDLES, ASSETS, LIFESTYLE_READY, PDP, pdpUrl, planFor } = window.Baerly;
+const { CREW, PRICE_NOTE, $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, warnFor, adultFor, store, shot, bearImg, avatar, duo, go: link, ready } = window.Shop;
 
 const SET_TEXT = {
   crew: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage.',
@@ -15,53 +15,34 @@ const SET_TEXT = {
 const two = (n) => String(n).padStart(2, '0');
 
 /* ------------------------------------------------------------------ */
-/* Hero: eine Bühne pro Bär                                            */
+/* Hero: eine Bühne pro Sorte                                          */
 /* ------------------------------------------------------------------ */
-const HERO_MS = 7000;
-/* Zwei schwebende Gummies, so viele wie die Tagesportion (siehe assets/ASSETS.md: nie als Snack in Mengen zeigen).
-   x, y in %, Größe in px, Tiefe für die Parallaxe, Drehung */
-const GUMMIES = [[47, 10, 70, .85, -16], [91, 68, 58, .6, 20]];
-
 function heroCopy(p, i) {
   const abo = planFor(p, 'abo');
   const h = PDP[p.id].hero;
   return `<p class="hero-kicker hl"><span class="hero-num">${two(i + 1)}</span><span class="hero-of">/ ${two(CREW.length)}</span><span>${NAME(p)} · ${p.title}</span></p>
     <h2 class="hero-title hl"><span class="sr-only">${NAME(p)}: </span>${h.title}</h2>
     <p class="hero-sub hl">${h.sub}</p>
-    <p class="hero-claim hl">${p.cardClaim}${p.warn ? ` <b>${p.warn}</b>` : ''}</p>
     <div class="hero-ctas hl">
-      <a class="btn btn-hero" href="${pdpUrl(p.id)}">${NAME(p)} entdecken</a>
+      <a class="btn btn-hero" ${link(pdpUrl(p.id))}>${NAME(p)} entdecken</a>
       <button class="btn btn-hero-ghost" type="button" data-add="${p.id}" data-plan="abo">Im Abo · ${eur(abo.price)}</button>
     </div>
-    <p class="hero-price hl">Im Abo ${eur(abo.price)} je 30 Tage (${perKg(p, 'abo')}), einmalig ${eur(p.price)} (${perKg(p, 'once')}). Inkl. MwSt.</p>`;
+    <p class="hero-price hl">Im Abo ${eur(abo.price)} je 30 Tage (${perKg(p, 'abo')}), einmalig ${eur(p.price)} (${perKg(p, 'once')}). Inkl. MwSt.</p>
+    <p class="hero-claim hl">${p.cardClaim}${p.warn ? ` <b>${p.warn}</b>` : ''}</p>`;
 }
 
-function heroSlide(p) {
-  const a = ASSETS(p.id);
+function heroSlide(p, first) {
   return `<div class="hero-slide" data-id="${p.id}">
-    <div class="hero-halo"></div>
-    <button class="hero-buddy" type="button" aria-label="${NAME(p)} etwas sagen lassen">
-      <img class="hero-mascot" src="${a.character}" alt="" width="940" height="1040" decoding="async" draggable="false">
-    </button>
-    <img class="hero-jar" src="${a.front}" alt="" width="720" height="1473" decoding="async" draggable="false">
+    <div class="hero-shot">${shot(p.id, `Dose ${NAME(p)} ${p.title}`, false).replace('<img ', first ? '<img fetchpriority="high" ' : '<img ')}</div>
+    <button class="hero-buddy" type="button" aria-label="${NAME(p)} etwas sagen lassen">${bearImg(p.id, '', false, 'hero-bear')}</button>
     <p class="hero-bubble" aria-live="polite">${PDP[p.id].lines[0]}</p>
   </div>`;
-}
-
-function heroWord(p) {
-  return [...NAME(p)].map((ch, i) => `<span style="--i:${i}">${ch}</span>`).join('');
-}
-
-function heroGummies(p) {
-  return GUMMIES.map(([x, y, s, z, r], i) => `<span class="gummy" style="--x:${x}%;--y:${y}%;--s:${s}px;--z:${z};--r:${r}deg;--d:${5 + (i % 3) * 1.6}s;--delay:${-i * .9}s">${bear(p, { face: false, shadow: false, label: false })}</span>`).join('');
 }
 
 function initHero() {
   const hero = $('#hero');
   const stage = $('#heroStage');
   const copy = $('#heroCopy');
-  const word = $('#heroWord');
-  const float = $('#heroFloat');
   const tabs = $('#heroTabs');
   const toggle = $('#heroToggle');
   const panel = $('#heroPanel');
@@ -71,7 +52,7 @@ function initHero() {
   const lineIdx = {};
 
   tabs.innerHTML = CREW.map((p, i) => `<button class="hero-tab" type="button" role="tab" id="heroTab-${p.id}" aria-controls="heroPanel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" style="${vars(p.id)}">
-      <img src="${ASSETS(p.id).bust}" alt="" width="600" height="510" decoding="async">
+      ${avatar(p.id, false)}
       <span class="hero-tab-text"><b>${NAME(p)}</b><small>${p.goal}</small></span>
       <span class="hero-tab-bar" aria-hidden="true"><i></i></span>
     </button>`).join('');
@@ -101,12 +82,9 @@ function initHero() {
     bar.classList.add('run');
   };
 
-  function render(p, i, firstPaint) {
+  function render(p, i) {
     setTheme(p);
     copy.innerHTML = heroCopy(p, i);
-    word.innerHTML = heroWord(p);
-    float.innerHTML = heroGummies(p);
-    if (firstPaint) stage.innerHTML = heroSlide(p);
     $$('.hero-tab', tabs).forEach((t, k) => {
       t.setAttribute('aria-selected', String(k === i));
       t.tabIndex = k === i ? 0 : -1;
@@ -131,34 +109,37 @@ function initHero() {
     index = to;
     copy.setAttribute('aria-live', manual ? 'polite' : 'off');
     const out = $('.hero-slide', stage);
-    stage.insertAdjacentHTML('beforeend', heroSlide(p));
+    stage.insertAdjacentHTML('beforeend', heroSlide(p, false));
     const inc = stage.lastElementChild;
-    render(p, to, false);
+    render(p, to);
     restartBar();
     if (reduced) { out?.remove(); return; }
-    // Der alte Bär fliegt nach links oben raus, der neue kommt von rechts unten (rückwärts umgekehrt)
-    const exitTo = dir > 0 ? 'translate(-70%, -52%) rotate(-36deg) scale(.45)' : 'translate(78%, 68%) rotate(36deg) scale(.45)';
-    const leave = out?.animate([{ transform: 'none', opacity: 1 }, { transform: exitTo, opacity: 0 }],
-      { duration: 620, easing: 'cubic-bezier(.55,0,.8,.3)', fill: 'forwards' });
+    // Ruhiger Wechsel: die neue Sorte gleitet von rechts unten herein, der Bär kommt einen Moment später
+    const s = dir > 0 ? 1 : -1;
+    const ease = 'cubic-bezier(.2,.7,.2,1)';
+    const leave = out?.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translate(${-4 * s}%, ${-3 * s}%)` }],
+      { duration: 450, easing: 'ease-in', fill: 'forwards' });
     leave?.finished.then(() => out.remove(), () => {});
-    const enterFrom = dir > 0 ? 'translate(112%, 104%) rotate(52deg) scale(.4)' : 'translate(-108%, -92%) rotate(-52deg) scale(.4)';
-    const enter = inc.animate([
-      { transform: enterFrom, opacity: 0 },
-      { opacity: 1, offset: .2 },
-      { transform: 'translate(0,0) rotate(-7deg) scale(1.06)', offset: .66 },
-      { transform: 'translate(0,0) rotate(3deg) scale(.98)', offset: .84 },
-      { transform: 'none', opacity: 1 }
-    ], { duration: 1150, delay: 160, easing: 'cubic-bezier(.22,.9,.3,1)', fill: 'backwards' });
-    enter.finished.catch(() => {});
-    running = [leave, enter].filter(Boolean);
+    const anims = [
+      inc.animate([{ opacity: 0, transform: `translate(${7 * s}%, ${6 * s}%)` }, { opacity: 1, transform: 'none' }],
+        { duration: 900, delay: 120, easing: ease, fill: 'backwards' }),
+      $('.hero-buddy', inc).animate([
+        { transform: `translateY(6%) rotate(${4 * s}deg)`, opacity: 0 },
+        { transform: `translateY(-1.5%) rotate(${-1 * s}deg)`, opacity: 1, offset: .7 },
+        { transform: 'none', opacity: 1 }
+      ], { duration: 1000, delay: 320, easing: ease, fill: 'backwards' })
+    ];
+    anims.forEach(a => a.finished.catch(() => {}));
+    running = [leave, ...anims].filter(Boolean);
   }
 
-  render(CREW[0], 0, true);
+  stage.innerHTML = heroSlide(CREW[0], true);
+  render(CREW[0], 0);
   toggle.hidden = reduced;           // ohne Bewegung gibt es nichts zu starten
   syncPause();
   restartBar();
 
-  /* Fortschrittsbalken treibt den Wechsel: läuft er durch, kommt der nächste Bär */
+  /* Fortschrittsbalken treibt den Wechsel: läuft er durch, kommt die nächste Sorte */
   tabs.addEventListener('animationend', e => { if (e.target.matches('.hero-tab-bar i.run')) go(index + 1, 1); });
   tabs.addEventListener('click', e => {
     const t = e.target.closest('.hero-tab');
@@ -187,7 +168,7 @@ function initHero() {
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1, true);
   });
 
-  /* Antippen: der Bär quetscht sich und sagt etwas Neues */
+  /* Antippen: der Bär nickt und sagt etwas Neues */
   stage.addEventListener('click', e => {
     const b = e.target.closest('.hero-buddy');
     if (!b) return;
@@ -196,9 +177,9 @@ function initHero() {
     lineIdx[id] = ((lineIdx[id] || 0) + 1) % lines.length;
     const bubble = $('.hero-bubble', b.parentElement);
     bubble.textContent = lines[lineIdx[id]];
-    b.classList.remove('squish'); bubble.classList.remove('pop');
+    b.classList.remove('nod'); bubble.classList.remove('pop');
     void b.offsetWidth;
-    b.classList.add('squish'); bubble.classList.add('pop');
+    b.classList.add('nod'); bubble.classList.add('pop');
   });
 
   /* Pausen: Maus über dem Hero, Fokus darin, außer Sicht, Tab im Hintergrund, Warenkorb offen */
@@ -214,7 +195,7 @@ function initHero() {
     new IntersectionObserver(([en]) => hold('offscreen', !en.isIntersecting), { threshold: .25 }).observe(hero);
   }
 
-  /* Parallaxe mit der Maus: Gummies, Wort und Bühne bewegen sich leicht gegeneinander */
+  /* Leichte Parallaxe mit der Maus: Bär und Packshot bewegen sich minimal gegeneinander */
   if (!reduced && matchMedia('(pointer: fine)').matches) {
     let raf = 0, mx = 0, my = 0;
     hero.addEventListener('pointermove', e => {
@@ -235,31 +216,30 @@ function initHero() {
 /* ------------------------------------------------------------------ */
 function productCard(p) {
   const abo = planFor(p, 'abo');
-  const a = ASSETS(p.id);
   return `<article class="product" style="${vars(p.id)}" data-reveal>
-    <a class="product-visual" href="${pdpUrl(p.id)}" aria-label="${NAME(p)} ${p.title} ansehen${p.adultOnly ? ', nur für Erwachsene' : ''}">
+    <a class="product-visual" ${link(pdpUrl(p.id))} aria-label="${NAME(p)} ${p.title} ansehen${p.adultOnly ? ', nur für Erwachsene' : ''}">
       ${p.adultOnly ? '<span class="product-badge" aria-hidden="true">18+</span>' : ''}
-      <img class="product-peek" src="${a.bust}" alt="" loading="lazy" decoding="async">
-      <img class="product-jar" src="${a.front}" alt="" loading="lazy" decoding="async">
+      ${shot(p.id)}
+      ${bearImg(p.id, '', true, 'product-peek')}
     </a>
     <div class="product-body">
-      <p class="product-name">${NAME(p)}</p>
-      <h3 class="product-title"><a href="${pdpUrl(p.id)}">${p.title}</a></h3>
-      <p class="product-short">${p.short}</p>
+      <div class="product-head">${avatar(p.id)}<div><p class="product-name">${NAME(p)}</p><h3 class="product-title"><a ${link(pdpUrl(p.id))}>${p.title}</a></h3></div></div>
+      <p class="product-short">${p.goal} · ${p.short}</p>
+      <p class="product-flavor">${p.flavor} · ${count(p)} Fruchtgummis · 30 Tage</p>
+      <p class="product-price"><strong>${eur(p.price)}</strong><span>im Abo ${eur(abo.price)}</span></p>
+      <p class="product-unit">${perKg(p, 'once')}, im Abo ${perKg(p, 'abo')} · inkl. MwSt.</p>
       <p class="product-claim">${p.cardClaim}${p.warn ? ` <b>${p.warn}</b>` : ''}</p>
-      <p class="product-price"><strong>${eur(p.price)}</strong><span>oder ${eur(abo.price)} im Abo</span></p>
-      <p class="product-unit">${count(p)} Fruchtgummis · 30 Tage · ${perKg(p, 'once')}, im Abo ${perKg(p, 'abo')}</p>
     </div>
     <div class="product-actions">
-      <button class="btn btn-ink" type="button" data-add="${p.id}">In den Warenkorb</button>
-      <a class="btn btn-ghost" href="${pdpUrl(p.id)}" aria-label="Details zu ${NAME(p)}">Details</a>
+      <button class="btn btn-ink" type="button" data-add="${p.id}" data-plan="abo">Im Abo · ${eur(abo.price)}</button>
+      <a class="btn btn-ghost" ${link(pdpUrl(p.id))} aria-label="Details zu ${NAME(p)}">Details</a>
     </div>
   </article>`;
 }
 function setCard(b) {
   const warn = warnFor(b.id);
   return `<article class="set" data-reveal>
-    <div class="set-visual">${adultFor(b.id) ? '<span class="product-badge" aria-hidden="true">18+</span>' : ''}${b.members.map(id => `<img src="${ASSETS(id).front}" alt="" loading="lazy" decoding="async">`).join('')}</div>
+    <div class="set-visual">${adultFor(b.id) ? '<span class="product-badge" aria-hidden="true">18+</span>' : ''}${b.members.map(id => shot(id)).join('')}</div>
     <div>
       <h3>${b.name}</h3>
       <p>${SET_TEXT[b.id] || b.title}</p>
@@ -291,10 +271,7 @@ function renderFinder(id) {
   const b = BUNDLES[setId];
   const facts = p.facts.filter(([, label]) => !/pro Tag|vor dem Schlafen/.test(label)).slice(0, 3);
   $('#finderResult').innerHTML = `<div class="finder-card" style="${vars(id)}">
-    <div class="finder-visual">
-      <img class="finder-mascot" src="${ASSETS(id).character}" alt="" decoding="async">
-      <img class="finder-jar" src="${ASSETS(id).front}" alt="${NAME(p)} ${p.title}, Dose" decoding="async">
-    </div>
+    <div class="finder-visual">${duo(id, `${NAME(p)} ${p.title}, Dose`, false)}</div>
     <div class="finder-copy">
       <p class="product-name">DEIN BÄR: ${NAME(p)}</p>
       <h3>${p.title}</h3>
@@ -303,8 +280,8 @@ function renderFinder(id) {
       <p class="claim-note">${p.claim}${p.warn ? ` ${p.warn}` : ''}</p>
       <div class="finder-buy">
         <div class="price"><strong>${eur(abo.price)}</strong><span>im Abo (${perKg(p, 'abo')}), einmalig ${eur(p.price)} (${perKg(p, 'once')}) · inkl. MwSt.</span></div>
-        <button class="btn btn-ink" type="button" data-add="${id}" data-plan="abo">Im Abo in den Warenkorb</button>
-        <a class="btn btn-ghost" href="${pdpUrl(id)}">Zur Produktseite</a>
+        <a class="btn btn-ink" ${link(pdpUrl(id))}>Zu ${NAME(p)}</a>
+        <button class="btn btn-ghost" type="button" data-add="${id}" data-plan="abo">Im Abo in den Warenkorb</button>
       </div>
       <p class="finder-set">${setText} für ${eur(b.price)} statt ${eur(memberSum(b))}.${warnFor(setId) && !p.warn ? ` Enthält SNOOZY: ${warnFor(setId)}` : ''} <button class="text-btn" type="button" data-bundle="${setId}">Set hinzufügen</button></p>
     </div>
@@ -328,10 +305,10 @@ function initFinder() {
 /* ------------------------------------------------------------------ */
 /* Himmel je Moment: Verlauf oben/unten, Sonnenstand (0–180°, über 180 = Mond) */
 const SKY = {
-  daily:  { sky: ['#ffe2bf', '#fff4e4'], sun: 26, label: 'Morgens' },
-  glow:   { sky: ['#ffd9e4', '#fff3f6'], sun: 44, label: 'Morgens' },
-  flex:   { sky: ['#ffc98a', '#ffe9cf'], sun: 150, label: 'Abends' },
-  snoozy: { sky: ['#272046', '#3f3270'], sun: 220, label: 'Nachts' }
+  daily:  { sky: ['#ffe2bf', '#fff4e4'], sun: 26 },
+  glow:   { sky: ['#ffd9e4', '#fff3f6'], sun: 44 },
+  flex:   { sky: ['#ffd7a8', '#ffeeda'], sun: 150 },
+  snoozy: { sky: ['#272046', '#3f3270'], sun: 220 }
 };
 function initDay() {
   const order = ['daily', 'glow', 'flex', 'snoozy'].map(id => byId[id]);
@@ -357,17 +334,15 @@ function initDay() {
     range.setAttribute('aria-valuetext', `${r.time} Uhr, ${NAME(p)}: ${p.scene.title}`);
     $$('.day-tick', box).forEach((t, k) => t.setAttribute('aria-pressed', String(k === i)));
     scene.innerHTML = `<div class="day-shot" style="${vars(p.id)}">
-      ${slotHTML(ASSETS(p.id).lifestyle, `${NAME(p)}: ${p.scene.title}`, `<div class="day-fallback">
-        <img class="day-mascot" src="${ASSETS(p.id).character}" alt="" decoding="async">
-        <img class="day-jar" src="${ASSETS(p.id).front}" alt="" decoding="async">
-      </div>`, 'day-slot')}
+      ${LIFESTYLE_READY.includes(p.id)
+        ? `<img class="day-photo" src="${ASSETS(p.id).lifestyle}" alt="${esc(`${NAME(p)}: ${p.scene.title}`)}" decoding="async">`
+        : duo(p.id, '', false, 'duo-day')}
     </div>`;
-    window.Shop.hydrateSlots(scene);
     text.innerHTML = `<p class="day-time">${r.time}<span>Uhr</span></p>
       <p class="day-name">${NAME(p)} · ${r.moment}</p>
       <h3 class="day-title">${p.scene.title}</h3>
       <p class="day-text">${p.scene.text}${p.warn ? ` <span class="adult-note">Nur für Erwachsene.</span>` : ''}</p>
-      <a class="day-link" href="${pdpUrl(p.id)}">${NAME(p)} ansehen</a>`;
+      <a class="day-link" ${link(pdpUrl(p.id))}>${NAME(p)} ansehen</a>`;
   };
   range.addEventListener('input', () => show(+range.value));
   $('#dayTicks').addEventListener('click', e => {
@@ -382,13 +357,13 @@ function initDay() {
 /* ------------------------------------------------------------------ */
 function renderCrew() {
   $('#crewGrid').innerHTML = CREW.map(p => `<article class="member" style="${vars(p.id)}" data-reveal>
-    <a class="member-visual" href="${pdpUrl(p.id)}" aria-label="${NAME(p)}: ${esc(p.look)}. Zur Produktseite">
-      <img src="${ASSETS(p.id).character}" alt="" loading="lazy" decoding="async" width="940" height="1040">
+    <a class="member-visual" ${link(pdpUrl(p.id))} aria-label="${NAME(p)}: ${esc(p.look)}. Zur Produktseite">
+      ${bearImg(p.id)}
     </a>
     <p class="member-role">${PDP[p.id].traits[0][1]}</p>
     <h3>${NAME(p)}</h3>
     <p class="member-persona">${p.persona}</p>
-    <a class="member-product" href="${pdpUrl(p.id)}">${p.title}</a>${p.warn ? '<span class="adult-note">Nur für Erwachsene</span>' : ''}
+    <a class="member-product" ${link(pdpUrl(p.id))}>${p.title}</a>${p.warn ? '<span class="adult-note">Nur für Erwachsene</span>' : ''}
   </article>`).join('');
 }
 function initAbo() {

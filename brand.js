@@ -291,7 +291,6 @@ const PDP = {
     ] },
     faq: [
       ['Warum Gummies statt Pulver?', 'Weil 3 g Kreatin in zwei Gummies in jede Tasche passen. Kein Abmessen, kein Shaker, kein Pulver im Rucksack.'],
-      ['Warum ist die FLEX-Dose größer?', 'Für 3 g Kreatin pro Tag sind die Gummies größer, etwa 4,5 g pro Stück. Deshalb kommt FLEX in der großen Dose mit 150 mm Höhe.'],
       ['Muss ich FLEX auch an trainingsfreien Tagen nehmen?', 'Ja. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein, also jeden Tag zwei Gummies.'],
       ['Ist FLEX für Jugendliche?', 'Nein. FLEX ist für Erwachsene, die intensiv trainieren.']
     ]
@@ -464,11 +463,14 @@ const BUNDLES = {
 
 /* Bild-Slots der Website. Alle Bilder werden eigens für die Website produziert
    (siehe assets/ASSETS.md); fehlt eine Datei, zeigt die Seite einen sauberen Platzhalter. */
+/* Freigegebene Bilder: Packshot (mit Studiohintergrund) und Charakter (freigestellt).
+   Büsten werden per CSS aus dem Charakterbild geschnitten, es gibt keine weiteren Varianten. */
+/* Lifestyle-Fotos (assets/lifestyle/<id>.webp): Sorte hier eintragen, sobald das Foto im Ordner liegt.
+   Bis dahin zeigt die Seite Packshot und Charakter, ohne eine Datei anzufragen, die es nicht gibt. */
+const LIFESTYLE_READY = [];
 const ASSETS = (id) => ({
   front: `assets/products/${id}-front.webp`,
-  wrap: `assets/products/${id}-wrap.webp`,
   character: `assets/characters/${id}.webp`,
-  bust: `assets/characters/${id}-bust.webp`,
   lifestyle: `assets/lifestyle/${id}.webp`
 });
 
@@ -599,5 +601,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, LIFESTYLE_READY, plansFor, planFor, netGrams, unitPrice, bear };
 })();

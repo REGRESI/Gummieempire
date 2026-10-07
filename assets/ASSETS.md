@@ -1,36 +1,40 @@
 # bärly Website-Assets
 
-Alle Bilder auf der Website werden eigens dafür produziert. Ausschnitte aus Moodboards, Character Bible oder Packaging-Frames werden nicht verwendet. Die Referenz-Frames dienen nur als Vorlage für Farben, Charaktere und Packaging.
+Auf der Website erscheinen ausschließlich die freigegebenen Dateien unten. Es werden keine Dosen oder Bären nachgezeichnet, gerendert oder ersetzt. Ansichten wie „Dose mit Bär“ entstehen nur durch Anordnung dieser Dateien per HTML/CSS.
 
-Fehlt eine Datei, zeigt die Website an dieser Stelle einen sauberen Platzhalter mit dem Dateinamen. Sobald die Datei unter genau diesem Pfad liegt, erscheint sie automatisch.
+## Freigegeben (kanonisch)
 
-## Vorhanden (eigene Renderings)
-
-| Datei | Inhalt | Quelle |
+| Datei | Inhalt | Format |
 | --- | --- | --- |
-| `products/{glow,flex,snoozy,daily}-front.webp` | Dose frontal, transparenter Hintergrund, Leinwand 720 × 1473 px, alle im selben Maßstab und unten bündig | `packs.js` `jar()` · `node tools/render-products.js` |
-| `products/{id}-wrap.webp` | Abwicklung des Dosenkörpers (2000 px breit = Umfang) für die 360°-Ansicht: Front, Maskottchen-Seite, Rückseite mit Nährwerten, linke Seite | `packs.js` `jarWrap()` · `node tools/render.js tools/render-wraps.html assets/products` |
-| `characters/{id}.webp` | Maskottchen ganz, 940 × 1040 px, transparent | `mascots.js` · `node tools/render.js tools/render-characters.html assets/characters` |
-| `characters/{id}-bust.webp` | Maskottchen als Büste, 600 × 510 px, transparent (Auswahl im Hero, Karten, Leiste) | wie oben |
+| `products/glow-front.webp` | Packshot GLOW | 1122 × 1402, mit Studiohintergrund |
+| `products/flex-front.webp` | Packshot FLEX | 1086 × 1448, mit Studiohintergrund |
+| `products/snoozy-front.webp` | Packshot SNOOZY | 1122 × 1402, mit Studiohintergrund |
+| `products/daily-front.webp` | Packshot DAILY | 1122 × 1402, mit Studiohintergrund |
+| `characters/glow.webp` | GLOW: pink, goldene Krone, Herz-Sonnenbrille | 1122 × 1402, freigestellt |
+| `characters/flex.webp` | FLEX: blau, schwarze Sportbrille, Hantel | 1122 × 1402, freigestellt |
+| `characters/snoozy.webp` | SNOOZY: lila, Schlafmütze, Kissen | 1122 × 1402, freigestellt |
+| `characters/daily.webp` | DAILY: gelb, cremefarbener Hoodie, schwarze Crossbody-Bag | 1122 × 1402, freigestellt |
 
-Die Renderer erzeugen PNG; danach in WebP umwandeln (Qualität 86–90, bei Figuren mit Alphakanal). Für den Launch können echte Packshots und 3D-Renderings der Maskottchen die Dateien 1:1 ersetzen: gleicher Name, gleiche Leinwand, transparenter Hintergrund. Die 360°-Ansicht braucht dafür eine flache Etiketten-Abwicklung in derselben Aufteilung (Front bei 57,5° vom linken Rand, siehe `WRAP_SEAM` in `packs.js`).
+`characters/*-bust.webp` sind identische Kopien der Charakterbilder. Die Website nutzt dafür das Hauptbild und schneidet den Kopf per CSS aus (`.avatar` in `styles.css`, Kopfmitte über `--ax` / `--ay`).
 
-## Noch zu produzieren
+Packshots haben einen Studiohintergrund und werden deshalb immer als gerahmtes Foto gezeigt, nie freigestellt.
 
-Alle Formate als WebP, sRGB, Qualität 85–90. Bis dahin zeigt die Seite die Maskottchen mit Dose auf der Sortenfarbe und einen kleinen Hinweis mit dem Dateinamen.
+## Nicht verwenden
 
-| Datei | Format | Motiv | Wo |
-| --- | --- | --- | --- |
-| `lifestyle/glow.webp` | 1600 × 2000 (4:5) | GLOW-Dose auf einem hellen Vanity-Setup: Marmor, Spiegel, Serum, frische Himbeeren, Morgenlicht. Ruhig, viel Fläche. | „Ein Tag mit der Crew“, Produktseite „Im Alltag“ |
-| `lifestyle/flex.webp` | 1600 × 2000 (4:5) | FLEX-Dose im Gym: Bank, Hanteln, Sporttasche, kühles Tageslicht. Keine Personen mit Körperversprechen. | wie oben |
-| `lifestyle/snoozy.webp` | 1600 × 2000 (4:5) | SNOOZY-Dose im Schlafzimmer am Abend: Nachttisch, warme Lampe, Leinen, Buch. Nur Erwachsenen-Setting. | wie oben |
-| `lifestyle/daily.webp` | 1600 × 2000 (4:5) | DAILY-Dose beim Frühstück: Küche, Kaffee, Zitrone, Mango, helles Morgenlicht. | wie oben |
+| Datei | Grund |
+| --- | --- |
+| `campaign/crew-hero.webp` | Liegt im Repository, weil sie im Asset-Paket war. Die Bären und Dosen darin weichen von den freigegebenen Dateien ab (z. B. DAILY mit Cap, andere Dosen). Deshalb nirgends eingebunden. |
 
-Der Hero braucht kein eigenes Bild mehr: Er setzt sich pro Sorte aus Maskottchen und Dose zusammen.
+## Noch zu produzieren (optional)
+
+| Datei | Format | Motiv |
+| --- | --- | --- |
+| `lifestyle/{glow,flex,snoozy,daily}.webp` | 1600 × 2000 (4:5) | Echte Dose im Alltag: GLOW Vanity am Morgen, FLEX im Gym, SNOOZY Nachttisch am Abend, DAILY Frühstückstisch. |
+
+Liegt ein Foto im Ordner, die Sorte in `brand.js` unter `LIFESTYLE_READY` eintragen. Dann erscheint es im Modul „Ein Tag mit der Crew“. Vorher zeigt die Seite Packshot und Charakter und fragt keine fehlende Datei an.
 
 ## Regeln für alle Bilder
 
-- Erwachsen, ruhig, hochwertig. Keine Comic-Flächen, keine Kinder, keine Süßigkeiten-Inszenierung.
-- Gummies nie als Snack in großen Mengen zeigen; wenn Gummies im Bild sind, dann zwei.
-- Kein Text im Bild außer dem, was auf der Dose steht.
-- Charaktere so, wie in der Character Bible beschrieben: GLOW pink mit Krone und Herzbrille, FLEX blau mit schwarzer Sportbrille, SNOOZY lila mit Schlafmütze und Kissen, DAILY gelb mit Hoodie und Crossbody-Bag.
+- Produkt zuerst, Charakter als zweite Ebene. Erwachsen, ruhig, hochwertig.
+- Gummies nie als Snack in großen Mengen zeigen.
+- Charaktere nur so, wie in den freigegebenen Dateien.

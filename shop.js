@@ -37,10 +37,32 @@ const members = (id) => BUNDLES[id] ? BUNDLES[id].members : [id];
 /* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin, nur für Erwachsene) */
 const warnFor = (id) => members(id).map(m => byId[m].warn).filter(Boolean)[0] || '';
 const adultFor = (id) => members(id).some(m => byId[m].adultOnly);
-/* Pfade dürfen nur an Schrägstrichen umbrechen */
-const pathHTML = (src) => esc(src).replace(/\//g, '/<wbr>');
 
 document.documentElement.classList.add('js');
+
+/* ------------------------------------------------------------------ */
+/* Seitenlinks, die überall funktionieren                              */
+/* htmlpreview.github.io lädt die Seite über einen Proxy und schreibt nur die Links um,      */
+/* die beim Laden schon im HTML stehen. Alle internen Seitenlinks tragen deshalb data-page; */
+/* in der Vorschau baut page() daraus die passende Vorschau-Adresse.                        */
+/* ------------------------------------------------------------------ */
+const PREVIEW = location.hostname === 'htmlpreview.github.io';
+function page(file) {
+  if (!PREVIEW) return file;
+  const src = location.search.slice(1).split('&')[0];          // z. B. https://github.com/…/blob/branch/index.html
+  return `${location.origin}${location.pathname}?${src.replace(/[^/]*$/, '')}${file}`;
+}
+/* Attribute für einen Link auf eine andere Seite des Shops */
+const go = (file) => `href="${page(file)}" data-page="${file}"`;
+function fixLinks(root = document) {
+  if (!PREVIEW) return;
+  root.querySelectorAll('a[data-page]').forEach(a => { a.href = page(a.dataset.page); });
+}
+/* Auch nachträglich gezeichnete Links: beim Klick die Vorschau-Adresse erzwingen */
+document.addEventListener('click', e => {
+  const a = PREVIEW && e.target.closest('a[data-page]');
+  if (a && !e.defaultPrevented && e.button === 0 && !e.metaKey && !e.ctrlKey) { e.preventDefault(); location.href = page(a.dataset.page); }
+});
 
 function store(key, val) {
   try {
@@ -49,26 +71,14 @@ function store(key, val) {
   } catch (e) { return null; }
 }
 
-/* ------------------------------------------------------------------ */
-/* Bild-Slots: echtes Bild, sobald die Datei existiert, sonst Platzhalter */
-/* ------------------------------------------------------------------ */
-function slotHTML(src, alt, fallback, cls = '') {
-  return `<div class="slot ${cls}" data-src="${src}" data-alt="${esc(alt)}">
-    <div class="slot-fallback">${fallback}</div>
-    <span class="slot-tag" title="Platzhalter: Bild unter ${src} ablegen">${pathHTML(src)}</span>
-  </div>`;
-}
-function hydrateSlots(root = document) {
-  $$('.slot[data-src]:not([data-ready])', root).forEach(el => {
-    el.dataset.ready = '1';
-    const img = new Image();
-    img.className = 'slot-img';
-    img.alt = el.dataset.alt || '';
-    img.decoding = 'async';
-    img.onload = () => { el.prepend(img); el.classList.add('is-loaded'); };
-    img.src = el.dataset.src;
-  });
-}
+/* Bildbausteine aus den freigegebenen Dateien: Packshot (Foto mit Studiohintergrund),
+   Charakter (freigestellt) und ein Kopf-Ausschnitt desselben Charakterbilds. Keine anderen Varianten. */
+const shot = (id, alt = '', lazy = true) => `<img class="shot" src="${ASSETS(id).front}" alt="${esc(alt)}" width="1122" height="1402" decoding="async"${lazy ? ' loading="lazy"' : ''} draggable="false">`;
+const bearImg = (id, alt = '', lazy = true, cls = 'bear') => `<img class="${cls}" src="${ASSETS(id).character}" alt="${esc(alt)}" width="1122" height="1402" decoding="async"${lazy ? ' loading="lazy"' : ''} draggable="false">`;
+const avatar = (id, lazy = true) => `<span class="avatar avatar-${id}" aria-hidden="true">${bearImg(id, '', lazy, 'avatar-img')}</span>`;
+/* Packshot und Charakter nebeneinander: der Bär steht links vor dem Foto */
+const duo = (id, alt = '', lazy = true, cls = '') => `<div class="duo ${cls}" style="${vars(id)}">${shot(id, alt, lazy)}${bearImg(id, '', lazy)}</div>`;
+
 
 /* ------------------------------------------------------------------ */
 /* Warenkorb                                                           */
@@ -127,12 +137,14 @@ function renderCart() {
     const first = it.members ? it.members[0] : it.id;
     const canToggle = (l.plan === 'abo' || l.plan === 'once');
     const warn = warnFor(l.id);
-    const name = it.members ? esc(lineName(it)) : `<a href="${pdpUrl(it.id)}">${esc(lineName(it))}</a>`;
+    const name = it.members ? esc(lineName(it)) : `<a ${go(pdpUrl(it.id))}>${esc(lineName(it))}</a>`;
     return `<div class="line" style="${vars(first)}">
       <div class="line-img">${lineImage(l.id)}</div>
       <div>
         <p class="line-name">${name}</p>
-        <p class="line-meta">${pl.label}${pl.sub ? ' · ' + pl.sub : ''}${l.plan === 'abo' && !it.members ? ` · alle ${l.every || 30} Tage` : ''}</p>
+        <p class="line-meta">${l.plan === 'abo'
+          ? `Abo${it.members ? ' · ' + pl.sub : ` · alle ${l.every || 30} Tage`} · versandkostenfrei`
+          : l.plan === 'once' ? (it.members ? 'Einmalkauf' : 'Einmalkauf · Dose mit 60 Fruchtgummis') : `${pl.label} · ${pl.sub}`}</p>
         ${warn ? `<p class="line-warn">${it.members ? 'SNOOZY: ' : ''}${warn}</p>` : ''}
         ${canToggle ? `<div class="line-plan" role="group" aria-label="Kaufart für ${esc(lineName(it))}">
           <button type="button" data-plan="${i}" data-val="abo" aria-pressed="${l.plan === 'abo'}">Abo</button>
@@ -298,13 +310,18 @@ function whenVisible(el, fn, margin = '0px 0px -12% 0px') {
 function ready() {
   renderCart();
   saveCart();
-  hydrateSlots();
+  fixLinks();
   initReveal();
+  /* Sprungmarke erst anfahren, wenn der Inhalt gezeichnet ist (z. B. index.html#founders) */
+  if (location.hash.length > 1) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) requestAnimationFrame(() => target.scrollIntoView());
+  }
 }
 
 window.Shop = {
   CREW, THEME, PRICE_NOTE, SHIPPING_FREE, SHIPPING_COST,
-  $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, sellable, members, warnFor, adultFor, pathHTML,
-  store, slotHTML, hydrateSlots, addToCart, openCart, toast, initReveal, whenVisible, ready
+  $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, sellable, members, warnFor, adultFor,
+  store, shot, bearImg, avatar, duo, page, go, fixLinks, addToCart, openCart, toast, initReveal, whenVisible, ready
 };
 })();

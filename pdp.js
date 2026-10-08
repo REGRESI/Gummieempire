@@ -325,9 +325,9 @@ function render() {
       <div class="cross-grid">
         ${others.map(crossCard).join('')}
         <div class="cross-set" data-reveal>
-          <div class="cross-set-visual">${set.members.map(id => shot(id)).join('')}</div>
+          <a class="cross-set-visual" ${link(pdpUrl(set.id))} tabindex="-1" aria-hidden="true">${set.members.map(id => shot(id)).join('')}</a>
           <p class="cross-name">Set</p>
-          <h3 class="cross-title">${set.name}</h3>
+          <h3 class="cross-title"><a ${link(pdpUrl(set.id))}>${set.name}</a></h3>
           <p class="cross-short">${set.title}.</p>
           ${setWarn ? `<p class="cross-adult">SNOOZY: ${setWarn}</p>` : ''}
           <p class="cross-price">${eur(set.price)} <span class="cross-was">statt einzeln ${eur(memberSum(set))}</span></p>
@@ -427,7 +427,7 @@ function initBuy() {
     const s = e.target.closest('[data-step]');
     if (s) { state.qty = Math.min(9, Math.max(1, state.qty + +s.dataset.step)); update(); }
   });
-  const add = () => addToCart(p.id, state.plan, { qty: state.qty, every: planFor(p, state.plan).every ? state.every : 0 });
+  const add = (e) => addToCart(p.id, state.plan, { qty: state.qty, every: planFor(p, state.plan).every ? state.every : 0, from: e.currentTarget });
   $('#buyBtn').addEventListener('click', add);
   $('#stickyBtn').addEventListener('click', add);
   update();

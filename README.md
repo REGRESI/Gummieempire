@@ -14,6 +14,7 @@ Klickbarer Prototyp des bärly-Shops. Marke: **bärly** (Domain: bärly.de). Cla
 | --- | --- |
 | `index.html` | Startseite |
 | `glow.html`, `flex.html`, `snoozy.html`, `daily.html` | Produktseiten (eine pro Sorte) |
+| `crew.html`, `morgen-abend.html` | Produktseiten der Sets „Die ganze Crew“ und „Morgen & Abend“ |
 | `verpackung.html`, `content.html` | intern, nicht im Shop verlinkt: Verpackungssystem (Entwurfszeichnungen, nicht das freigegebene Packaging) und Content-Plan |
 
 ### Startseite
@@ -36,7 +37,13 @@ Klickbarer Prototyp des bärly-Shops. Marke: **bärly** (Domain: bärly.de). Cla
 - Danach: Nutzenleiste, Warum, Inhaltsstoffe mit NRV, zugelassene Angaben im Wortlaut mit Nährwerttabelle und Pflichtangaben, Einnahme, Meet the bear, Abo mit Rechner, Bewertungen (leer bis zum Launch), FAQ, Rest der Crew
 - Jede Sorte mit eigener Stimmung (GLOW Vanity-Rosa, FLEX klares Blau, SNOOZY Abendlila, DAILY Morgengelb), gleiche Bausteine
 
-Warenkorb (im Browser gespeichert) gilt für alle Seiten.
+### Set-Seiten
+
+- Galerie (alle Dosen, alle Bären, jede Sorte mit Bär), Kaufbox mit Abo oder Einmalkauf, Ersparnis gegenüber einzeln
+- Was drin ist (eine Karte pro Sorte mit Link auf ihre Produktseite und deren Pflichtangaben), Dein Tag (Uhrzeiten aus `PDP.<sorte>.ritual`), Rechnung mit Regler, FAQ, Rest der Crew
+- Name, Inhalt und Preise kommen aus `BUNDLES` und `planFor`, ein Aktionspreis im Abo (Black Week) erscheint automatisch
+
+Warenkorb (im Browser gespeichert) gilt für alle Seiten. Beim Hinzufügen fliegt ein Gummibär (bei Sets einer pro Sorte) vom Knopf in den Warenkorb; Screenreader bekommen stattdessen eine Ansage. Bei „Bewegung reduzieren“ springt nur das Warenkorb-Symbol.
 
 ### Links in der htmlpreview-Vorschau
 
@@ -51,7 +58,7 @@ Nur die freigegebenen Dateien aus `assets/` (siehe `assets/ASSETS.md`). Es gibt 
 - Produkte, Formate, Preise: `brand.js` (`PRODUCTS`, `PACK_INFO`, `plansFor`, `BUNDLES`)
 - Texte für Hero und Produktseiten (Schlagzeilen, Sprechblasen, Steckbrief, Einnahme, FAQ): `brand.js` (`PDP`)
 - Lifestyle-Fotos freischalten: `brand.js` (`LIFESTYLE_READY`)
-- Gemeinsame Shop-Logik (Warenkorb, Navigation): `shop.js`, Startseite: `home.js`, Produktseiten: `pdp.js`
+- Gemeinsame Shop-Logik (Warenkorb, Gummibär-Flug, Navigation): `shop.js`, Startseite: `home.js`, Produktseiten: `pdp.js`, Set-Seiten: `bundle.js` (Texte in `COPY`, Dateinamen in `brand.js` unter `SET_PAGES`)
 - Farben und Schriften: `styles.css` unter `:root`, Produktseite zusätzlich `pdp.css`
 - Kopf und Fuß der Produktseiten kommen aus `index.html`: nach Änderungen `node tools/build-pdps.js`
 

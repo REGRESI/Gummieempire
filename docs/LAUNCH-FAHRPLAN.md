@@ -94,15 +94,6 @@ Die Branches der Threads 1, 2 und 6 bis 9 entstehen gerade. Jeder Thread verlink
 
 Welcher Account auf welches Handy kommt, steht im Account-Plan des [TikTok-Shop- und Creator-Threads](https://claude.ai/code/project/chan_016FpAZYk5dhb7PuFrbTCCeH?thread=cmsg_016FpAZYk5dhb7PuFrbTCCeH81p87EXkn2KKhbjLbC2sdT). Er ist auf die vier KI-Avatare Lina, Kian, Mila und Jule abgestimmt (`ki-content/` auf Branch `claude/ki-influencer-skripte-g70x6l`, [Thread](https://claude.ai/code/project/chan_016FpAZYk5dhb7PuFrbTCCeH?thread=cmsg_016FpAZYk5dhb7PuFrbTCCeHGYzeoewYQtbVPui46tUjBp)). Dieser Fahrplan legt nur fest, wann die Accounts angelegt werden (Freitag) und wann gepostet wird (ab Montag).
 
---- | --- | --- |
-| Handy 1 | **bärly** | Beauty-/Wellness-Avatar, spricht vor allem über GLOW und DAILY |
-| Handy 2 | **Skincare-Marke** | Fitness-/Lifestyle-Avatar, spricht über FLEX und Skincare |
-
-- Jeden Account mit eigener E-Mail anlegen, Handle gleich auf allen drei Plattformen.
-- Avatar-Accounts: KI-Kennzeichnung in der Bio und beim Posten das Plattform-Label „KI-generiert“ setzen.
-- Bio-Link mit Quelle, z. B. `bärly.de/?utm_source=tiktok`, damit PR #2 mitzählt, woher Anmeldungen kommen.
-- Erste 1 bis 2 Tage ganz normal nutzen (scrollen, liken, Profil vollständig), dann posten. Neue Accounts, die sofort viel hochladen, bekommen oft wenig Reichweite.
-
 ---
 
 ## 6. Tagesplan

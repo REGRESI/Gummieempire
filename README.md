@@ -46,6 +46,8 @@ htmlpreview.github.io schreibt nur Links um, die beim Laden im HTML stehen. Alle
 
 Nur die freigegebenen Dateien aus `assets/` (siehe `assets/ASSETS.md`). Es gibt keine gerenderten Dosen oder Bären mehr auf der Website.
 
+Prompts für neue Bilder (Charaktere, Produktbilder, Box, Ads, KI-Avatare): `prompts/bilder/README.md`.
+
 ## Anpassen
 
 - Produkte, Formate, Preise: `brand.js` (`PRODUCTS`, `PACK_INFO`, `plansFor`, `BUNDLES`)

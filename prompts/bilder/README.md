@@ -16,8 +16,9 @@ Die Prompts sind auf Englisch, weil Bildmodelle damit am stabilsten arbeiten. Te
 | Crew-Box, Unboxing, Nachfüller, Konzeptbilder für Supplier oder Boxenhersteller | [03-box-und-verpackung.md](03-box-und-verpackung.md) | `B-01` bis `B-09` |
 | Image Ads für Meta, TikTok, Pinterest | [04-ads.md](04-ads.md) | `A-01` bis `A-18` |
 | Black-Week-Motive | [04-ads.md](04-ads.md) | `A-13` bis `A-15` |
-| KI-Avatar erstellen (Lea, Tim, Sarah, Mara, Jonas) | [05-avatare.md](05-avatare.md) | `AV-00-…` |
-| KI-Avatar mit Produkt, Startbild für ein Video | [05-avatare.md](05-avatare.md) | `AV-01` bis `AV-16` |
+| KI-Avatar erstellen (Lina, Kian, Mila, Jule) | [05-avatare.md](05-avatare.md) | `AV-00` (in Higgsfield: `ki-content/01-avatare.md`) |
+| KI-Avatar: Profilbild, Video-Startbild, Unboxing, Duo, Black Week | [05-avatare.md](05-avatare.md) | `AV-01` bis `AV-07` |
+| KI-Avatar mit Dose (Feed-Fotos) | `ki-content/04-bild-prompts.md` (Branch `claude/ki-influencer-skripte-g70x6l`) | Teil A |
 | Einzelne Bausteine zum Selbstbauen | [00-bausteine.md](00-bausteine.md) | `[STIL-…]`, `[BÄR-…]`, `[DOSE-…]`, `[GUMMI]` |
 
 ## Referenzbilder: was du hochlädst
@@ -32,7 +33,7 @@ Jeder Prompt beginnt mit einer Zeile **Hochladen:**. Die Kürzel bedeuten:
 | `R-GUMMI-<SORTE>` | Dein Foto der echten Gummies dieser Sorte | Supplier-Sample oder Supplier-Foto. Form und Farbe der Gummies kommen immer von hier, nie aus dem Prompt. |
 | `R-BOX` | Foto oder Entwurf der Außenbox | Sobald es eine gibt (oder ein Ergebnis aus `B-01`, das du freigegeben hast) |
 | `R-NACHFÜLLER` | Foto des Nachfüllbeutels | Sobald es einen gibt |
-| `R-AVATAR-<NAME>` | Das freigegebene Gesichtsbild des Avatars | Ergebnis aus `AV-00-<NAME>`, einmal erzeugen und dann immer wieder hochladen |
+| `R-AVATAR-<NAME>` | Das freigegebene Gesichtsbild des Avatars | Character Sheet aus Higgsfield oder Ergebnis aus `AV-00`, einmal erzeugen und dann immer wieder hochladen |
 | `R-SKINCARE` | Produktfoto des Skincare-Partnerprodukts | Kommt aus dem Skincare-Thread |
 
 Herunterladen aus GitHub: Datei im Repo öffnen, dann oben rechts auf „Download raw file“. ChatGPT nimmt `.webp` direkt an.

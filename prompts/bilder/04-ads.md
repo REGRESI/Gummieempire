@@ -324,7 +324,7 @@ Werte vor dem Posten mit der finalen Rezeptur vom Supplier abgleichen.
 
 ### A-18 · UGC-Foto mit Story-Text
 
-Sieht aus wie ein echtes Foto aus dem Alltag, mit Text im Stil einer Instagram-Story. Für Spark Ads und Stories. Mit Avatar statt Hand: `AV-10` in [05-avatare.md](05-avatare.md).
+Sieht aus wie ein echtes Foto aus dem Alltag, mit Text im Stil einer Instagram-Story. Für Spark Ads und Stories. Mit Avatar statt Hand: `AV-02` in [05-avatare.md](05-avatare.md).
 
 **Hochladen:** `R-DOSE-{SORTE}`  
 **Format:** vertical 9:16

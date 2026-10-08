@@ -281,10 +281,29 @@ function renderBlackWeek() {
         <button class="btn bf-btn" type="button" data-bundle="${b.id}" data-plan="abo">Crew-Abo sichern · ${eur(abo.price)}</button>
         <button class="btn btn-ghost bf-ghost" type="button" data-bundle="${b.id}" data-plan="once">Einmal kaufen · ${eur(b.price)}</button>
       </div>
+      ${BLACK_FRIDAY.gift ? `<p class="bf-gift">${BLACK_FRIDAY.gift}</p>` : ''}
       <p class="bf-note">Einmalkauf statt einzeln ${eur(memberSum(b))}. ${PRICE_NOTE}</p>
       ${warn ? `<p class="bf-note"><b>SNOOZY: ${warn}</b></p>` : ''}
     </div>
-  </div>`;
+  </div>
+  ${b.includes ? `<div class="wrap"><ul class="bf-includes" aria-label="Das steckt in ${esc(b.name)}">${b.includes.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('')}</ul></div>` : ''}
+  ${coopCard()}`;
+}
+/* Zweites Black-Week-Angebot: Koop-Set mit der Skincare-Marke, erst sichtbar, wenn es kaufbar ist */
+function coopCard() {
+  const c = BUNDLES[BLACK_FRIDAY.coop];
+  if (!c || c.soon || !c.partner.items.length) return '';
+  const glow = byId.glow;
+  return `<div class="wrap"><article class="bf-coop">
+    <div class="bf-coop-visual">${shot('glow', `Dose ${NAME(glow)}`)}${c.partner.items.map(x => `<img class="shot" src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy">`).join('')}</div>
+    <div>
+      <p class="eyebrow">Black-Week-Koop · bärly × ${esc(c.partner.brand)}</p>
+      <h3>${esc(c.name)}</h3>
+      <p>${esc(c.title)}: ${NAME(glow)} ${glow.title} plus ${c.partner.items.map(x => esc(x.name)).join(', ')}.</p>
+      <p class="bf-coop-price"><strong>${eur(c.price)}</strong><em>statt einzeln ${eur(memberSum(c))}</em></p>
+      <button class="btn bf-btn" type="button" data-bundle="${c.id}" data-plan="once">Koop-Set sichern · ${eur(c.price)}</button>
+    </div>
+  </article></div>`;
 }
 function initBlackWeek() {
   let last = null;

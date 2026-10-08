@@ -460,8 +460,19 @@ function unitPrice(p, planId) {
 }
 
 const BUNDLES = {
-  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage', aboSub: 'alle vier, je 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
+  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage', aboSub: 'alle vier, je 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5',
+            includes: [
+              ['Alle vier Dosen', 'GLOW, FLEX, SNOOZY und DAILY mit je 60 Fruchtgummis, zusammen 30 Tage für alle vier Ziele'],
+              ['Vier Charakterkarten', 'Jeder Bär mit Steckbrief und Uhrzeit: wann welcher Gummi dran ist'],
+              ['Im Abo: vier Nachfüller per Brief', 'Danach alle 30 Tage, die Dosen bleiben bei dir. Einzelne Sorten tauschen oder pausieren geht jederzeit']
+            ] },
   beautysleep: { id: 'beautysleep', name: 'Morgen & Abend', title: 'GLOW zum Frühstück, SNOOZY vor dem Schlafen', aboSub: 'GLOW und SNOOZY, je 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
+  /* Black-Week-Koop mit der Skincare-Marke: GLOW von innen, Pflege von außen.
+     Partnerprodukte (Name, Preis, Bild) kommen aus dem Skincare-Thread; solange soon: true, ist das Set nirgends sichtbar
+     und nicht kaufbar. Kein Abo, weil die Pflegeprodukte nicht im Nachfüll-Rhythmus laufen. */
+  glowskin: { id: 'glowskin', name: 'GLOW × Skincare', title: 'GLOW von innen, Pflege von außen', members: ['glow'], noAbo: true, tint: '#f6e1e6', soon: true,
+            partner: { brand: '', items: [ /* { name: 'Serum …', price: 0, img: 'assets/partner/….webp' } */ ] },
+            price: 0 },
   kids:   { id: 'kids', name: 'Schul-Duo', title: '30 Tütchen mit je 1 Kiko + 1 Juno', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
 
@@ -471,6 +482,8 @@ const BUNDLES = {
    danach ist alles wie vorher. Vorschau: ?bf=teaser, ?bf=live oder ?bf=off an die Adresse hängen. */
 const BLACK_FRIDAY = {
   bundle: 'crew',
+  coop: 'glowskin',                        // zweites Angebot im Black-Week-Block, sobald das Set nicht mehr soon ist
+  gift: '',                                // z. B. 'Gratis dazu: bärly Sticker-Set'; leer = keine Zeile
   aboPrice: 59.90,                         // erste Lieferung im Abo (normal 71,92 €)
   teaser: '2026-11-09T00:00:00+01:00',
   start: '2026-11-23T00:00:00+01:00',      // Montag der Black Week

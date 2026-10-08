@@ -31,7 +31,7 @@ const theme = (id) => THEME[id] || THEME.glow;
 const vars = (id) => `--tint:${theme(id).tint};--deep:${theme(id).deep};--dot:${theme(id).dot}`;
 const perKg = (p, plan) => `${eur(unitPrice(p, plan))}/kg`;
 const count = (p) => { const f = PACK_INFO[p.id]; return f.refill[0] * (30 / f.refill[1]); };
-const memberSum = (b) => b.members.reduce((s, id) => s + byId[id].price, 0);
+const memberSum = (b) => b.members.reduce((s, id) => s + byId[id].price, 0) + ((b.partner && b.partner.items) || []).reduce((s, x) => s + x.price, 0);
 const sellable = (id) => (byId[id] && byId[id].launch) || (BUNDLES[id] && !BUNDLES[id].soon);
 const members = (id) => BUNDLES[id] ? BUNDLES[id].members : [id];
 /* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin, nur für Erwachsene) */
@@ -107,7 +107,8 @@ function addToCart(id, plan = 'once', extra = {}) {
 }
 
 function lineImage(id) {
-  return members(id).map(x => `<img src="${ASSETS(x).front}" alt="">`).join('');
+  const partner = (BUNDLES[id] && BUNDLES[id].partner && BUNDLES[id].partner.items) || [];
+  return members(id).map(x => `<img src="${ASSETS(x).front}" alt="">`).join('') + partner.map(x => `<img src="${x.img}" alt="">`).join('');
 }
 
 function renderCart() {
@@ -135,7 +136,7 @@ function renderCart() {
     const it = itemInfo(l.id);
     const pl = planFor(it, l.plan);
     const first = it.members ? it.members[0] : it.id;
-    const canToggle = (l.plan === 'abo' || l.plan === 'once');
+    const canToggle = (l.plan === 'abo' || l.plan === 'once') && !it.noAbo;
     const warn = warnFor(l.id);
     const name = it.members ? esc(lineName(it)) : `<a ${go(pdpUrl(it.id))}>${esc(lineName(it))}</a>`;
     return `<div class="line" style="${vars(first)}">

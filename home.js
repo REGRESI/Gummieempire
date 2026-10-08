@@ -5,8 +5,8 @@
 (() => {
 'use strict';
 
-const { eur, byId, BUNDLES, ASSETS, LIFESTYLE_READY, PDP, pdpUrl, planFor } = window.Baerly;
-const { CREW, PRICE_NOTE, $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, warnFor, adultFor, store, shot, bearImg, avatar, duo, go: link, ready } = window.Shop;
+const { eur, byId, BUNDLES, BLACK_FRIDAY, bfState, ASSETS, LIFESTYLE_READY, PDP, pdpUrl, planFor } = window.Baerly;
+const { CREW, PRICE_NOTE, $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, warnFor, adultFor, store, shot, bearImg, avatar, duo, go: link, ready, onBfTick, pad2 } = window.Shop;
 
 const SET_TEXT = {
   crew: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage.',
@@ -236,6 +236,10 @@ function productCard(p) {
     </div>
   </article>`;
 }
+function setAbo(b) {
+  const abo = planFor(b, 'abo');
+  return abo.was ? `Black Week: im Abo erste Lieferung ${eur(abo.price)} statt ${eur(abo.was)}` : `im Abo ${eur(abo.price)}`;
+}
 function setCard(b) {
   const warn = warnFor(b.id);
   return `<article class="set" data-reveal>
@@ -244,14 +248,64 @@ function setCard(b) {
       <h3>${b.name}</h3>
       <p>${SET_TEXT[b.id] || b.title}</p>
       ${warn ? `<p class="set-warn">SNOOZY: ${warn}</p>` : ''}
-      <p class="set-price"><strong>${eur(b.price)}</strong><em>statt einzeln ${eur(memberSum(b))}</em><span>im Abo ${eur(planFor(b, 'abo').price)}</span></p>
+      <p class="set-price"><strong>${eur(b.price)}</strong><em>statt einzeln ${eur(memberSum(b))}</em><span>${setAbo(b)}</span></p>
       <button class="btn btn-ink btn-sm" type="button" data-bundle="${b.id}">Set in den Warenkorb</button>
     </div>
   </article>`;
 }
+/* ------------------------------------------------------------------ */
+/* Black Week: Die ganze Crew im Abo, mit Countdown                    */
+/* ------------------------------------------------------------------ */
+function renderBlackWeek() {
+  const el = $('#angebot');
+  const live = bfState() === 'live';
+  el.hidden = !live;
+  if (!live) { el.innerHTML = ''; return; }
+  const b = BUNDLES[BLACK_FRIDAY.bundle];
+  const abo = planFor(b, 'abo');
+  const warn = warnFor(b.id);
+  const off = Math.round((1 - abo.price / abo.was) * 100);
+  el.innerHTML = `<div class="wrap bf-grid">
+    <div class="bf-visual">${b.members.map(id => shot(id, `Dose ${NAME(byId[id])}`)).join('')}<span class="bf-badge" aria-hidden="true">−${off} %</span></div>
+    <div class="bf-copy">
+      <p class="eyebrow">Black Week · bis ${BLACK_FRIDAY.endLabel}</p>
+      <h2 class="h2" id="bfTitle">${b.name}. <em>Zum Black-Friday-Preis.</em></h2>
+      <p class="bf-lead">${SET_TEXT[b.id]} Im Abo kommt die erste Lieferung mit allen vier Dosen für ${eur(abo.price)} statt ${eur(abo.was)}. Danach ${eur(abo.was)} je 30 Tage, jederzeit pausieren oder kündigen.</p>
+      <div class="bf-clock" role="timer" aria-label="Angebot endet in">
+        <div><b data-bf="d">0</b><span>Tage</span></div>
+        <div><b data-bf="h">00</b><span>Std</span></div>
+        <div><b data-bf="m">00</b><span>Min</span></div>
+        <div><b data-bf="s">00</b><span>Sek</span></div>
+      </div>
+      <div class="bf-buy">
+        <button class="btn bf-btn" type="button" data-bundle="${b.id}" data-plan="abo">Crew-Abo sichern · ${eur(abo.price)}</button>
+        <button class="btn btn-ghost bf-ghost" type="button" data-bundle="${b.id}" data-plan="once">Einmal kaufen · ${eur(b.price)}</button>
+      </div>
+      <p class="bf-note">Einmalkauf statt einzeln ${eur(memberSum(b))}. ${PRICE_NOTE}</p>
+      ${warn ? `<p class="bf-note"><b>SNOOZY: ${warn}</b></p>` : ''}
+    </div>
+  </div>`;
+}
+function initBlackWeek() {
+  let last = null;
+  onBfTick(t => {
+    if (t.state !== last) {
+      // Start oder Ende während die Seite offen ist: Set-Preise neu zeichnen
+      if (last !== null) { renderSets(); $$('#sets [data-reveal]').forEach(n => n.classList.add('in')); }
+      last = t.state;
+      renderBlackWeek();
+    }
+    if (t.state !== 'live') return;
+    $$('#angebot [data-bf]').forEach(n => { n.textContent = n.dataset.bf === 'd' ? t.d : pad2(t[n.dataset.bf]); });
+  });
+}
+
+function renderSets() {
+  $('#sets').innerHTML = ['crew', 'beautysleep'].map(id => setCard(BUNDLES[id])).join('');
+}
 function renderProducts() {
   $('#productGrid').innerHTML = CREW.map(productCard).join('');
-  $('#sets').innerHTML = ['crew', 'beautysleep'].map(id => setCard(BUNDLES[id])).join('');
+  renderSets();
   $('#sets').insertAdjacentHTML('afterend', `<p class="price-note">${PRICE_NOTE}</p>`);
 }
 
@@ -376,6 +430,7 @@ function initAbo() {
 /* Start */
 initHero();
 renderProducts();
+initBlackWeek();
 initFinder();
 initDay();
 renderCrew();

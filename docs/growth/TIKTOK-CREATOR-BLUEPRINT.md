@@ -11,7 +11,7 @@ Dazugehörig: [Outreach-Vorlagen](./OUTREACH-VORLAGEN.md) (alle Nachrichten zum 
 ### Freitag, 09.10.
 - [ ] TikTok-Shop-Verkäuferkonto im Seller Center (seller-de.tiktok.com) als Unternehmen anlegen. Bereithalten: Gewerbeanmeldung oder Handelsregisterauszug, USt-IdNr., Ausweis, Geschäftskonto, Lager- und Rücksendeadresse.
 - [ ] Kategorie „Gesundheit / Nahrungsergänzung“ beantragen. TikTok fragt dafür meist Unterlagen zum Produkt ab (Etikett, Analysezertifikat vom Hersteller, Anzeige beim BVL). Den neuen Supplier morgen direkt nach diesen Unterlagen fragen, Sublify ebenso als Plan B.
-- [ ] Die 4 Accounts anlegen und mit dem Aufwärmen beginnen (Abschnitt 6).
+- [ ] Die 4 Avatar-Accounts (Lina, Kian, Mila, Jule) auf den zwei Handys anlegen, Markenkonto am Rechner, und mit dem Aufwärmen beginnen (Abschnitt 6).
 - [ ] Google Sheet „Creator-Pipeline“ anlegen (Spalten in Abschnitt 5.4).
 - [ ] Brevo-Formular „Founding Creator“ anlegen (gleiches Brevo wie Founders Club, eigene Liste). Felder: Name, E-Mail, TikTok-Handle, Instagram-Handle, Follower, Lieblings-Bär, Adresse für Samples (optional).
 
@@ -128,22 +128,27 @@ Spalten: Handle · Plattform · Follower · Ø Views · Nische · Bär · Quelle
 
 ## 6. Accounts auf zwei Handys
 
-Vier Identitäten, je eine pro Handy-Slot. Jede Identität bekommt TikTok **und** Instagram (Instagram verträgt mehrere Konten in einer App problemlos). Facebook läuft über Seiten, die alle in einer Meta Business Suite hängen, also nicht über eigene Facebook-Profile pro Avatar.
+Dieser Abschnitt ist der verbindliche Account-Plan. Die vier KI-Avatare, ihre Account-Namen und Bios kommen aus `ki-content/01-avatare.md` (Branch `claude/ki-influencer-skripte-g70x6l`), dort stehen auch die Skripte.
 
-| Handy | Konto | Wer | Bären | Rolle im Shop |
-| --- | --- | --- | --- | --- |
-| 1 | @baerly (bzw. @baerly.de) | Marke | alle | Offizielles TikTok-Shop-Konto, Lives, Reposts der Creator, Gewinnspiele |
-| 1 | Avatar Lea | Beauty, Skincare, GRWM | GLOW, Koop mit der Skincare-Marke | Als Marketing-Konto mit dem Shop verknüpfen |
-| 2 | Avatar Tim | Gym, Kreatin | FLEX | Als Marketing-Konto mit dem Shop verknüpfen |
-| 2 | Avatar Sarah | Abendroutine, Alltag, Organisation | SNOOZY, DAILY | Als Marketing-Konto mit dem Shop verknüpfen |
+Die zwei Handys gehören den vier Avataren, zwei pro Handy. Das Markenkonto läuft nicht als dritter Slot auf einem Handy, sondern am Rechner: TikTok über TikTok Studio im Browser, Instagram und Facebook über die Meta Business Suite. Für Lives am Black Friday meldet man sich mit dem Markenkonto kurz auf einem der Handys an.
 
-Lea, Tim und Sarah sind die Zielgruppen-Personas aus dem Content-Plan (`content.html`) und werden über Higgsfield als KI-Influencer gebaut. Facebook-Seiten: eine für bärly, je eine für jeden Avatar, damit Reels dort mitlaufen.
+Jeder Avatar bekommt TikTok **und** Instagram (Instagram verträgt mehrere Konten in einer App). Facebook läuft über Seiten, die alle in einer Meta Business Suite hängen, nicht über eigene Facebook-Profile pro Avatar.
 
-**Shop-Verknüpfung:** Im Seller Center unter Konten das Markenkonto als offizielles Konto und die Avatar-Konten als Marketing-Konten verknüpfen. Dann können sie Produkte direkt im Video verlinken, ohne die Follower-Grenze für normale Affiliates. Wie viele Marketing-Konten erlaubt sind, beim Verknüpfen im Seller Center nachsehen.
+| Wo | Konto | Sorte | Account-Name (Vorschlag) | Plattform zuerst | Rolle im Shop |
+| --- | --- | --- | --- | --- | --- |
+| Handy 1 · A | **Lina**, 26 | GLOW, Koop mit der Skincare-Marke | `lina.glowt` | TikTok, Instagram | Marketing-Konto des Shops |
+| Handy 1 · B | **Kian**, 24 | FLEX | `kian.flext` | TikTok, YouTube Shorts | Marketing-Konto des Shops |
+| Handy 2 · A | **Mila**, 33 | SNOOZY | `mila.abends` | Instagram, TikTok | Marketing-Konto des Shops |
+| Handy 2 · B | **Jule**, 31 | DAILY | `jule.plant` | Instagram, Facebook | Marketing-Konto des Shops |
+| Rechner | **@baerly** (bzw. @baerly.de) | alle | `baerly` | TikTok, Instagram | Offizielles Shop-Konto, Reposts der besten Avatar- und Creator-Clips, Gewinnspiele, Lives |
+
+Weitere Namensideen und die Bio-Vorlagen stehen in `ki-content/01-avatare.md`. Ist ein Name vergeben, die nächste Idee von dort nehmen. Facebook-Seiten: eine für bärly, je eine für jeden Avatar, damit Reels dort mitlaufen. Bei Jule ist Facebook Pflicht, ihr Publikum (30–45) ist dort.
+
+**Shop-Verknüpfung:** Im Seller Center unter Konten das Markenkonto als offizielles Konto und die Avatar-Konten als Marketing-Konten verknüpfen. Dann können sie Produkte direkt im Video verlinken, ohne die Follower-Grenze für normale Affiliates. Wie viele Marketing-Konten erlaubt sind, beim Verknüpfen im Seller Center nachsehen. Reicht die Zahl nicht für alle vier, zuerst Lina und Kian verknüpfen (TikTok-stärkste Sorten), Mila und Jule verlinken über die Bio.
 
 ### Einrichten (pro Konto)
-1. Eigene E-Mail pro Konto (z. B. lea@bärly.de als Weiterleitung), Handy-Region Deutschland, kein VPN.
-2. Profilbild, Name, Bio mit KI-Hinweis und Link (Linktree oder direkt Shop mit UTM: `?utm_source=tiktok&utm_medium=social&utm_campaign=lea`). Bei TikTok beim Posten den Schalter „KI-generierte Inhalte“ setzen.
+1. Eigene E-Mail pro Konto (z. B. lina@bärly.de als Weiterleitung), Handy-Region Deutschland, kein VPN.
+2. Profilbild, Name, Bio mit KI-Hinweis und Link (Linktree oder direkt Shop mit UTM: `?utm_source=tiktok&utm_medium=social&utm_campaign=lina`). Bei TikTok beim Posten den Schalter „KI-generierte Inhalte“ setzen.
 3. Auf Business- bzw. Creator-Konto umstellen, Kategorie passend.
 4. **Aufwärmen 3 Tage:** täglich 20–30 Minuten in der eigenen Nische scrollen, liken, ein paar echte Kommentare, anderen Creatorn der Nische folgen. Noch nichts posten.
 5. Ab Tag 4: 1 Video pro Tag, nach einer Woche 2–3 pro Tag auf TikTok.
@@ -200,7 +205,7 @@ Kein Werbebudget vorab. Sobald die ersten Verkäufe laufen, gehen 10–15 % vom 
 - Einkaufspreise vom Supplier, danach Provisionssätze bestätigen.
 - Ob TikTok Shop für Österreich und die Schweiz verfügbar ist, im Seller Center prüfen. Bis dahin laufen die zwei Länder über Instagram, Facebook und den eigenen Shop.
 - Partner-Seite im Shop bauen (Website-Branch).
-- Koop mit der Skincare-Marke für Black Week: gemeinsames GLOW-Paket, über Lea und Beauty-Creator. Details im Skincare-Branch.
+- Koop mit der Skincare-Marke für Black Week: gemeinsames GLOW-Paket, über Lina und Beauty-Creator. Details im Skincare-Branch.
 
 ## Quellen
 

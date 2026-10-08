@@ -5,7 +5,7 @@
 (() => {
 'use strict';
 
-const { eur, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, planFor, unitPrice, pdpUrl } = window.Baerly;
+const { eur, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, SIGNUP, planFor, unitPrice, pdpUrl } = window.Baerly;
 
 const CREW = PRODUCTS.filter(p => p.launch);
 const SHIPPING_FREE = 35;
@@ -258,16 +258,64 @@ document.addEventListener('click', e => {
   if (bundle) { addToCart(bundle.dataset.bundle, bundle.dataset.plan || 'once'); confirmButton(bundle); }
 });
 
+/* Founders Club: Herkunft aus dem Bio-Link merken, auch wenn erst eine Produktseite geöffnet wird */
+const utm = new URLSearchParams(location.search).get('utm_source');
+try { if (utm) sessionStorage.setItem('baerly-utm', utm.slice(0, 40)); } catch (e) {}
+
+/* Feldnamen der eingebetteten Formulare von Brevo und MailerLite (Free-Tarife).
+   Beide antworten mit JSON { success: true } und schicken selbst die Bestätigungs-Mail (Double-Opt-in). */
+const SIGNUP_FIELDS = {
+  brevo: (email, source) => ({ EMAIL: email, OPT_IN: '1', email_address_check: '', locale: 'de', html_type: 'simple', ...(source && { [SIGNUP.sourceField]: source }) }),
+  mailerlite: (email, source) => ({ 'fields[email]': email, 'ml-submit': '1', anticsrf: 'true', ...(source && { [`fields[${SIGNUP.sourceField}]`]: source }) })
+};
+
+async function sendSignup(email) {
+  let source = '';
+  try { source = SIGNUP.sourceField ? sessionStorage.getItem('baerly-utm') || '' : ''; } catch (e) {}
+  const body = new FormData();
+  Object.entries(SIGNUP_FIELDS[SIGNUP.provider](email, source)).forEach(([k, v]) => body.append(k, v));
+  let res;
+  try {
+    res = await fetch(SIGNUP.action + (SIGNUP.provider === 'brevo' ? '?isAjax=1' : ''), { method: 'POST', body });
+  } catch (e) {
+    /* Antwort vom Browser blockiert (CORS) oder Netz weg: einmal ohne lesbare Antwort senden.
+       Klappt das, ist die Anmeldung angekommen, das Tool verschickt die Bestätigung. */
+    await fetch(SIGNUP.action, { method: 'POST', body, mode: 'no-cors' });
+    return true;
+  }
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json().catch(() => ({}));
+  if (data.success === false) throw new Error('abgelehnt');
+  return true;
+}
+
 const signup = $('#signup');
 if (signup) {
-  signup.addEventListener('submit', e => {
+  signup.addEventListener('submit', async e => {
     e.preventDefault();
+    const form = e.target;
     const email = $('#signupEmail').value.trim();
     const msg = $('#signupMsg');
+    const btn = $('button[type="submit"]', form);
+    if ($('#signupHp').value) return;   /* Bot hat das unsichtbare Feld ausgefüllt */
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.'; $('#signupEmail').focus(); return; }
     if (!$('#signupConsent').checked) { msg.textContent = 'Bitte bestätige, dass wir dir E-Mails schicken dürfen.'; $('#signupConsent').focus(); return; }
-    msg.textContent = 'Du bist dabei. Wir melden uns vor dem Launch. (Prototyp: wird noch nicht gespeichert.)';
-    e.target.reset();
+    if (!SIGNUP.action || !SIGNUP_FIELDS[SIGNUP.provider]) {
+      msg.textContent = 'Du bist dabei. Wir melden uns vor dem Launch. (Prototyp: wird noch nicht gespeichert.)';
+      form.reset();
+      return;
+    }
+    btn.disabled = true;
+    msg.textContent = 'Einen Moment …';
+    try {
+      await sendSignup(email);
+      msg.textContent = 'Fast geschafft: Bitte bestätige deine Anmeldung über den Link in der E-Mail, die wir dir gerade geschickt haben.';
+      form.reset();
+    } catch (err) {
+      msg.textContent = 'Das hat leider nicht geklappt. Bitte versuch es gleich noch einmal.';
+    } finally {
+      btn.disabled = false;
+    }
   });
 }
 

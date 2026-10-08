@@ -206,7 +206,8 @@
         <input id="signupEmail" name="email" type="email" placeholder="du@beispiel.de" autocomplete="email" required>
         <button class="btn btn-light" type="submit">Eintragen</button>
       </div>
-      <label class="consent"><input type="checkbox" id="signupConsent" required> Ich möchte E-Mails zum Launch und zum Founders Club erhalten. Abmelden geht jederzeit.</label>
+      <input class="sr-only" id="signupHp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="consent"><input type="checkbox" id="signupConsent" required> Ich möchte E-Mails zum Launch und zum Founders Club erhalten. Abmelden geht jederzeit. Du bekommst zuerst eine Mail zum Bestätigen.</label>
       <p class="signup-msg" id="signupMsg" role="status"></p>
     </form>
   </div>

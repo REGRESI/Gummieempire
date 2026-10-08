@@ -461,6 +461,17 @@ const BUNDLES = {
   kids:   { id: 'kids', name: 'Schul-Duo', title: '30 Tütchen mit je 1 Kiko + 1 Juno', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
 
+/* Founders Club: wohin das Anmeldeformular auf der Startseite sendet (kostenloses E-Mail-Tool).
+   provider: 'brevo' oder 'mailerlite'. action: die Formular-Adresse aus dem Tool, siehe README
+   („Founders Club anbinden“). Bleibt action leer, speichert das Formular nichts und sagt das auch.
+   sourceField: optionaler Name eines Kontakt-Attributs im Tool (z. B. 'QUELLE'); dann wird
+   utm_source aus dem Link (z. B. ?utm_source=tiktok) mitgeschickt, für Sign-ups pro Plattform. */
+const SIGNUP = {
+  provider: 'brevo',
+  action: '',
+  sourceField: ''
+};
+
 /* Bild-Slots der Website. Alle Bilder werden eigens für die Website produziert
    (siehe assets/ASSETS.md); fehlt eine Datei, zeigt die Seite einen sauberen Platzhalter. */
 /* Freigegebene Bilder: Packshot (mit Studiohintergrund) und Charakter (freigestellt).
@@ -601,5 +612,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, LIFESTYLE_READY, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, LIFESTYLE_READY, SIGNUP, plansFor, planFor, netGrams, unitPrice, bear };
 })();

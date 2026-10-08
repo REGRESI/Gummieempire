@@ -64,4 +64,21 @@ Nur die freigegebenen Dateien aus `assets/` (siehe `assets/ASSETS.md`). Es gibt 
 - Melatonin (SNOOZY): Einstufung in Deutschland rechtlich klären.
 - Gesundheitsbezogene Angaben, Produktnamen und Pflichtangaben rechtlich prüfen lassen.
 - Widerrufsrecht und Abo-Bedingungen (Kündigungsbutton) mit den AGB abgleichen.
-- Kasse und Newsletter sind noch nicht angebunden (geplant: Shopify).
+- Kasse ist noch nicht angebunden (geplant: Shopify). Founders Club: siehe unten, braucht nur die Formular-Adresse.
+
+## Founders Club anbinden
+
+Das Formular auf der Startseite (`#founders`) sendet an ein kostenloses E-Mail-Tool. Solange in `brand.js` unter `SIGNUP` keine `action` steht, speichert es nichts und sagt das auch.
+
+**Brevo (empfohlen, Free-Tarif, Server in der EU):**
+
+1. Konto anlegen, unter *Kontakte → Listen* eine Liste „Founders Club“ anlegen.
+2. *Kontakte → Formulare → Anmeldeformular erstellen*, Liste „Founders Club“ wählen, **Double-Opt-in** einschalten (in Deutschland Pflicht für Werbe-Mails), Bestätigungs-Mail auf Deutsch anpassen.
+3. Unter *Teilen → HTML-Code* im Code die Adresse aus `<form … action="https://….sibforms.com/serve/…">` kopieren.
+4. In `brand.js` eintragen: `SIGNUP.action = 'https://….sibforms.com/serve/…'` (`provider: 'brevo'` bleibt).
+5. Optional Sign-ups pro Plattform: im Formular ein Textfeld mit dem Kontakt-Attribut `QUELLE` ergänzen und `sourceField: 'QUELLE'` setzen. Dann wird `utm_source` aus dem Bio-Link (z. B. `bärly.de/?utm_source=tiktok`) mitgeschickt.
+6. 25-%-Code: als Willkommens-Mail per Automatisierung („Kontakt zur Liste hinzugefügt“) verschicken.
+
+**MailerLite** geht genauso: `provider: 'mailerlite'`, `action` ist die Adresse `https://assets.mailerlite.com/jsonp/<Konto>/forms/<Formular>/subscribe` aus dem eingebetteten Formular.
+
+Testen: Startseite öffnen, eigene Adresse eintragen, Bestätigungs-Mail klicken, Kontakt in der Liste prüfen.

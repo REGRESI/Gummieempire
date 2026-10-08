@@ -90,12 +90,11 @@ Die Branches der Threads 1, 2 und 6 bis 9 entstehen gerade. Jeder Thread verlink
 
 ---
 
-## 5. Social Accounts: Vorschlag für zwei Handys
+## 5. Social Accounts
 
-Pro Handy zwei Identitäten, jeweils auf Instagram, Facebook (Seite) und TikTok:
+Welcher Account auf welches Handy kommt, steht im Account-Plan des [TikTok-Shop- und Creator-Threads](https://claude.ai/code/project/chan_016FpAZYk5dhb7PuFrbTCCeH?thread=cmsg_016FpAZYk5dhb7PuFrbTCCeH81p87EXkn2KKhbjLbC2sdT). Er ist auf die vier KI-Avatare Lina, Kian, Mila und Jule abgestimmt (`ki-content/` auf Branch `claude/ki-influencer-skripte-g70x6l`, [Thread](https://claude.ai/code/project/chan_016FpAZYk5dhb7PuFrbTCCeH?thread=cmsg_016FpAZYk5dhb7PuFrbTCCeHGYzeoewYQtbVPui46tUjBp)). Dieser Fahrplan legt nur fest, wann die Accounts angelegt werden (Freitag) und wann gepostet wird (ab Montag).
 
-| Handy | Account 1 (Marke) | Account 2 (KI-Avatar) |
-| --- | --- | --- |
+--- | --- | --- |
 | Handy 1 | **bärly** | Beauty-/Wellness-Avatar, spricht vor allem über GLOW und DAILY |
 | Handy 2 | **Skincare-Marke** | Fitness-/Lifestyle-Avatar, spricht über FLEX und Skincare |
 

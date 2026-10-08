@@ -50,7 +50,7 @@ Nur die freigegebenen Dateien aus `assets/` (siehe `assets/ASSETS.md`). Es gibt 
 
 - Produkte, Formate, Preise: `brand.js` (`PRODUCTS`, `PACK_INFO`, `plansFor`, `BUNDLES`)
 - Texte für Hero und Produktseiten (Schlagzeilen, Sprechblasen, Steckbrief, Einnahme, FAQ): `brand.js` (`PDP`)
-- Black Week (Crew-Abo zum Aktionspreis, Banner mit Countdown, Angebotsblock unter dem Hero): `brand.js` (`BLACK_FRIDAY`: Preis, Teaser-, Start- und Endzeit). Vorschau ohne auf das Datum zu warten: `?bf=live`, `?bf=teaser` oder `?bf=off` an die Adresse hängen. Inhalt der Crew: `BUNDLES.crew.includes`. Koop-Set mit der Skincare-Marke: `BUNDLES.glowskin` (Partnername, Produkte mit Preis und Bild, Setpreis eintragen, dann `soon` entfernen); Gratis-Beigabe: `BLACK_FRIDAY.gift`
+- Black Week (Crew-Abo zum Aktionspreis, Banner mit Countdown, Angebotsblock unter dem Hero): `brand.js` (`BLACK_FRIDAY`: Preis, Teaser-, Start- und Endzeit). Vorschau ohne auf das Datum zu warten: `?bf=live`, `?bf=teaser` oder `?bf=off` an die Adresse hängen. Inhalt der Crew: `BUNDLES.crew.includes`. Koop „Glow Inside & Out“ mit SKINCARRY: `BUNDLES.glowduo` und `BUNDLES.glowritual` (Preise bestätigen, Bilder eintragen, dann `soon` entfernen); Gratis-Beigabe: `BLACK_FRIDAY.gift`
 - Lifestyle-Fotos freischalten: `brand.js` (`LIFESTYLE_READY`)
 - Gemeinsame Shop-Logik (Warenkorb, Navigation): `shop.js`, Startseite: `home.js`, Produktseiten: `pdp.js`
 - Farben und Schriften: `styles.css` unter `:root`, Produktseite zusätzlich `pdp.css`

@@ -287,23 +287,30 @@ function renderBlackWeek() {
     </div>
   </div>
   ${b.includes ? `<div class="wrap"><ul class="bf-includes" aria-label="Das steckt in ${esc(b.name)}">${b.includes.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('')}</ul></div>` : ''}
-  ${coopCard()}`;
+  ${coopCards()}`;
 }
-/* Zweites Black-Week-Angebot: Koop-Set mit der Skincare-Marke, erst sichtbar, wenn es kaufbar ist */
-function coopCard() {
-  const c = BUNDLES[BLACK_FRIDAY.coop];
-  if (!c || c.soon || !c.partner.items.length) return '';
+/* Koop „Glow Inside & Out“ mit SKINCARRY: je Set eine Karte, erst sichtbar, wenn das Set kaufbar ist */
+function coopCards() {
+  const sets = BLACK_FRIDAY.coop.map(id => BUNDLES[id]).filter(c => c && !c.soon);
+  if (!sets.length) return '';
   const glow = byId.glow;
-  return `<div class="wrap"><article class="bf-coop">
-    <div class="bf-coop-visual">${shot('glow', `Dose ${NAME(glow)}`)}${c.partner.items.map(x => `<img class="shot" src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy">`).join('')}</div>
+  const card = (c) => `<article class="bf-coop">
+    <div class="bf-coop-visual" style="--n:${c.partner.items.length + 1}">${shot('glow', `Dose ${NAME(glow)}`)}${c.partner.items.map(x => x.img
+      ? `<img class="shot" src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy">`
+      : `<span class="shot bf-coop-tile">${esc(x.name)}</span>`).join('')}</div>
     <div>
-      <p class="eyebrow">Black-Week-Koop · bärly × ${esc(c.partner.brand)}</p>
       <h3>${esc(c.name)}</h3>
-      <p>${esc(c.title)}: ${NAME(glow)} ${glow.title} plus ${c.partner.items.map(x => esc(x.name)).join(', ')}.</p>
+      <p>${esc(c.title)}: ${NAME(glow)} ${glow.title} plus ${c.partner.items.map(x => esc(x.name)).join(', ')} von ${esc(c.partner.brand)}.</p>
       <p class="bf-coop-price"><strong>${eur(c.price)}</strong><em>statt einzeln ${eur(memberSum(c))}</em></p>
-      <button class="btn bf-btn" type="button" data-bundle="${c.id}" data-plan="once">Koop-Set sichern · ${eur(c.price)}</button>
+      <button class="btn bf-btn" type="button" data-bundle="${c.id}" data-plan="once">${esc(c.name)} sichern · ${eur(c.price)}</button>
     </div>
-  </article></div>`;
+  </article>`;
+  return `<div class="wrap bf-coop-wrap">
+    <p class="eyebrow">Black-Week-Koop · bärly × ${esc(sets[0].partner.brand)}</p>
+    <h3 class="bf-coop-title">${BLACK_FRIDAY.coopName}</h3>
+    <div class="bf-coop-grid">${sets.map(card).join('')}</div>
+    <p class="bf-note">Zwei Marken, ein Warenkorb: Die Pflegeprodukte kommen in einer eigenen Sendung.</p>
+  </div>`;
 }
 function initBlackWeek() {
   let last = null;

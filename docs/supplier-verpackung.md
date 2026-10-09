@@ -28,8 +28,8 @@ the only manufacturer we found that offers full customisation, no MOQ and
 all the certificates we need.
 
 WHAT WE PLAN
-- Gummy supplements for 30 days per jar: usually 60 gummies, 2 per day
-  (FLEX can be 90 gummies, 3 per day).
+- One jar = 30 days. 60 gummies (2 per day) or 90 gummies (3 per day)
+  both work for us, whatever fits your gummies best.
 - We'll launch all four products below at once, each in 2 to 3 flavours.
 - Selling online in Germany/EU (Shopify), first through pre-orders, then
   monthly subscriptions.
@@ -51,8 +51,7 @@ OUR 4 PRODUCTS (per daily serving)
    plus zinc, selenium, iodine (full list on request)
 
 Requirements for all: vegan (pectin, no gelatine), natural colours only
-(no azo dyes, no titanium dioxide), EU-compliant vitamin/mineral forms,
-gummy weight around 3 g. Low sugar or sugar-free options are welcome,
+(no azo dyes, no titanium dioxide), EU-compliant vitamin/mineral forms. Low sugar or sugar-free options are welcome,
 please tell us what you offer.
 
 FLAVOURS
@@ -69,15 +68,15 @@ minerals change the taste)? Can the gummy colour match the product colour
 GUMMY SHAPE
 Our brand characters are four bears, so we'd like the classic gummy bear
 shape.
+- How much does one of your bear gummies weigh?
 - Can we use your existing gummy bear mould? Which other shapes do you have?
 - Later maybe a custom mould with our own bear: cost and lead time?
 
 PACKAGING – our designs are almost finished, we'll send you the final
 product images once you confirm you can produce this. The look:
 - We saw your options (wide-mouthed bottle, square bottle, bag, barrel).
-  We want the round wide-mouthed jar for 60 (FLEX: 90) gummies, filled nicely to the
-  top. Which jar size do you recommend? We estimate around 200–250 ml for
-  3 g gummies (FLEX may need a bigger one if the gummies are heavier).
+  We want the round wide-mouthed jar for 60 or 90 gummies, filled nicely
+  to the top. Which jar size do you recommend for your bear gummies?
 - Fully matte, opaque jar in the product colour (pink, light blue, lilac,
   yellow), screw cap in the same colour, smooth, no logo on the cap.
 - Full-wrap matte label (or direct print) with metallic foil swirls
@@ -113,8 +112,8 @@ QUESTIONS
    apply to custom packaging? Shipping time to Germany, and can you ship
    DDP (duties paid)? Air and sea prices please.
 7. Payment terms: what deposit do you need, and when is the balance due?
-8. Certificates: please send copies of GMP, HACCP, ISO 22000, ISO 9001 and
-   Halal, and a vegan certificate if you have one.
+8. We saw your certificates, thank you. Do you also have a vegan
+   certificate?
 9. For each batch: certificate of analysis incl. active ingredients, heavy
    metals and microbiology? Shelf life and stability data?
 10. Can you print batch number and best-before date on each jar?
@@ -156,7 +155,7 @@ Zertifikate laut Angebot: GMP, HACCP, ISO 22000, ISO 9001, Halal, CoA, Sicherhei
 - Bei FLEX zum Shoppreis von 29,90 € ist der Einkauf mit ca. 4,50 € plus Versand und Zoll sehr gut. Bei FLEX ist das Risiko am kleinsten, weil er das Produkt schon fertig hat.
 - 90 Gummies à ca. 2,2 g heißt wohl 3 Gummies pro Tag. Das klärt unsere Frage nach 1,5 g pro Gummy: einfach 3 am Tag. Shop und Etikett müssten dann von 60 auf 90 Stück.
 - Die Lieferzeit ist 14 Tage Produktion bis 500 Stück, nicht 7 Tage. Die 7 Tage sind vermutlich nur der Versand.
-- Ein Vegan-Zertifikat steht nicht in der Liste, nur Halal. In der Mail nachfragen.
+- Zertifikate hat er auf Alibaba hochgeladen. Ein Vegan-Zertifikat steht nicht in der Liste, nur Halal. Die Mail fragt nur noch danach.
 - Der Laden ist jung und hat wenige Bewertungen. Deshalb über Alibaba bezahlen (Trade Assurance mit Geld-zurück-Garantie), nicht per Überweisung außerhalb.
 - Die Preise gelten für sein Standardprodukt. Ob eigene Dose, farbiger Deckel und Etikett extra kosten, fragt die Mail.
 

@@ -28,7 +28,8 @@ the only manufacturer we found that offers full customisation, no MOQ and
 all the certificates we need.
 
 WHAT WE PLAN
-- Gummy supplements, 60 gummies per jar, 2 gummies per day (30 days).
+- Gummy supplements for 30 days per jar: usually 60 gummies, 2 per day
+  (FLEX can be 90 gummies, 3 per day).
 - We'll start focused with 1 to 3 products and add more step by step.
   Below are our four candidates. Please tell us which formulas you can
   produce, so we can pick the first ones.
@@ -36,7 +37,7 @@ WHAT WE PLAN
   monthly subscriptions.
 - We want to start with small batches and scale up quickly with demand.
 
-OUR 4 CANDIDATES (per daily serving of 2 gummies)
+OUR 4 CANDIDATES (per daily serving)
 1) GLOW – Beauty Gummies, pink
    Biotin (amount to be confirmed, we'd like to go lower than 450 µg,
    e.g. 50 µg), Zinc 5 mg, Vitamin C 80 mg
@@ -75,7 +76,7 @@ shape.
 PACKAGING – our designs are almost finished, we'll send you the final
 product images once you confirm you can produce this. The look:
 - We saw your options (wide-mouthed bottle, square bottle, bag, barrel).
-  We want the round wide-mouthed jar for 60 gummies, filled nicely to the
+  We want the round wide-mouthed jar for 60 (FLEX: 90) gummies, filled nicely to the
   top. Which jar size do you recommend? We estimate around 200–250 ml for
   3 g gummies (FLEX may need a bigger one if the gummies are heavier).
 - Fully matte, opaque jar in the product colour (pink, light blue, lilac,

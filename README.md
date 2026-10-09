@@ -8,6 +8,18 @@ Klickbarer Prototyp des bärly-Shops. Marke: **bärly** (Domain: bärly.de). Cla
 - **GitHub Pages (empfohlen, lädt alle Bilder):** Repo → Settings → Pages → Branch auswählen → Ordner `/ (root)`.
 - **Ohne Setup:** `https://htmlpreview.github.io/?https://github.com/REGRESI/Gummieempire/blob/<branch>/index.html`
 
+## Domain www.bärly.de
+
+`CNAME` enthält die Domain in Punycode (`www.xn--brly-loa.de`), so verlangt es GitHub Pages.
+
+1. GitHub: Repo → Settings → Pages → Source „Deploy from a branch“, Branch `claude/charming-maxwell-fmxgdw`, Ordner `/ (root)`.
+2. United Domains → Domain bärly.de → DNS-Einstellungen:
+   - `www` als CNAME auf `regresi.github.io.`
+   - Hauptdomain (`@`) als A-Records auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (dann leitet bärly.de auf www weiter)
+3. Nach der DNS-Umstellung (meist unter einer Stunde, bis 24 h) in Settings → Pages „Enforce HTTPS“ anhaken.
+
+Kommt später Shopify dazu, zeigt die Domain stattdessen auf Shopify (dort „Domain verbinden“); dann `CNAME` hier löschen.
+
 ## Seiten
 
 | Datei | Inhalt |

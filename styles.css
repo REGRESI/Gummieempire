@@ -25,7 +25,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 96px; }
+/* Seitenwechsel im Shop: sanft überblenden statt hart umschalten (Chrome, Edge, Safari 18.2+) */
+@view-transition { navigation: auto; }
 body {
+  visibility: visible; animation: none;
   margin: 0;
   overflow-x: clip;
   background: var(--bg);

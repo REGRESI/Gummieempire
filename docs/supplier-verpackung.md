@@ -4,7 +4,7 @@ Stand: 09.10.2026 · Branch `claude/supplier-verpackung-56motr`
 
 ## Was zu tun ist
 
-1. **Morgen:** Nachricht unten (Abschnitt 1) an den Supplier aus China schicken. Die vier Packshots aus `assets/products/` als Bilder anhängen (`glow-front.webp`, `flex-front.webp`, `snoozy-front.webp`, `daily-front.webp`; vorher als JPG/PNG exportieren, WhatsApp/Alibaba zeigen WebP nicht immer an).
+1. Nachricht unten (Abschnitt 1) an den Supplier aus China schicken, ohne Bilder. Die fertigen Produktbilder bekommt er erst, wenn er bestätigt hat, dass er alles umsetzen kann.
 2. Antwort mit der Checkliste in Abschnitt 2 auswerten. Wenn alle Muss-Punkte erfüllt sind: Muster bestellen, Plan A.
 3. Wenn nicht: Plan B (Abschnitt 3) bzw. die bessere Alternative B+ (Abschnitt 4).
 4. Nach seiner Antwort: Start-Sortiment festlegen (1 bis 3 Produkte, wie Bloom mit wenigen Kernprodukten) und Produktdesign, Geschmäcker und Shop daran anpassen.
@@ -48,7 +48,7 @@ OUR 4 CANDIDATES (per daily serving of 2 gummies)
    Melatonin 1 mg, Magnesium 57 mg, Vitamin B6 1.4 mg
 4) DAILY – Multivitamin Gummies, yellow
    Vitamins A, D3 (10 µg), E, C, B1, B2, B3, B5, B6, B12, biotin, folic acid,
-   plus zinc, selenium, iodine (full list attached / on request)
+   plus zinc, selenium, iodine (full list on request)
 
 Requirements for all: vegan (pectin, no gelatine), natural colours only
 (no azo dyes, no titanium dioxide), EU-compliant vitamin/mineral forms,
@@ -71,8 +71,8 @@ shape.
 - Can we use your existing gummy bear mould? Which other shapes do you have?
 - Later maybe a custom mould with our own bear: cost and lead time?
 
-PACKAGING – please see the 4 attached product images, the jars should look
-exactly like this:
+PACKAGING – our designs are almost finished, we'll send you the final
+product images once you confirm you can produce this. The look:
 - We saw your options (wide-mouthed bottle, square bottle, bag, barrel).
   We want the round wide-mouthed jar, approx. Ø 70 mm, around 300–400 ml, 60 gummies.
 - Fully matte, opaque jar in the product colour (pink, light blue, lilac,
@@ -82,7 +82,7 @@ exactly like this:
   product name, category, small icon (crown, arm, moon, sun).
 - Tamper-evident inner seal.
 - We provide the artwork. Can your team create the dieline / print files
-  from our images, and do you send a print proof before production?
+  from our designs, and do you send a print proof before production?
 
 MULTI-PACK GIFT BOX
 For bundles we'd like a premium outer box that holds several jars, so the

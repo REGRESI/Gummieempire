@@ -7,7 +7,7 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 1. Nachricht unten (Abschnitt 1) an den Supplier aus China schicken, ohne Bilder. Die fertigen Produktbilder bekommt er erst, wenn er bestätigt hat, dass er alles umsetzen kann.
 2. Antwort mit der Checkliste in Abschnitt 2 auswerten. Wenn alle Muss-Punkte erfüllt sind: Muster bestellen, Plan A.
 3. Wenn nicht: Plan B (Abschnitt 3) bzw. die bessere Alternative B+ (Abschnitt 4).
-4. Nach seiner Antwort: Start-Sortiment festlegen (1 bis 3 Produkte, wie Bloom mit wenigen Kernprodukten) und Produktdesign, Geschmäcker und Shop daran anpassen.
+4. Nach seiner Antwort: Geschmäcker festlegen (alle vier Produkte zum Start, je 2 bis 3 Geschmäcker) und Produktdesign und Shop daran anpassen.
 5. Wenn die Muster da sind: Abschnitt 5 abarbeiten (Muster-Check), erst dann Produktion.
 
 **Empfehlung:** Plan A, also der Supplier aus China. Nur dort sieht das echte Produkt aus wie auf unseren Packshots, und auf genau diesen Bildern bauen Shop, Ads und Creator-Content auf. Begründung in Abschnitt 4.
@@ -30,14 +30,12 @@ all the certificates we need.
 WHAT WE PLAN
 - Gummy supplements for 30 days per jar: usually 60 gummies, 2 per day
   (FLEX can be 90 gummies, 3 per day).
-- We'll start focused with 1 to 3 products and add more step by step.
-  Below are our four candidates. Please tell us which formulas you can
-  produce, so we can pick the first ones.
+- We'll launch all four products below at once, each in 2 to 3 flavours.
 - Selling online in Germany/EU (Shopify), first through pre-orders, then
   monthly subscriptions.
 - We want to start with small batches and scale up quickly with demand.
 
-OUR 4 CANDIDATES (per daily serving)
+OUR 4 PRODUCTS (per daily serving)
 1) GLOW – Beauty Gummies, pink
    Biotin (amount to be confirmed, we'd like to go lower than 450 µg,
    e.g. 50 µg), Zinc 5 mg, Vitamin C 80 mg
@@ -58,11 +56,12 @@ gummy weight around 3 g. Low sugar or sugar-free options are welcome,
 please tell us what you offer.
 
 FLAVOURS
-We saw your flavour list. Our preferred flavours:
-- GLOW: raspberry (is your "cranberry" picture raspberry?), else strawberry
-- FLEX: blueberry
-- SNOOZY: mixed berries
-- DAILY: mango (or lemon-mango / orange)
+We saw your flavour list. We'd like 2 to 3 flavours per product:
+- GLOW: raspberry (is your "cranberry" picture raspberry?) or strawberry,
+  cherry, honey peach
+- FLEX: blueberry, green apple, watermelon
+- SNOOZY: mixed berries, grape, cherry
+- DAILY: mango, orange, pineapple
 Can every flavour be combined with every formula (e.g. creatine and
 minerals change the taste)? Can the gummy colour match the product colour
 (pink, blue, purple, yellow) with natural colours?
@@ -98,9 +97,9 @@ unboxing feels special (similar to what some beauty brands do):
 
 QUESTIONS
 1. Can you produce all four formulas above in all requested flavours and
-   the bear shape? If not, which ones?
+   the bear shape? If not, which formula/flavour combinations work best?
 2. Samples: can you send samples of the formulas you can make (or as close
-   as possible with existing recipes) in our flavours and bear shape, plus
+   as possible with existing recipes) in all our flavours and bear shape, plus
    one jar + label sample? Cost and shipping time to Germany?
 3. Is there really no minimum order quantity per product, per flavour,
    per shape and per packaging design?
@@ -154,7 +153,7 @@ Zertifikate laut Angebot: GMP, HACCP, ISO 22000, ISO 9001, Halal, CoA, Sicherhei
 **Was das für uns heißt:**
 
 - Keine Mindestmenge stimmt: Preise ab 1 Stück.
-- Bei FLEX zum Shoppreis von 29,90 € ist der Einkauf mit ca. 4,50 € plus Versand und Zoll sehr gut. FLEX ist damit der naheliegende erste Kandidat, weil er das Produkt schon fertig hat.
+- Bei FLEX zum Shoppreis von 29,90 € ist der Einkauf mit ca. 4,50 € plus Versand und Zoll sehr gut. Bei FLEX ist das Risiko am kleinsten, weil er das Produkt schon fertig hat.
 - 90 Gummies à ca. 2,2 g heißt wohl 3 Gummies pro Tag. Das klärt unsere Frage nach 1,5 g pro Gummy: einfach 3 am Tag. Shop und Etikett müssten dann von 60 auf 90 Stück.
 - Die Lieferzeit ist 14 Tage Produktion bis 500 Stück, nicht 7 Tage. Die 7 Tage sind vermutlich nur der Versand.
 - Ein Vegan-Zertifikat steht nicht in der Liste, nur Halal. In der Mail nachfragen.

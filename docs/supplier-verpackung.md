@@ -1,6 +1,6 @@
 # Supplier & Verpackung
 
-Stand: 09.10.2026 · Branch `claude/supplier-verpackung-56motr`
+Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 ## Was zu tun ist
 
@@ -42,8 +42,9 @@ OUR 4 CANDIDATES (per daily serving of 2 gummies)
    e.g. 50 µg), Zinc 5 mg, Vitamin C 80 mg
 2) FLEX – Creatine Gummies, blue
    Creatine 3 g (from creatine monohydrate), Vitamin B6 0.7 mg, B12 2.5 µg
-   -> Can you do 1.5 g creatine per gummy in a stable way? If not, what is
-      the max per gummy (we could go to 3 gummies/day)?
+   -> We saw your creatine gummies (BK2025102003, 3 g creatine per serving,
+      90 gummies, sugar-free, blueberry). That's a great base for FLEX.
+      Is it 3 gummies per serving (1 g creatine each)? Can you add B6/B12?
 3) SNOOZY – Sleep Gummies, purple
    Melatonin 1 mg, Magnesium 57 mg, Vitamin B6 1.4 mg
 4) DAILY – Multivitamin Gummies, yellow
@@ -102,14 +103,18 @@ QUESTIONS
    one jar + label sample? Cost and shipping time to Germany?
 3. Is there really no minimum order quantity per product, per flavour,
    per shape and per packaging design?
-4. Unit price (gummies + jar + label, filled and sealed) per product at:
-   100 / 300 / 500 / 1,000 / 3,000 jars. Please list one-off costs
-   separately (mould, printing plates, setup).
+4. We saw your prices for the creatine gummies (5.67 € / 4.54 € / 3.42 € /
+   3.15 €). Do they include our custom jar, coloured cap and full-wrap
+   label, or what is the extra cost? Please quote the same tiers for the
+   other formulas and list one-off costs separately (mould, printing
+   plates, setup).
 5. Price for the multi-pack box (2-jar and 4-jar) at 100 / 500 / 1,000.
-6. Production lead time and shipping time to Germany. Can you ship DDP
-   (duties paid) to Germany? Air and sea prices please.
+6. Your listing says 14 days production up to 500 units. Does that also
+   apply to custom packaging? Shipping time to Germany, and can you ship
+   DDP (duties paid)? Air and sea prices please.
 7. Payment terms: what deposit do you need, and when is the balance due?
-8. Certificates: please send copies (Halal, vegan, ISO, GMP, HACCP, etc.).
+8. Certificates: please send copies of GMP, HACCP, ISO 22000, ISO 9001 and
+   Halal, and a vegan certificate if you have one.
 9. For each batch: certificate of analysis incl. active ingredients, heavy
    metals and microbiology? Shelf life and stability data?
 10. Can you print batch number and best-before date on each jar?
@@ -129,6 +134,31 @@ bärly · [E-Mail] · [WhatsApp/Telefon]
 Hinweis zu GLOW: Im Shop stehen noch 450 µg Biotin. Der Vorbestellplan schlägt eine niedrigere Dosis vor (z. B. 50 µg), entschieden ist das noch nicht. Die Nachricht fragt deshalb offen.
 
 ---
+
+## 1b. Was sein Alibaba-Angebot schon verrät (Stand 09.10.2026)
+
+Biocaro Pharmaceutical Co., Ltd. (Marke BIOCCHN), Zhengzhou, Verified PRO, seit 1 Jahr auf Alibaba, Antwortzeit ≤ 3 h, 100 % pünktliche Lieferung, 4,3/5 aus nur 6 Bewertungen, 10–20 Tsd. $ Online-Umsatz.
+
+Kreatin-Gummies (Modell BK2025102003): vegan, zuckerfrei, 3 g Kreatin pro Portion, 90 Gummies und 200 g pro Dose, Blaubeere, 24 Monate haltbar, Muster verfügbar, volle Anpassung (OEM/ODM, eigene Rezeptur, eigene Verpackung).
+
+| Menge | Preis pro Dose | Produktion |
+| --- | --- | --- |
+| 1–49 | 5,67 € | 14 Tage (bis 500) |
+| 50–499 | 4,54 € | 14 Tage |
+| 500–2.999 | 3,42 € | 35 Tage (501–3.000) |
+| ab 3.000 | 3,15 € | 42 Tage |
+
+Zertifikate laut Angebot: GMP, HACCP, ISO 22000, ISO 9001, Halal, CoA, Sicherheitsdatenblatt.
+
+**Was das für uns heißt:**
+
+- Keine Mindestmenge stimmt: Preise ab 1 Stück.
+- Bei FLEX zum Shoppreis von 29,90 € ist der Einkauf mit ca. 4,50 € plus Versand und Zoll sehr gut. FLEX ist damit der naheliegende erste Kandidat, weil er das Produkt schon fertig hat.
+- 90 Gummies à ca. 2,2 g heißt wohl 3 Gummies pro Tag. Das klärt unsere Frage nach 1,5 g pro Gummy: einfach 3 am Tag. Shop und Etikett müssten dann von 60 auf 90 Stück.
+- Die Lieferzeit ist 14 Tage Produktion bis 500 Stück, nicht 7 Tage. Die 7 Tage sind vermutlich nur der Versand.
+- Ein Vegan-Zertifikat steht nicht in der Liste, nur Halal. In der Mail nachfragen.
+- Der Laden ist jung und hat wenige Bewertungen. Deshalb über Alibaba bezahlen (Trade Assurance mit Geld-zurück-Garantie), nicht per Überweisung außerhalb.
+- Die Preise gelten für sein Standardprodukt. Ob eigene Dose, farbiger Deckel und Etikett extra kosten, fragt die Mail.
 
 ## 2. Antwort auswerten
 

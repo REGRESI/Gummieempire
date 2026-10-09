@@ -239,9 +239,9 @@ function productCard(p) {
 function setCard(b) {
   const warn = warnFor(b.id);
   return `<article class="set" data-reveal>
-    <div class="set-visual">${adultFor(b.id) ? '<span class="product-badge" aria-hidden="true">18+</span>' : ''}${b.members.map(id => shot(id)).join('')}</div>
+    <a class="set-visual" ${link(pdpUrl(b.id))} tabindex="-1" aria-hidden="true">${adultFor(b.id) ? '<span class="product-badge">18+</span>' : ''}${b.members.map(id => shot(id)).join('')}</a>
     <div>
-      <h3>${b.name}</h3>
+      <h3><a ${link(pdpUrl(b.id))}>${b.name}</a></h3>
       <p>${SET_TEXT[b.id] || b.title}</p>
       ${warn ? `<p class="set-warn">SNOOZY: ${warn}</p>` : ''}
       <p class="set-price"><strong>${eur(b.price)}</strong><em>statt einzeln ${eur(memberSum(b))}</em><span>im Abo ${eur(planFor(b, 'abo').price)}</span></p>

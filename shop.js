@@ -281,14 +281,15 @@ function confirmButton(btn) {
   btn.classList.remove('is-added'); void btn.offsetWidth; btn.classList.add('is-added');
 }
 
+/* Nur echte Knöpfe legen in den Warenkorb: Set-Seiten tragen data-bundle auch auf <main> */
 document.addEventListener('click', e => {
-  const add = e.target.closest('[data-add]');
+  const add = e.target.closest('button[data-add]');
   if (add) {
     addToCart(add.dataset.add, add.dataset.plan || 'once', { from: add });
     confirmButton(add);
     return;
   }
-  const bundle = e.target.closest('[data-bundle]');
+  const bundle = e.target.closest('button[data-bundle]');
   if (bundle) { addToCart(bundle.dataset.bundle, bundle.dataset.plan || 'once', { from: bundle }); confirmButton(bundle); }
 });
 

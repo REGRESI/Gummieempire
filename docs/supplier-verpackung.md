@@ -74,7 +74,9 @@ shape.
 PACKAGING – our designs are almost finished, we'll send you the final
 product images once you confirm you can produce this. The look:
 - We saw your options (wide-mouthed bottle, square bottle, bag, barrel).
-  We want the round wide-mouthed jar, approx. Ø 70 mm, around 300–400 ml, 60 gummies.
+  We want the round wide-mouthed jar for 60 gummies, filled nicely to the
+  top. Which jar size do you recommend? We estimate around 200–250 ml for
+  3 g gummies (FLEX may need a bigger one if the gummies are heavier).
 - Fully matte, opaque jar in the product colour (pink, light blue, lilac,
   yellow), screw cap in the same colour, smooth, no logo on the cap.
 - Full-wrap matte label (or direct print) with metallic foil swirls

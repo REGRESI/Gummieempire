@@ -1,13 +1,14 @@
 # Supplier & Verpackung
 
-Stand: 08.10.2026 · Branch `claude/supplier-verpackung-56motr`
+Stand: 09.10.2026 · Branch `claude/supplier-verpackung-56motr`
 
 ## Was zu tun ist
 
 1. **Morgen:** Nachricht unten (Abschnitt 1) an den Supplier aus China schicken. Die vier Packshots aus `assets/products/` als Bilder anhängen (`glow-front.webp`, `flex-front.webp`, `snoozy-front.webp`, `daily-front.webp`; vorher als JPG/PNG exportieren, WhatsApp/Alibaba zeigen WebP nicht immer an).
 2. Antwort mit der Checkliste in Abschnitt 2 auswerten. Wenn alle Muss-Punkte erfüllt sind: Muster bestellen, Plan A.
 3. Wenn nicht: Plan B (Abschnitt 3) bzw. die bessere Alternative B+ (Abschnitt 4).
-4. Wenn die Muster da sind: Abschnitt 5 abarbeiten (Muster-Check), erst dann Produktion.
+4. Nach seiner Antwort: Start-Sortiment festlegen (1 bis 3 Produkte, wie Bloom mit wenigen Kernprodukten) und Produktdesign, Geschmäcker und Shop daran anpassen.
+5. Wenn die Muster da sind: Abschnitt 5 abarbeiten (Muster-Check), erst dann Produktion.
 
 **Empfehlung:** Plan A, also der Supplier aus China. Nur dort sieht das echte Produkt aus wie auf unseren Packshots, und auf genau diesen Bildern bauen Shop, Ads und Creator-Content auf. Begründung in Abschnitt 4.
 
@@ -27,39 +28,53 @@ the only manufacturer we found that offers full customisation, no MOQ and
 all the certificates we need.
 
 WHAT WE PLAN
-- 4 gummy supplements, each 60 gummies per jar, 2 gummies per day (30 days).
+- Gummy supplements, 60 gummies per jar, 2 gummies per day (30 days).
+- We'll start focused with 1 to 3 products and add more step by step.
+  Below are our four candidates. Please tell us which formulas you can
+  produce, so we can pick the first ones.
 - Selling online in Germany/EU (Shopify), first through pre-orders, then
   monthly subscriptions.
 - We want to start with small batches and scale up quickly with demand.
 
-THE 4 PRODUCTS (per daily serving of 2 gummies)
-1) GLOW – Beauty Gummies, raspberry, pink
+OUR 4 CANDIDATES (per daily serving of 2 gummies)
+1) GLOW – Beauty Gummies, pink
    Biotin (amount to be confirmed, we'd like to go lower than 450 µg,
    e.g. 50 µg), Zinc 5 mg, Vitamin C 80 mg
-2) FLEX – Creatine Gummies, blueberry, blue
+2) FLEX – Creatine Gummies, blue
    Creatine 3 g (from creatine monohydrate), Vitamin B6 0.7 mg, B12 2.5 µg
    -> Can you do 1.5 g creatine per gummy in a stable way? If not, what is
       the max per gummy (we could go to 3 gummies/day)?
-3) SNOOZY – Sleep Gummies, mixed berry, purple
+3) SNOOZY – Sleep Gummies, purple
    Melatonin 1 mg, Magnesium 57 mg, Vitamin B6 1.4 mg
-4) DAILY – Multivitamin Gummies, lemon-mango, yellow
+4) DAILY – Multivitamin Gummies, yellow
    Vitamins A, D3 (10 µg), E, C, B1, B2, B3, B5, B6, B12, biotin, folic acid,
    plus zinc, selenium, iodine (full list attached / on request)
 
-Requirements for all four: vegan (pectin, no gelatine), natural colours only
+Requirements for all: vegan (pectin, no gelatine), natural colours only
 (no azo dyes, no titanium dioxide), EU-compliant vitamin/mineral forms,
 gummy weight around 3 g. Low sugar or sugar-free options are welcome,
 please tell us what you offer.
 
+FLAVOURS
+We saw your flavour list. Our preferred flavours:
+- GLOW: raspberry (is your "cranberry" picture raspberry?), else strawberry
+- FLEX: blueberry
+- SNOOZY: mixed berries
+- DAILY: mango (or lemon-mango / orange)
+Can every flavour be combined with every formula (e.g. creatine and
+minerals change the taste)? Can the gummy colour match the product colour
+(pink, blue, purple, yellow) with natural colours?
+
 GUMMY SHAPE
-Our brand characters are four bears. We'd love a bear-shaped gummy.
-- Do you have an existing bear mould we can use?
-- What would a custom mould with our own bear shape cost, and how long
-  does it take?
+Our brand characters are four bears, so we'd like the classic gummy bear
+shape.
+- Can we use your existing gummy bear mould? Which other shapes do you have?
+- Later maybe a custom mould with our own bear: cost and lead time?
 
 PACKAGING – please see the 4 attached product images, the jars should look
 exactly like this:
-- Round wide-mouth jar, approx. Ø 70 mm, around 300–400 ml, 60 gummies.
+- We saw your options (wide-mouthed bottle, square bottle, bag, barrel).
+  We want the round wide-mouthed jar, approx. Ø 70 mm, around 300–400 ml, 60 gummies.
 - Fully matte, opaque jar in the product colour (pink, light blue, lilac,
   yellow), screw cap in the same colour, smooth, no logo on the cap.
 - Full-wrap matte label (or direct print) with metallic foil swirls
@@ -78,23 +93,26 @@ unboxing feels special (similar to what some beauty brands do):
 - Can you produce these boxes and the cards too? Price and MOQ?
 
 QUESTIONS
-1. Samples: can you send samples of all 4 products (or as close as possible
-   with existing recipes) plus one jar + label sample? Cost and shipping
+1. Can you produce all four formulas above in all requested flavours and
+   the bear shape? If not, which ones?
+2. Samples: can you send samples of the formulas you can make (or as close
+   as possible with existing recipes) in our flavours and bear shape, plus
+   one jar + label sample? Cost and shipping
    time to Germany?
-2. Is there really no minimum order quantity per product, per flavour and
-   per packaging design?
-3. Unit price (gummies + jar + label, filled and sealed) per product at:
+3. Is there really no minimum order quantity per product, per flavour,
+   per shape and per packaging design?
+4. Unit price (gummies + jar + label, filled and sealed) per product at:
    100 / 300 / 500 / 1,000 / 3,000 jars. Please list one-off costs
    separately (mould, printing plates, setup).
-4. Price for the multi-pack box (2-jar and 4-jar) at 100 / 500 / 1,000.
-5. Production lead time and shipping time to Germany. Can you ship DDP
+5. Price for the multi-pack box (2-jar and 4-jar) at 100 / 500 / 1,000.
+6. Production lead time and shipping time to Germany. Can you ship DDP
    (duties paid) to Germany? Air and sea prices please.
-6. Payment terms: what deposit do you need, and when is the balance due?
-7. Certificates: please send copies (Halal, vegan, ISO, GMP, HACCP, etc.).
-8. For each batch: certificate of analysis incl. active ingredients, heavy
+7. Payment terms: what deposit do you need, and when is the balance due?
+8. Certificates: please send copies (Halal, vegan, ISO, GMP, HACCP, etc.).
+9. For each batch: certificate of analysis incl. active ingredients, heavy
    metals and microbiology? Shelf life and stability data?
-9. Can you print batch number and best-before date on each jar?
-10. Do you also offer refill pouches (flat stand-up or 3-side-seal bag,
+10. Can you print batch number and best-before date on each jar?
+11. Do you also offer refill pouches (flat stand-up or 3-side-seal bag,
     60 gummies) in matching design? We'd like to add those later.
 
 If everything works, we'd like to order samples this week and start with a

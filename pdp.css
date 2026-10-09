@@ -34,7 +34,7 @@
 .g-stage { position: relative; aspect-ratio: 4 / 5; max-height: calc(100svh - 270px); width: 100%; border-radius: 28px; overflow: hidden; background: #efe9e3; touch-action: pan-y; }
 .g-view { position: absolute; inset: 0; animation: fade .5s var(--ease); }
 .g-view img { -webkit-user-drag: none; user-select: none; }
-.g-shot .shot { position: absolute; inset: 0; object-position: 50% 30%; }   /* wird die Bühne breiter als 4:5, unten statt am Deckel beschneiden */
+.g-shot .shot { position: absolute; inset: 0; }
 .g-duo .shot { position: absolute; right: 7%; top: 9%; width: 62%; height: auto; aspect-ratio: 4 / 5; border-radius: 22px; box-shadow: 0 40px 70px -34px rgba(31, 27, 45, .5); }
 .g-duo .bear { position: absolute; left: 0; bottom: 2%; width: 52%; filter: drop-shadow(0 24px 26px rgba(31, 27, 45, .22)); }
 .g-bear .bear { position: absolute; left: 50%; bottom: 4%; width: 74%; translate: -50% 0; filter: drop-shadow(0 26px 30px rgba(31, 27, 45, .2)); }

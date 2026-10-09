@@ -4,7 +4,7 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 ## Was zu tun ist
 
-1. Nachricht unten (Abschnitt 1) an den Supplier aus China schicken, ohne Bilder. Die fertigen Produktbilder bekommt er erst, wenn er bestätigt hat, dass er alles umsetzen kann.
+1. Kurze Nachricht (Abschnitt 1) an den Supplier schicken, ohne Bilder. Wenn er zusagt, Details aus Abschnitt 1a nachschieben. Die fertigen Produktbilder bekommt er erst, wenn er bestätigt hat, dass er alles umsetzen kann.
 2. Antwort mit der Checkliste in Abschnitt 2 auswerten. Wenn alle Muss-Punkte erfüllt sind: Muster bestellen, Plan A.
 3. Wenn nicht: Plan B (Abschnitt 3) bzw. die bessere Alternative B+ (Abschnitt 4).
 4. Nach seiner Antwort: Geschmäcker festlegen (alle vier Produkte zum Start, je 2 bis 3 Geschmäcker) und Produktdesign und Shop daran anpassen.
@@ -14,7 +14,33 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 ---
 
-## 1. Nachricht an den Supplier (zum Einfügen)
+## 1. Erste Nachricht an den Supplier (kurz, zum Einfügen)
+
+Kurz gehalten, weil das Alibaba-Feld lange Texte nicht absendet. Erst klären, ob er es überhaupt kann; Details (Verpackung, Multipack-Box, Zahlung, CoA) kommen in der zweiten Runde aus Abschnitt 1a.
+
+```text
+Hi, I'm Nico, founder of bärly, a new German brand for vegan supplement gummies. We want to launch 4 products under our own brand for Black Friday:
+
+1. Beauty (biotin, zinc, vitamin C)
+2. Creatine (3 g/day, like your BK2025102003)
+3. Sleep (melatonin, magnesium, B6)
+4. Multivitamin
+
+Each in 2-3 flavours, classic gummy bear shape, 30 days per jar (60 or 90 gummies), custom coloured jar with our full label.
+
+Quick questions:
+1. Can you make all 4 in bear shape and different flavours?
+2. How much does one bear gummy weigh?
+3. No MOQ per product and flavour?
+4. Price per jar incl. custom jar and label at 100 / 500 / 1,000?
+5. Samples: cost and shipping time to Germany?
+6. Do you have a vegan certificate?
+
+If it fits, we'd like to order samples right away. Thanks!
+Nico
+```
+
+## 1a. Details für die zweite Runde (nach seiner Zusage)
 
 Englisch, weil das bei chinesischen OEM-Herstellern der Standard ist. Platzhalter in `[eckigen Klammern]` vorher ausfüllen.
 

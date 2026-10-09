@@ -22,8 +22,8 @@ Englisch, weil das bei chinesischen OEM-Herstellern der Standard ist. Platzhalte
 Hi [Name],
 
 my name is Nico, I'm the founder of bärly, a new German brand for vegan
-supplement gummies. We're launching with four products and a big creator
-campaign for Black Friday, and we'd love to produce with you because you're
+supplement gummies. We're launching our first products together with a big
+creator campaign for Black Friday, and we'd love to produce with you because you're
 the only manufacturer we found that offers full customisation, no MOQ and
 all the certificates we need.
 
@@ -97,8 +97,7 @@ QUESTIONS
    the bear shape? If not, which ones?
 2. Samples: can you send samples of the formulas you can make (or as close
    as possible with existing recipes) in our flavours and bear shape, plus
-   one jar + label sample? Cost and shipping
-   time to Germany?
+   one jar + label sample? Cost and shipping time to Germany?
 3. Is there really no minimum order quantity per product, per flavour,
    per shape and per packaging design?
 4. Unit price (gummies + jar + label, filled and sealed) per product at:

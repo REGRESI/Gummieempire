@@ -121,7 +121,7 @@ Design a premium collectible character card, like a trading card for adults. Rou
 Top two thirds: the character, full body, winking and waving with one paw, soft plush 3d character render, pixar-like quality, velvety fluffy fur with fine strand detail, soft studio lighting with gentle rim light.
 Bottom third, clean typography in a bold rounded sans-serif, dark ink #1d1236, perfectly spelled including umlauts:
 Line 1, large: "GLOW"
-Line 2, small caps: "{ROLLE: neuer Name für GLOW, kommt aus dem Shop-Thread}"
+Line 2, small caps: "The Icon"
 Line 3: "Charmant, selbstbewusst und immer ein bisschen extra."
 Line 4, small, with a tiny clock icon: "Morgens, zwischen Serum und Parfum"
 Bottom center, very small: "bärly · Same Bears. Better Days."
@@ -130,7 +130,7 @@ No other text.
 Avoid: changed fur color, missing or changed accessories, extra limbs, human body, realistic animal, flat 2D cartoon, altered jar label, misspelled "bärly", piles of gummies, children, cluttered background, watermark.
 ```
 
-Rückseite: lieber in Canva setzen (Steckbrief: Ziel Beauty, Geschmack Himbeere, Biotin · Zink · Vitamin C, Einnahme). Mit `[TEXT-AUS]` aus den Bausteinen kannst du ein leeres Rückseitenmuster erzeugen. `{ROLLE}` erst ersetzen, wenn der neue Name für GLOW feststeht. Bis dahin Zeile 2 weglassen.
+Rückseite: lieber in Canva setzen (Steckbrief: Ziel Beauty, Geschmack Himbeere, Biotin · Zink · Vitamin C, Einnahme). Mit `[TEXT-AUS]` aus den Bausteinen kannst du ein leeres Rückseitenmuster erzeugen.
 
 ### C-GLOW-06 · Sticker
 

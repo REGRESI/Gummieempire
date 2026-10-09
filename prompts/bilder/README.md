@@ -63,7 +63,7 @@ Die gleichen wie in `assets/ASSETS.md`, damit Content und Shop zusammenpassen:
 - Produkt zuerst, Bär als zweite Ebene. Erwachsen, ruhig, hochwertig.
 - Gummies nie als Snack in großen Mengen: höchstens die Tagesportion (2 Stück) plus ein paar Deko-Gummies, keine Haufen, keine Schüssel.
 - Dose und Bär exakt wie in den Referenzen: Etikett, Farben, Logo, Krone, Brillen, Mütze, Hoodie bleiben, wie sie sind.
-- GLOW nicht „Main Character“ nennen (der neue Rollenname kommt aus dem Shop-Thread).
+- GLOWs Rolle heißt „The Icon“ (nicht mehr „Main Character“).
 - Texte im Bild: nur Aussagen, die auch im Shop stehen (`brand.js`, Feld `claim`/`cardClaim`). Keine Heilversprechen wie „heilt“, „garantiert“, „gegen“.
 
 ## Wenn das Etikett nicht stimmt

@@ -8,6 +8,18 @@ Klickbarer Prototyp des bärly-Shops. Marke: **bärly** (Domain: bärly.de). Cla
 - **GitHub Pages (empfohlen, lädt alle Bilder):** Repo → Settings → Pages → Branch auswählen → Ordner `/ (root)`.
 - **Ohne Setup:** `https://htmlpreview.github.io/?https://github.com/REGRESI/Gummieempire/blob/<branch>/index.html`
 
+## Domain www.bärly.de
+
+`CNAME` enthält die Domain in Punycode (`www.xn--brly-loa.de`), so verlangt es GitHub Pages.
+
+1. GitHub: Repo → Settings → Pages → Source „Deploy from a branch“, Branch `claude/charming-maxwell-fmxgdw`, Ordner `/ (root)`.
+2. United Domains → Domain bärly.de → DNS-Einstellungen:
+   - `www` als CNAME auf `regresi.github.io.`
+   - Hauptdomain (`@`) als A-Records auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (dann leitet bärly.de auf www weiter)
+3. Nach der DNS-Umstellung (meist unter einer Stunde, bis 24 h) in Settings → Pages „Enforce HTTPS“ anhaken.
+
+Kommt später Shopify dazu, zeigt die Domain stattdessen auf Shopify (dort „Domain verbinden“); dann `CNAME` hier löschen.
+
 ## Seiten
 
 | Datei | Inhalt |
@@ -57,6 +69,7 @@ Nur die freigegebenen Dateien aus `assets/` (siehe `assets/ASSETS.md`). Es gibt 
 
 - Produkte, Formate, Preise: `brand.js` (`PRODUCTS`, `PACK_INFO`, `plansFor`, `BUNDLES`)
 - Texte für Hero und Produktseiten (Schlagzeilen, Sprechblasen, Steckbrief, Einnahme, FAQ): `brand.js` (`PDP`)
+- Black Week (Crew-Abo zum Aktionspreis, Banner mit Countdown, Angebotsblock unter dem Hero): `brand.js` (`BLACK_FRIDAY`: Preis, Teaser-, Start- und Endzeit). Vorschau ohne auf das Datum zu warten: `?bf=live`, `?bf=teaser` oder `?bf=off` an die Adresse hängen. Inhalt der Crew: `BUNDLES.crew.includes`. Koop „Glow Inside & Out“ mit SKINCARRY: `BUNDLES.glowduo` und `BUNDLES.glowritual` (Preise bestätigen, Bilder eintragen, dann `soon` entfernen); Gratis-Beigabe: `BLACK_FRIDAY.gift`
 - Lifestyle-Fotos freischalten: `brand.js` (`LIFESTYLE_READY`)
 - Gemeinsame Shop-Logik (Warenkorb, Gummibär-Flug, Navigation): `shop.js`, Startseite: `home.js`, Produktseiten: `pdp.js`, Set-Seiten: `bundle.js` (Texte in `COPY`, Dateinamen in `brand.js` unter `SET_PAGES`)
 - Farben und Schriften: `styles.css` unter `:root`, Produktseite zusätzlich `pdp.css`

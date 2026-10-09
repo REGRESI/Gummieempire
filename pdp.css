@@ -234,11 +234,16 @@
 .cross-price { margin-top: 6px; font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .cross-was { color: var(--ink-2); font-weight: 400; }
 .cross-adult { font-size: 12px; font-weight: 600; line-height: 1.4; }
-.cross-set { display: grid; align-content: start; gap: 3px; padding: 22px; border-radius: 22px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.cross-set { display: grid; align-content: start; gap: 3px; }
 .cross-set p, .cross-set h3 { margin: 0; }
-.cross-set-visual { display: flex; justify-content: center; height: 150px; margin-bottom: 12px; }
-.cross-set-visual .shot { width: auto; height: 100%; aspect-ratio: 4 / 5; border-radius: 12px; box-shadow: 0 14px 26px -16px rgba(31, 27, 45, .5), 0 0 0 2px var(--surface); }
-.cross-set-visual .shot + .shot { margin-left: -14%; }
+/* Set-Bild im selben 4:5-Rahmen wie die Sorten daneben: die Dosen als ruhiges Raster */
+.cross-set-visual {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: center;
+  aspect-ratio: 4 / 5; margin-bottom: 12px; padding: 8px; border-radius: 22px; overflow: hidden;
+  background: var(--bg-2);
+}
+.cross-set-visual .shot { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; transition: transform 1.2s var(--ease); }
+.cross-set:hover .cross-set-visual .shot { transform: scale(1.02); }
 .cross-set .btn { margin-top: 14px; justify-self: start; }
 .cross-set .cross-title a { color: inherit; text-decoration: none; }
 .cross-set .cross-title a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }

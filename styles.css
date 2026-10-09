@@ -25,7 +25,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: 96px; }
+/* Seitenwechsel im Shop: sanft überblenden statt hart umschalten (Chrome, Edge, Safari 18.2+) */
+@view-transition { navigation: auto; }
 body {
+  visibility: visible; animation: none;
   margin: 0;
   overflow-x: clip;
   background: var(--bg);
@@ -103,6 +106,68 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .announce p { margin: 0; padding: 10px var(--gutter); text-wrap: balance; }
 .announce a { text-decoration: none; }
 .announce a:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Black Week: Banner mit Countdown und Kaufknopf */
+.announce-bf { background: #0f0c18; }
+.announce-bf p { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 14px; }
+.announce-bf b { color: #f2d48a; font-weight: 700; }
+.announce-time { font-variant-numeric: tabular-nums; color: #cfc6b4; }
+.announce-time time { color: #f4ead9; font-weight: 600; }
+.announce-btn {
+  min-height: 32px; padding: 6px 16px; border: 0; border-radius: 999px;
+  background: var(--metal); color: var(--night); font: inherit; font-weight: 700; cursor: pointer;
+}
+.announce-btn:hover { filter: brightness(1.06); }
+.announce-btn.is-added { background: #2f5e3e; color: #fff; }
+
+/* ---------- Black Week ---------- */
+.bf { background: radial-gradient(120% 90% at 85% 0%, #3a2d63 0%, var(--night) 55%, #0f0c18 100%); color: #f4ead9; padding-block: clamp(56px, 7vw, 96px); }
+.bf :focus-visible { outline-color: #f4ead9; }
+.bf-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: clamp(32px, 5vw, 72px); }
+.bf-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 260px; }
+.bf-visual .shot { flex: none; width: 26%; max-width: 150px; aspect-ratio: 4 / 5; height: auto; border-radius: 16px; box-shadow: 0 24px 40px -20px rgba(0, 0, 0, .7), 0 0 0 2px rgba(244, 234, 217, .25); }
+.bf-visual .shot + .shot { margin-left: -6%; }
+.bf-visual .shot:nth-child(odd) { transform: translateY(-14px) rotate(-3deg); }
+.bf-visual .shot:nth-child(even) { transform: translateY(10px) rotate(3deg); }
+.bf-badge {
+  position: absolute; top: 0; right: 4%; display: grid; place-items: center;
+  width: 88px; height: 88px; border-radius: 50%; rotate: 10deg;
+  background: var(--metal); color: var(--night); font-weight: 800; font-size: 22px;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6);
+}
+.bf .eyebrow { color: #f2d48a; }
+.bf .h2 { font-size: clamp(38px, 4.6vw, 64px); }
+.bf-lead { margin: 18px 0 0; max-width: 52ch; font-size: clamp(16px, 1.2vw, 18px); color: #d8cfe8; }
+.bf-clock { display: flex; gap: 10px; margin-top: 26px; }
+.bf-clock div { display: grid; justify-items: center; min-width: 72px; padding: 12px 8px 10px; border-radius: 16px; background: rgba(255, 255, 255, .07); box-shadow: inset 0 0 0 1px rgba(244, 234, 217, .16); }
+.bf-clock b { font-family: var(--f-mark); font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
+.bf-clock span { margin-top: 6px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #cfc6b4; }
+.bf-buy { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.bf-btn { background: var(--metal); color: var(--night); font-weight: 700; }
+.bf-btn:hover { box-shadow: 0 12px 30px -10px rgba(242, 212, 138, .55); }
+.bf-ghost { color: #f4ead9; box-shadow: inset 0 0 0 1px rgba(244, 234, 217, .35); }
+.bf-ghost:hover { box-shadow: inset 0 0 0 1px #f4ead9; }
+.bf-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.5; color: #b9b0c9; }
+.bf-note + .bf-note { margin-top: 6px; }
+.bf-note b { color: #f4ead9; font-weight: 600; }
+.bf-gift { margin: 14px 0 0; font-size: 14px; font-weight: 600; color: #f2d48a; }
+.bf-includes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: clamp(36px, 5vw, 56px) 0 0; padding: 0; list-style: none; }
+.bf-includes li { padding: 18px 20px; border-radius: 18px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(244, 234, 217, .12); }
+.bf-includes b { display: block; font-size: 15px; color: #f4ead9; }
+.bf-includes span { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.5; color: #b9b0c9; }
+.bf-coop-wrap { margin-top: clamp(40px, 5vw, 64px); }
+.bf-coop-title { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); }
+.bf-coop-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.bf-coop-tile { display: grid; place-items: center; padding: 10px; background: linear-gradient(160deg, #3a2d63, #221d33); color: #f4ead9; font-size: 12px; font-weight: 600; text-align: center; line-height: 1.3; }
+.bf-coop { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 24px; padding: 24px 28px; border-radius: var(--radius); background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(242, 212, 138, .35); }
+.bf-coop-visual { display: flex; justify-content: center; }
+.bf-coop-visual .shot { width: calc(100% / var(--n, 2)); max-width: 120px; aspect-ratio: 4 / 5; height: auto; object-fit: cover; border-radius: 14px; box-shadow: 0 0 0 2px rgba(244, 234, 217, .25); }
+.bf-coop-visual .shot + .shot { margin-left: -4%; }
+.bf-coop h3 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 28px; }
+.bf-coop p { margin: 6px 0 0; font-size: 14.5px; color: #d8cfe8; }
+.bf-coop-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.bf-coop-price strong { font-size: 20px; color: #f4ead9; }
+.bf-coop-price em { font-style: normal; font-size: 13.5px; color: #b9b0c9; }
+.bf-coop .btn { margin-top: 14px; }
 
 .nav {
   position: sticky; top: 0; z-index: 40;
@@ -602,6 +667,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .day { grid-template-columns: minmax(0, 1fr); grid-template-areas: "scene" "copy" "control"; }
   .day-scene { aspect-ratio: 4 / 3; }
   .day-copy { padding-block: 8px 0; }
+  .bf-grid { grid-template-columns: minmax(0, 1fr); }
+  .bf-visual { min-height: 200px; }
+  .bf-includes, .bf-coop, .bf-coop-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
@@ -640,6 +708,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .hero-bubble { left: 0; top: 2%; max-width: 11em; }
   .day-time { font-size: 64px; }
   .product-actions .btn { min-height: 48px; }
+  .bf-clock { gap: 8px; }
+  .bf-clock div { flex: 1; min-width: 0; }
+  .bf-clock b { font-size: 28px; }
+  .bf-buy .btn { flex: 1 1 100%; }
+  .bf-badge { width: 70px; height: 70px; font-size: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

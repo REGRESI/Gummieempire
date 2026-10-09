@@ -5,7 +5,7 @@
 (() => {
 'use strict';
 
-const { eur, PRODUCTS, byId, BUNDLES, PACK_INFO, ASSETS, planFor, unitPrice, pdpUrl } = window.Baerly;
+const { eur, PRODUCTS, byId, BUNDLES, BLACK_FRIDAY, bfState, PACK_INFO, ASSETS, planFor, unitPrice, pdpUrl } = window.Baerly;
 
 const CREW = PRODUCTS.filter(p => p.launch);
 const SHIPPING_FREE = 35;
@@ -31,7 +31,7 @@ const theme = (id) => THEME[id] || THEME.glow;
 const vars = (id) => `--tint:${theme(id).tint};--deep:${theme(id).deep};--dot:${theme(id).dot}`;
 const perKg = (p, plan) => `${eur(unitPrice(p, plan))}/kg`;
 const count = (p) => { const f = PACK_INFO[p.id]; return f.refill[0] * (30 / f.refill[1]); };
-const memberSum = (b) => b.members.reduce((s, id) => s + byId[id].price, 0);
+const memberSum = (b) => b.was || b.members.reduce((s, id) => s + byId[id].price, 0);
 const sellable = (id) => (byId[id] && byId[id].launch) || (BUNDLES[id] && !BUNDLES[id].soon);
 const members = (id) => BUNDLES[id] ? BUNDLES[id].members : [id];
 /* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin, nur für Erwachsene) */
@@ -145,7 +145,8 @@ function flyToCart(id, from, land) {
 }
 
 function lineImage(id) {
-  return members(id).map(x => `<img src="${ASSETS(x).front}" alt="">`).join('');
+  const partner = (BUNDLES[id] && BUNDLES[id].partner && BUNDLES[id].partner.items) || [];
+  return members(id).map(x => `<img src="${ASSETS(x).front}" alt="">`).join('') + partner.filter(x => x.img).map(x => `<img src="${x.img}" alt="">`).join('');
 }
 
 function renderCart() {
@@ -173,7 +174,7 @@ function renderCart() {
     const it = itemInfo(l.id);
     const pl = planFor(it, l.plan);
     const first = it.members ? it.members[0] : it.id;
-    const canToggle = (l.plan === 'abo' || l.plan === 'once');
+    const canToggle = (l.plan === 'abo' || l.plan === 'once') && !it.noAbo;
     const warn = warnFor(l.id);
     const name = `<a ${go(pdpUrl(it.id))}>${esc(lineName(it))}</a>`;
     return `<div class="line" style="${vars(first)}">
@@ -280,14 +281,15 @@ function confirmButton(btn) {
   btn.classList.remove('is-added'); void btn.offsetWidth; btn.classList.add('is-added');
 }
 
+/* Nur echte Knöpfe legen in den Warenkorb: Set-Seiten tragen data-bundle auch auf <main> */
 document.addEventListener('click', e => {
-  const add = e.target.closest('[data-add]');
+  const add = e.target.closest('button[data-add]');
   if (add) {
     addToCart(add.dataset.add, add.dataset.plan || 'once', { from: add });
     confirmButton(add);
     return;
   }
-  const bundle = e.target.closest('[data-bundle]');
+  const bundle = e.target.closest('button[data-bundle]');
   if (bundle) { addToCart(bundle.dataset.bundle, bundle.dataset.plan || 'once', { from: bundle }); confirmButton(bundle); }
 });
 
@@ -340,6 +342,56 @@ function whenVisible(el, fn, margin = '0px 0px -12% 0px') {
   io.observe(el);
 }
 
+/* ------------------------------------------------------------------ */
+/* Black Week: Banner mit Countdown auf jeder Seite                    */
+/* ------------------------------------------------------------------ */
+const pad2 = (n) => String(n).padStart(2, '0');
+/* Restzeit bis zum nächsten Wechsel (Start oder Ende), in Tagen, Stunden, Minuten, Sekunden */
+function bfLeft(now = Date.now()) {
+  const state = bfState(now);
+  const target = Date.parse(state === 'teaser' ? BLACK_FRIDAY.start : BLACK_FRIDAY.end);
+  const ms = Math.max(0, target - now);
+  return { state, ms, d: Math.floor(ms / 864e5), h: Math.floor(ms / 36e5) % 24, m: Math.floor(ms / 6e4) % 60, s: Math.floor(ms / 1e3) % 60 };
+}
+const bfShort = (t) => `${t.d ? `${t.d} T ` : ''}${pad2(t.h)}:${pad2(t.m)}:${pad2(t.s)}`;
+/* Einmal pro Sekunde; fn bekommt die Restzeit. Wechselt der Zustand (Start, Ende), wird neu gezeichnet. */
+const bfListeners = [];
+function onBfTick(fn) {
+  bfListeners.push(fn);
+  fn(bfLeft());
+}
+let bfLast = bfState();
+setInterval(() => {
+  const t = bfLeft();
+  if (t.state !== bfLast) { bfLast = t.state; renderBanner(); }
+  bfListeners.forEach(fn => fn(t));
+}, 1000);
+
+const announce = $('.announce p');
+const announceDefault = announce ? announce.innerHTML : '';
+/* Startseite: Sprung zum Angebot; Produktseiten: zur Startseite */
+const anchor = (id) => document.getElementById(id) ? `href="#${id}"` : go(`index.html#${id}`);
+function renderBanner() {
+  if (!announce) return;
+  const state = bfState();
+  const crew = BUNDLES[BLACK_FRIDAY.bundle];
+  announce.parentElement.classList.toggle('announce-bf', state !== 'off');
+  if (state === 'live') {
+    const abo = planFor(crew, 'abo');
+    announce.innerHTML = `<a ${anchor('angebot')}><b>Black Week:</b> ${crew.name} im Abo, erste Lieferung ${eur(abo.price)} statt ${eur(abo.was)}</a>
+      <span class="announce-time">noch <time data-bf-short></time></span>
+      <button class="announce-btn" type="button" data-bundle="${crew.id}" data-plan="abo">Jetzt sichern</button>`;
+  } else if (state === 'teaser') {
+    announce.innerHTML = `<a ${anchor('founders')}><b>Black Week ab ${new Date(BLACK_FRIDAY.start).toLocaleDateString('de-DE', { day: 'numeric', month: 'numeric', timeZone: 'Europe/Berlin' })}:</b> ${crew.name} zum Aktionspreis. Founders Club bekommt Bescheid.</a>
+      <span class="announce-time">startet in <time data-bf-short></time></span>`;
+  } else {
+    announce.innerHTML = announceDefault;
+  }
+  fixLinks(announce);
+}
+renderBanner();
+onBfTick(t => $$('[data-bf-short]').forEach(el => { el.textContent = bfShort(t); }));
+
 function ready() {
   renderCart();
   saveCart();
@@ -355,6 +407,7 @@ function ready() {
 window.Shop = {
   CREW, THEME, PRICE_NOTE, SHIPPING_FREE, SHIPPING_COST,
   $, $$, esc, reduced, NAME, theme, vars, perKg, count, memberSum, sellable, members, warnFor, adultFor,
-  store, shot, bearImg, avatar, duo, page, go, fixLinks, addToCart, openCart, toast, initReveal, whenVisible, ready
+  store, shot, bearImg, avatar, duo, page, go, fixLinks, addToCart, openCart, toast, initReveal, whenVisible, ready,
+  bfLeft, onBfTick, pad2
 };
 })();

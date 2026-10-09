@@ -435,6 +435,10 @@ function plansFor(p) {
 }
 function planFor(item, planId) {
   if (item.members) {
+    if (planId === 'abo' && item.id === BLACK_FRIDAY.bundle && bfState() === 'live') {
+      const regular = aboPrice(item.price);
+      return { id: 'abo', label: 'Abo', sub: `Black Week: erste Lieferung ${eur(BLACK_FRIDAY.aboPrice)}, danach ${eur(regular)} je 30 Tage`, price: BLACK_FRIDAY.aboPrice, was: regular, every: true };
+    }
     return planId === 'abo'
       ? { id: 'abo', label: 'Abo', sub: item.aboSub || 'per Brief', price: aboPrice(item.price), every: true }
       : { id: 'once', label: 'Einmalkauf', sub: '', price: item.price };
@@ -458,10 +462,51 @@ function unitPrice(p, planId) {
 }
 
 const BUNDLES = {
-  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage', aboSub: 'alle vier, je 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5' },
+  crew:   { id: 'crew', name: 'Die ganze Crew', title: 'GLOW, FLEX, SNOOZY und DAILY, je 30 Tage', aboSub: 'alle vier, je 30 Tage', members: ['glow', 'flex', 'snoozy', 'daily'], price: 89.90, tint: '#fbe7b5',
+            includes: [
+              ['Alle vier Dosen', 'GLOW, FLEX, SNOOZY und DAILY mit je 60 Fruchtgummis, zusammen 30 Tage für alle vier Ziele'],
+              ['Vier Charakterkarten', 'Jeder Bär mit Steckbrief und Uhrzeit: wann welcher Gummi dran ist'],
+              ['Im Abo: vier Nachfüller per Brief', 'Danach alle 30 Tage, die Dosen bleiben bei dir. Einzelne Sorten tauschen oder pausieren geht jederzeit']
+            ] },
   beautysleep: { id: 'beautysleep', name: 'Morgen & Abend', title: 'GLOW zum Frühstück, SNOOZY vor dem Schlafen', aboSub: 'GLOW und SNOOZY, je 30 Tage', members: ['glow', 'snoozy'], price: 44.90, tint: '#fad4dd' },
+  /* Black-Week-Koop „Glow Inside & Out“ mit SKINCARRY: GLOW von innen, Pflege von außen.
+     Auswahl und Preise aus dem Skincare-Thread (koop/skincarry-glow-koop.md). Einkaufspreise sind noch Schätzungen,
+     daher soon: true – nirgends sichtbar und nicht kaufbar. Zum Start: Preise bestätigen, Bilder (img) eintragen, soon entfernen.
+     was = Summe der Einzelpreise. Kein Abo, die Pflegeprodukte laufen nicht im Nachfüll-Rhythmus.
+     Versand als verbundener Kauf: ein Warenkorb, zwei Sendungen. Glow Complete (Panel) verkauft nur SKINCARRY. */
+  glowduo: { id: 'glowduo', name: 'Glow Duo', title: 'GLOW von innen, Serum von außen', members: ['glow'], noAbo: true, tint: '#f6e1e6', soon: true,
+            partner: { brand: 'SKINCARRY', items: [{ name: 'Afterlight Serum', price: 34, img: '' }] },
+            price: 49, was: 60.90 },
+  glowritual: { id: 'glowritual', name: 'Glow Ritual', title: 'GLOW plus das ganze Pflegeritual', members: ['glow'], noAbo: true, tint: '#f6e1e6', soon: true,
+            // Nail & Hair Oil nur, wenn Selfnamed es im Katalog hat; sonst Eintrag löschen, price: 69 und was anpassen
+            partner: { brand: 'SKINCARRY', items: [{ name: 'Afterlight Serum', img: '' }, { name: 'Afterglow Face Oil', img: '' }, { name: 'Nail & Hair Oil', img: '' }] },
+            price: 79, was: 114.90 },
   kids:   { id: 'kids', name: 'Schul-Duo', title: '30 Tütchen mit je 1 Kiko + 1 Juno', aboSub: 'Kiko + Juno alle 30 Tage', members: ['kiko', 'juno'], price: 34.90, tint: '#fff2c2', soon: true }
 };
+
+/* Black Week: „Die ganze Crew“ im Abo, erste Lieferung zum Aktionspreis. Danach gilt der normale
+   Abo-Preis, der „statt“-Preis ist also der Preis der letzten 30 Tage (PAngV § 11).
+   Zeiten in deutscher Zeit. Ab teaser zählt der Banner bis zum Start, ab start bis zum Ende,
+   danach ist alles wie vorher. Vorschau: ?bf=teaser, ?bf=live oder ?bf=off an die Adresse hängen. */
+const BLACK_FRIDAY = {
+  bundle: 'crew',
+  coop: ['glowduo', 'glowritual'],         // Koop-Karten im Black-Week-Block, jeweils sobald das Set nicht mehr soon ist
+  coopName: 'Glow Inside & Out',
+  gift: '',                                // Crew-Beigabe, z. B. 'Gratis dazu: eine Serum-Probe von SKINCARRY'; leer = keine Zeile
+  aboPrice: 59.90,                         // erste Lieferung im Abo (normal 71,92 €)
+  teaser: '2026-11-09T00:00:00+01:00',
+  start: '2026-11-23T00:00:00+01:00',      // Montag der Black Week
+  end: '2026-12-01T00:00:00+01:00',        // bis einschließlich Cyber Monday, 30.11.
+  endLabel: '30.11.'
+};
+function bfState(now = Date.now()) {
+  const force = typeof location !== 'undefined' && /[?&#]bf=(teaser|live|off)\b/.exec(location.search + location.hash);
+  if (force) return force[1];
+  if (now >= Date.parse(BLACK_FRIDAY.end)) return 'off';
+  if (now >= Date.parse(BLACK_FRIDAY.start)) return 'live';
+  if (now >= Date.parse(BLACK_FRIDAY.teaser)) return 'teaser';
+  return 'off';
+}
 
 /* Bild-Slots der Website. Alle Bilder werden eigens für die Website produziert
    (siehe assets/ASSETS.md); fehlt eine Datei, zeigt die Seite einen sauberen Platzhalter. */
@@ -603,5 +648,5 @@ function bear(p, opts = {}) {
 </svg>`;
 }
 
-window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, PACK_INFO, PDP, pdpUrl, ASSETS, LIFESTYLE_READY, plansFor, planFor, netGrams, unitPrice, bear };
+window.Baerly = { ...(window.Baerly || {}), BRAND, INK, ABO_FACTOR, EXTRA_CAN, eur, aboPrice, PRODUCTS, byId, BUNDLES, BLACK_FRIDAY, bfState, PACK_INFO, PDP, pdpUrl, ASSETS, LIFESTYLE_READY, plansFor, planFor, netGrams, unitPrice, bear };
 })();

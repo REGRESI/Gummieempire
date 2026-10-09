@@ -150,7 +150,7 @@ function crossCard(q) {
     <span class="cross-title">${q.title}</span>
     <span class="cross-short">${q.short}</span>
     <span class="cross-price">${eur(q.price)} (${perKg(q, 'once')}) · im Abo ${eur(pa.price)} (${perKg(q, 'abo')})</span>
-    ${q.warn ? '<span class="cross-adult">Nur für Erwachsene</span>' : ''}
+    ${q.adultOnly ? '<span class="cross-adult">Nur für Erwachsene</span>' : ''}
   </a>`;
 }
 

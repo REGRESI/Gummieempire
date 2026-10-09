@@ -51,7 +51,7 @@ const PRODUCTS = [
     color: '#2a6fff', light: '#a7c6ff', dark: '#1e4ed8', tint: '#d3e8ff',
     pack: { primary: '#d3e8ff', accent: '#2a6fff', light: '#e9f3ff', fur: '#6da3ff', icon: 'dumbbell', jar: '#a6bdee', deep: '#1f3a8a', metal: ['#e8edf6', '#8f9bb5'] },
     word: 'FLEX', mood: 'cool', acc: 'shades',
-    story: '3 g Kreatin in zwei Blaubeer-Gummies, ohne Shaker und Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein. Für Erwachsene, die intensiv trainieren.',
+    story: '3 g Kreatin in zwei Blaubeer-Gummies, ohne Shaker und Pulver. Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein. Für alle, die intensiv trainieren.',
     facts: [['3 g', 'Kreatin'], ['0,7 mg', 'Vitamin B6'], ['2,5 µg', 'Vitamin B12'], ['2 Gummies', 'pro Tag']],
     nutrients: [
       ['Kreatin (aus 3.410 mg Kreatin-Monohydrat)', '3.000 mg', '–', 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.'],
@@ -59,7 +59,7 @@ const PRODUCTS = [
       ['Vitamin B12', '2,5 µg', '100 %', 'Vitamin B12 trägt zu einem normalen energieliefernden Stoffwechsel bei.']
     ],
     claim: 'Kreatin erhöht die körperliche Leistung bei Schnellkrafttraining im Rahmen kurzzeitiger intensiver körperlicher Betätigung. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein.',
-    serving: '2 Fruchtgummis täglich', count: 60, price: 29.90, vegan: true, doses: { b6: .7 }, adultOnly: true
+    serving: '2 Fruchtgummis täglich', count: 60, price: 29.90, vegan: true, doses: { b6: .7 }
   },
   {
     id: 'snoozy', launch: true, name: 'Snoozy', title: 'Sleep Gummies', cat: 'sleep', line: 'adult',
@@ -81,8 +81,8 @@ const PRODUCTS = [
       ['Vitamin B6', '1,4 mg', '100 %', 'Vitamin B6 trägt zu einer normalen psychischen Funktion bei.']
     ],
     claim: 'Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen. Die positive Wirkung stellt sich ein, wenn kurz vor dem Schlafengehen 1 mg Melatonin aufgenommen wird.',
-    warn: 'Nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende. Nicht vor dem Autofahren einnehmen.',
-    serving: '2 Fruchtgummis 30 Minuten vor dem Schlafengehen', count: 60, price: 24.90, vegan: true, doses: { b6: 1.4 }, adultOnly: true
+    warn: 'Nicht für Kinder, Schwangere und Stillende. Nicht vor dem Autofahren einnehmen.',
+    serving: '2 Fruchtgummis 30 Minuten vor dem Schlafengehen', count: 60, price: 24.90, vegan: true, doses: { b6: 1.4 }
   },
   {
     id: 'daily', launch: true, name: 'Daily', title: 'Multivitamin Gummies', cat: 'balance', line: 'adult',
@@ -292,7 +292,7 @@ const PDP = {
     faq: [
       ['Warum Gummies statt Pulver?', 'Weil 3 g Kreatin in zwei Gummies in jede Tasche passen. Kein Abmessen, kein Shaker, kein Pulver im Rucksack.'],
       ['Muss ich FLEX auch an trainingsfreien Tagen nehmen?', 'Ja. Die positive Wirkung stellt sich bei einer täglichen Aufnahme von 3 g Kreatin ein, also jeden Tag zwei Gummies.'],
-      ['Ist FLEX für Jugendliche?', 'Nein. FLEX ist für Erwachsene, die intensiv trainieren.']
+      ['Ist FLEX für Jugendliche?', 'FLEX ist für Menschen gedacht, die intensiv trainieren. Jugendliche sprechen vorher am besten mit ihrer Ärztin oder ihrem Arzt.']
     ]
   },
   snoozy: {
@@ -306,7 +306,7 @@ const PDP = {
     ] },
     faq: [
       ['Wie viel Melatonin ist drin?', '1 mg pro Tagesportion. Genau die Menge, für die die zugelassene Angabe gilt: Melatonin trägt dazu bei, die Einschlafzeit zu verkürzen, wenn kurz vor dem Schlafengehen 1 mg aufgenommen wird.'],
-      ['Für wen ist SNOOZY nicht geeignet?', 'SNOOZY ist nur für Erwachsene. Nicht für Kinder, Schwangere und Stillende, und nicht vor dem Autofahren.'],
+      ['Für wen ist SNOOZY nicht geeignet?', 'Nicht für Kinder, Schwangere und Stillende, und nicht vor dem Autofahren.'],
       ['Ich nehme Medikamente. Darf ich SNOOZY nehmen?', 'Sprich bitte vorher mit deiner Ärztin oder deinem Arzt.'],
       ['Warum Magnesium und Vitamin B6?', 'Magnesium trägt zu einer normalen Funktion des Nervensystems bei, Vitamin B6 zu einer normalen psychischen Funktion. Beides ist in einer Menge drin, für die diese Angaben zugelassen sind.']
     ]

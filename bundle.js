@@ -85,7 +85,7 @@ function buyHTML() {
     <p class="buy-lead">${copy.hero.sub}</p>
     <ul class="set-members">${items.map(p => `<li style="${vars(p.id)}">${avatar(p.id, false)}<span><b>${NAME(p)}</b> ${p.title}<small>${p.flavor} · ${count(p)} Fruchtgummis · 30 Tage</small></span></li>`).join('')}</ul>
     <p class="buy-claim">Einzeln ${eur(sum)}, im Set ${eur(once.price)}: du sparst ${eur(sum - once.price)}.</p>
-    ${adults.length ? `<p class="buy-warn" role="note"><b>Wichtig:</b> ${adults.join(' und ')} ${adults.length > 1 ? 'sind' : 'ist'} nur für Erwachsene.${warn ? ` ${warnName}: ${warn.replace(/^Nur für Erwachsene\.\s*/, '')}` : ''}</p>` : ''}
+    ${adults.length || warn ? `<p class="buy-warn" role="note"><b>Wichtig:</b>${adults.length ? ` ${adults.join(' und ')} ${adults.length > 1 ? 'sind' : 'ist'} nur für Erwachsene.` : ''}${warn ? ` ${warnName}: ${warn}` : ''}</p>` : ''}
 
     <fieldset class="plans">
       <legend class="sr-only">Kaufart wählen</legend>
@@ -190,7 +190,7 @@ function render() {
   const faq = [
     ['Was ist im Set?', `${nameList}, jede Sorte in einer eigenen Dose mit ${count(items[0])} Fruchtgummis für 30 Tage. Alle Inhaltsstoffe und Pflichtangaben stehen auf der Produktseite der jeweiligen Sorte.`],
     ['Kann ich alle Sorten gleichzeitig nehmen?', `Ja, dafür ist das Set gedacht. Jede Sorte hat ihre eigene Uhrzeit, siehe „Dein Tag“ oben.${zincPair ? ' GLOW und DAILY zusammen ergeben 6,5 mg Zink pro Tag, genau die Höchstmenge, die das BfR für Zink in Nahrungsergänzungsmitteln empfiehlt. Nimm dann kein weiteres Zink-Präparat dazu.' : ''}`],
-    ...(adults.length ? [['Ist das Set für alle?', `Nein. ${adults.join(' und ')} ${adults.length > 1 ? 'sind' : 'ist'} nur für Erwachsene.${warn ? ` ${warnName}: ${warn.replace(/^Nur für Erwachsene\.\s*/, '')}` : ''}`]] : []),
+    ...(adults.length || warn ? [['Ist das Set für alle?', `Nicht ganz.${adults.length ? ` ${adults.join(' und ')} ${adults.length > 1 ? 'sind' : 'ist'} nur für Erwachsene.` : ''}${warn ? ` ${warnName}: ${warn}` : ''}`]] : []),
     ['Wie funktioniert das Abo?', `${aboLine()} Pausieren und kündigen geht jederzeit per Klick, ohne Mindestlaufzeit.`],
     ['Ich nehme Medikamente. Darf ich das Set nehmen?', `Sprich bitte vorher mit deiner Ärztin oder deinem Arzt${med ? `, besonders wegen ${med}` : ''}.`]
   ];

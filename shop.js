@@ -34,7 +34,7 @@ const count = (p) => { const f = PACK_INFO[p.id]; return f.refill[0] * (30 / f.r
 const memberSum = (b) => b.was || b.members.reduce((s, id) => s + byId[id].price, 0);
 const sellable = (id) => (byId[id] && byId[id].launch) || (BUNDLES[id] && !BUNDLES[id].soon);
 const members = (id) => BUNDLES[id] ? BUNDLES[id].members : [id];
-/* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin, nur für Erwachsene) */
+/* Warnhinweise der enthaltenen Sorten (SNOOZY: Melatonin) */
 const warnFor = (id) => members(id).map(m => byId[m].warn).filter(Boolean)[0] || '';
 const adultFor = (id) => members(id).some(m => byId[m].adultOnly);
 

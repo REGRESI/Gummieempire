@@ -421,7 +421,7 @@ function initDay() {
     text.innerHTML = `<p class="day-time">${r.time}<span>Uhr</span></p>
       <p class="day-name">${NAME(p)} · ${r.moment}</p>
       <h3 class="day-title">${p.scene.title}</h3>
-      <p class="day-text">${p.scene.text}${p.warn ? ` <span class="adult-note">Nur für Erwachsene.</span>` : ''}</p>
+      <p class="day-text">${p.scene.text}${p.adultOnly ? ` <span class="adult-note">Nur für Erwachsene.</span>` : ''}</p>
       <a class="day-link" ${link(pdpUrl(p.id))}>${NAME(p)} ansehen</a>`;
   };
   range.addEventListener('input', () => show(+range.value));
@@ -443,7 +443,7 @@ function renderCrew() {
     <p class="member-role">${PDP[p.id].traits[0][1]}</p>
     <h3>${NAME(p)}</h3>
     <p class="member-persona">${p.persona}</p>
-    <a class="member-product" ${link(pdpUrl(p.id))}>${p.title}</a>${p.warn ? '<span class="adult-note">Nur für Erwachsene</span>' : ''}
+    <a class="member-product" ${link(pdpUrl(p.id))}>${p.title}</a>${p.adultOnly ? '<span class="adult-note">Nur für Erwachsene</span>' : ''}
   </article>`).join('');
 }
 function initAbo() {

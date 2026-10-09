@@ -68,7 +68,7 @@ for (const p of PRODUCTS.filter(x => x.launch)) {
   const abo = planFor(p, 'abo');
   write(pdpUrl(p.id), pageHTML({
     title: `${name} ${p.title} · bärly`,
-    desc: `bärly ${name} ${p.title}: ${p.short} ${p.flavor}, 60 Fruchtgummis für 30 Tage. Einmalig ${eur(p.price)}, im Abo ${eur(abo.price)} je Lieferung.${p.warn ? ' Nur für Erwachsene.' : ''}`,
+    desc: `bärly ${name} ${p.title}: ${p.short} ${p.flavor}, 60 Fruchtgummis für 30 Tage. Einmalig ${eur(p.price)}, im Abo ${eur(abo.price)} je Lieferung.${p.adultOnly ? ' Nur für Erwachsene.' : ''}`,
     mainAttrs: `data-product="${p.id}"`,
     noscript: `      <h1>${name} ${p.title}</h1>
       <p>${esc(p.short)} ${esc(p.flavor)}, ${esc(p.serving)}.</p>

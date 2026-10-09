@@ -21,7 +21,7 @@ const PRODUCTS = [
   /* ---------------- Launch-Crew: die vier Bären aus der Character Bible ---------------- */
   {
     id: 'glow', launch: true, name: 'Glow', title: 'Beauty Gummies', cat: 'beauty', line: 'adult',
-    role: 'The Main Character',
+    role: 'The Icon',
     goal: 'Beauty', persona: 'Charmant, selbstbewusst und immer ein bisschen extra.', look: 'Pink, mit Krone und Herzbrille',
     short: 'Mit Biotin, Zink und Vitamin C.',
     cardClaim: 'Biotin und Zink tragen zur Erhaltung normaler Haut und Haare bei.',
@@ -266,8 +266,8 @@ const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
 const PDP = {
   glow: {
     hero: { title: 'Beauty, <em>zum Kauen.</em>', sub: 'Biotin, Zink und Vitamin C in zwei Himbeer-Gummies am Tag.' },
-    lines: ['Krone sitzt. Du auch?', 'Heute ist Main-Character-Tag.', 'Erst zwei Gummies, dann der Spiegel.', 'Herzbrille bleibt auf. Immer.'],
-    traits: [['Rolle', 'The Main Character'], ['Erkennungszeichen', 'Krone und Herzbrille'], ['Lieblingsort', 'Vor dem Spiegel, mit gutem Licht'], ['Sagt nie', '„Ich bin nicht fotogen.“']],
+    lines: ['Krone sitzt. Du auch?', 'Heute ist mein Tag. Morgen auch.', 'Erst zwei Gummies, dann der Spiegel.', 'Herzbrille bleibt auf. Immer.'],
+    traits: [['Rolle', 'The Icon'], ['Erkennungszeichen', 'Krone und Herzbrille'], ['Lieblingsort', 'Vor dem Spiegel, mit gutem Licht'], ['Sagt nie', '„Ich bin nicht fotogen.“']],
     ritual: { time: '07:30', moment: 'Morgens im Bad', steps: [
       ['Zwei Gummies', 'Morgens, zwischen Zähneputzen und Serum.'],
       ['Mehr ist nicht mehr', 'Die Tagesportion sind zwei Gummies. Nicht mehr.'],
@@ -328,8 +328,10 @@ const PDP = {
     ]
   }
 };
-/* Produktseiten liegen im Hauptordner: glow.html, flex.html, snoozy.html, daily.html */
-const pdpUrl = (id) => `${id}.html`;
+/* Produktseiten liegen im Hauptordner: glow.html, flex.html, snoozy.html, daily.html,
+   die Sets unter eigenem Namen (Inhalt aus BUNDLES, Seite aus bundle.js) */
+const SET_PAGES = { crew: 'crew.html', beautysleep: 'morgen-abend.html' };
+const pdpUrl = (id) => SET_PAGES[id] || `${id}.html`;
 
 /* Packungsdaten je Sorte (siehe verpackung.html)
    nutrient  kurzer Nährstoffname für die Vorderseite

@@ -1,5 +1,5 @@
 /* bärly – gemeinsame Shop-Logik für Startseite und Produktseiten
-   Warenkorb (localStorage, seitenübergreifend), Navigation, Toast, Bild-Slots, Einblenden.
+   Warenkorb (localStorage, seitenübergreifend), Navigation, Gummibär-Flug, Bild-Slots, Einblenden.
    Seiten-Skripte (home.js, pdp.js) rufen am Ende Shop.ready() auf. Keine Abhängigkeiten. */
 
 (() => {
@@ -95,15 +95,53 @@ const cartTotal = () => cart.reduce((s, l) => s + linePrice(l), 0);
 
 function addToCart(id, plan = 'once', extra = {}) {
   if (!sellable(id)) return;
+  const from = extra.from || document.activeElement;
   const qty = Math.max(1, extra.qty || 1);
   const found = cart.find(l => l.id === id && l.plan === plan);
   if (found) { found.qty += qty; if (extra.every) found.every = extra.every; }
   else cart.push({ id, plan, qty, ...(extra.every ? { every: extra.every } : {}) });
   saveCart();
-  renderCart();
-  const btn = $('#cartOpen');
-  btn.classList.remove('bump'); void btn.offsetWidth; btn.classList.add('bump');
+  flyToCart(id, from, () => renderCart());
+  // Für Screenreader: Ansage statt sichtbarem Text, die Bestätigung ist der Bär im Warenkorb
   toast(`${lineName(itemInfo(id))} liegt im Warenkorb${plan === 'abo' ? ' (Abo)' : ''}`);
+}
+
+/* Gummibär fliegt vom geklickten Knopf in den Warenkorb, bei Sets einer pro Sorte.
+   Die Zahl am Warenkorb springt erst, wenn der erste Bär ankommt. */
+function flyToCart(id, from, land) {
+  const cartBtn = $('#cartOpen');
+  const catchIt = () => { land(); cartBtn.classList.remove('bump'); void cartBtn.offsetWidth; cartBtn.classList.add('bump'); };
+  const a = from && from !== document.body && from.getBoundingClientRect();
+  const b = cartBtn.getBoundingClientRect();
+  if (reduced || !a || !a.width || !cartBtn.animate || b.bottom < 0) { catchIt(); return; }
+  const ids = members(id);
+  const size = 54;
+  const ex = b.left + b.width / 2, ey = b.top + b.height / 2;
+  let caught = false;
+  ids.forEach((m, i) => {
+    const sx = a.left + a.width / 2 + (i - (ids.length - 1) / 2) * 26;
+    const sy = a.top + a.height / 2;
+    const dx = ex - sx, dy = ey - sy;
+    const lift = Math.min(140, 60 + Math.abs(dx) * .25);
+    const el = document.createElement('div');
+    el.className = 'fly';
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = `left:${sx - size / 2}px;top:${sy - size * .62}px;width:${size}px`;
+    el.innerHTML = `<div class="fly-y">${window.Baerly.bear(byId[m], { label: false, shadow: false })}</div>`;
+    document.body.append(el);
+    const opts = { duration: 820, delay: i * 90, fill: 'both' };
+    // x gleichmäßig, y erst hoch, dann in den Korb: ergibt einen Bogen
+    el.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${dx}px)` }], { ...opts, easing: 'cubic-bezier(.35,0,.65,1)' });
+    el.firstElementChild.animate([
+      { transform: 'translateY(0) scale(.6) rotate(0)', opacity: 0, easing: 'cubic-bezier(.2,.7,.4,1)' },
+      { transform: `translateY(${-lift}px) scale(1.05) rotate(-14deg)`, opacity: 1, offset: .38, easing: 'cubic-bezier(.55,0,.85,.4)' },
+      { transform: `translateY(${dy}px) scale(.28) rotate(24deg)`, opacity: 1, offset: .96 },
+      { transform: `translateY(${dy}px) scale(.2) rotate(24deg)`, opacity: 0 }
+    ], opts).finished.then(() => {
+      el.remove();
+      if (!caught) { caught = true; catchIt(); }
+    }, () => el.remove());
+  });
 }
 
 function lineImage(id) {
@@ -138,7 +176,7 @@ function renderCart() {
     const first = it.members ? it.members[0] : it.id;
     const canToggle = (l.plan === 'abo' || l.plan === 'once') && !it.noAbo;
     const warn = warnFor(l.id);
-    const name = it.members ? esc(lineName(it)) : `<a ${go(pdpUrl(it.id))}>${esc(lineName(it))}</a>`;
+    const name = `<a ${go(pdpUrl(it.id))}>${esc(lineName(it))}</a>`;
     return `<div class="line" style="${vars(first)}">
       <div class="line-img">${lineImage(l.id)}</div>
       <div>
@@ -194,7 +232,6 @@ let lastFocus = null;
 const behind = () => ['.skip', '.announce', '.nav', 'main', '.footer', '.sticky-buy'].map(s => $(s)).filter(Boolean);
 function openCart() {
   lastFocus = document.activeElement;
-  $('#toast').classList.remove('show');
   overlay.hidden = false;
   drawer.classList.add('open');
   drawer.setAttribute('aria-hidden', 'false');
@@ -228,35 +265,31 @@ addEventListener('storage', e => {
 });
 
 /* ------------------------------------------------------------------ */
-/* Toast, Klicks, Formular, Navigation                                 */
+/* Ansage, Klicks, Formular, Navigation                                */
 /* ------------------------------------------------------------------ */
+/* #toast ist nur noch für Screenreader da (sr-only), sichtbar ist der fliegende Bär */
 let toastTimer;
 function toast(msg) {
   const t = $('#toast');
   t.textContent = msg;
-  t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  toastTimer = setTimeout(() => { t.textContent = ''; }, 2600);
 }
 
-/* Kurzes „Hinzugefügt“ auf dem Knopf, der geklickt wurde */
+/* Der geklickte Knopf gibt kurz nach, der Text bleibt */
 function confirmButton(btn) {
-  if (btn.classList.contains('is-added')) return;
-  const label = btn.innerHTML;
-  btn.classList.add('is-added');
-  btn.textContent = 'Hinzugefügt';
-  setTimeout(() => { btn.classList.remove('is-added'); btn.innerHTML = label; }, 1500);
+  btn.classList.remove('is-added'); void btn.offsetWidth; btn.classList.add('is-added');
 }
 
 document.addEventListener('click', e => {
   const add = e.target.closest('[data-add]');
   if (add) {
-    addToCart(add.dataset.add, add.dataset.plan || 'once');
+    addToCart(add.dataset.add, add.dataset.plan || 'once', { from: add });
     confirmButton(add);
     return;
   }
   const bundle = e.target.closest('[data-bundle]');
-  if (bundle) { addToCart(bundle.dataset.bundle, bundle.dataset.plan || 'once'); confirmButton(bundle); }
+  if (bundle) { addToCart(bundle.dataset.bundle, bundle.dataset.plan || 'once', { from: bundle }); confirmButton(bundle); }
 });
 
 const signup = $('#signup');

@@ -29,7 +29,7 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 **Suplify als Notfall:** Wenn die Beutel-Gummies nicht rechtzeitig kommen, kann man über Suplify Creator-Seeding oder erste Bestellungen bedienen. Dann aber ehrlich mit Fotos der echten Suplify-Dose.
 
-### Zum Start nur ein Geschmack pro Produkt
+### Zum Start nur ein Geschmack pro Produkt (von Nico bestätigt am 10.10.)
 
 Die Mindestmenge gilt meist pro Geschmack. Mit 4 Produkten × 3 Geschmäckern × 100 Stück wären es 1.200 Einheiten auf einmal. Deshalb starten wir mit **einem Geschmack pro Produkt** (400 Einheiten) und nehmen weitere dazu, sobald Vorbestellungen sie bezahlen. Als Start-Geschmäcker: GLOW Erdbeere oder Himbeere, FLEX Blaubeere, SNOOZY Mixed Berries, DAILY Mango.
 

@@ -2,6 +2,66 @@
 
 Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
+## Stand 10.10.2026: Antworten und neue Entscheidung
+
+**Entscheidung: Option 2, also eigene Dose plus Gummies im versiegelten Beutel. Wir packen und versenden selbst.** Biocaro (Plan A) fällt für den Start weg. Alles darunter ab „Was zu tun ist“ ist der alte Stand vom 08./09.10.
+
+### Was die Lieferanten geantwortet haben
+
+| | Biocaro (Leo) | Shaanxi Fuda Ruishi (Anna) | Suplify | Option 2: eigene Dose + Beutel |
+| --- | --- | --- | --- | --- |
+| Mindestmenge | 3.000 Dosen je Geschmack, unter 1.000 gar nicht | 100 Dosen | keine | 100 Dosen (Dose), Beutel: anfragen |
+| Preis | erst nach Muster | 2,30 $ (100) / 2,20 $ (500) + 30 $ einmalig fürs Etikett, farbige Dose extra | 7,85 € + MwSt. (≈ 9,34 €) | Dose 0,30–0,60 € + Gummies + Etikett |
+| Muster | 150–200 $ je Produkt inkl. Versand, 7–15 Arbeitstage | anfragen | – | – |
+| Bärchen | 3 g, 1 g Kreatin pro Stück | 3 g | ja | über Fuda o. a. |
+| Optik wie Packshots | ja | nein (Standarddose, nur Etikett) | nein (klare Dose, weißer Deckel) | **ja** |
+| Versand | wir | wir | Suplify | wir |
+
+### Warum Option 2
+
+- Die Packung sieht aus wie geplant. Shop, Ads und Creator-Content zeigen dann das echte Produkt.
+- Es ist mit Abstand am günstigsten: grob 3–4 € pro Dose für Gummies, Dose, Etikett und Beutel (Schätzung, bis Preise für die Beutel da sind). Bei Suplify sind es ≈ 9,34 € nur für die Ware.
+- Die Mindestmenge von 100 passt zum Vorbestellmodell: Erst wenn Vorbestellungen da sind, wird bestellt.
+- Der Beutel kommt fertig versiegelt mit MHD und Los vom Hersteller. Wir öffnen nichts und füllen nichts um, wir legen ihn nur in die Dose. Das hält Hygiene und Haftung einfach.
+- Der Beutel passt später direkt als Nachfüller im Abo (Plan aus `packaging-spec.js`).
+
+**Was man dafür in Kauf nimmt:** selbst packen und versenden (bei ein paar hundert Bestellungen mit zwei Leuten machbar), Etiketten separat drucken lassen und Platz zum Lagern.
+
+**Suplify als Notfall:** Wenn die Beutel-Gummies nicht rechtzeitig kommen, kann man über Suplify Creator-Seeding oder erste Bestellungen bedienen. Dann aber ehrlich mit Fotos der echten Suplify-Dose.
+
+### Zum Start nur ein Geschmack pro Produkt
+
+Die Mindestmenge gilt meist pro Geschmack. Mit 4 Produkten × 3 Geschmäckern × 100 Stück wären es 1.200 Einheiten auf einmal. Deshalb starten wir mit **einem Geschmack pro Produkt** (400 Einheiten) und nehmen weitere dazu, sobald Vorbestellungen sie bezahlen. Als Start-Geschmäcker: GLOW Erdbeere oder Himbeere, FLEX Blaubeere, SNOOZY Mixed Berries, DAILY Mango.
+
+### Nächster Schritt: Nachricht an Anna (Fuda), kurz
+
+```text
+Hi Anna, thanks for the quick answer! One more question: we'd like to
+buy the gummies in sealed bags instead of bottles (we use our own jars).
+
+1. Can you pack bear gummies in sealed food-grade bags (60 or 90 pcs per
+   bag), with best-before date and batch number printed on each bag?
+2. Which formulas do you have: creatine, beauty (biotin, zinc, vit C),
+   sleep (melatonin, magnesium, B6), multivitamin?
+3. Are they vegan (pectin, no gelatine)?
+4. MOQ and price per bag at 100 / 500 per formula and flavour?
+5. Sample cost and shipping time to Germany?
+
+Thanks!
+Nico
+```
+
+Dieselbe Frage parallel an 1–2 weitere Anbieter schicken, damit wir vergleichen können.
+
+### Danach
+
+1. Dose auswählen: matt in Sortenfarbe, Weithals, Größe passend zu 60 Bärchen à 3 g (≈ 180 g Gummies). Musterdose bestellen und mit Gummies füllen.
+2. Etiketten bei einer Etikettendruckerei anfragen: matt, rundum, Metallic-Effekt, ab 100 Stück je Sorte.
+3. Muster-Check (Abschnitt 5), dann erste Bestellung nach Vorbestellungen.
+4. Shop anpassen: Stückzahl und Gewicht je Produkt, sobald die Gummies feststehen.
+
+---
+
 ## Was zu tun ist
 
 1. Kurze Nachricht (Abschnitt 1) an den Supplier schicken, ohne Bilder. Wenn er zusagt, Details aus Abschnitt 1a nachschieben. Die fertigen Produktbilder bekommt er erst, wenn er bestätigt hat, dass er alles umsetzen kann.

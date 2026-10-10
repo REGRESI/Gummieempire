@@ -31,6 +31,8 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 ### Zum Start nur ein Geschmack pro Produkt (von Nico bestätigt am 10.10.)
 
+**Startmenge Gummies: 25 pro Produkt** (Wunsch Nico, 10.10.), also 100 Beutel insgesamt. Die Dosen trotzdem mit 100 pro Farbe kaufen: Sie kosten nur 0,30–0,60 € (zusammen ca. 120–240 €), verderben nicht und reichen für die nächsten Bestellungen. Ablaufen können nur die Gummies, deshalb bei denen klein anfangen.
+
 Die Mindestmenge gilt meist pro Geschmack. Mit 4 Produkten × 3 Geschmäckern × 100 Stück wären es 1.200 Einheiten auf einmal. Deshalb starten wir mit **einem Geschmack pro Produkt** (400 Einheiten) und nehmen weitere dazu, sobald Vorbestellungen sie bezahlen. Als Start-Geschmäcker: GLOW Erdbeere oder Himbeere, FLEX Blaubeere, SNOOZY Mixed Berries, DAILY Mango.
 
 ### Nächster Schritt: Nachricht an Anna (Fuda), kurz
@@ -44,7 +46,8 @@ buy the gummies in sealed bags instead of bottles (we use our own jars).
 2. Which formulas do you have: creatine, beauty (biotin, zinc, vit C),
    sleep (melatonin, magnesium, B6), multivitamin?
 3. Are they vegan (pectin, no gelatine)?
-4. MOQ and price per bag at 100 / 500 per formula and flavour?
+4. Can we start with only 25 bags per formula? MOQ and price per bag
+   at 25 / 100 / 500?
 5. Sample cost and shipping time to Germany?
 
 Thanks!

@@ -58,8 +58,8 @@ B) in sealed blank jars without label (we add our own label),
 with best-before date and batch number printed.
 
 Questions:
-1. Can you start with only 25 per product (100 in total)? We're happy to pay a higher price for this first test order, repeat orders will be bigger.
-2. Price per bag / per blank jar at 25 / 100 / 500?
+1. Can you start with only 10-25 per product (40-100 in total)? We're happy to pay a higher price for this first test order, repeat orders will be bigger.
+2. Price per bag / per blank jar at 10 / 25 / 100 / 500?
 3. Are the gummies vegan (pectin)? Gummy weight?
 4. Shipping cost and time to Germany?
 

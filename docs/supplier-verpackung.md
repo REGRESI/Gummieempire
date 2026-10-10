@@ -35,6 +35,13 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 Die Mindestmenge gilt meist pro Geschmack. Mit 4 Produkten × 3 Geschmäckern × 100 Stück wären es 1.200 Einheiten auf einmal. Deshalb starten wir mit **einem Geschmack pro Produkt** (400 Einheiten) und nehmen weitere dazu, sobald Vorbestellungen sie bezahlen. Als Start-Geschmäcker: GLOW Erdbeere oder Himbeere, FLEX Blaubeere, SNOOZY Mixed Berries, DAILY Mango.
 
+### Ablauf für den Start (Nico, 10.10.)
+
+Die Gummies kommen **versiegelt** vom Hersteller, wir öffnen und füllen nichts selbst um (sonst gelten wir als Abpacker, mit Registrierung, Hygieneauflagen und eigenem MHD).
+
+1. **Am liebsten:** versiegelter Beutel mit MHD und Los → in unsere eigene Dose → in die bärly-Box mit Karte und Goodies.
+2. **Wenn kein Beutel geht:** versiegelte Blanko-Dose → unser Etikett drauf → in die bärly-Box mit Karte und Goodies.
+
 ### Nächster Schritt: Nachricht an Anna (Fuda), kurz
 
 ```text

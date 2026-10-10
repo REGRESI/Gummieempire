@@ -42,20 +42,26 @@ Die Gummies kommen **versiegelt** vom Hersteller, wir öffnen und füllen nichts
 1. **Am liebsten:** versiegelter Beutel mit MHD und Los → in unsere eigene Dose → in die bärly-Box mit Karte und Goodies.
 2. **Wenn kein Beutel geht:** versiegelte Blanko-Dose → unser Etikett drauf → in die bärly-Box mit Karte und Goodies.
 
-### Nächster Schritt: Nachricht an Anna (Fuda), kurz
+### Nächster Schritt: Nachricht an die Supplier (Anna/Fuda und 1–2 weitere)
 
 ```text
-Hi Anna, thanks for the quick answer! One more question: we'd like to
-buy the gummies in sealed bags instead of bottles (we use our own jars).
+Hi, I'm Nico from bärly, a new German brand for vegan supplement gummies. For our launch we need 4 bear gummy products, 1 flavour each:
 
-1. Can you pack bear gummies in sealed food-grade bags (60 or 90 pcs per
-   bag), with best-before date and batch number printed on each bag?
-2. Which formulas do you have: creatine, beauty (biotin, zinc, vit C),
-   sleep (melatonin, magnesium, B6), multivitamin?
-3. Are they vegan (pectin, no gelatine)?
-4. Can we start with only 25 bags per formula? MOQ and price per bag
-   at 25 / 100 / 500?
-5. Sample cost and shipping time to Germany?
+1. Creatine (3 g per day), blueberry
+2. Beauty (biotin, zinc, vitamin C), strawberry or raspberry
+3. Sleep (melatonin, magnesium, B6), mixed berries
+4. Multivitamin, mango
+
+We'd like them sealed, either:
+A) in sealed bags (60 or 90 pcs), or
+B) in sealed blank jars without label (we add our own label),
+with best-before date and batch number printed.
+
+Questions:
+1. Can you start with only 25 per product (100 in total)? We're happy to pay a higher price for this first test order, repeat orders will be bigger.
+2. Price per bag / per blank jar at 25 / 100 / 500?
+3. Are the gummies vegan (pectin)? Gummy weight?
+4. Shipping cost and time to Germany?
 
 Thanks!
 Nico

@@ -4,7 +4,9 @@ Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
 ## Stand 11.10.2026: Bewertung von Nicos Mindmap „Verpackung“
 
-**Empfehlung:** Mit Suplify (Dropshipping, keine Mindestmenge, ca. 8 € pro Dose) starten und das Design ganz ins Etikett legen. Auf die eigene Dose umsteigen, sobald ein Produkt um die 250 Stück im Monat verkauft. Begründung: kein Startkapital, kein Lager, kein Packen. Die Zeit geht in Content und Creator, und das ist für Black Friday der eigentliche Engpass.
+**Update (Nico, 11.10.):** Eine weiße Zylinderdose mit unserem Etikett ist besser als die Ergänzungsflasche. Deshalb Suppify.io zuerst prüfen: laut Nicos Notizen größere Auswahl an Verpackungen, Etikett und Verpackungsform schon bei wenigen Bestellungen anpassbar. Chance2Brand passt erst später, weil eigene Verpackung dort mindestens 99 € im Monat und 250 Bestellungen im Monat voraussetzt. Im kostenlosen Tarif ist dort nur das Etikett änderbar, wie bei Suplify. Suppify und Suplify fragen, wer die weiße Dose ohne Mindestmenge mit Versand aus der EU anbietet. Wer sie hat, gewinnt.
+
+**Ursprüngliche Empfehlung:** Mit Suplify (Dropshipping, keine Mindestmenge, ca. 8 € pro Dose) starten und das Design ganz ins Etikett legen. Auf die eigene Dose umsteigen, sobald ein Produkt um die 250 Stück im Monat verkauft. Begründung: kein Startkapital, kein Lager, kein Packen. Die Zeit geht in Content und Creator, und das ist für Black Friday der eigentliche Engpass.
 
 **Zur Frage aus der Mindmap, ob wir die Design-Dose zeigen und die Standardflasche verschicken:** Nein. Kunden müssen auf den Bildern das bekommen, was sie sehen. Sonst gibt es Retouren, schlechte Bewertungen und Abmahnrisiko. Packshots und Mockups deshalb mit der echten Flasche und unserem Etikett neu machen, auch als Vorlage für Creator.
 

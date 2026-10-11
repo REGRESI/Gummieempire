@@ -12,6 +12,33 @@ Nächste Schritte:
 3. Packshots und Mockups mit der echten Dose und dem Etikett neu machen. Der Shop zeigt nur, was ankommt.
 4. Shop: Stückzahl und Gewicht an das Produkt des Anbieters anpassen und Shopify anbinden.
 
+### Parallel: Ausschreibung auf Alibaba (RFQ, 11.10.)
+
+Ziel ist ein Lieferant, der unsere Strategie mitträgt: kleine Chargen nach Vorbestellung, eigenes Etikett, mitwachsen. Statt einzeln anzufragen, eine Ausschreibung (Request for Quotation) auf Alibaba einstellen:
+
+```text
+Private label vegan gummy bears – small batches on demand, long-term partner wanted
+
+We are bärly, a new German supplement gummy brand. We sell through pre-orders, so we order exactly what our customers have paid for, then reorder every 2–4 weeks.
+
+Products (bear shape, 1 flavour each):
+1. Creatine (3 g per day)
+2. Beauty (biotin, zinc, vitamin C)
+3. Sleep (melatonin, magnesium, B6)
+4. Multivitamin
+
+What we need:
+- First order 25–100 per product, repeat orders growing with sales
+- Wide-mouth jar (white is fine) with our own full-wrap label, or sealed bags with best-before date and batch number
+- Vegan (pectin), EU-compliant ingredients, CoA per batch
+- Production plus shipping to Germany within about 3 weeks
+- Payment via Trade Assurance
+
+Please quote price per jar at 25 / 100 / 500 / 1,000 incl. label, sample cost and shipping to Germany. Suppliers who can grow with us get our full volume as we scale.
+```
+
+Bis passende Angebote da sind, läuft der Start über Dropshipping.
+
 ## Stand 11.10.2026: Bewertung von Nicos Mindmap „Verpackung“
 
 **Update (Nico, 11.10.):** Eine weiße Zylinderdose mit unserem Etikett ist besser als die Ergänzungsflasche. Deshalb Suppify.io zuerst prüfen: laut Nicos Notizen größere Auswahl an Verpackungen, Etikett und Verpackungsform schon bei wenigen Bestellungen anpassbar. Chance2Brand ist ebenfalls ein Kandidat: Der kostenlose Tarif hat ein eigenes Etikett ohne Mindestmenge wie Suplify, aber mehr Auswahl an Produkten und Verpackungen. Der Tarif ab 99 € im Monat (mindestens 250 Bestellungen im Monat, eigene Verpackung) kommt erst später. Alle drei (Suppify, Chance2Brand, Suplify) fragen, wer die weiße Dose ohne Mindestmenge mit Versand aus der EU anbietet. Wer sie hat, gewinnt.

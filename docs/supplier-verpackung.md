@@ -2,6 +2,16 @@
 
 Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
+## Entscheidung (Nico, 11.10.2026)
+
+**Start über Dropshipping mit eigenem Etikett:** Suppify, Chance2Brand oder Suplify, je nachdem, wer eine weiße Dose ohne Mindestmenge mit Versand aus der EU anbietet. Die Kasse läuft über Shopify. Die Black-Friday-Crew-Box in der echten bärly-Dose gibt es separat als Vorbestellung. Ab ca. 250 verkauften Stück pro Produkt im Monat steigen wir auf die eigene Dose um. Die Abschnitte vom 10.10. (eigene Dose + Beutel) und darunter gelten nur noch als Plan für später.
+
+Nächste Schritte:
+1. Anfrage an Suppify, Chance2Brand und Suplify schicken und den Anbieter wählen.
+2. Etikett für die gewählte Dose gestalten (Sortenfarbe, Bär, Metallic-Look im Druck).
+3. Packshots und Mockups mit der echten Dose und dem Etikett neu machen. Der Shop zeigt nur, was ankommt.
+4. Shop: Stückzahl und Gewicht an das Produkt des Anbieters anpassen und Shopify anbinden.
+
 ## Stand 11.10.2026: Bewertung von Nicos Mindmap „Verpackung“
 
 **Update (Nico, 11.10.):** Eine weiße Zylinderdose mit unserem Etikett ist besser als die Ergänzungsflasche. Deshalb Suppify.io zuerst prüfen: laut Nicos Notizen größere Auswahl an Verpackungen, Etikett und Verpackungsform schon bei wenigen Bestellungen anpassbar. Chance2Brand ist ebenfalls ein Kandidat: Der kostenlose Tarif hat ein eigenes Etikett ohne Mindestmenge wie Suplify, aber mehr Auswahl an Produkten und Verpackungen. Der Tarif ab 99 € im Monat (mindestens 250 Bestellungen im Monat, eigene Verpackung) kommt erst später. Alle drei (Suppify, Chance2Brand, Suplify) fragen, wer die weiße Dose ohne Mindestmenge mit Versand aus der EU anbietet. Wer sie hat, gewinnt.

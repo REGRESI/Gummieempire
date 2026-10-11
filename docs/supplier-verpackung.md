@@ -12,6 +12,23 @@ Nächste Schritte:
 3. Packshots und Mockups mit der echten Dose und dem Etikett neu machen. Der Shop zeigt nur, was ankommt.
 4. Shop: Stückzahl und Gewicht an das Produkt des Anbieters anpassen und Shopify anbinden.
 
+### Anfrage an die Dropshipping-Anbieter (Suppify, Chance2Brand, Suplify), 11.10.
+
+Bärchenform ist Pflicht (Chance2Brand hat oft andere Formen). Deshalb pro Produkt nach Bärchen fragen.
+
+```text
+Hi, I'm Nico from bärly, a new German brand for vegan supplement gummies. We'd like to sell 4 products via your service with our own label: creatine, beauty (biotin, zinc, vitamin C), sleep (melatonin, magnesium, B6) and multivitamin.
+
+1. Do you have these 4 as gummy BEARS (bear shape)? If not, which ones are bears?
+2. Instead of the standard supplement bottle, do you offer a white (or black) wide-mouth cylinder jar with our full-wrap label?
+3. Is there a minimum order quantity for that, or does it work per order?
+4. Price per jar incl. label, and shipping cost and time within Germany?
+5. Do you ship from an EU warehouse, and does it connect to Shopify?
+
+Thanks!
+Nico
+```
+
 ### Parallel: Ausschreibung auf Alibaba (RFQ, 11.10.)
 
 Ziel ist ein Lieferant, der unsere Strategie mitträgt: kleine Chargen nach Vorbestellung, eigenes Etikett, mitwachsen. Statt einzeln anzufragen, eine Ausschreibung (Request for Quotation) auf Alibaba einstellen:

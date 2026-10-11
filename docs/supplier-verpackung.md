@@ -2,6 +2,22 @@
 
 Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
+## Stand 11.10.2026: Bewertung von Nicos Mindmap „Verpackung“
+
+**Empfehlung:** Mit Suplify (Dropshipping, keine Mindestmenge, ca. 8 € pro Dose) starten und das Design ganz ins Etikett legen. Auf die eigene Dose umsteigen, sobald ein Produkt um die 250 Stück im Monat verkauft. Begründung: kein Startkapital, kein Lager, kein Packen. Die Zeit geht in Content und Creator, und das ist für Black Friday der eigentliche Engpass.
+
+**Zur Frage aus der Mindmap, ob wir die Design-Dose zeigen und die Standardflasche verschicken:** Nein. Kunden müssen auf den Bildern das bekommen, was sie sehen. Sonst gibt es Retouren, schlechte Bewertungen und Abmahnrisiko. Packshots und Mockups deshalb mit der echten Flasche und unserem Etikett neu machen, auch als Vorlage für Creator.
+
+**Optionen, die in der Mindmap noch fehlen:**
+
+1. **Weiße Zylinderdose mit Rundum-Etikett in Sortenfarbe:** Das Etikett deckt fast die ganze Dose ab, nur der Deckel bleibt weiß oder schwarz. Das kommt dem Zielbild am nächsten, ohne farbige Dose. Bei Suplify fragen, ob es so eine Dose gibt, sonst beim Blanko-Lieferanten.
+2. **Farbiger Deckel separat:** Wenn die Dose innen ein Siegel unter dem Deckel hat, kann man den Deckel tauschen, ohne an die Gummies zu gehen. Farbige Deckel gibt es oft in kleinen Mengen. Nur machen, wenn das Innensiegel sicher drin ist.
+3. **Schrumpfschlauch (Sleeve) statt Etikett:** Er färbt die ganze Dose rundum ein. Er lohnt sich erst ab ein paar hundert Stück, deshalb später.
+4. **Premium-Edition als Vorbestellung:** Normale Bestellungen laufen über Suplify. Zusätzlich gibt es eine limitierte Black-Friday-Crew-Box in der echten bärly-Dose als Vorbestellung, Lieferung im Januar. Produziert wird nur, wenn genug zusammenkommt, sonst gibt es das Geld zurück oder eine normale Lieferung. So bezahlen Kunden die Mindestmenge vor.
+5. **Wechsel ab 250 im Monat:** Chance2Brand oder die eigene Dose. Den Wechsel erst machen, wenn die Zahlen da sind.
+
+---
+
 ## Stand 10.10.2026: Antworten und neue Entscheidung
 
 **Entscheidung: Option 2, also eigene Dose plus Gummies im versiegelten Beutel. Wir packen und versenden selbst.** Biocaro (Plan A) fällt für den Start weg. Alles darunter ab „Was zu tun ist“ ist der alte Stand vom 08./09.10.

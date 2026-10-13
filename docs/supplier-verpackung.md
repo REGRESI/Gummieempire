@@ -2,6 +2,10 @@
 
 Stand: 09.10.2026 (abends) · Branch `claude/supplier-verpackung-56motr`
 
+## Stand 13.10.2026: erst das fertige Produkt, dann die Ausschreibung
+
+Bevor die Ausschreibung rausgeht, legen wir das fertige Produkt mit GPT-Bildern fest: klassische Bärchenform in Sortenfarbe, weiße 250-ml-Dose mit Etikett rundum (Variante A) oder Dose und Deckel in Sortenfarbe (Variante B). Die Prompts stehen in `docs/fertiges-produkt-prompts.md` (geteilte Kopie: `prompts/bilder/06-fertiges-produkt.md`). Die fertigen Bilder kommen danach in die Ausschreibung und die Anfragen.
+
 ## Entscheidung (Nico, 11.10.2026)
 
 **Start über Dropshipping mit eigenem Etikett:** Suppify, Chance2Brand oder Suplify, je nachdem, wer eine weiße Dose ohne Mindestmenge mit Versand aus der EU anbietet. Die Kasse läuft über Shopify. Die Black-Friday-Crew-Box in der echten bärly-Dose gibt es separat als Vorbestellung. Ab ca. 250 verkauften Stück pro Produkt im Monat steigen wir auf die eigene Dose um. Die Abschnitte vom 10.10. (eigene Dose + Beutel) und darunter gelten nur noch als Plan für später.
